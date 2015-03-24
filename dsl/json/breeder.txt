@@ -1,0 +1,15 @@
+{
+  operators: {
+    tournament: selection {
+      operator: selection/tournament {size: 5}
+    },
+
+    crossover: variation {
+      operator: crossover/one_point {rate: 0.7}
+    },
+
+    mutation: variation {
+      operator: mutation/uniform {rate: 0.01}
+    }
+  }
+}

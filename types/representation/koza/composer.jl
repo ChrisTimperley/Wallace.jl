@@ -1,0 +1,38 @@
+load("../koza", dirname(@__FILE__))
+load("tree", dirname(@__FILE__))
+load("builder/grow", dirname(@__FILE__))
+
+register("representation/koza_tree", KozaTreeRepresentation)
+composer("representation/koza_tree") do s
+  s["min_depth"] = Base.get(s, "min_depth", 1)
+  s["max_depth"] = Base.get(s, "max_depth", 9)
+
+  # Construct each input.
+  s["inputs"] = Base.get(s, "inputs", String[])
+  s["inputs"] = KozaInput[KozaInput(i) for i in s["inputs"]]
+
+  # Construct the tree type.
+  tt = ComposeKozaTree(s["inputs"])
+
+  # Construct the builder.
+  # If none is given, default to ramped-half-and-half with 0.5 grow probability.
+  s["builder"] = KozaHalfBuilder{tt}(2, 6, 0.5, 0.5) 
+
+  # Construct each terminal.
+  s["terminals"] = Base.get(s, "terminals", String[])
+  s["terminals"] = KozaTerminal[
+    apply(ComposeKozaTerminal(s["inputs"], t)) for t in s["terminals"]]
+
+  # Construct each non-terminal.
+  s["non_terminals"] = Base.get(s, "non_terminals", String[])
+  s["non_terminals"] = KozaNonTerminal[
+    apply(ComposeKozaNonTerminal(s["inputs"], nt)) for nt in s["non_terminals"]]
+
+  KozaTreeRepresentation(tt,
+    s["min_depth"],
+    s["max_depth"],
+    s["terminals"],
+    s["non_terminals"],
+    s["inputs"],
+    s["builder"])
+end

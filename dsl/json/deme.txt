@@ -1,0 +1,27 @@
+{
+  capacity: 1000,
+  species: {
+    representation: int_vector {length: 800}
+  },
+  breeder: fast {
+    sources: {
+      s: selection {
+        operator: tournament {size: 5}
+      },
+
+      x: variation {
+        source: "s",
+        operator: one_point_crossover {rate: 0.7}
+      },
+
+      m: variation {
+        source: "x"
+        operator: uniform {
+          rate: 0.01,
+          min_value: 0,
+          max_value: 100000
+        }
+      }
+    }
+  }
+}

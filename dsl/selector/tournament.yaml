@@ -1,0 +1,14 @@
+---
+
+selectors:
+	tournament:
+    type:       tournament
+    size:       7
+    pick_best:  true
+
+  random:
+    type:       random
+
+variators:
+
+---
