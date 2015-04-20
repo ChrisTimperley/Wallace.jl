@@ -10,34 +10,6 @@ module Reflect
   fresh() = "Anon$(global __counter += 1)"
   fresh_mod() = "AnonMod$(global __counter_mod += 1)"
 
-  #
-  #type TypeDefinition
-  #  _mode::String
-  #_extends::Vector{String}
-  #  _attributes::Vector{(String, String)}
-  #
-  #  
-  #  function TypeDefinition(f::Function)
-  #    d = TypeDefinition()
-  #    println("Applying supplied function.")
-  #    f(d)
-  #    return d
-  #  end
-  #  TypeDefinition() = new("type", [], [])
-  #end
-
-  #extends(d::TypeDefinition, base::Vector{String}) = d._extends = base
-  #is_abstract(d::TypeDefinition) = d._mode = "abstract"
-  #is_immutable(d::TypeDefinition) = d._mode = "immutable"
-  
-  # Adds an attribute to a type definition.
-  #function has_attribute(d::TypeDefinition, n::String, t::String)
-  #  #if any((an, at) -> an == n, d._attributes)
-  #  #  error("Attribute already defined within type.")
-  #  #end
-  #  push!(d._attributes, (n, t))
-  #end
-
   # Generates an empty anonymous type.
   anonymous_type(m::Module) = anonymous_type(m, "type;end")
 
