@@ -1,18 +1,14 @@
-# Load the Wallace kernel.
-require(joinpath(dirname(@__FILE__), "kernel.jl"))
+using Wallace
 
-# Print the Wallace header.
 println("| Wallace")
 println("| A high-performance language for meta-heuristic and evolutionary computation")
-println("| Documentation: http://github.io/wallace")
-println("| Version 0.0.1-prerelease (Borneo)")
+println("| Documentation: http://github.io/ChrisTimperley/Wallace")
+println("| Version 0.0.2-prerelease (Borneo)")
 println()
 
-# REPL.
 while true
   print("wallace> ")
 
-  # Attempts to read and evaluate a provided user command.
   try
 
     # Read the user-input and (attempt to) convert it to an expression.
@@ -36,5 +32,4 @@ while true
     println()
     println()
   end
-
 end

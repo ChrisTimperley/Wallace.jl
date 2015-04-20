@@ -1,4 +1,3 @@
-# This module specifies the methods of the Wallace kernel.
 module Wallace
 
   # Define some useful type aliases.
@@ -10,42 +9,20 @@ module Wallace
     typealias Float Float32
   end
 
-  # Load the base files.
-  require(joinpath(dirname(@__FILE__), "../base/partition.jl"))
-  require(joinpath(dirname(@__FILE__), "../base/each.jl"))
-  require(joinpath(dirname(@__FILE__), "../base/Reflect.jl"))
-
-  # Import the base modules.
+  # Load and import the base modules.
+  require("base/partition.jl")
+  require("base/each.jl")
+  require("base/Reflect.jl")
+  
   using Each
   using Reflect
   using Partition
 
-  # Returns true if a given ends with a given suffix, else
+  # Returns true if a provided string ends with a given suffix, else
   # it returns false.
   function ends_with(str::ASCIIString, suffix::ASCIIString)
     len = length(suffix)
     length(str) >= len && str[end-len+1:end] == suffix
-  end
-  
-  # This doesn't work as intended. Annoying.
-  macro require_relative(f)
-    :(
-      begin
-
-        # Calculate the absolute path to the requested file.
-        path = joinpath(dirname(@__FILE__), $f)
-
-        # Ensure the ".jl" suffix is added to the end of the file.
-        if !ends_with(path, ".jl")
-          path = string(path, ".jl") 
-        end
-
-        include(path)
-
-        return path
-
-      end
-    )
   end
 
   # Imports a file into the Wallace environment, relative to a given directory.
@@ -66,7 +43,6 @@ module Wallace
     end
 
     return file
-
   end
 
   # Imports a file into the Wallace environment, relative to the current
@@ -111,9 +87,9 @@ module Wallace
     apply(t, positionals...; keywords...)
 
   # Load all of the kernel files.
-  load_all(joinpath(dirname(@__FILE__), "../kernel"))
+  load_all(joinpath(dirname(@__FILE__), "kernel"))
 
   # Load all of the built-in types.
-  load_all(joinpath(dirname(@__FILE__), "../types"))
+  load_all(joinpath(dirname(@__FILE__), "types"))
 
 end
