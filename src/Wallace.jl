@@ -14,7 +14,8 @@ module Wallace
   include("base/each.jl")
   include("base/Reflect.jl")
   include("kernel/parser.jl")
-  
+  include("kernel/example.jl")
+
   using .Each
   using .Reflect
   using .Partition
