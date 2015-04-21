@@ -10,13 +10,13 @@ module Wallace
   end
 
   # Load and import the base modules.
-  require("base/partition.jl")
-  require("base/each.jl")
-  require("base/Reflect.jl")
+  include("base/partition.jl")
+  include("base/each.jl")
+  include("base/Reflect.jl")
   
-  using Each
-  using Reflect
-  using Partition
+  using .Each
+  using .Reflect
+  using .Partition
   using DataStructures
 
   # Returns true if a provided string ends with a given suffix, else
