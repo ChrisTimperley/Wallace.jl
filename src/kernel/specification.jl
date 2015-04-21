@@ -1,9 +1,23 @@
-import DataStructures.OrderedDict  
-
 module Specification
   import JSON, DataStructures.OrderedDict
-  export parse, load_specification
-  
+  export parse, load_specification, compose, composer
+ 
+  # Composer register.
+  composer_register = Dict{String, Function}()
+
+  # Retrieves a given composer by its alias.
+  composer(alias::String) = composer_register[alias]
+
+  # Registers a composer with a given alias.
+  composer(f::Function, alias::String) = composer_register[alias] = f
+
+  # Composes a given specification file into an object.
+  compose(alias::String, file::String) = compose(alias, load_specification(file))
+
+  # Composes a given specification object (in the form of a JSON object)
+  # into the object it describes.
+  compose(alias::String, s::OrderedDict{String, Any}) = apply(composer(alias), [s])
+
   # Insertion point functions.
   is_ins(::Any) = false
   is_ins(s::OrderedDict{String, Any}) = collect(keys(s)) == ["\$"]
@@ -77,27 +91,3 @@ module Specification
   load_specification(f::String) = parse(open(readall, f))
 
 end
-
-######
-## MOVE INTO MODULE
-######
-
-# Map storing all instance composers by their name.
-# I dislike this being an global variable.
-# Perhaps we could have a Composers module? From which
-# we could export the 'compose' methods into the wider
-# Wallace scope?
-instance_composers = Dict{String, Function}()
-
-# Retrieves a given composer by its alias.
-composer(alias::String) = instance_composers[alias]
-
-# Registers a composer with a given alias.
-composer(f::Function, alias::String) = instance_composers[alias] = f
-
-# Composes a given specification file into an object.
-compose(alias::String, file::String) = compose(alias, Specification.load_specification(file))
-
-# Composes a given specification object (in the form of a JSON object)
-# into the object it describes.
-compose(alias::String, s::OrderedDict{String, Any}) = apply(composer(alias), [s])

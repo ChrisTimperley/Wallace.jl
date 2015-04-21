@@ -9,14 +9,16 @@ module Wallace
     typealias Float Float32
   end
 
-  # Load and import the base modules.
+  # Load and import the base and kernel modules.
   include("base/partition.jl")
   include("base/each.jl")
   include("base/Reflect.jl")
+  include("kernel/specification.jl")
   
   using .Each
   using .Reflect
   using .Partition
+  using .Specification
   using DataStructures
 
   # Returns true if a provided string ends with a given suffix, else
