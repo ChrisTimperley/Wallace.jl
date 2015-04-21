@@ -15,11 +15,13 @@ module Wallace
   include("base/Reflect.jl")
   include("kernel/parser.jl")
   include("kernel/example.jl")
+  include("kernel/help.jl")
 
   using .Each
   using .Reflect
   using .Partition
   using .Parser
+  using .Help
   using DataStructures
 
   # Returns true if a provided string ends with a given suffix, else
