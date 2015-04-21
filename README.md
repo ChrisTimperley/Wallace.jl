@@ -1,6 +1,7 @@
 # Wallace
 
 ## Installation
+Wallace is installed using Julia's built-in package manager system, via the `Pkg.add("Wallace")` command; before calling this however, ensure that the rest of your packages are up-to-date, via `Pkg.update()`.
 
     julia> Pkg.init()
     julia> Pkg.update()
