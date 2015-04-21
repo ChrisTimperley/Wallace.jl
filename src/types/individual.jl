@@ -57,7 +57,6 @@ composer("individual") do s
   # into an anonymous type.
   unshift!(definition, "type <: Individual")
   push!(definition, "end")
-  println(join(definition, "\n"))
   t = anonymous_type(Wallace, join(definition, "\n"))
 
   # Build the cloning operation for this type.
