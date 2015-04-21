@@ -1,4 +1,4 @@
-module Specification
+module Parser
   import JSON, DataStructures.OrderedDict
   export parse, load_specification, compose, composer
  

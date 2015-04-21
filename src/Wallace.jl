@@ -13,12 +13,12 @@ module Wallace
   include("base/partition.jl")
   include("base/each.jl")
   include("base/Reflect.jl")
-  include("kernel/specification.jl")
+  include("kernel/parser.jl")
   
   using .Each
   using .Reflect
   using .Partition
-  using .Specification
+  using .Parser
   using DataStructures
 
   # Returns true if a provided string ends with a given suffix, else
@@ -88,9 +88,6 @@ module Wallace
 
   i(t::Type, positionals...; keywords...) = 
     apply(t, positionals...; keywords...)
-
-  # Load all of the kernel files.
-  load_all(joinpath(dirname(@__FILE__), "kernel"))
 
   # Load all of the built-in types.
   load_all(joinpath(dirname(@__FILE__), "types"))
