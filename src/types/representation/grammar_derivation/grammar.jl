@@ -15,10 +15,6 @@ type Grammar
     for (sym, entries) in rules
       p_rules[sym] = [parse_rule_entry(entry) for entry in  entries]
     end
-
-    println("Building grammar")
-    println(p_rules)
-
     new(root, p_rules)
   end
 end
@@ -64,7 +60,6 @@ function parse_rule_entry(entry::String)
     if !isempty(left)
       push!(tokens, GrammarLiteral(left))
     end
-    
     if !isempty(tag)
       push!(tokens, GrammarSymbol(tag[2:end-1]))
     end
