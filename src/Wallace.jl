@@ -17,6 +17,7 @@ module Wallace
   using Each
   using Reflect
   using Partition
+  using DataStructures
 
   # Returns true if a provided string ends with a given suffix, else
   # it returns false.
