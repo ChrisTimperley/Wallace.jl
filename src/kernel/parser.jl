@@ -12,6 +12,12 @@ module Parser
   composer(f::Function, alias::String) = composer_register[alias] = f
 
   # Composes a given specification file into an object.
+  function compose(file::String)
+    s = load_specification(file)
+    return compose(s["type"], s)
+  end
+
+  # Composes a given specification file into an object, using a predetermined composer.
   compose(alias::String, file::String) = compose(alias, load_specification(file))
 
   # Composes a given specification object (in the form of a JSON object)
