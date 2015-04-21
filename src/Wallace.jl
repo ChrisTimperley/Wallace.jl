@@ -24,13 +24,6 @@ module Wallace
   using .Help
   using DataStructures
 
-  # Returns true if a provided string ends with a given suffix, else
-  # it returns false.
-  function ends_with(str::ASCIIString, suffix::ASCIIString)
-    len = length(suffix)
-    length(str) >= len && str[end-len+1:end] == suffix
-  end
-
   # Imports a file into the Wallace environment, relative to a given directory.
   function load(file::ASCIIString, from::ASCIIString)
     
@@ -60,7 +53,7 @@ module Wallace
   function load_all(directory::ASCIIString)
     for f in readdir(directory)
       f = joinpath(directory, f)
-      if ends_with(f, ".jl")
+      if endswith(f, ".jl")
 
         # I dislike this...
         # Things need a little tweaking here.
