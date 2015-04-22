@@ -1,8 +1,9 @@
 ===============================================================================
-Wallace
+Wallace - Stable
 ===============================================================================
 
-To install Wallace, open up the Julia REPL, and call the following:
+To install the latest stable release of Wallace, open up the Julia REPL, and
+call the following:
 
 julia> Pkg.add("Wallace")
 
@@ -11,6 +12,20 @@ in order to avoid any installation issues. This can be done by calling the
 following:
 
 julia> Pkg.update()
+
+===============================================================================
+Wallace - Bleeding Edge
+===============================================================================
+
+To install the latest developmental version of Wallace, open up the Julia REPL,
+and call the following:
+
+julia> Pkg.remove("Wallace")
+julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.git")
+
+This will remove any existing Wallace module from your Julia installation,
+before cloning the contents of the Wallace git repository into your local into
+your Julia modules directory.
 
 ===============================================================================
 Julia
