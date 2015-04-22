@@ -12,7 +12,7 @@ To simultaneously achieve performance and ease-of-use, Wallace utilises computat
 For technical documentation and an extensive set of tutorials, aimed at a wide range of different audiences, visit the Wallace website at: [http://www.christimperley.co.uk/Wallace](http://www.christimperley.co.uk/Wallace).
 
 ## Usage
-To load an example problem in Wallace, simply follow the code below; a list of example problems can be found by calling the `examples()` function.
+To load an example problem in Wallace, follow the code below; a list of example problems can be found by calling the `examples()` function.
 
 ```julia
 using Wallace
@@ -20,7 +20,7 @@ using Wallace
 ex = example("max_ones")
 results = run!(ex)
 ```
-To compose your algorithm specifications into executable Julia code, tailored to a given problem, follow the example code below:
+To compose an algorithm specification into executable Julia code tailored to a given problem, follow the example code below:
 
 ```julia
 algo = compose("my_configuration_file.cfg")
