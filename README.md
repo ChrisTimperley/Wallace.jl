@@ -1,7 +1,7 @@
 # Wallace
 
 Wallace is a high-performance, easy-to-use evolutionary computation framework written in [Julia](http://julialang.org/), built for researchers, students, and software engineers alike.
-To simultaneously achieve performance and ease-of-use, Wallace utilises computational reflection to compile problem-specific data structures and algorithms on the fly, using a beautiful and compact domain-specific language.
+To simultaneously achieve performance and ease-of-use, Wallace utilises computational reflection to compile problem-specific data structures and algorithms at run-time, using a beautiful and compact domain-specific language.
 
 **Installation:** ```julia> Pkg.add("Wallace")```
 
