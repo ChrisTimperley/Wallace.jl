@@ -20,3 +20,9 @@ using Wallace
 ex = example("max_ones")
 results = run!(ex)
 ```
+To compose your algorithm specifications into executable Julia code, tailored to a given problem, follow the example code below:
+
+```
+julia> algo = compose("my_configuration_file.cfg")
+julia> results = run!(algo)
+```
