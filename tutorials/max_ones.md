@@ -32,8 +32,8 @@ skeleton specification in your favourite text editor and start writing a simple
 GA to solve our problem.
 
 > **Tip:** If you're running Wallace through the Julia REPL, try using *shell mode*
-  by typing ";" to access command-line text editors such as `vim` and `nano` without
-  leaving the REPL.
+  by typing ";" into the console; this will allow your to access command-line text
+  editors such as `vim` and `nano` from within the REPL session.
 
 #### Specifying the components of our algorithm.
 
