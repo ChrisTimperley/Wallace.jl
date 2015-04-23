@@ -22,9 +22,12 @@ evolutionary algorithms.
 * Use Wallace to solve simple binary-string optimisation problems, such as the
   Max Ones problem.
 
+
 --------------------------------------------------------------------------------
 
 #### Creating a skeleton for our specification file.
+To start off with, let's create an empty Wallace specification file within our
+current working directory, called `my_max_ones.cfg`.
 
 #### Specifying the components of our algorithm.
 
