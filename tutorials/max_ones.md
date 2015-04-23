@@ -1,4 +1,4 @@
-## Max Ones
+# Max Ones
 ### An Introduction to Solving Optimisation Problems with Genetic Algorithms
 Outline of this tutorial.
 
@@ -21,4 +21,4 @@ Outline of this tutorial.
 
 -------------------------------------------------------------------------------
 
-### Troubleshooting
+## Troubleshooting
