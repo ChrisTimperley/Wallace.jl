@@ -24,8 +24,6 @@ evolutionary algorithms.
 
 --------------------------------------------------------------------------------
 
-## Getting Started
-
 #### Creating a skeleton for our specification file.
 
 #### Specifying the components of our algorithm.
