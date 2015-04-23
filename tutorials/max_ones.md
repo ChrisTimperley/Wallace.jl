@@ -18,7 +18,7 @@ evolutionary algorithms.
 * You know a little bit about the basic structure of Wallace specification files. 
 
 **By the end of this tutorial, you will be able to:**
-* Write a simple binary-string genetic algorithm.
+* Write a simple binary-string genetic algorithm from scratch.
 * Use Wallace to solve simple binary-string optimisation problems, such as the
   Max Ones problem.
 
@@ -26,8 +26,16 @@ evolutionary algorithms.
 
 ## Getting Started
 
+#### Creating a skeleton for our specification file.
+
+#### Specifying the components of our algorithm.
+
+#### Running our algorithm and analysing our results.
+
 > **Question:** *Does the fitness of the best individual in the population
   always improve or stay the same?*
+
+#### Optimising our algorithm parameters.
 
 -------------------------------------------------------------------------------
 
