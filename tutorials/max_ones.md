@@ -1,10 +1,8 @@
 # Max Ones
 ### An Introduction to Solving Optimisation Problems with Genetic Algorithms
 
-**Author:** [Chris Timperley](http://www.christimperley.co.uk)
-
-**Difficulty:** Beginner.
-
+**Author:** [Chris Timperley](http://www.christimperley.co.uk),
+**Difficulty:** Beginner,
 **Duration:** 10-30 minutes.
 
 Outline of this tutorial.
