@@ -1,10 +1,13 @@
 # Max Ones
 ### An Introduction to Solving Optimisation Problems with Genetic Algorithms
-Outline of this tutorial.
 
 **Author:** [Chris Timperley](http://www.christimperley.co.uk)
+
 **Difficulty:** Beginner.
+
 **Duration:** 10-30 minutes.
+
+Outline of this tutorial.
 
 **This tutorial assumes:**
 * You know how to interact with Julia through the command line and the REPL.
