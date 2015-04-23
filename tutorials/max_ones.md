@@ -7,6 +7,11 @@ Outline of this tutorial.
 * You know how to load Wallace specification files and run them.
 * You know a little bit about the basic structure of Wallace specification files. 
 
+**By the end of this tutorial, you will be able to:**
+* Write a simple binary-string genetic algorithm.
+* Use Wallace to solve simple binary-string optimisation problems, such as the
+  Max Ones problem.
+
 --------------------------------------------------------------------------------
 
 ## Getting Started
