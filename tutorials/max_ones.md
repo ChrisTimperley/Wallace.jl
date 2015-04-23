@@ -27,7 +27,13 @@ evolutionary algorithms.
 
 #### Creating a skeleton for our specification file.
 To start off with, let's create an empty Wallace specification file within our
-current working directory, called `my_max_ones.cfg`.
+current working directory, called `my_max_ones.cfg`. Now let's open up our
+skeleton specification in your favourite text editor and start writing a simple
+GA to solve our problem.
+
+> **Tip:** If you're running Wallace through the Julia REPL, try using *shell mode*
+  by typing ";" to access command-line text editors such as `vim` and `nano` without
+  leaving the REPL.
 
 #### Specifying the components of our algorithm.
 
