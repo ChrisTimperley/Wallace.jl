@@ -41,11 +41,18 @@ describe a *simple evolutionary algorithm* to, so we prepend the
 `algorithm/simple_evolutionary_algorithm` type to the front of our description
 in order to let Wallace know how we want the object to be built.
 
-```python
+```json
 algorithm/simple_evolutionary_algorithm {
 
 }
 ```
+
+> **What if:** If you omit the type of the root object in your specification
+  file, then Wallace will be unable to construct the object when you call
+  `compose(my_specification)`. However, you can still force Wallace to
+  construct as if it were a given type by using
+  `compose_as(my_specification, some_type)`.
+
 
 #### Specifying the components of our algorithm.
 
