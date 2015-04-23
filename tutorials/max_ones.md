@@ -38,7 +38,8 @@ GA to solve our problem.
 To begin with, we need to specify the type of the object that we wish our
 specification to describe. In this case, we'll be using our specification to
 describe a *simple evolutionary algorithm* to, so we prepend the
-`algorithm/simple_evolutionary_algorithm` type to the front of our description.
+`algorithm/simple_evolutionary_algorithm` type to the front of our description
+in order to let Wallace know how we want the object to be built.
 
 ```python
 algorithm/simple_evolutionary_algorithm {
