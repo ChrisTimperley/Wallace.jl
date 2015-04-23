@@ -22,7 +22,6 @@ evolutionary algorithms.
 * Use Wallace to solve simple binary-string optimisation problems, such as the
   Max Ones problem.
 
-
 --------------------------------------------------------------------------------
 
 #### Creating a skeleton for our specification file.
@@ -31,9 +30,21 @@ current working directory, called `my_max_ones.cfg`. Now let's open up our
 skeleton specification in your favourite text editor and start writing a simple
 GA to solve our problem.
 
-> **Tip:** If you're running Wallace through the Julia REPL, try using *shell mode*
-  by typing ";" into the console; this will allow your to access command-line text
-  editors such as `vim` and `nano` from within the REPL session.
+> **Tip:** If you're running Wallace through the Julia REPL, try using *shell
+  mode* by typing ";" into the console; this will allow your to access
+  command-line text editors such as `vim` and `nano` from within the REPL
+  session.
+
+To begin with, we need to specify the type of the object that we wish our
+specification to describe. In this case, we'll be using our specification to
+describe a *simple evolutionary algorithm* to, so we prepend the
+`algorithm/simple_evolutionary_algorithm` type to the front of our description.
+
+```python
+algorithm/simple_evolutionary_algorithm {
+
+}
+```
 
 #### Specifying the components of our algorithm.
 
