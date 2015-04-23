@@ -5,6 +5,12 @@
 **Difficulty:** Beginner,
 **Duration:** 10-30 minutes.
 
+In this tutorial, we will be using Wallace to implement a simple Genetic
+Algorithm to solve the benchmark Max Ones optimisation problem, where we attempt
+to maximise the number of 1s in a fixed-length bit-string. This problem is
+trivial for humans, of course, but is slightly less so for "blind" evolutionary
+algorithms.
+
 Outline of this tutorial.
 
 **This tutorial assumes:**
