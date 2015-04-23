@@ -8,7 +8,8 @@
 Outline of this tutorial.
 
 **This tutorial assumes:**
-* You know how to interact with Julia through the command line and the REPL.
+* A minimal knowledge of [Julia](http://julialang.org/).
+* You know how to navigate the Julia REPL when using Wallace.
 * You know how to load Wallace specification files and run them.
 * You know a little bit about the basic structure of Wallace specification files. 
 
