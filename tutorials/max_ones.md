@@ -56,7 +56,7 @@ algorithm/simple_evolutionary_algorithm {
 
 #### Specifying the components of our algorithm.
 
-```json
+```
 algorithm/simple_evolutionary_algorithm {
   evaluator: evaluator/simple
     objective: (i) -> SimpleFitness{Int}(true, sum(get(i.bits)))
@@ -65,6 +65,7 @@ algorithm/simple_evolutionary_algorithm {
 }
 ```
 
+
 #### Running our algorithm and analysing our results.
 
 > **Question:** *Does the fitness of the best individual in the population
@@ -72,6 +73,7 @@ algorithm/simple_evolutionary_algorithm {
 
 
 #### Optimising our algorithm parameters.
+
 
 
 -------------------------------------------------------------------------------
