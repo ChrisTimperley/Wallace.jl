@@ -79,7 +79,9 @@ The method of evaluating individuals for this algorithm.
 ```
 
 
-> **Tip:** Try calling `properties("algorithm/simple_evolutionary_algorithm")`.
+> **Tip:** If you're running Wallace through the Julia REPL, try using
+  *help mode* by typing "?" into the console. Once in help mode, simply type
+  the name of the Wallace or Julia type you wish to know more about.
 
 ```
 algorithm/simple_evolutionary_algorithm {
