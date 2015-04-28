@@ -22,6 +22,7 @@ evolutionary algorithms.
 * Use Wallace to solve simple binary-string optimisation problems, such as the
   Max Ones problem.
 
+
 --------------------------------------------------------------------------------
 
 #### Creating a skeleton for our specification file.
@@ -47,21 +48,31 @@ algorithm/simple_evolutionary_algorithm {
 }
 ```
 
-> **What if:** If you omit the type of the root object in your specification
+> **What If:** If you omit the type of the root object in your specification
   file, then Wallace will be unable to construct the object when you call
   `compose(my_specification)`. However, you can still force Wallace to
   construct as if it were a given type by using
   `compose_as(my_specification, some_type)`.
 
-
 #### Specifying the components of our algorithm.
+
+```json
+algorithm/simple_evolutionary_algorithm {
+  evaluator: evaluator/simple
+    objective: (i) -> SimpleFitness{Int}(true, sum(get(i.bits)))
+  
+  replacement: replacement/generational
+}
+```
 
 #### Running our algorithm and analysing our results.
 
 > **Question:** *Does the fitness of the best individual in the population
   always improve or stay the same?*
 
+
 #### Optimising our algorithm parameters.
+
 
 -------------------------------------------------------------------------------
 
