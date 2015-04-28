@@ -12,12 +12,14 @@ trivial for humans, of course, but proves to be a little trickier for "blind"
 evolutionary algorithms.
 
 **This tutorial assumes:**
+
 * A minimal knowledge of [Julia](http://julialang.org/).
 * You know how to navigate the Julia REPL when using Wallace.
 * You know how to load Wallace specification files and run them.
 * You know a little bit about the basic structure of Wallace specification files. 
 
 **By the end of this tutorial, you will be able to:**
+
 * Write a simple binary-string genetic algorithm from scratch.
 * Use Wallace to solve simple binary-string optimisation problems, such as the
   Max Ones problem.
@@ -58,7 +60,24 @@ algorithm/simple_evolutionary_algorithm {
 Now we have a skeleton for our algorithm specification in place, let's go about
 specifying each of the components and parameters of our algorithm. Before we
 can do this, we need to know more about the structure and properties of the
-`algorithm/simple_evolutionary_algorithm` type.
+`algorithm/simple_evolutionary_algorithm` type; in order to find out this
+information, we can call the `properties` or `help` function, as demonstrated
+below:
+
+```
+julia> help("algorithm/simple_evolutionary_algorithm")
+
+Properties:
+- evaluator
+- replacement
+- termination
+- population
+
+julia> help("algorithm/simple_evolutionary_algorithm:evaluator")
+
+The method of evaluating individuals for this algorithm.
+```
+
 
 > **Tip:** Try calling `properties("algorithm/simple_evolutionary_algorithm")`.
 
