@@ -75,23 +75,32 @@ Properties:
 
 julia> help("algorithm/simple_evolutionary_algorithm:evaluator")
 
-The method of evaluating individuals for this algorithm.
+The method of evaluating individuals used by this algorithm.
 ```
-
 
 > **Tip:** If you're running Wallace through the Julia REPL, try using
   *help mode* by typing "?" into the console. Once in help mode, simply type
   the name of the Wallace or Julia type you wish to know more about.
 
+#### Setting up the population.
+
+To begin with, let's make use of the look-up operator, *$*, in order to specify
+the population setup used by our algorithm. By default, the standard `population`
+type within Wallace is composed of a number of demes (also known as sub-populations),
+each of which undergoes its own evolutionary processes in isolation, perhaps running
+on a separate compute node.
+
+Following the example below, we can create a single-deme population, composed of
+100 individuals of a species given by the top-level `_my_species` property,
+using the top-level `_my_breeder` breeding setup:
+
 ```
 algorithm/simple_evolutionary_algorithm {
-  evaluator: evaluator/simple
-    objective: (i) -> SimpleFitness{Int}(true, sum(get(i.bits)))
-  
-  replacement: replacement/generational
+  population:
+    demes:
+      - size: 100, species: $(_my_species), breeder: $(_my_breeder)
 }
 ```
-
 
 #### Running our algorithm and analysing our results.
 
