@@ -55,6 +55,12 @@ algorithm/simple_evolutionary_algorithm {
   `compose_as(my_specification, some_type)`.
 
 #### Specifying the components of our algorithm.
+Now we have a skeleton for our algorithm specification in place, let's go about
+specifying each of the components and parameters of our algorithm. Before we
+can do this, we need to know more about the structure and properties of the
+`algorithm/simple_evolutionary_algorithm` type.
+
+> **Tip:** Try calling `properties("algorithm/simple_evolutionary_algorithm")`.
 
 ```
 algorithm/simple_evolutionary_algorithm {
