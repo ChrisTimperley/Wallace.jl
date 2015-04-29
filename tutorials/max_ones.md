@@ -88,7 +88,7 @@ To begin with, let's make use of the look-up operator, *$*, in order to specify
 the population setup used by our algorithm. By default, the standard `population`
 type within Wallace is composed of a number of demes (also known as sub-populations),
 each of which undergoes its own evolutionary processes in isolation, perhaps running
-on a separate compute node.
+on its own compute node.
 
 Following the example below, we can create a single-deme population, composed of
 100 individuals of a single species and using a given breeding setup, both defined
@@ -102,7 +102,7 @@ algorithm/simple_evolutionary_algorithm {
 }
 ```
 
-#### Running our algorithm and analysing our results.
+#### Running our algorithm and analysing the results.
 
 > **Question:** *Does the fitness of the best individual in the population
   always improve or stay the same?*
