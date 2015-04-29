@@ -91,8 +91,8 @@ each of which undergoes its own evolutionary processes in isolation, perhaps run
 on a separate compute node.
 
 Following the example below, we can create a single-deme population, composed of
-100 individuals of a species given by the top-level `_my_species` property,
-using the top-level `_my_breeder` breeding setup:
+100 individuals of a single species and using a given breeding setup, both defined
+elsewhere within the file.
 
 ```
 algorithm/simple_evolutionary_algorithm {
