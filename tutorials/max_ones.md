@@ -192,6 +192,9 @@ that the objective should be maximised by setting its first parameter to
 ```
 
 > **Why do I have to call `get(i.bits)` rather than `i.bits`?**
+  `i.bits` stores an `IndividualStage` object that acts as a lightweight proxy
+  to the value of a given stage. This proxy is required to avoid illegally
+  accessing an undefined stage.
 
 #### Specifying the termination conditions.
 
