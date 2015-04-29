@@ -3,7 +3,7 @@
 
 **Author:** [Chris Timperley](http://www.christimperley.co.uk),
 **Difficulty:** Beginner,
-**Duration:** 10-30 minutes.
+**Duration:** 15-30 minutes.
 
 In this tutorial, we will be using Wallace to implement a simple Genetic
 Algorithm to solve the benchmark Max Ones optimisation problem, where we attempt
@@ -51,8 +51,10 @@ algorithm/simple_evolutionary_algorithm {
 }
 ```
 
-> **What If:** If you omit the type of the root object in your specification
-  file, then Wallace will be unable to construct the object when you call
+> **What happens if you  omit the type of the root object in the specification
+  file?**
+  <br/>
+  Then Wallace will be unable to construct the object when you call
   `compose(my_specification)`. However, you can still force Wallace to
   construct as if it were a given type by using
   `compose_as(my_specification, some_type)`.
@@ -170,6 +172,12 @@ Fill in the specification file.
 
 #### Specifying the termination conditions.
 
+Finally, provide your algorithm specification with a set of termination
+conditions, implemented using the `termination` hash, as shown in the example
+below. Once the state of the algorithm has satisfied any of these conditions,
+the algorithm will terminate. For now, let's specify a simple limit on the
+number of iterations that the algorithm may run for.
+
 ```
 ...
   termination[iterations]: criterion/iterations { limit: 100 }
@@ -180,6 +188,12 @@ Fill in the specification file.
   <br/>
   The algorithm won't terminate until you force the program to close;
   we don't advise doing this!
+
+> **What other termination conditions are there?**
+  <br/>
+  Call `listall("termination")` from within the REPL to produce a list of all
+  known termination condition types registered with Wallace. To find out more
+  about a particular type, just call `help("name_of_type")` in the REPL.
 
 #### Running the algorithm and analysing the results.
 
