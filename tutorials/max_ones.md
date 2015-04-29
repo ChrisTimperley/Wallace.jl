@@ -202,7 +202,8 @@ that the objective should be maximised by setting its first parameter to
 > **How do I check if a given stage is safe to access?**
   <br/>
   By simply calling `issafe(i.NAME)`, where `NAME` is replaced by the name of
-  the stage you wish to check.
+  the stage you wish to check; if the stage is safe to access, the function
+  will return `true`, else it will return `false`.
 
 #### Specifying the termination conditions.
 
