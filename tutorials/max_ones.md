@@ -133,32 +133,38 @@ Type: representation
 Fill in the specification file.
 
 ```
-algorithm/simple_evolutionary_algorithm {
+...
   _my_species:
-    representation: representation/bit_vector
-      length: 100
-
-  population:
-    demes:
-      - size: 20, species: $(_my_species), breeder: $(_my_breeder)
-}
+    stages[bits]:
+      representation: representation/bit_vector { length: 100 }
+...
 ```
 
 #### Specifying the breeding operations.
 
 ```
 ...
-_my_breeder: breeder/fast
-  sources[s]: selection
-    operator: selection/tournament { size: 2 }
-  sources[x]: variation
-    operator: crossover/one_point { rate: 1.0 }
-    source: "s"
-    stage: "bits"
-  sources[m]: variation
-    operator: mutation/bit_flip { rate: 0.1 }
-    source: "x"
-    stage: "bits"
+  _my_breeder: breeder/fast
+    sources[s]: selection
+      operator: selection/tournament { size: 2 }
+    sources[x]: variation
+      operator: crossover/one_point { rate: 1.0 }
+      source: "s"
+      stage: "bits"
+    sources[m]: variation
+      operator: mutation/bit_flip { rate: 0.1 }
+      source: "x"
+      stage: "bits"
+...
+```
+
+#### Setting up the evaluator.
+
+```
+...
+  evaluator: evaluator/simple
+    objective: ->
+      SimpleFitness{Int}(true, sum(get(i.bits)))
 ...
 ```
 
@@ -166,7 +172,7 @@ _my_breeder: breeder/fast
 
 ```
 ...
-termination[iterations]: criterion/iterations { limit: 100 }
+  termination[iterations]: criterion/iterations { limit: 100 }
 ...
 ```
 
