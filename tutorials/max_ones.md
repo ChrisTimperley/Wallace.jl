@@ -192,9 +192,17 @@ that the objective should be maximised by setting its first parameter to
 ```
 
 > **Why do I have to call `get(i.bits)` rather than `i.bits`?**
+  <br/>
   `i.bits` stores an `IndividualStage` object that acts as a lightweight proxy
   to the value of a given stage. This proxy is required to avoid illegally
-  accessing an undefined stage.
+  accessing an undefined stage. Although this feature serves little use in
+  this example, it becomes critical when performing grammatical evolution,
+  where the latter stages of an individual may fail to generate.
+
+> **How do I check if a given stage is safe to access?**
+  <br/>
+  By simply calling `issafe(i.NAME)`, where `NAME` is replaced by the name of
+  the stage you wish to check.
 
 #### Specifying the termination conditions.
 
