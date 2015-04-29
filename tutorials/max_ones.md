@@ -25,6 +25,7 @@ evolutionary algorithms.
   Max Ones problem.
 
 
+
 --------------------------------------------------------------------------------
 
 #### Creating a skeleton for our specification file.
@@ -55,6 +56,7 @@ algorithm/simple_evolutionary_algorithm {
   `compose(my_specification)`. However, you can still force Wallace to
   construct as if it were a given type by using
   `compose_as(my_specification, some_type)`.
+
 
 #### Specifying the components of our algorithm.
 Now we have a skeleton for our algorithm specification in place, let's go about
@@ -102,13 +104,57 @@ algorithm/simple_evolutionary_algorithm {
 }
 ```
 
-#### Running our algorithm and analysing the results.
+#### Setting up the species and representation.
+
+Now we have our single deme population in place, let's go about specifying its
+species and the representation used by its members, by specifying the
+`_my_species` property we referenced earlier. In order to find out what
+information we need to provide our species definition with, we can once again
+make use of `help("species")` to find out more information about a given type,
+as demonstrated below:
+
+```
+julia> help("species")
+
+Properties:
+- representation
+```
+
+Find list of representations.
+
+```
+julia> help("species:representation")
+
+Describes the data structure used to represent solutions for this given species.
+
+Type: representation
+```
+
+Fill in the specification file.
+
+```
+algorithm/simple_evolutionary_algorithm {
+  _my_species:
+    representation: representation/bit_vector
+      length: 100
+
+  population:
+    demes:
+      - size: 100, species: $(_my_species), breeder: $(_my_breeder)
+}
+```
+
+#### Specifying the breeding operations.
+
+#### Running the algorithm and analysing the results.
 
 > **Question:** *Does the fitness of the best individual in the population
   always improve or stay the same?*
 
 
 #### Optimising our algorithm parameters.
+
+
 
 
 
