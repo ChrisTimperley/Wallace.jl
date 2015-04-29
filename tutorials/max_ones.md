@@ -174,9 +174,9 @@ Fill in the specification file.
 
 Finally, provide your algorithm specification with a set of termination
 conditions, implemented using the `termination` hash, as shown in the example
-below. Once the state of the algorithm has satisfied any of these conditions,
-the algorithm will terminate. For now, let's specify a simple limit on the
-number of iterations that the algorithm may run for.
+below. Once the state of the algorithm has satisfied any of these conditions, it
+will terminate before the start of the next iteration. For now, let's specify
+a simple limit on the number of iterations that the algorithm may run for.
 
 ```
 ...
@@ -189,7 +189,9 @@ number of iterations that the algorithm may run for.
   The algorithm won't terminate until you force the program to close;
   we don't advise doing this!
 
-> **What other termination conditions are there?**
+
+
+> **What other types of termination condition are there?**
   <br/>
   Call `listall("termination")` from within the REPL to produce a list of all
   known termination condition types registered with Wallace. To find out more
