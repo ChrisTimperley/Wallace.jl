@@ -160,6 +160,30 @@ Fill in the specification file.
 ...
 ```
 
+> **Why doesn't the selector specify a source or stage?**
+  <br/>
+  The selector operates on individuals as a whole, considering only their
+  fitness values; no changes are made to the individual. No source is
+  required as the selector uses the contents of the deme it is connected
+  to as its source.
+
+> **What happens if I omit the `stage` property for a variation operator?**
+  <br/>
+  Wallace will assume the operator acts upon the canonical genome of an
+  individual (rather than any of its other stages). Removing the `stage`
+  property for this example should have no effect.
+
+> **What happens if I omit the `source` property for a variation operator?**
+  <br/>
+  The breeder will fail to compile and will raise an error.
+
+> **Are there types of breeder sources other than `selection` and `variation`?**
+  <br/>
+  Another less common type of breeder source is the `multi` source, which draws
+  a requested number of individual from a number of attached breeding sources.
+  The number of individuals picked from each source may be based on either fixed
+  proportions or a given probability distribution.
+
 #### Setting up the evaluator.
 Next, let's provide an evaluation function for algorithm so that we can assess
 the relative fitness of potential solutions. For this problem, you should use
