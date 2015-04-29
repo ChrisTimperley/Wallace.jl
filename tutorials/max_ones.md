@@ -140,7 +140,7 @@ algorithm/simple_evolutionary_algorithm {
 
   population:
     demes:
-      - size: 100, species: $(_my_species), breeder: $(_my_breeder)
+      - size: 20, species: $(_my_species), breeder: $(_my_breeder)
 }
 ```
 
@@ -149,21 +149,26 @@ algorithm/simple_evolutionary_algorithm {
 ```
 ...
 _my_breeder: breeder/fast
-  sources:
-    s: selection
-      operator: selection/tournament { size: 2 }
-    x: variation
-      operator: crossover/one_point { rate: 1.0 }
-      source: "s"
-      stage: "bits"
-    m: variation
-      operator: mutation/bit_flip { rate: 0.1 }
-      source: "x"
-      stage: "bits"
+  sources[s]: selection
+    operator: selection/tournament { size: 2 }
+  sources[x]: variation
+    operator: crossover/one_point { rate: 1.0 }
+    source: "s"
+    stage: "bits"
+  sources[m]: variation
+    operator: mutation/bit_flip { rate: 0.1 }
+    source: "x"
+    stage: "bits"
 ...
 ```
 
 #### Specifying the termination conditions.
+
+```
+...
+termination[iterations]: criterion/iterations { limit: 100 }
+...
+```
 
 #### Running the algorithm and analysing the results.
 
