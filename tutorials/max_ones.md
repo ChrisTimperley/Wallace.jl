@@ -161,6 +161,27 @@ Fill in the specification file.
 ```
 
 #### Setting up the evaluator.
+Next, let's provide an evaluation function for algorithm so that we can assess
+the relative fitness of potential solutions. For this problem, you should use
+the `evaluator/simple` evaluator, which simply computes the fitness of each
+individual within a given population using a provided `objective` function.
+
+This objective function will be implemented as a Julia function, accepting a
+single candidate individual, `i`, and producing a `Fitness` object containing
+its calculated objective value. In order to provide a Julia function to the
+Wallace specification language, we simply need to prepend `->` onto the start
+of our objective definition, immediately after the opening colons; this
+instructs Wallace to treat all the code within the block below as a single
+function definition, and not as a specification.
+
+To calculate the fitness of a candidate individual for our given problem, we
+need to count the number of binary 1s within the `bits` stage of the given
+individual. In order to access the candidate's bits stage, we simply call
+`get(i.bits)`. We can then calculate the number of ones within this string
+by simply summing it using Julia's `sum` function. Finally, we wrap our
+computed objective value within a new `SimpleFitness` object, and specify
+that the objective should be maximised by setting its first parameter to
+`true`.
 
 ```
 ...
@@ -169,6 +190,8 @@ Fill in the specification file.
       SimpleFitness{Int}(true, sum(get(i.bits)))
 ...
 ```
+
+> **Why do I have to call `get(i.bits)` rather than `i.bits`?**
 
 #### Specifying the termination conditions.
 
@@ -188,8 +211,6 @@ a simple limit on the number of iterations that the algorithm may run for.
   <br/>
   The algorithm won't terminate until you force the program to close;
   we don't advise doing this!
-
-
 
 > **What other types of termination condition are there?**
   <br/>
