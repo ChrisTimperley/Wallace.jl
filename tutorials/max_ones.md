@@ -146,6 +146,25 @@ algorithm/simple_evolutionary_algorithm {
 
 #### Specifying the breeding operations.
 
+```
+...
+_my_breeder: breeder/fast
+  sources:
+    s: selection
+      operator: selection/tournament { size: 2 }
+    x: variation
+      operator: crossover/one_point { rate: 1.0 }
+      source: "s"
+      stage: "bits"
+    m: variation
+      operator: mutation/bit_flip { rate: 0.1 }
+      source: "x"
+      stage: "bits"
+...
+```
+
+#### Specifying the termination conditions.
+
 #### Running the algorithm and analysing the results.
 
 > **Question:** *Does the fitness of the best individual in the population
