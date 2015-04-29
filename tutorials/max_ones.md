@@ -176,6 +176,11 @@ Fill in the specification file.
 ...
 ```
 
+> **What happens if I don't supply any termination conditions?**
+  <br/>
+  The algorithm won't terminate until you force the program to close;
+  we don't advise doing this!
+
 #### Running the algorithm and analysing the results.
 
 > **Question:** *Does the fitness of the best individual in the population
