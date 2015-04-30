@@ -128,17 +128,38 @@ developmental stage.
 Type: IndexedCollection{String, species_stage}
 ```
 
-Find list of representations.
+As we can see from above, species are represented by a series of developmental
+stages; this is one of the features unique to Wallace. For a lot of problems,
+we're only interested in using a single stage to represent the genome, but for
+more complex setups, such as grammatical evolution, we model the individual
+using a sequence of representations.
+
+Using the `help()` function, find out the structure of `species_stage`
+definitions, before composing one for your algorithm specification. In this
+tutorial we won't be discussing how more complex multiple stage species are
+composed.
 
 ```
-julia> help("species:representation")
+julia> help("species_stage")
 
-Describes the data structure used to represent solutions for this given species.
+Describes a particular stage of individual development for a given species.
 
-Type: representation
+Properties:
+- Representation
+- From
+- Lamarckian
 ```
 
-Fill in the specification file.
+For our simple, single-stage problem, the only parameter we need to concern
+ourselves with is the `representation` parameter, which describes the
+representation used by this stage of development; in the case of this problem,
+we'll be using a bit vector. In order to find the appropriate type of
+`representation` for our problem, try using the `listall("PARENT_TYPE")`
+function to list all known representations registered with Wallace, before
+using `help()` to figure out what parameters to supply it with.
+
+Once you've done that, your species definition should look something like the
+one below:
 
 ```
 ...
