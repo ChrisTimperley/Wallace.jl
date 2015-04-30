@@ -24,8 +24,6 @@ evolutionary algorithms.
 * Use Wallace to solve simple binary-string optimisation problems, such as the
   Max Ones problem.
 
-
-
 --------------------------------------------------------------------------------
 
 #### Creating a skeleton for our specification file.
@@ -144,6 +142,26 @@ Fill in the specification file.
 
 #### Specifying the breeding operations.
 
+Now we have the species of our single deme in place, let's go about specifying
+the breeding operations responsible for producing the offspring for our deme
+at each generation. For this problem, we will be implementing a single method
+of selection, mutation and recombination, however, you may produce any
+arbitrary chain of operations that you wish.
+
+To describe these operations, we use a `breeder` component; in this case we'll
+be using the default `breeder/fast` breeder. The breeder is composed of a
+number of sources, provided to its `sources` collection. For this problem we'll
+be using `selection` sources to implement our selection methods, and `variation`
+sources to implement our methods of crossover and mutation.
+
+Each breeder source accepts a single `operator`, and in the case of variation
+methods, it also accepts a `stage` property, specifying which stage of the
+individual the operator is applied to. Variation sources also accept a `source`
+parameter, informing the breeder which source should be used to provide inputs.
+
+An example breeder setup is given below. Using the `listall()` and `help()`
+functions, try to build your own selection-crossover-mutation breeding sequence.
+
 ```
 ...
   _my_breeder: breeder/fast
@@ -261,10 +279,6 @@ a simple limit on the number of iterations that the algorithm may run for.
 
 
 #### Optimising our algorithm parameters.
-
-
-
-
 
 -------------------------------------------------------------------------------
 
