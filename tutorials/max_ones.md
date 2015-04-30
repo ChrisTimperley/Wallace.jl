@@ -117,7 +117,15 @@ as demonstrated below:
 julia> help("species")
 
 Properties:
-- representation
+- stages
+
+julia> help("species:stages")
+
+An indexed collection describing each of the different stages of development
+for an individual belonging to this species, indexed by the name of the
+developmental stage.
+
+Type: IndexedCollection{String, species_stage}
 ```
 
 Find list of representations.
