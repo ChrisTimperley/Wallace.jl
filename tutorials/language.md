@@ -5,7 +5,7 @@
 ### An Example File
 
 ```
-algorithm/simple_evolutionary_algorithm {
+<algorithm/simple_evolutionary_algorithm>:
   evaluator<simple>:
     objective: >
       SimpleFitness{Int}(true, sum(get(i.bits))
@@ -24,10 +24,12 @@ algorithm/simple_evolutionary_algorithm {
   _my_breeder<fast>:
     sources[s]<selection>:
       operator<selection/tournament>: { size: 2 }
+
     sources[x]<variation>:
       source: s
       stage: bits
       operator<crossover/one_point>: { rate: 1.0 } 
+
     sources[m]<variation>:
       source: x
       stage: bits
@@ -38,7 +40,6 @@ algorithm/simple_evolutionary_algorithm {
       - capacity: 100
         species: $(_my_species)
         breeder: $(_my_breeder)
-}
 ```
 
 --------------------------------------------------------------------------------
