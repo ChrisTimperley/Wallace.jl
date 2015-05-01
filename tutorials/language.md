@@ -41,13 +41,15 @@ population:
 ```
 
 --------------------------------------------------------------------------------
-### Language Features
+### Language Components
 
 #### Top-Level Structure
 
-#### Types
+```
+type: algorithm/evolutionary_algorithm
+```
 
-#### Multi-Line Descriptions
+#### Type Labels
 
 #### Lists
 
@@ -62,7 +64,19 @@ colours:
 [red, yellow, blue, green]
 ```
 
-#### Indexed Collections
+#### Associative Arrays
+
+```
+  model:  Forza Corsa
+  colour: Red
+  year:   2011
+```
+
+```
+{model: Forza Corsa, colour: Red, year: 2011}
+```
+
+#### Multi-Line Descriptions
 
 #### Pointers
 
