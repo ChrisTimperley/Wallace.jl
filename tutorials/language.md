@@ -49,7 +49,18 @@
 
 #### Multi-Line Descriptions
 
-#### Collections
+#### Lists
+
+```
+colours:
+  - red
+  - yellow
+  - blue
+```
+
+```
+[red, yellow, blue, green]
+```
 
 #### Indexed Collections
 
