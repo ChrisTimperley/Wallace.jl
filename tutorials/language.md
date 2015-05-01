@@ -5,39 +5,39 @@
 ### An Example File
 
 ```
-<algorithm/simple_evolutionary_algorithm>:
-  evaluator<simple>:
-    objective: >
-      SimpleFitness{Int}(true, sum(get(i.bits))
+type: algorithm/simple_evolutionary_algorithm:
 
-  replacement<generational>:
-    elitism: 0
+evaluator<simple>:
+  objective: >
+    SimpleFitness{Int}(true, sum(get(i.bits))
 
-  termination[iterations<iterations>]: { limit: 1000 }
+replacement<generational>: { elitism: 0 }
 
-  _my_species:
+termination[iterations<iterations>]: { limit: 1000 }
+
+_my_species:
     stages[bits]:
       representation<bit_vector>: { length: 100 }
 
-  _my_breeder<fast>:
-    sources[s]<selection>:
-      operator<selection/tournament>: { size: 2 }
+_my_breeder<fast>:
+  sources[s]<selection>:
+    operator<selection/tournament>: { size: 2 }
 
-    sources[x]<variation>:
-      source: s
-      stage: bits
-      operator<crossover/one_point>: { rate: 1.0 } 
+  sources[x]<variation>:
+    source: s
+    stage: bits
+    operator<crossover/one_point>: { rate: 1.0 } 
 
-    sources[m]<variation>:
-      source: x
-      stage: bits
-      operator<mutation/bit_flip>: { rate: 0.1 }
+  sources[m]<variation>:
+    source: x
+    stage: bits
+    operator<mutation/bit_flip>: { rate: 0.1 }
 
-  population:
-    demes:
-      - capacity: 100
-        species: $(_my_species)
-        breeder: $(_my_breeder)
+population:
+  demes:
+    - capacity: 100
+      species: $(_my_species)
+      breeder: $(_my_breeder)
 ```
 
 --------------------------------------------------------------------------------
