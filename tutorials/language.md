@@ -45,6 +45,16 @@
 
 #### Top-Level Structure
 
+#### Types
+
+#### Multi-Line Descriptions
+
+#### Collections
+
+#### Indexed Collections
+
+#### Pointers
+
 #### Comments
 
 ```
@@ -55,6 +65,4 @@ x: 30 # or just the end of a line.
             # at all.
 ```
 
-#### Collections
 
-#### Indexed Collections
