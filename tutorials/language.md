@@ -2,13 +2,15 @@
 #### An overview of the Wallace specification language.
 
 --------------------------------------------------------------------------------
-## An Example File
+### An Example File
 
 ```
 
 ```
 
 --------------------------------------------------------------------------------
+### Language Features
+
 #### Top-Level Structure
 
 #### Comments
