@@ -21,18 +21,19 @@ _my_species:
       bits: { representation<bit_vector>: { length: 100 } }
 
 _my_breeder<fast>:
-  sources[s]<selection>:
-    operator<selection/tournament>: { size: 2 }
+  sources:
+    sel<selection>:
+      operator<selection/tournament>: { size: 2 }
 
-  sources[x]<variation>:
-    source: s
-    stage: bits
-    operator<crossover/one_point>: { rate: 1.0 } 
+    crx<variation>:
+      source: sel
+      stage:  bits
+      operator<crossover/one_point>: { rate: 1.0 } 
 
-  sources[m]<variation>:
-    source: x
-    stage: bits
-    operator<mutation/bit_flip>: { rate: 0.1 }
+    mut<variation>:
+      source: crx
+      stage:  bits
+      operator<mutation/bit_flip>: { rate: 0.1 }
 
 population:
   demes:
