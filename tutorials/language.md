@@ -13,14 +13,12 @@
   replacement<generational>:
     elitism: 0
 
-  # Terminate after 1000 generations.
   termination[iterations<iterations>]: { limit: 1000 }
 
   _my_species:
     stages[bits]:
       representation<bit_vector>: { length: 100 }
 
-  # Selection, crossover and mutation operators.
   _my_breeder<fast>:
     sources[s]<selection>:
       operator<selection/tournament>: { size: 2 }
