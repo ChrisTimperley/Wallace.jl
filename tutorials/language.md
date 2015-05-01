@@ -6,10 +6,11 @@
 #### Comments
 
 ```
-# Comments can take up a whole line.
-x: 30 # Or just the end of a line.
+# Comments can take up a whole line,
+x: 30 # or just the end of a line.
 
-  # And indentation doesn't matter.
+  # And indentation doesn't matter,
+            # at all.
 ```
 
 #### Collections
