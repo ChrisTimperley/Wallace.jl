@@ -13,11 +13,12 @@ evaluator<simple>:
 
 replacement<generational>: { elitism: 0 }
 
-termination[iterations<iterations>]: { limit: 1000 }
+termination:
+  iterations<iterations>: { limit: 1000 }
 
 _my_species:
-    stages[bits]:
-      representation<bit_vector>: { length: 100 }
+    stages:
+      bits: { representation<bit_vector>: { length: 100 } }
 
 _my_breeder<fast>:
   sources[s]<selection>:
