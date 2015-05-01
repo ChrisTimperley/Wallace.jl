@@ -1,6 +1,14 @@
 # Wallace Specification Language
 #### An overview of the Wallace specification language.
 
+--------------------------------------------------------------------------------
+## An Example File
+
+```
+
+```
+
+--------------------------------------------------------------------------------
 #### Top-Level Structure
 
 #### Comments
