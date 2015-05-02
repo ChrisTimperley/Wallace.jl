@@ -8,7 +8,7 @@
 type: algorithm/simple_evolutionary_algorithm:
 
 evaluator<simple>:
-  objective: >
+  objective: |
     SimpleFitness{Int}(true, sum(get(i.bits))
 
 replacement<generational>: { elitism: 0 }
@@ -23,17 +23,17 @@ _my_species:
 _my_breeder<fast>:
   sources:
     sel<selection>:
-      operator<selection/tournament>: { size: 2 }
+      operator<tournament>: { size: 2 }
 
-    crx<variation>:
+    crx<crossover>:
       source: sel
       stage:  bits
-      operator<crossover/one_point>: { rate: 1.0 } 
+      operator<one_point>: { rate: 1.0 } 
 
-    mut<variation>:
+    mut<mutation>:
       source: crx
       stage:  bits
-      operator<mutation/bit_flip>: { rate: 0.1 }
+      operator<bit_flip>: { rate: 0.1 }
 
 population:
   demes:
