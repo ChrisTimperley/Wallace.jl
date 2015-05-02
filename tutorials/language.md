@@ -5,7 +5,7 @@
 ### An Example File
 
 ```
-type: algorithm/simple_evolutionary_algorithm:
+type: algorithm/simple_evolutionary_algorithm
 
 evaluator<simple>:
   objective: |
@@ -16,18 +16,15 @@ replacement<generational>: { elitism: 0 }
 termination:
   iterations<iterations>: { limit: 1000 }
 
-_my_species<simple>:
+species:
   representation<bit_vector>: { length: 100 }
 
-_my_breeder<simple>:
+breeder:
   selector<tournament>: { size: 2 }
   crossover<one_point>: { rate: 1.0 } 
-  mutation<bit_flip>: { rate: 0.1 }
+  mutation<bit_flip>:   { rate: 0.1 }
 
-population<simple>:
-  capacity: 100
-  species: $(_my_species)
-  breeder: $(_my_breeder)
+population_size: 100
 ```
 
 --------------------------------------------------------------------------------
