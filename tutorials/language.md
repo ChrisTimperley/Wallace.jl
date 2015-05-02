@@ -16,30 +16,18 @@ replacement<generational>: { elitism: 0 }
 termination:
   iterations<iterations>: { limit: 1000 }
 
-_my_species:
-    stages:
-      bits: { representation<bit_vector>: { length: 100 } }
+_my_species<simple>:
+  representation<bit_vector>: { length: 100 }
 
-_my_breeder<fast>:
-  sources:
-    sel<selection>:
-      operator<tournament>: { size: 2 }
+_my_breeder<simple>:
+  selector<tournament>: { size: 2 }
+  crossover<one_point>: { rate: 1.0 } 
+  mutation<bit_flip>: { rate: 0.1 }
 
-    crx<crossover>:
-      source: sel
-      stage:  bits
-      operator<one_point>: { rate: 1.0 } 
-
-    mut<mutation>:
-      source: crx
-      stage:  bits
-      operator<bit_flip>: { rate: 0.1 }
-
-population:
-  demes:
-    - capacity: 100
-      species: $(_my_species)
-      breeder: $(_my_breeder)
+population<simple>:
+  capacity: 100
+  species: $(_my_species)
+  breeder: $(_my_breeder)
 ```
 
 --------------------------------------------------------------------------------
