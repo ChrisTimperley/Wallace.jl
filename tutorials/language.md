@@ -4,6 +4,9 @@
 --------------------------------------------------------------------------------
 ### An Example File
 
+Below is an example specification file for an implementation of the OneMax
+problem, using the `simple_evolutionary_algorithm` type.
+
 ```
 type: algorithm/simple_evolutionary_algorithm
 
