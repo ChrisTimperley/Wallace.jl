@@ -121,6 +121,10 @@ brackets and delimiting their items with a comma followed by a space:
 
 #### Comments
 
+Comments are opened each unenclosed number sign, `#`, and close at the
+end of the same line. In addition to taking up an entire line, comments
+may consume the rest of a line following the end of a statement.
+
 ```
 # Comments can take up a whole line,
 x: 30 # or just the end of a line.
