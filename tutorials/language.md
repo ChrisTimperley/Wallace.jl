@@ -122,8 +122,8 @@ breaks preserved; or using the `>` character, to specify that each line break sh
 be replaced by a space, transforming the multi-line string into a single line one.
 In both cases, the leading indent and trailing white space on each line are removed.
 
-For example, the line-break preserving operator when used on the following multi-line
-string:
+##### Line-Break Preserving
+The line-break preserving operator when used on the following multi-line string:
 ```
 lines_preserved: |
   First line
@@ -138,7 +138,8 @@ Second line
 Third line
 ```
 
-Whereas the line-break preserving operator, when employed on the following
+##### Line-Break Folding
+The line-break folding operator, `>`, when employed on the following
 string:
   
 ```
@@ -148,7 +149,7 @@ lines_replaced: >
   third item
 ```
 
-yields a one-line string:
+yields a one-line string, given below:
 
 ```
 First item, second item, third item
