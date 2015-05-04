@@ -43,10 +43,8 @@ describe a *simple evolutionary algorithm* to, so we prepend the
 `algorithm/simple_evolutionary_algorithm` type to the front of our description
 in order to let Wallace know how we want the object to be built.
 
-```json
-algorithm/simple_evolutionary_algorithm {
-
-}
+```
+type: algorithm/simple_evolutionary_algorithm
 ```
 
 > **What happens if you  omit the type of the root object in the specification
