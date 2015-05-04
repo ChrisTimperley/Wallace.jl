@@ -59,7 +59,8 @@ selector<tournament>:
 
 When the file is passed to the Wallace run-time, these type tags are simply
 extracted from their property, and inserted as the `type` property within
-its object, as shown below:
+its object. As such, you can avoid using type tags entirely by specifying
+this type property directly, as demonstrated below:
 
 ```
 selector:
