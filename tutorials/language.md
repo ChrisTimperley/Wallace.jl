@@ -115,7 +115,44 @@ brackets and delimiting their items with a comma followed by a space:
 {model: Forza Corsa, colour: Red, year: 2011}
 ```
 
-#### Multi-Line Descriptions
+#### Multi-Line Strings
+As in YAML, strings may be given across multiple lines in one of two ways: either by
+using the `|` character to indicate that the string should be read with its line
+breaks preserved; or using the `>` character, to specify that each line break should
+be replaced by a space, transforming the multi-line string into a single line one.
+In both cases, the leading indent and trailing white space on each line are removed.
+
+For example, the line-break preserving operator when used on the following multi-line
+string:
+```
+lines_preserved: |
+  First line
+  Second line
+  Third line
+```
+
+results in the following parsed string:
+```
+First line
+Second line
+Third line
+```
+
+Whereas the line-break preserving operator, when employed on the following
+string:
+  
+```
+lines_replaced: >
+  First item,
+  second item
+  third item
+```
+
+yields a one-line string:
+
+```
+First item, second item, third item
+```
 
 #### Pointers
 
