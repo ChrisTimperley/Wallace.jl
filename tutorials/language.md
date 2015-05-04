@@ -47,6 +47,26 @@ type: algorithm/evolutionary_algorithm
 
 #### Type Labels
 
+Certain parameters within a file may require type information, in order to
+instruct Wallace how to compile them. The most common way to do this is by
+appending the property name with a type tag, enclosed in angled brackets,
+as shown below:
+
+```
+selector<tournament>:
+  size: 2
+```
+
+When the file is passed to the Wallace run-time, these type tags are simply
+extracted from their property, and inserted as the `type` property within
+its object, as shown below:
+
+```
+selector:
+  type: tournament
+  size: 2
+```
+
 #### Lists
 
 ```
