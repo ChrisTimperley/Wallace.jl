@@ -68,6 +68,22 @@ selector:
   size: 2
 ```
 
+##### Absolute and Relative Types
+In most cases, Wallace allows you to specify types either relative to some
+namespace, or to give an absolute address for a given type. Below is an
+example of a property that accepts types relative to the
+`/selector/` namespace, and how a type may be specified using either
+relative or absolute addressing:
+
+```
+selector<tournament>: { ... }
+selector</selector/tournament>: { ... }
+```
+
+Absolute types are distinguished from relative types by Wallace using their
+`\` prefix. When in doubt as to whether a given property supports relative
+type addressing, you should consult the `help()` function for more information.
+
 #### Lists
 
 ```
