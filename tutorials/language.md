@@ -86,12 +86,18 @@ type addressing, you should consult the `help()` function for more information.
 
 #### Lists
 
+Lists can either be specified in a block format, where a hypen followed by
+a space denotes each item within the list, as shown below:
+
 ```
 colours:
   - red
   - yellow
   - blue
 ```
+
+Alternatively, lists can be specified inline, by enclosing them within square
+brackets and delimiting their items with a comma followed by a space:
 
 ```
 [red, yellow, blue, green]
