@@ -157,6 +157,10 @@ First item, second item, third item
 
 #### Pointers
 
+Pointer tags, `$()`, can be used to fetch the definition of an object from
+a specified location within the file and place a copy of that definition at
+location of the tag. An example of a simple pointer tag is given below:
+
 ```
 people:
   alice:
@@ -167,6 +171,10 @@ book:
   title: Through the Looking-Glass
   owner: $(people.alice)
 ```
+
+Upon parsing, the pointer is unwound, copying the contents of the object
+stored at `people.alice` into the `book.owner` property, resulting in the
+specification given below:
 
 ```
 people:
@@ -181,11 +189,13 @@ book:
     age: 28
 ```
 
+
 #### Comments
 
 Comments are opened each unenclosed number sign, `#`, and close at the
 end of the same line. In addition to taking up an entire line, comments
 may consume the rest of a line following the end of a statement.
+
 
 ```
 # Comments can take up a whole line,
