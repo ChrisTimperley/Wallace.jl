@@ -190,6 +190,21 @@ book:
     age: 28
 ```
 
+Pointers can also be used to fetch the contents of items contained
+within lists by simply specifying the index of the item (where all list indices
+start at zero) within brackets, as shown below:
+
+```
+people:
+  - name: Alice
+    age: 28
+  - name: Bob
+    age: 28
+
+book:
+  title: To Kill a Mockingbird
+  author: $(people[1])
+```
 
 #### Comments
 
