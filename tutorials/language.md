@@ -157,6 +157,17 @@ First item, second item, third item
 
 #### Pointers
 
+```
+people:
+  alice:
+    name: Alice
+    age: 28
+    
+book:
+  title: Through the Looking-Glass
+  owner: $(people.alive)
+```
+
 #### Comments
 
 Comments are opened each unenclosed number sign, `#`, and close at the
