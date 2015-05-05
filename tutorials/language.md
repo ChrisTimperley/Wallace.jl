@@ -165,7 +165,20 @@ people:
     
 book:
   title: Through the Looking-Glass
-  owner: $(people.alive)
+  owner: $(people.alice)
+```
+
+```
+people:
+  alice:
+    name: Alice
+    age: 28
+    
+book:
+  title: Through the Looking-Glass
+  owner:
+    name: Alice
+    age: 28
 ```
 
 #### Comments
