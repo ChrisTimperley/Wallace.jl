@@ -116,6 +116,7 @@ brackets and delimiting their items with a comma followed by a space:
 ```
 
 #### Multi-Line Strings
+
 As in YAML, strings may be given across multiple lines in one of two ways: either by
 using the `|` character to indicate that the string should be read with its line
 breaks preserved; or using the `>` character, to specify that each line break should
@@ -145,7 +146,7 @@ string:
 ```
 lines_replaced: >
   First item,
-  second item
+  second item,
   third item
 ```
 
