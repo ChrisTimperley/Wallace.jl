@@ -105,11 +105,21 @@ brackets and delimiting their items with a comma followed by a space:
 
 #### Associative Arrays
 
+Associative arrays are used to hold pairs of data and their respective keys, and form
+the backbone of the entire language; the document itself is an associative array. These
+objects are constructed using an indented below the line of the property definition, as
+shown below:
+
 ```
+my_car:
   model:  Forza Corsa
   colour: Red
   year:   2011
 ```
+
+Alternatively, one may supply an associative array definition inline, using JSON-style
+opening and closing brackets. An example of such an inline associative array is given
+below:
 
 ```
 {model: Forza Corsa, colour: Red, year: 2011}
