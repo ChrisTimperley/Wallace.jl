@@ -14,6 +14,16 @@ julia> using Wallace
 
 ### IJulia Graphical Notebook
 
+```
+julia> using IJulia
+julia> notebook()
+```
+
+```
+shell> ipython notebook --profile julia
+```
+
+
 ### Script Execution
 
 ```
