@@ -59,3 +59,23 @@ v"0.0.1"
 ```
 
 ### `examples` function
+The `examples` function can be used to return a list of all the official
+example solutions bundled with your current version of Wallace.
+
+```
+julia> Wallace.examples()
+- ant
+- koza
+- multiplexer
+- one_max
+- rastrigin
+- symbolic_regression
+```
+
+To load the algorithm for one of these examples, one may use the
+`example` function with the name of the example problem you wish to build:
+
+```
+julia> alg = Wallace.example("ant");
+julia> results = run!(alg);
+```
