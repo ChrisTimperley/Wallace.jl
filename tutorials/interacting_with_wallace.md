@@ -53,6 +53,9 @@ julia> aliases("mutation/bit_flip#rate")
 
 ### `version` function
 
+To see which version of Wallace you're running on your system, you may make use
+of the provided `version` function.
+
 ```
 julia> Wallace.version()
 v"0.0.1"
