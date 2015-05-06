@@ -18,6 +18,10 @@ julia> help("selection/tournament:size")
 
 ### `listall` function
 
+The `listall` function can be used to produce a list of all the known
+sub-types of a given type that have been loaded into the Wallace
+environment.
+
 ```
 julia> listall("selection")
 - selection/tournament
