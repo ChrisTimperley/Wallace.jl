@@ -14,6 +14,10 @@ julia> help("selection/tournament")
 
 ```
 julia> help("selection/tournament:size")
+The number of individuals that should participate in each tournament.
+
+Type:     Integer
+Default:  5
 ```
 
 ### `listall` function
