@@ -8,6 +8,8 @@
 
 ```
 julia> help("selection/tournament")
+
+Authors: Alice and Bob
 ```
 
 #### Describing type properties
