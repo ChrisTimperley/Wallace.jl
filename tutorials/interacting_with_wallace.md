@@ -4,9 +4,13 @@
 
 ### `help` function
 
+#### Describing types
+
 ```
 julia> help("selection/tournament")
 ```
+
+#### Describing type properties
 
 ```
 julia> help("selection/tournament:size")
