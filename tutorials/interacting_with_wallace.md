@@ -7,7 +7,15 @@ julia> alg = compose("my_algorithm.cfg")
 ```
 
 ```
+julia> alg = compose_as("my_algorithm.cfg", "algorithm/simple_evolutionary_algorithm")
+```
+
+```
 julia> alg = compose_with("my_algorithm.cfg") do cfg
+  cfg["population_size"] = 100
+end
+
+julia> alg = compose_as_with("my_algorithm.cfg", "algorithm/simple_evolutionary_algorithm") do cfg
   cfg["population_size"] = 100
 end
 ```
