@@ -32,3 +32,15 @@ julia> listall("selection")
 ```
 
 ### `aliases` function
+The `aliases` function returns a list of all known aliases for a given property
+or type.
+
+```
+julia> aliases("selection/stochastic_universal_sampling")
+- selection/stochastic_universal_sampling
+- selection/sus
+
+julia> aliases("mutation/bit_flip#rate")
+- #rate
+- #probability
+```
