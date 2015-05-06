@@ -95,11 +95,10 @@ Following the example below, we can create a single-deme population, composed of
 elsewhere within the file.
 
 ```
-algorithm/simple_evolutionary_algorithm {
-  population:
-    demes:
-      - size: 100, species: $(_my_species), breeder: $(_my_breeder)
-}
+type: algorithm/simple_evolutionary_algorithm
+population:
+  demes:
+    - size: 100, species: $(_my_species), breeder: $(_my_breeder)
 ```
 
 #### Setting up the species and representation.
@@ -160,11 +159,10 @@ Once you've done that, your species definition should look something like the
 one below:
 
 ```
-...
-  _my_species:
-    stages[bits]:
+_my_species:
+  stages:
+    bits:
       representation: representation/bit_vector { length: 100 }
-...
 ```
 
 #### Specifying the breeding operations.
