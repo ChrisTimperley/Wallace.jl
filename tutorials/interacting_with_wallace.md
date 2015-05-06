@@ -1,5 +1,13 @@
 # Interacting with Wallace
 
+## Modes of Interaction
+
+### Julia Read-Eval-Print-Loop (REPL)
+
+### IJulia Graphical Notebook
+
+### Script Execution
+
 ## Loading Wallace Files
 
 ```
