@@ -24,8 +24,8 @@ julia> Pkg.remove("Wallace")
 julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.git")
 
 This will remove any existing Wallace module from your Julia installation,
-before cloning the contents of the Wallace git repository into your local into
-your Julia modules directory.
+before cloning the contents of the Wallace git repository into your local
+Julia modules directory.
 
 ===============================================================================
 Julia
