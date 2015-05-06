@@ -48,3 +48,7 @@ julia> aliases("mutation/bit_flip#rate")
 - #rate
 - #probability
 ```
+
+### `version` function
+
+### `examples` function
