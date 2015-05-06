@@ -8,6 +8,10 @@
 julia> help("selection/tournament")
 ```
 
+```
+julia> help("selection/tournament:size")
+```
+
 ### `listall` function
 
 ```
