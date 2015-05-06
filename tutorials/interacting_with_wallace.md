@@ -53,4 +53,9 @@ julia> aliases("mutation/bit_flip#rate")
 
 ### `version` function
 
+```
+julia> Wallace.version()
+v"0.0.1"
+```
+
 ### `examples` function
