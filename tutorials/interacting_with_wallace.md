@@ -4,9 +4,21 @@
 
 ### Julia Read-Eval-Print-Loop (REPL)
 
+```
+shell> julia
+...
+...
+
+julia> using Wallace
+```
+
 ### IJulia Graphical Notebook
 
 ### Script Execution
+
+```
+shell> julia my_script.jl
+```
 
 ## Loading Wallace Files
 
