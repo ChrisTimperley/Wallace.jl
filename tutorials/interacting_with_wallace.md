@@ -1,5 +1,7 @@
 # Interacting with Wallace
 
+## Loading Wallace Files
+
 ## Navigational Commands
 
 ### `help` function
