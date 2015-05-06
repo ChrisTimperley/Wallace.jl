@@ -30,3 +30,5 @@ julia> listall("selection")
 - selection/random
 - selection/truncation
 ```
+
+### `aliases` function
