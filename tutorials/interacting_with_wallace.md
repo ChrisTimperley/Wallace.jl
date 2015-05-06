@@ -2,6 +2,16 @@
 
 ## Loading Wallace Files
 
+```
+julia> alg = compose("my_algorithm.cfg")
+```
+
+```
+julia> alg = compose_with("my_algorithm.cfg") do cfg
+  cfg["population_size"] = 100
+end
+```
+
 ## Navigational Commands
 
 ### `help` function
