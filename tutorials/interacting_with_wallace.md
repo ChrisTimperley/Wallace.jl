@@ -30,6 +30,8 @@ shell> ipython notebook --profile julia
 shell> julia my_script.jl
 ```
 
+-------------------------------------------------------------------
+
 ## Loading Wallace Files
 
 ```
@@ -49,6 +51,7 @@ julia> alg = compose_as_with("my_algorithm.cfg", "algorithm/simple_evolutionary_
   cfg["population_size"] = 100
 end
 ```
+-------------------------------------------------------------------
 
 ## Navigational Commands
 
