@@ -4,6 +4,12 @@
 
 ### Julia Read-Eval-Print-Loop (REPL)
 
+The simplest way to started with Wallace is through Julia's built-in REPL, which can
+be accessed by simply typing `julia` into the terminal (once Julia has been
+installed). Once the REPL has been loaded, one may use the `using Wallace` statement
+to import the Wallace environment into the workspace, allowing them to interact
+with Wallace.
+
 ```
 shell> julia
 ...
