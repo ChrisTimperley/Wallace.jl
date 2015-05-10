@@ -45,7 +45,7 @@ composer("species#stage") do s
   s["lamarckian"] = Base.get(s, "lamarckian", false)
 
   # Build the representation for this stage.
-  s["representation"] = compose(s["representation"]["type"], s["representation"])
+  s["representation"] = compose_as(s["representation"], s["representation"]["type"])
 
   return SpeciesStage(s["label"], s["from"], s["representation"], s["lamarckian"])
   
