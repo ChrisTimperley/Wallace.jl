@@ -28,6 +28,6 @@ unevaluated{I <: Individual}(inds::Vector{I}) = filter(i -> !i.evaluated, inds)
 
 register("population", Population)
 composer("population") do s
-  s["demes"] = Deme[compose("deme", d) for d in s["demes"]]
+  s["demes"] = Deme[compose_as(d, "deme") for d in s["demes"]]
   Population(s["demes"])
 end

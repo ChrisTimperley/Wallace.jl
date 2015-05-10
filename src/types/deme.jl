@@ -24,9 +24,9 @@ breed!(d::Deme) = breed!(d.breeder, d)
 
 register("deme", Deme)
 composer("deme") do s
-  s["species"] = compose("species", s["species"])
+  s["species"] = compose_as(s["species"], "species")
   s["breeder"]["species"] = s["species"]
-  s["breeder"] = compose(s["breeder"]["type"], s["breeder"])
+  s["breeder"] = compose(s["breeder"], s["breeder"]["type"])
   s["capacity"] = Base.get(s, "capacity", 100)
   s["offspring"] = Base.get(s, "offspring", s["capacity"])
 
