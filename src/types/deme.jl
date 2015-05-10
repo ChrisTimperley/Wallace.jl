@@ -26,7 +26,7 @@ register("deme", Deme)
 composer("deme") do s
   s["species"] = compose_as(s["species"], "species")
   s["breeder"]["species"] = s["species"]
-  s["breeder"] = compose(s["breeder"], s["breeder"]["type"])
+  s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
   s["capacity"] = Base.get(s, "capacity", 100)
   s["offspring"] = Base.get(s, "offspring", s["capacity"])
 
