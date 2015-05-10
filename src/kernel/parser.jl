@@ -14,7 +14,7 @@ module Parser
   # Composes a given specification file into an object.
   function compose(file::String)
     s = load_specification(file)
-    return compose(s, s["type"])
+    return compose(s, String(s["type"]))
   end
 
   # Composes a given specification file into an object, using a predetermined composer.
