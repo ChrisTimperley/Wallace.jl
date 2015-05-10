@@ -20,17 +20,20 @@ julia> using Wallace
 
 ### IJulia Graphical Notebook
 
+Another way to interact with Wallace is through the IJulia, a powerful graphical
+web-based notebook front-end for Julia.
+
 ```
 julia> using IJulia
 julia> notebook()
-```
 
+ijulia> using Wallace
 ```
-shell> ipython notebook --profile julia
-```
-
 
 ### Script Execution
+
+Alternatively, one may choose to import the Wallace package into a Julia script,
+which may then be executed via the command line, as shown below:
 
 ```
 shell> julia my_script.jl
