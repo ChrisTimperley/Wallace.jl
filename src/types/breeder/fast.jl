@@ -123,7 +123,7 @@ composer("breeder/fast") do s
       ss["source"] = s["sources"][ss["source"]]
       ss["stage"] = s["species"].stages[Base.get(ss, "stage", "genome")]
     end
-    s["sources"][sn] = compose("breeder/fast:source/$(ss["type"])", ss)
+    s["sources"][sn] = compose_as(ss, "breeder/fast:source/$(ss["type"])")
   end
   
   # Create the breeder using the final breeding source.

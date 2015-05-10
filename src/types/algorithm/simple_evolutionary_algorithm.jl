@@ -51,14 +51,14 @@ end
 register("algorithm/simple_evolutionary_algorithm", SimpleEvolutionaryAlgorithm)
 composer("algorithm/simple_evolutionary_algorithm") do s
   s["output"] = abspath(Base.get(s, "output", "output"))
-  s["population"] = compose("population", s["population"])
-  s["replacement"] = compose(s["replacement"]["type"], s["replacement"])
-  s["evaluator"] = compose(s["evaluator"]["type"], s["evaluator"])
-  s["loggers"] = Logger[compose(lg["type"], lg) for lg in Base.get(s, "loggers", [])]
+  s["population"] = compose_as(s["population"], "population")
+  s["replacement"] = compose_as(s["replacement"], s["replacement"]["type"])
+  s["evaluator"] = compose_as(s["evaluator"], s["evaluator"]["type"])
+  s["loggers"] = Logger[compose_as(lg, lg["type"]) for lg in Base.get(s, "loggers", [])]
 
   s["termination"] = Base.get(s, "termination", Dict{String, Criterion}())
   for t in keys(s["termination"])
-    s["termination"][t] = compose(s["termination"][t]["type"], s["termination"][t])
+    s["termination"][t] = compose_as(s["termination"][t], s["termination"][t]["type"])
   end
   s["termination"] = Dict{String, Criterion}(s["termination"])
 

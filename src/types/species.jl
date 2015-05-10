@@ -33,14 +33,14 @@ composer("species") do s
   # Compose each of the stages for this species.
   for (name, stage) in s["stages"]
     stage["label"] = name
-    s["stages"][name] = compose("species#stage", stage)
+    s["stages"][name] = compose_as(stage, "species#stage")
   end
 
   # Compose the individual type.
-  I = compose("individual", OrderedDict{String, Any}([
+  I = compose_as(OrderedDict{String, Any}([
     "fitness" => s["fitness"],
     "stages" => s["stages"]
-  ]))
+  ]), "individual")
 
   # Instantiate this species.
   Species{I}(Dict{String, SpeciesStage}(s["stages"]))

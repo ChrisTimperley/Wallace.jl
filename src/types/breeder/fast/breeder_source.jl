@@ -29,13 +29,13 @@ end
 
 register("breeder/fast:source/selection", SelectionBreederSource)
 composer("breeder/fast:source/selection") do s
-  SelectionBreederSource(compose(s["operator"]["type"], s["operator"]))
+  SelectionBreederSource(compose_as(s["operator"], s["operator"]["type"]))
 end
 
 register("breeder/fast:source/variation", VariationBreederSource)
 composer("breeder/fast:source/variation") do s
   s["operator"]["stage"] = s["stage"]
-  VariationBreederSource(compose(s["operator"]["type"], s["operator"]),
+  VariationBreederSource(compose_as(s["operator"], s["operator"]["type"]),
     s["source"],
     s["stage"])
 end
