@@ -1,6 +1,6 @@
 module Parser
   import JSON, DataStructures.OrderedDict
-  export load_specification, compose, composer
+  export load_specification, compose, compose_as, composer
  
   # Composer register.
   composer_register = Dict{String, Function}()
@@ -14,7 +14,7 @@ module Parser
   # Composes a given specification file into an object.
   function compose(file::String)
     s = load_specification(file)
-    return compose_as(s, s["type"])
+    return compose(file, s["type"])
   end
 
   # Composes a given specification file into an object, using a predetermined composer.
