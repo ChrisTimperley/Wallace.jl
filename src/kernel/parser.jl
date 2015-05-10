@@ -14,15 +14,17 @@ module Parser
   # Composes a given specification file into an object.
   function compose(file::String)
     s = load_specification(file)
-    return compose(s["type"], s)
+    return compose_as(s, s["type"])
   end
 
   # Composes a given specification file into an object, using a predetermined composer.
-  compose(alias::String, file::String) = compose(alias, load_specification(file))
+  compose_as(file::String, as::String) =
+    compose(load_specification(file), as)
 
   # Composes a given specification object (in the form of a JSON object)
   # into the object it describes.
-  compose(alias::String, s::OrderedDict{String, Any}) = apply(composer(alias), [s])
+  compose(s::OrderedDict{String, Any}, as::String) =
+    apply(composer(as), [s])
 
   # Insertion point functions.
   is_ins(::Any) = false
