@@ -28,10 +28,14 @@ module Parser
 
   # Composes a given object before performing refinements specified by a
   # given block.
-  compose_with(r::Function, file::String) =
+  function compose_with(r::Function, file::String)
     apply(r, compose(file))
-  compose_as_with(r::Function, file::String, as::String) =
+    return r
+  end
+  function compose_as_with(r::Function, file::String, as::String)
     apply(r, compose_as(file, as))
+    return r
+  end
 
   # Insertion point functions.
   is_ins(::Any) = false
