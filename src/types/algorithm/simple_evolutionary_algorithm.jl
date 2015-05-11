@@ -29,10 +29,8 @@ function run!(a::SimpleEvolutionaryAlgorithm)
   pbest = gbest = best(a.state.population)
 
   prepare!(a.state.population)
-  println("Prepared the population.")
 
   while !any(c -> is_satisfied(c, a.state), values(a.termination))
-#    println("Beginning generation: $(a.state.iterations)")
     breed!(a.state.population)
     evaluate!(a.evaluator, a.state)
 
