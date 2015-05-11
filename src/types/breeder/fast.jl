@@ -131,6 +131,7 @@ composer("breeder/fast") do s
       i += 1
     end
   end
+  println("Sources: $(srcs)")
 
   # Create each of the breeding sources, in the established order.
   for sn in srcs
