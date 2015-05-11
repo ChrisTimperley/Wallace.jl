@@ -60,6 +60,52 @@ module Parser
     end
   end
 
+  # Locate and parse each type tag within the document, line-by-line.
+  function handle_type_tags(s::String)
+    i = 1
+    lines = split(s, "\n")
+    while i <= length(lines)
+
+      loc = search(lines[i], r"<\w+>:")
+      if loc.stop != -1
+        typ = lines[i][loc.start+1:loc.stop-2]
+
+        # Inline block handling.
+        bloc = search(lines[i], '{', loc.stop+1)
+        if bloc != 0
+          lines[i] = lines[i][1:bloc] * " type: $(typ), " * lines[i][bloc+1:end]
+     
+        # Indented block handling.
+        # - Determine correct indent from the line below.
+        elseif isblank(lines[i][loc.stop+1:end])
+          insert!(lines, i+1, "$(indent_of(lines[i+1]))type: $(typ)")
+
+        # Tried injecting type tags into unsupported element.
+        else
+          error("Failed to handle type tags; used in an unsupported context (Line $(i)).")
+        end
+
+        # Remove the tag from the line.
+        lines[i] = lines[i][1:loc.start-1] * ":" * lines[i][loc.stop+1:end]
+      end
+
+      i += 1
+    end
+
+    return join(lines, "\n")
+  end
+
+  # Returns the leading indent for a given string.
+  function indent_of(s::String)
+    indent = ""
+    i = 1
+    while isblank(s[i])
+      indent *= "$(s[i])"
+      i += 1
+    end
+    return indent
+  end
+
   # Parses a Wallace specification file into a JSON object.
   function parse(s::String)
 
