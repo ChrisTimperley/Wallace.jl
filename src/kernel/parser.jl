@@ -1,6 +1,7 @@
 module Parser
   import JSON, YAML, DataStructures.OrderedDict
-  export load_specification, compose, compose_as, composer, compose_with, parse
+  export load_specification, compose, compose_as, composer, compose_with,
+    parse, parse_file
  
   # Composer register.
   composer_register = Dict{String, Function}()
@@ -106,7 +107,9 @@ module Parser
     return indent
   end
 
+
   # Parses a Wallace specification file as a pre-processed YAML file.
+  parse_file(f::String) = parse(readall(f))
   function parse(s::String)
    
     # Remove all comments.
