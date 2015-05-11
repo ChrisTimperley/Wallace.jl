@@ -1,6 +1,6 @@
 module Parser
   import JSON, DataStructures.OrderedDict
-  export load_specification, compose, compose_as, composer
+  export load_specification, compose, compose_as, composer, compose_with
  
   # Composer register.
   composer_register = Dict{String, Function}()
