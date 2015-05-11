@@ -16,26 +16,25 @@ module Parser
     s = load_specification(file)
     return compose_as(s, s["type"])
   end
+  function compose(refinements::Function, file::String)
+    s = load_specification(file)
+    apply(refinements, s)
+    return compose_as(s, s["type"])
+  end
 
   # Composes a given specification file into an object, using a predetermined composer.
   compose_as(file::String, as::String) =
     compose_as(load_specification(file), as)
+  function compose_as(refinements::Function, file::String, as::String)
+    s = load_specification(file)
+    apply(refinements, s)
+    return compose_as(s, as)
+  end
 
   # Composes a given specification object (in the form of a JSON object)
   # into the object it describes.
   compose_as(s::OrderedDict{String, Any}, as::String) =
     apply(composer(as), [s])
-
-  # Composes a given object before performing refinements specified by a
-  # given block.
-  function compose_with(r::Function, file::String)
-    apply(r, compose(file))
-    return r
-  end
-  function compose_as_with(r::Function, file::String, as::String)
-    apply(r, compose_as(file, as))
-    return r
-  end
 
   # Insertion point functions.
   is_ins(::Any) = false
