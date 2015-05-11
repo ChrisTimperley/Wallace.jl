@@ -88,9 +88,14 @@ module Parser
 
         # Remove the tag from the line.
         lines[i] = lines[i][1:loc.start-1] * ":" * lines[i][loc.stop+1:end]
+      
+      # Only proceed to the next line if there were no changes to the line
+      # during this pass. This allows supports for multiple type tags on a
+      # single line (useful when nesting inline documents).
+      else
+        i += 1
       end
 
-      i += 1
     end
 
     return join(lines, "\n")
