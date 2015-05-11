@@ -119,11 +119,11 @@ composer("breeder/fast") do s
 
   # Determine the correct order in which to construct each of the breeding
   # sources.
-  srcs = collect(keys(Dict{String, Any}(s["sources"])))
+  srcs = collect(keys(Dict{ASCIIString, Any}(s["sources"])))
   i = 1
   while i < length(srcs)
     gt_i = findfirst(srcs) do j
-      srcs[i] == s["sources"][srcs[j]]["source"]
+      srcs[i] == s["sources"][j]["source"]
     end
     if gt_i != 0 && gt_i > i
       srcs[gt_i], srcs[i] = srcs[i], srcs[gt_i]
