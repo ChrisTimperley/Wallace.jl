@@ -16,18 +16,18 @@ module Parser
     s = load_specification(file)
     return compose_as(s, s["type"])
   end
-  function compose(refinements::Function, file::String)
+  function compose_with(refinements::Function, file::String)
     s = load_specification(file)
-    apply(refinements, s)
+    apply(refinements, [s])
     return compose_as(s, s["type"])
   end
 
   # Composes a given specification file into an object, using a predetermined composer.
   compose_as(file::String, as::String) =
     compose_as(load_specification(file), as)
-  function compose_as(refinements::Function, file::String, as::String)
+  function compose_as_with(refinements::Function, file::String, as::String)
     s = load_specification(file)
-    apply(refinements, s)
+    apply(refinements, [s])
     return compose_as(s, as)
   end
 
