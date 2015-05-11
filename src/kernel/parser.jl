@@ -1,6 +1,6 @@
 module Parser
-  import JSON, DataStructures.OrderedDict
-  export load_specification, compose, compose_as, composer, compose_with
+  import JSON, YAML, DataStructures.OrderedDict
+  export load_specification, compose, compose_as, composer, compose_with, parse
  
   # Composer register.
   composer_register = Dict{String, Function}()
@@ -106,49 +106,21 @@ module Parser
     return indent
   end
 
-  # Parses a Wallace specification file into a JSON object.
+  # Parses a Wallace specification file as a pre-processed YAML file.
   function parse(s::String)
-
-    # Temporarily remove all strings from the specification text.
-    i = 0
-    strings = String[]
-    s = replace(s, r"\"(\\.|[^\"])*\"", x -> begin
-      push!(strings, x)
-      i += 1
-      "<STR_$i>"
-    end)
-    
+   
     # Remove all comments.
     s = replace(s, r"#.*", "")
 
-    # Format each insertion point into an object.
-    s = replace(s, r"\$\(\w+\)", x -> "{\"\$\":\"$(x[3:end-1])\"}")
+    # Handle all type tags.
+    s = handle_type_tags(s)
 
-    # Inject the type properties into each object.
-    s = replace(s, r"(\w|\/)+\s+{", x -> "{type: \"$(strip(x[1:end-1]))\", ")
-
-    # Remove any unnecessary commas introduced by the former operation.
-    s = replace(s, r",\s+}", x -> "}")
-
-    # Wrap all unwrapped property names.
-    s = replace(s, r"\b\w+:", x -> "\"$(x[1:end-1])\":")
-
-    # Remove all empty lines.
-    s = replace(s, r"\s*\n*\s{2,}", "\n")
-
-    # Add a comma to the end of each property, except for the last of
-    # each object.
-    s = replace(s, r"(?<!{|^|,|\[)\n(?!}|\]|$)", ",\n")
-
-    # Reinsert each of the removed strings.
-    for i in 1:length(strings)
-      s = replace(s, "<STR_$i>", strings[i])
-    end
+    println(s)
 
     # Parse as a JSON file.
-    j = JSON.parse(s; ordered=true)
-    inj_ins!(j)
-    return j
+    #j = JSON.parse(s; ordered=true)
+    #inj_ins!(j)
+    #return j
 
   end
 
