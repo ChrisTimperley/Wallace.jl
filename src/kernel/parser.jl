@@ -67,7 +67,7 @@ module Parser
     lines = split(s, "\n")
     while i <= length(lines)
 
-      loc = search(lines[i], r"<\w+>:")
+      loc = search(lines[i], r"<[\w\/\\-]+>:")
       if loc.stop != -1
         typ = lines[i][loc.start+1:loc.stop-2]
 
