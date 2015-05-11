@@ -37,7 +37,7 @@ composer("species") do s
   end
 
   # Compose the individual type.
-  I = compose_as(OrderedDict{String, Any}([
+  I = compose_as(Dict{Any, Any}([
     "fitness" => s["fitness"],
     "stages" => s["stages"]
   ]), "individual")

@@ -89,9 +89,6 @@ module Parser
 
     # Parse as a YAML document, before handling insertion points.
     d = YAML.load(s)
-
-    println("TYPE: $(typeof(d))")    
-
     inj_ins!(d)
     return d
   end
