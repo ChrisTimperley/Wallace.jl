@@ -43,13 +43,28 @@ shell> julia my_script.jl
 
 ## Loading Wallace Files
 
+The `compose` function may be used to build the Julia object described by a
+given Wallace specification file into a concrete form. When called with only
+the name of the file that should be composed, Wallace will attempt to determine
+how to construct the object based upon its top-level `type` property.
+
 ```
 julia> alg = compose("my_algorithm.cfg")
 ```
 
+In the event that a specification file does not have a top-level `type`
+property, or one wishes to build it as a specific type, one may use the
+`compose_as` function to instruct Wallace to attempt to build the object from
+the description as if it were a given type.
+
 ```
 julia> alg = compose_as("my_algorithm.cfg", "algorithm/simple_evolutionary_algorithm")
 ```
+
+Modifications may be made to a given specification before translation, without
+affecting the original file, by supplying either the `compose_with` or `compose_as_with`
+functions with a block that accepts a given parsed specification object and
+performs changes to that object.
 
 ```
 julia> alg = compose_with("my_algorithm.cfg") do cfg
