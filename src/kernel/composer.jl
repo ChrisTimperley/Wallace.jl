@@ -14,6 +14,7 @@ module Composer
   # Composes a given specification file into an object.
   function compose(file::String)
     s = parse_file(file)
+    println(s)
     return compose_as(s, s["type"])
   end
   function compose_with(refinements::Function, file::String)
