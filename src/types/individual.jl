@@ -62,12 +62,12 @@ composer("individual") do s
   # Build the cloning operation for this type.
   cloner = join([[], ["i.$(stage.label)" for stage in stages]], ",")
   cloner = "clone(i::$(t)) = $(t)($(cloner))"
-  eval(Wallace, parse(cloner))
+  eval(Wallace, base.parse(cloner))
 
   # Build the describe operation for this type.
   describer = join(vcat(["fitness: \$(describe(i.fitness))"], ["$(stage.label):\n\$(describe(i.$(stage.label)))" for stage in stages]), "\n")
   describer = "describe(i::$(t)) = \"$(describer)\""
-  eval(Wallace, parse(describer))
+  eval(Wallace, base.parse(describer))
   
   # Return the generated individual type.
   return t

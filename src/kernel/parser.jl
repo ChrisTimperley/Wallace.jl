@@ -89,6 +89,7 @@ module Parser
 
     # Parse as a YAML document, before handling insertion points.
     d = YAML.load(s)
+    println(d)
     inj_ins!(d)
     return d
   end

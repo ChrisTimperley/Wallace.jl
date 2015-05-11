@@ -1,4 +1,3 @@
-# encoding: utf-8
 load("../individual",         dirname(@__FILE__))
 load("../deme",               dirname(@__FILE__))
 load("../breeder",            dirname(@__FILE__))

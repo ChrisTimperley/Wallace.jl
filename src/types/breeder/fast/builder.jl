@@ -52,5 +52,5 @@ function build_sync(from::Type, to::Type, ops::Vector{(String, String)})
     "\nend"
 
   # Dynamically evaluate the function definition
-  eval(Wallace, parse(body))
+  eval(Wallace, base.parse(body))
 end
