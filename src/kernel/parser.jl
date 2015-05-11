@@ -1,5 +1,5 @@
 module Parser
-  import JSON, YAML, DataStructures.OrderedDict
+  import YAML
   export load_specification, compose, compose_as, composer, compose_with,
     parse, parse_file
  
@@ -34,28 +34,28 @@ module Parser
 
   # Composes a given specification object (in the form of a JSON object)
   # into the object it describes.
-  compose_as(s::OrderedDict{String, Any}, as::String) =
+  compose_as(s::Dict{String, Any}, as::String) =
     apply(composer(as), [s])
 
   # Insertion point functions.
   is_ins(::Any) = false
-  is_ins(s::OrderedDict{String, Any}) = collect(keys(s)) == ["\$"]
+  is_ins(s::Dict{String, Any}) = collect(keys(s)) == ["\$"]
 
-  match_ins(s::OrderedDict{String, Any}, loc::String) =
+  match_ins(s::Dict{String, Any}, loc::String) =
     match_ins(s, String[ss for ss in split(loc, ".")])
-  match_ins(s::OrderedDict{String, Any}, loc::Vector{String}) =
+  match_ins(s::Dict{String, Any}, loc::Vector{String}) =
     length(loc) == 1 ? s[loc[1]] : match_ins(s[shift!(loc)], loc)
   match_ins(s::Vector{Any}, loc::Vector{String}) =
     length(loc) == 1 ? s[parseint(loc[1])] : match_ins(s[parseint(shift!(loc))], loc)
 
-  inj_ins!(s::OrderedDict{String, Any}) = inj_ins!(s, s)
-  inj_ins!(s::OrderedDict{String, Any}, ss::Any) = return
-  function inj_ins!(s::OrderedDict{String, Any}, ss::OrderedDict{String, Any})
+  inj_ins!(s::Dict{String, Any}) = inj_ins!(s, s)
+  inj_ins!(s::Dict{String, Any}, ss::Any) = return
+  function inj_ins!(s::Dict{String, Any}, ss::Dict{String, Any})
     for (k,v) in ss
       is_ins(v) ? ss[k] = match_ins(s, v["\$"]) : inj_ins!(s, v)
     end
   end
-  function inj_ins!(s::OrderedDict{String, Any}, ss::Vector{Any})
+  function inj_ins!(s::Dict{String, Any}, ss::Vector{Any})
     for (i,v) in enumerate(ss)
       is_ins(v) ? ss[i] = match_ins(s, v["\$"]) : inj_ins!(s, v)
     end
@@ -123,9 +123,13 @@ module Parser
     # Handle all type tags.
     s = handle_type_tags(s)
 
-    # Parse as a YAML document.
-    return YAML.load(s)
+    # Format each insertion point into an object.
+    s = replace(s, r"\$\(\w+\)", x -> "{\"\$\":\"$(x[3:end-1])\"}")
 
+    # Parse as a YAML document, before handling insertion points.
+    d = YAML.load(s)
+    inj_ins!(d)
+    return d
   end
 
   load_specification(f::String) = parse(open(readall, f))
