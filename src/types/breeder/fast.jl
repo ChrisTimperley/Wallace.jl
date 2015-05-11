@@ -117,8 +117,24 @@ end
 register("breeder/fast", FastBreeder)
 composer("breeder/fast") do s
 
-  # Create each of the breeding sources in order.
-  for (sn, ss) in s["sources"]
+  # Determine the correct order in which to construct each of the breeding
+  # sources.
+  srcs = keys(s["sources"])
+  i = 1
+  while i < length(srcs)
+    gt_i = findfirst(srcs) do j
+      srcs[i] == s["sources"][srcs[j]]["source"]
+    end
+    if gt_i != 0 && gt_i > i
+      srcs[gt_i], srcs[i] = srcs[i], srcs[gt_i]
+    else
+      i += 1
+    end
+  end
+
+  # Create each of the breeding sources, in the established order.
+  for sn in srcs
+    ss = s["sources"][sn]
     if ss["type"] == "variation" && haskey(ss, "source")
       ss["source"] = s["sources"][ss["source"]]
       ss["stage"] = s["species"].stages[Base.get(ss, "stage", "genome")]
@@ -130,5 +146,5 @@ composer("breeder/fast") do s
   # Annoyingly OrderedDict doesn't implement an endof(), nor does
   # its iterator, and so we have to collect its values before determining
   # which is the last.
-  build_sync(s["species"], FastBreeder(s["species"], last(collect(values(s["sources"])))))
+  build_sync(s["species"], FastBreeder(s["species"], s["sources"][srcs[end]]))
 end
