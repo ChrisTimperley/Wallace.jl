@@ -123,12 +123,8 @@ module Parser
     # Handle all type tags.
     s = handle_type_tags(s)
 
-    println(s)
-
-    # Parse as a JSON file.
-    #j = JSON.parse(s; ordered=true)
-    #inj_ins!(j)
-    #return j
+    # Parse as a YAML document.
+    return YAML.load(s)
 
   end
 
