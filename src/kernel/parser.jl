@@ -26,6 +26,13 @@ module Parser
   compose_as(s::OrderedDict{String, Any}, as::String) =
     apply(composer(as), [s])
 
+  # Composes a given object before performing refinements specified by a
+  # given block.
+  compose_with(r::Function, file::String) =
+    apply(r, compose(file))
+  compose_as_with(r::Function, file::String, as::String) =
+    apply(r, compose_as(file, as))
+
   # Insertion point functions.
   is_ins(::Any) = false
   is_ins(s::OrderedDict{String, Any}) = collect(keys(s)) == ["\$"]
