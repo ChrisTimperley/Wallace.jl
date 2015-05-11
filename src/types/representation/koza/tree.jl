@@ -16,7 +16,7 @@ function ComposeKozaTree(inputs::Vector{KozaInput})
   src = "execute($(src)) = execute($(join([["_t.root"], [
   a.label for a in inputs]], ",")))"
   println(src)
-  eval(Wallace, parse(src))
+  eval(Wallace, Base.parse(src))
 
   # Implement the cloning method for this tree type.
 

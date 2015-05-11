@@ -17,8 +17,8 @@ module Reflect
   function anonymous_module(d::String)
     name = fresh_mod()
     d = "module $(name)\n$(d)\nend"
-    eval(parse(d))
-    return eval(parse(name))
+    eval(Base.parse(d))
+    return eval(Base.parse(name))
   end
 
   # Generates an anonymous type from a provided definition.
@@ -30,16 +30,16 @@ module Reflect
     # Format the constructors using the name of the type.
     d = replace(d, r"constructor(?=\()", name)
 
-    eval(m, parse(d))
-    return eval(m, parse(name))
+    eval(m, Base.parse(d))
+    return eval(m, Base.parse(name))
   end
 
   define_inline_function(m::Module, n::ASCIIString, args::Vector{ASCIIString}, body::ASCIIString) =
-    eval(m, parse("$(n)($(join(args, ",")) = $(body)"))
+    eval(m, Base.parse("$(n)($(join(args, ",")) = $(body)"))
 
   # Never generates one-line functions (FOR NOW).
   # Won't work with less specific "String" type?
   define_function(m::Module, n::ASCIIString, args::Vector{ASCIIString}, body::ASCIIString) =
-    eval(m, parse("function $(n)($(join(args, ",")));$(body);end"))
+    eval(m, Base.parse("function $(n)($(join(args, ",")));$(body);end"))
 
 end

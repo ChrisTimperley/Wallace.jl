@@ -19,7 +19,7 @@ type VariationBreederSource <: BreederSource
   stage_getter::Function
   VariationBreederSource(v::Variation, s::BreederSource, stage::SpeciesStage) =
     new(anonymous_type(Wallace), v, s, stage.label,
-      eval(parse("inds -> IndividualStage{$(chromosome(stage.representation))}[i.$(stage.label) for i in inds]")))
+      eval(Base.parse("inds -> IndividualStage{$(chromosome(stage.representation))}[i.$(stage.label) for i in inds]")))
 end
 
 type MultiBreederSource <: BreederSource
