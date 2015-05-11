@@ -14,6 +14,7 @@ module Wallace
   include("base/each.jl")
   include("base/Reflect.jl")
   include("kernel/parser.jl")
+  include("kernel/composer.jl")
   include("kernel/example.jl")
   include("kernel/help.jl")
 
@@ -21,6 +22,7 @@ module Wallace
   using .Reflect
   using .Partition
   using .Parser
+  using .Composer
   using .Help
   using DataStructures
 

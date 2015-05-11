@@ -1,42 +1,7 @@
 module Parser
   import YAML
-  export load_specification, compose, compose_as, composer, compose_with,
-    parse, parse_file
+  export parse, parse_file
  
-  # Composer register.
-  composer_register = Dict{String, Function}()
-
-  # Retrieves a given composer by its alias.
-  composer(alias::String) = composer_register[alias]
-
-  # Registers a composer with a given alias.
-  composer(f::Function, alias::String) = composer_register[alias] = f
-
-  # Composes a given specification file into an object.
-  function compose(file::String)
-    s = load_specification(file)
-    return compose_as(s, s["type"])
-  end
-  function compose_with(refinements::Function, file::String)
-    s = load_specification(file)
-    apply(refinements, [s])
-    return compose_as(s, s["type"])
-  end
-
-  # Composes a given specification file into an object, using a predetermined composer.
-  compose_as(file::String, as::String) =
-    compose_as(load_specification(file), as)
-  function compose_as_with(refinements::Function, file::String, as::String)
-    s = load_specification(file)
-    apply(refinements, [s])
-    return compose_as(s, as)
-  end
-
-  # Composes a given specification object (in the form of a JSON object)
-  # into the object it describes.
-  compose_as(s::Dict{Any, Any}, as::String) =
-    apply(composer(as), [s])
-
   # Insertion point functions.
   is_ins(::Any) = false
   is_ins(s::Dict{Any, Any}) = collect(keys(s)) == ["\$"]
@@ -131,7 +96,5 @@ module Parser
     inj_ins!(d)
     return d
   end
-
-  load_specification(f::String) = parse(open(readall, f))
 
 end
