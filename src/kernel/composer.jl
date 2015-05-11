@@ -1,5 +1,5 @@
 module Composer
-  import Wallace.Parser
+  using  Wallace.Parser
   export compose, compose_as, composer, compose_with
  
   # Composer register.
