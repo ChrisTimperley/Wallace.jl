@@ -31,7 +31,6 @@ module Parser
     i = 1
     lines = split(s, "\n")
     while i <= length(lines)
-
       loc = search(lines[i], r"<[\w\/\\-]+>:")
       if loc.stop != -1
         typ = lines[i][loc.start+1:loc.stop-2]
@@ -60,9 +59,7 @@ module Parser
       else
         i += 1
       end
-
     end
-
     return join(lines, "\n")
   end
 
@@ -76,7 +73,6 @@ module Parser
     end
     return indent
   end
-
 
   # Parses a Wallace specification file as a pre-processed YAML file.
   parse_file(f::String) = parse(readall(f))
@@ -93,6 +89,9 @@ module Parser
 
     # Parse as a YAML document, before handling insertion points.
     d = YAML.load(s)
+
+    println("TYPE: $(typeof(d))")    
+
     inj_ins!(d)
     return d
   end
