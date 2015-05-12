@@ -23,7 +23,6 @@ function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::String)
   # Compose the execution function.
   src = join([["::$(t)"], ["$(i.label)::$(i.ty)" for i in inputs]], ",")
   src = "execute($(src)) = $(label)"
-  println(src)
   eval(Wallace, Base.parse(src))
 
   return t

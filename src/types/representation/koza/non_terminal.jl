@@ -31,7 +31,6 @@ function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::String)
       join([["p"], ["c$(i)" for i in 1:length(inputs)]], ",")
     ))
   end"
-  println(src)
   t = anonymous_type(Wallace, src)
 
   # Compose the "fresh" function.
@@ -54,14 +53,12 @@ function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::String)
       "execute($(join([["n.children[$(i)]"], input_list], ", ")))")
   end
   src = src * body * "\nend"
-  println(src)
   eval(Wallace, Base.parse(src))
 
   # Compose the clone function.
   src = "clone(n::$(t), p::KozaParent) = $(t)($(
     join([["p"], ["clone(n.children[$(i)], n)" for i in 1:length(inputs)]], ",")
   ))"
-  println(src)
   eval(Wallace, Base.parse(src))
 
   return t
