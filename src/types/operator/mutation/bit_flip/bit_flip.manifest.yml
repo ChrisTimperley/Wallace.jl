@@ -1,6 +1,6 @@
 id: mutation/bit_flip
 
-files:
+import:
   - bit_flip/bit_flip_mutation.jl
 
 tags:
