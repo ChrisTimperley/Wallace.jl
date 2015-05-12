@@ -35,13 +35,13 @@ function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::String)
   t = anonymous_type(Wallace, src)
 
   # Compose the "fresh" function.
-  eval(Wallace, parse("fresh(::$(t), p::KozaParent) = $(t)(p)"))
+  eval(Wallace, Base.parse("fresh(::$(t), p::KozaParent) = $(t)(p)"))
 
   # Compose the label function.
-  eval(Wallace, parse("label(::$(t)) = $(label)"))
+  eval(Wallace, Base.parse("label(::$(t)) = $(label)"))
 
   # Compose the arity function.
-  eval(Wallace, parse("arity(::$(t)) = $(length(accepts))"))
+  eval(Wallace, Base.parse("arity(::$(t)) = $(length(accepts))"))
 
   # Compose the execution function.
   input_list = [i.label for i in inputs]
@@ -55,14 +55,14 @@ function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::String)
   end
   src = src * body * "\nend"
   println(src)
-  eval(Wallace, parse(src))
+  eval(Wallace, Base.parse(src))
 
   # Compose the clone function.
   src = "clone(n::$(t), p::KozaParent) = $(t)($(
     join([["p"], ["clone(n.children[$(i)], n)" for i in 1:length(inputs)]], ",")
   ))"
   println(src)
-  eval(Wallace, parse(src))
+  eval(Wallace, Base.parse(src))
 
   return t
 end

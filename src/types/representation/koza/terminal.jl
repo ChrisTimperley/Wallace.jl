@@ -15,16 +15,16 @@ function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::String)
   t = anonymous_type(Wallace, src)
 
   # Compose the label function.
-  eval(Wallace, parse("label(::$(t)) = $(label)"))
+  eval(Wallace, Base.parse("label(::$(t)) = $(label)"))
 
   # Compose the "fresh" function.
-  eval(Wallace, parse("fresh(::$(t), p::KozaParent) = $(t)(p)"))
+  eval(Wallace, Base.parse("fresh(::$(t), p::KozaParent) = $(t)(p)"))
 
   # Compose the execution function.
   src = join([["::$(t)"], ["$(i.label)::$(i.ty)" for i in inputs]], ",")
   src = "execute($(src)) = $(label)"
   println(src)
-  eval(Wallace, parse(src))
+  eval(Wallace, Base.parse(src))
 
   return t
 end
