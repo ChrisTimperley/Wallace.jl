@@ -16,7 +16,10 @@ module Composer
   end
 
   # Registers a composer with a given alias.
-  composer(f::Function, alias::String) = register[alias] = f
+  function composer(f::Function, alias::String)
+    println("Use of deprecated composer register: $alias")
+    register[alias] = f
+  end
 
   # Composes a given specification file into an object.
   function compose(file::String)
