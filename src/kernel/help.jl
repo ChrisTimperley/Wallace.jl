@@ -14,7 +14,7 @@ module Help
     if !Registry.exists(q)
       println("No documentation found for the requested type: $q.")
     else
-      println(describe(q))
+      println(describe(Registry.lookup(q)))
     end
   end
 
