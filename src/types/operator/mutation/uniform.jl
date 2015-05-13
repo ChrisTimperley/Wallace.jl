@@ -30,7 +30,6 @@ function operate!{T}(o::UniformMutation,
 
 end
 
-register("mutation/uniform", UniformMutation)
 composer("mutation/uniform") do s
   rep = s["stage"].representation
   UniformMutation{typeof(rep), codon_type(rep)}(

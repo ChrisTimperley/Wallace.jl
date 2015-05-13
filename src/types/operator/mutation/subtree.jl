@@ -45,7 +45,6 @@ function operate!{T <: KozaTree}(o::SubtreeMutation,
 
 end
 
-register("mutation/subtree", SubtreeMutation)
 composer("mutation/subtree") do s
   SubtreeMutation(s["stage"].representation,
     Base.get(s, "rate", 0.01),

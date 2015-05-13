@@ -15,7 +15,6 @@ function select!(
   Individual[candidates[rand(1:end)] for i in 1:num]
 end
 
-register("selection/random", RandomSelection)
 composer("selection/random") do s
   RandomSelection()
 end

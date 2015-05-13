@@ -28,7 +28,6 @@ function evaluate!(
   
 end
 
-register("evaluator/simple", SimpleEvaluator)
 composer("evaluator/simple") do s
   eigen = anonymous_type(Wallace, "type <: SimpleEvaluator;end")
   define_function(Wallace, "evaluate!", ["::$(eigen)", "s::State", "i::Individual"],

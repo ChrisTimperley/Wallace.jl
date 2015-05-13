@@ -46,7 +46,6 @@ function run!(a::SimpleEvolutionaryAlgorithm)
   close!(a.loggers)
 end
 
-register("algorithm/simple_evolutionary_algorithm", SimpleEvolutionaryAlgorithm)
 composer("algorithm/simple_evolutionary_algorithm") do s
   s["output"] = abspath(Base.get(s, "output", "output"))
   s["population"] = compose_as(s["population"], "population")

@@ -33,7 +33,6 @@ function operate!{T}(o::GaussianMutation,
 
 end
 
-register("mutation/gaussian", GaussianMutation)
 composer("mutation/gaussian") do s
   rep = s["stage"].representation
   GaussianMutation{typeof(rep), codon_type(rep)}(

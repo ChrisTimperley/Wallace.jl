@@ -29,7 +29,6 @@ function log!(l::PopulationDumpLogger, s::State)
  close(f)
 end
 
-register("logger/population_dump", BestIndividualLogger)
 composer("logger/population_dump") do s
   PopulationDumpLogger()
 end

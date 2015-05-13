@@ -7,7 +7,6 @@ end
 
 is_satisfied(c::IterationsCriterion, s::State) = s.iterations >= c.limit
 
-register("criterion/iterations", IterationsCriterion)
 composer("criterion/iterations") do s
   IterationsCriterion(s["limit"])
 end

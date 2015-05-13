@@ -122,6 +122,3 @@ function produce!(
 )
   map(clone, select!(operator, buffers[operator], num))
 end
-
-# Register this type.
-register("breeder/buffered", BufferedBreeder)

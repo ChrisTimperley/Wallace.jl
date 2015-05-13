@@ -41,7 +41,6 @@ function operate!{T}(o::OnePointCrossover,
 
 end
 
-register("crossover/one_point", OnePointCrossover)
 composer("crossover/one_point") do s
   rep = s["stage"].representation
   OnePointCrossover{typeof(rep)}(rep, Base.get(s, "rate", 0.7))

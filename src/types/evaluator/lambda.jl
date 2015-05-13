@@ -1,4 +1,3 @@
-# encoding: utf-8
 load("simple", dirname(@__FILE__))
 
 type LambdaEvaluator <: SimpleEvaluator

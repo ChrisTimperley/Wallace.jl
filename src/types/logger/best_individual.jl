@@ -8,7 +8,6 @@ function log!(l::BestIndividualLogger, s::State)
   println("Best fitness: $(describe(pbest.fitness))")
 end
 
-register("logger/best_individual", BestIndividualLogger)
 composer("logger/best_individual") do s
   BestIndividualLogger()
 end

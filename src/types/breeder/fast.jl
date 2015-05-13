@@ -113,8 +113,6 @@ function breed!{I <: Individual}(
 
 end
 
-# Register this type.
-register("breeder/fast", FastBreeder)
 composer("breeder/fast") do s
 
   # Determine the correct order in which to construct each of the breeding

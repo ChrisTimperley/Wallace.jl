@@ -18,5 +18,3 @@ Base.isless{T}(x::SimpleFitness{T}, y::SimpleFitness{T}) =
   x.maximise && x.value < y.value
 Base.isequal{T}(x::SimpleFitness{T}, y::SimpleFitness{T}) = 
   x.value == y.value
-
-register("fitness/simple", SimpleFitness)

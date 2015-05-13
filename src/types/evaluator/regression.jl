@@ -19,7 +19,6 @@ function evaluate!(e::RegressionEvaluator, s::State, c::Individual)
   SimpleFitness{Float}(false, sse)
 end
 
-register("evaluator/regression", RegressionEvaluator)
 composer("evaluator/regression") do s
 
   # Flatten to 1D array?

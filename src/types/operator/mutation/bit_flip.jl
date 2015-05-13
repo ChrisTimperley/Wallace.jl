@@ -26,7 +26,6 @@ function operate!(o::BitFlipMutation,
   return inputs
 end
 
-register("mutation/bit_flip", BitFlipMutation)
 composer("mutation/bit_flip") do s
   BitFlipMutation(s["stage"].representation, Base.get(s, "rate", 0.01))
 end

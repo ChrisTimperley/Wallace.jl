@@ -16,7 +16,6 @@ function evaluate!(e::AntEvaluator, s::State, c::Individual)
   SimpleFitness{Int}(true, score)
 end
 
-register("evaluator/ant", AntEvaluator)
 composer("evaluator/ant") do s
   AntEvaluator(Ant(s["moves"], load_trail(s["trail"])))
 end

@@ -64,7 +64,6 @@ function evaluate!(e::MultiplexerEvaluator, s::State, c::Individual)
   SimpleFitness{Int64}(true, hits)
 end
 
-register("evaluator/multiplexer", MultiplexerEvaluator)
 composer("evaluator/multiplexer") do s
   return MultiplexerEvaluator(3)
 end

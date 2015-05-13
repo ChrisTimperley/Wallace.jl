@@ -38,7 +38,6 @@ function operate!{T <: KozaTree}(o::SubtreeCrossover,
 
 end
 
-register("crossover/subtree", SubtreeCrossover)
 composer("crossover/subtree") do s
   rep = s["stage"].representation
   SubtreeCrossover(rep,

@@ -9,5 +9,3 @@ select{I <: Individual}(s::Selection, candidates::Vector{I}, n::Int64) =
 
 # Prepares this selection operator for the breeding process.
 prepare{I <: Individual}(s::Selection, m::Vector{I}) = m
-
-register("selection", Selection)

@@ -22,13 +22,6 @@ prepare{I <: Individual}(v::Variation, m::Vector{I}) = I[]
 operate!(v::Variation, inputs::Vector{Any}) =
   error("Unimplemented `operate!` function for: $(v).")
 
-# For now...
-#function call!{I <: Individual}(v::Variation, stage::String, inputs::Vector{I})
-#  operate!(v, map(eval(parse("i -> i.$(stage)")), inputs))
-#end
-
 # Instead we could simply perform the "getter" operations within the breeder.
 call!{I <: Individual}(v::Variation, getter::Function, inputs::Vector{I}) =
   operate!(v, getter(inputs))
-
-register("variation", Variation)
