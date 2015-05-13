@@ -1,3 +1,3 @@
 abstract Fitness
 
-Wallace.Registry.register("types/fitness.manifest.yml")
+Wallace.register("types/fitness.manifest.yml")
