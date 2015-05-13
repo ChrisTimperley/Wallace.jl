@@ -29,5 +29,5 @@ properties:
     type:         String
     required:     True
 
-composer: | s
+composer: |
   BitFlipMutation(s["stage"].representation, s["rate"])
