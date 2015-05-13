@@ -27,4 +27,4 @@ function convert!{I <: Individual}(
   convert!(representation(s, from), representation(s, to), from, to, inds)
 end
 
-register("types/species.manifest.yml")
+register(joinpath(dirname(@__FILE__), "species.manifest.yml"))
