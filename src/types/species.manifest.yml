@@ -11,7 +11,7 @@ composer: |
   end
 
   # Compose the individual type.
-  I = compose_as([
+  I = compose_as(Dict{Any, Any}[
     "fitness" => s["fitness"],
     "stages" => s["stages"]
   ]), "individual")

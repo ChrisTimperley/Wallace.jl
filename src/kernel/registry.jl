@@ -68,7 +68,8 @@ module Registry
 
     # Composer.
     if haskey(yml, "composer")
-      mfst.composer = Base.eval(Wallace, Base.parse("identity() do s\n$(yml["composer"])\nend"))
+      cpsr = "identity() do s\n$(yml["composer"])\nend"
+      mfst.composer = Base.eval(Wallace, Base.parse(cpsr))
       mfst.has_composer = true
     end
 
