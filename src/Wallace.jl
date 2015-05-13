@@ -3,10 +3,8 @@ module Wallace
 
   # Define some useful type aliases.
   if is(Int, Int64)
-#    typealias UInt  UInt64
     typealias Float Float64
   else
-#    typealias UInt  UInt32
     typealias Float Float32
   end
 
@@ -73,12 +71,6 @@ module Wallace
   # Initialise the type registry and the list of loaded files.
   type_registry = Dict{ASCIIString, Type}()
   loaded_files = ASCIIString[]
-
-  # Registers a Julia type under a given alias in the Wallace kernel.
-  function register(alias::ASCIIString, t::Type)
-    println("Use of deprecated type registration: $(t).")
-    type_registry[alias] = t
-  end
 
   # Load all of the built-in types.
   load_all(joinpath(dirname(@__FILE__), "types"))

@@ -37,8 +37,6 @@ module Registry
   # registry.
   exists(id::String) = haskey(_contents, id)
 
-  register(p::ASCIIString) = println("What madness is this?")
-
   # Registers a manifest, encoded in a YAML format, with the registry.
   function register(path::String)
   
