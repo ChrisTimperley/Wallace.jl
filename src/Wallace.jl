@@ -14,6 +14,7 @@ module Wallace
   include("base/each.jl")
   include("base/Reflect.jl")
   include("kernel/parser.jl")
+  include("kernel/registry.jl")
   include("kernel/composer.jl")
   include("kernel/example.jl")
   include("kernel/help.jl")
@@ -21,6 +22,7 @@ module Wallace
   using .Each
   using .Reflect
   using .Partition
+  using .Registry
   using .Parser
   using .Composer
   using .Help
@@ -73,19 +75,9 @@ module Wallace
 
   # Registers a Julia type under a given alias in the Wallace kernel.
   function register(alias::ASCIIString, t::Type)
+    println("Use of deprecated type registration: $(t).")
     type_registry[alias] = t
   end
-
-  # Returns a register Julia type by its alias.
-  t(alias::ASCIIString) =
-    haskey(type_registry, alias) ? type_registry[alias] : error("Requested type not found: $alias.")
-
-  # Constructs an instance of a Julia type.
-  i(alias::ASCIIString, positionals...; keywords...) =
-    i(t(alias), positionals...; keywords...)
-
-  i(t::Type, positionals...; keywords...) = 
-    apply(t, positionals...; keywords...)
 
   # Load all of the built-in types.
   load_all(joinpath(dirname(@__FILE__), "types"))
