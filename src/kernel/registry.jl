@@ -22,14 +22,18 @@ module Registry
     aliases::Vector{ASCIIString}
     imports::Vector{ASCIIString}
     properties::Dict{ASCIIString, Dict{ASCIIString, Any}}
-    composer::Nullable{Function}
+    has_composer::Bool
+    composer::Function
 
     Manifest(id::String, path::String) =
-      new(id, path, "", [], [], [], [], Dict{ASCIIString, Dict{ASCIIString, Any}}(), Nullable{Function}())
+      new(id, path, "", [], [], [], [], Dict{ASCIIString, Dict{ASCIIString, Any}}(), false)
   end
 
   # Stores the composer for a given manifest.
-  composer(f::Function, m::Manifest) = m.composer = Nullable{Function}(f)
+  function composer(f::Function, m::Manifest)
+    m.composer = f
+    m.has_composer = true
+  end
 
   # Contents of the manifest registry.
   _contents = Dict{ASCIIString, Manifest}()
