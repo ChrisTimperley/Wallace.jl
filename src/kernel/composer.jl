@@ -1,13 +1,19 @@
 module Composer
   using  Wallace.Parser
-  import Base.convert
+  import Base.convert, Wallace.Registry
   export compose, compose_as, composer, compose_with
  
   # Composer register.
   register = Dict{String, Function}()
 
   # Retrieves a given composer by its alias.
-  composer(alias::String) = register[alias]
+  function composer(alias::String)
+    if Registry.exists(alias)
+      return Register.lookup(alias).composer
+    else
+      return register[alias]
+    end
+  end
 
   # Registers a composer with a given alias.
   composer(f::Function, alias::String) = register[alias] = f

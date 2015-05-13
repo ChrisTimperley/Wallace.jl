@@ -22,10 +22,14 @@ module Registry
     aliases::Vector{ASCIIString}
     imports::Vector{ASCIIString}
     properties::Dict{ASCIIString, Dict{ASCIIString, Any}}
+    composer::Nullable{Function}
 
     Manifest(id::String, path::String) =
-      new(id, path, "", [], [], [], [], Dict{ASCIIString, Dict{ASCIIString, Any}}())
+      new(id, path, "", [], [], [], [], Dict{ASCIIString, Dict{ASCIIString, Any}}(), Nullable{Function}())
   end
+
+  # Stores the composer for a given manifest.
+  composer(f::Function, m::Manifest) = m.composer = Nullable{Function}(f)
 
   # Contents of the manifest registry.
   _contents = Dict{ASCIIString, Manifest}()
@@ -62,6 +66,11 @@ module Registry
       for (k, v) in yml["properties"]
         mfst.properties[k] = v
       end
+    end
+
+    # Composer.
+    if haskey(yml, "composer")
+      Base.eval(Base.parse("composer(mfst) do s\n$(yml["composer"])\nend"))
     end
 
     return register(mfst)

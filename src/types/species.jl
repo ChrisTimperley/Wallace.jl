@@ -27,20 +27,4 @@ function convert!{I <: Individual}(
   convert!(representation(s, from), representation(s, to), from, to, inds)
 end
 
-composer("species") do s
-  
-  # Compose each of the stages for this species.
-  for (name, stage) in s["stages"]
-    stage["label"] = name
-    s["stages"][name] = compose_as(stage, "species#stage")
-  end
-
-  # Compose the individual type.
-  I = compose_as(Dict{Any, Any}([
-    "fitness" => s["fitness"],
-    "stages" => s["stages"]
-  ]), "individual")
-
-  # Instantiate this species.
-  Species{I}(Dict{String, SpeciesStage}(s["stages"]))
-end
+register("types/species.manifest.yml")
