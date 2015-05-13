@@ -1,4 +1,5 @@
 module Wallace
+  export register, compose
 
   # Define some useful type aliases.
   if is(Int, Int64)
