@@ -74,7 +74,7 @@ module Registry
 
     # Composer.
     if haskey(yml, "composer")
-      Base.eval(Base.parse("composer(mfst) do s\n$(yml["composer"])\nend"))
+      Base.eval(Wallace.Registry, Base.parse("composer(mfst) do s\n$(yml["composer"])\nend"))
     end
 
     return register(mfst)
