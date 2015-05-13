@@ -33,6 +33,10 @@ module Registry
   # Searches the contents of the registry for a manifest with a given ID.
   lookup(id::String) = _contents[id]
 
+  # Determines whether a manifest with a given ID exists within the
+  # registry.
+  exists(id::String) = haskey(_contents, id)
+
   # Registers a manifest, encoded in a YAML format, with the registry.
   function register(path::String)
   
@@ -65,10 +69,11 @@ module Registry
 
   # Registers a given manifest with the registry.
   function register(mfst::Manifest)
-    for i in mfst.imports
-      println("Importing: $i")
-      require(i)  
-    end
+    # Ignore all imports, for now.
+    #for i in mfst.imports
+    #  println("Importing: $i")
+    #  require(i)  
+    #end
     _contents[mfst.id] = mfst
   end
 
