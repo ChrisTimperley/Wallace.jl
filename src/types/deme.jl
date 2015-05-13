@@ -22,7 +22,6 @@ prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
 # Produces the offspring for a given deme at each generation.
 breed!(d::Deme) = breed!(d.breeder, d)
 
-register("deme", Deme)
 composer("deme") do s
   s["species"] = compose_as(s["species"], "species")
   s["breeder"]["species"] = s["species"]

@@ -1,4 +1,3 @@
-# encoding: utf-8
 load("individual",      dirname(@__FILE__))
 load("deme",            dirname(@__FILE__))
 load("../base/flatten", dirname(@__FILE__))
@@ -26,7 +25,6 @@ unevaluated(p::Population) = flatten(map(unevaluated, p.demes))
 unevaluated(d::Deme) = vcat(unevaluated(d.members), unevaluated(d.offspring))
 unevaluated{I <: Individual}(inds::Vector{I}) = filter(i -> !i.evaluated, inds)
 
-register("population", Population)
 composer("population") do s
   s["demes"] = Deme[compose_as(d, "deme") for d in s["demes"]]
   Population(s["demes"])

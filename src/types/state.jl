@@ -12,5 +12,3 @@ end
 function reset!(s::State)
   s.iterations = s.evaluations = 0
 end
-
-register("state", State)

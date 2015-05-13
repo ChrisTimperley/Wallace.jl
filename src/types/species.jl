@@ -27,7 +27,6 @@ function convert!{I <: Individual}(
   convert!(representation(s, from), representation(s, to), from, to, inds)
 end
 
-register("species", Species)
 composer("species") do s
   
   # Compose each of the stages for this species.

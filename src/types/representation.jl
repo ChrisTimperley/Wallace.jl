@@ -21,5 +21,3 @@ function convert!{I <: Individual}(
 end
 
 describe(i::Any) = "$(i)"
-
-register("representation", Representation)

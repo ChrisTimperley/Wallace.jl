@@ -10,7 +10,6 @@ Base.isless(x::Individual, y::Individual) =
 Base.isequal(x::Individual, y::Individual) = 
   !x.evaluated || (y.evaluated && x.fitness == y.fitness)
 
-register("individual", Individual)
 composer("individual") do s
 
   # Create an array to hold each of the lines of the type definition.
