@@ -9,9 +9,9 @@ module Composer
   # Retrieves a given composer by its alias.
   function composer(alias::String)
     if Registry.exists(alias)
-      return Register.lookup(alias).composer
+      Registry.lookup(alias).composer
     else
-      return register[alias]
+      register[alias]
     end
   end
 
