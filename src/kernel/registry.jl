@@ -1,5 +1,5 @@
 module Registry
-  import YAML
+  import YAML, Wallace
   export lookup, register
 
   # Data structure for recording information about a given author of a
