@@ -43,6 +43,6 @@ module Composer
 
   # Composes a given specification object (in the form of a JSON object)
   # into the object it describes.
-  compose_as(s::Dict{Any, Any}, as::String) =
+  compose_as{X,Y}(s::Dict{X, Y}, as::String) =
     apply(composer(as), [s])
 end
