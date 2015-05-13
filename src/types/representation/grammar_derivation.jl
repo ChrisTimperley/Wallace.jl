@@ -22,7 +22,6 @@ convert!(r_from::IntVectorRepresentation,
 derive(r::GrammarDerivationRepresentation, s::Vector{Int}) =
   derive(r.grammar, s, r.max_wraps)
 
-register("representation/grammar_derivation", GrammarDerivationRepresentation)
 composer("representation/grammar_derivation") do s
   s["max_wraps"] = Base.get(s, "max_wraps", 0)
   s["grammar"] = compose("grammar", s["grammar"])

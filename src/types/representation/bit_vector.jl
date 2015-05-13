@@ -35,7 +35,6 @@ function convert!(r_from::IntVectorRepresentation, r_to::BitVectorRepresentation
   end
 end
 
-register("representation/bit_vector", BitVectorRepresentation)
 composer("representation/bit_vector") do s
   BitVectorRepresentation(Base.get(s, "length", 100)) 
 end

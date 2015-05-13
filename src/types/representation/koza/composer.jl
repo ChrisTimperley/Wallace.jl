@@ -2,7 +2,6 @@ load("../koza", dirname(@__FILE__))
 load("tree", dirname(@__FILE__))
 load("builder/grow", dirname(@__FILE__))
 
-register("representation/koza_tree", KozaTreeRepresentation)
 composer("representation/koza_tree") do s
   s["min_depth"] = Base.get(s, "min_depth", 1)
   s["max_depth"] = Base.get(s, "max_depth", 9)

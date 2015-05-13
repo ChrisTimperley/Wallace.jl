@@ -67,7 +67,6 @@ function parse_rule_entry(entry::String)
   return tokens
 end
 
-register("grammar", Grammar)
 composer("grammar") do s
   Grammar(s["root"], Dict{String, Vector{String}}(s["rules"]))
 end

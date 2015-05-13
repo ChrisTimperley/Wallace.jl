@@ -17,7 +17,6 @@ chromosome(::IntVectorRepresentation) = Vector{Int}
 describe(i::Vector{Int}) = "($(join(i, ",")))"
 Base.rand(r::IntVectorRepresentation) = rand(r.range, r.length)
 
-register("representation/int_vector", IntVectorRepresentation)
 composer("representation/int_vector") do s
   IntVectorRepresentation(
     Base.get(s, "length", 80),

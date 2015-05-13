@@ -39,7 +39,6 @@ function select!{I <: Individual}(
   return winners
 end
 
-register("selection/tournament", TournamentSelection)
 composer("selection/tournament") do s
   TournamentSelection(Base.get(s, "size", 7))
 end

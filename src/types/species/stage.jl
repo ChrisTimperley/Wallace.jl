@@ -36,7 +36,6 @@ root(ss::Vector{SpeciesStage}) = for s in ss
   end
 end
 
-register("species#stage", SpeciesStage)
 composer("species#stage") do s
 
   # By default, all stages are treated as root stages (although there can only be one) and
