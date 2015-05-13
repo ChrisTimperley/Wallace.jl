@@ -14,7 +14,7 @@ composer: |
   I = compose_as(Dict{Any, Any}[
     "fitness" => s["fitness"],
     "stages" => s["stages"]
-  ]), "individual")
+  ], "individual")
 
   # Instantiate this species.
   Species{I}(Dict{String, SpeciesStage}(s["stages"]))
