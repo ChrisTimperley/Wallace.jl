@@ -29,12 +29,6 @@ module Registry
       new(id, path, "", [], [], [], [], Dict{ASCIIString, Dict{ASCIIString, Any}}(), false)
   end
 
-  # Stores the composer for a given manifest.
-  function composer(f::Function, m::Manifest)
-    m.composer = f
-    m.has_composer = true
-  end
-
   # Contents of the manifest registry.
   _contents = Dict{ASCIIString, Manifest}()
 
@@ -74,7 +68,8 @@ module Registry
 
     # Composer.
     if haskey(yml, "composer")
-      Base.eval(Wallace.Registry, Base.parse("composer(mfst) do s\n$(yml["composer"])\nend"))
+      mfst.composer = Base.eval(Base.parse("identity() do s\n$(yml["composer"])\nend"))
+      mfst.has_composer = true
     end
 
     return register(mfst)
