@@ -26,6 +26,4 @@ function operate!(o::BitFlipMutation,
   return inputs
 end
 
-composer("mutation/bit_flip") do s
-  BitFlipMutation(s["stage"].representation, Base.get(s, "rate", 0.01))
-end
+register(joinpath(dirname(@__FILE__), "bit_flip.manifest.yml"))

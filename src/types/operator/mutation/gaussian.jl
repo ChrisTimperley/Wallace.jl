@@ -33,8 +33,4 @@ function operate!{T}(o::GaussianMutation,
 
 end
 
-composer("mutation/gaussian") do s
-  rep = s["stage"].representation
-  GaussianMutation{typeof(rep), codon_type(rep)}(
-    rep, s["mean"], s["std"], Base.get(s, "rate", 0.01))
-end
+register(joinpath(dirname(@__FILE__), "gaussian.manifest.yml"))

@@ -29,6 +29,4 @@ function log!(l::PopulationDumpLogger, s::State)
  close(f)
 end
 
-composer("logger/population_dump") do s
-  PopulationDumpLogger()
-end
+register(joinpath(dirname(@__FILE__), "population_dump.manifest.yml"))

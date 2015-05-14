@@ -45,10 +45,4 @@ function operate!{T <: KozaTree}(o::SubtreeMutation,
 
 end
 
-composer("mutation/subtree") do s
-  SubtreeMutation(s["stage"].representation,
-    Base.get(s, "rate", 0.01),
-    Base.get(s, "prob_terminal", 0.5),
-    Base.get(s, "min_depth", 1),
-    Base.get(s, "max_depth", 5))
-end
+register(joinpath(dirname(@__FILE__), "subtree.manifest.yml"))

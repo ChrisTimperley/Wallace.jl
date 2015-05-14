@@ -30,8 +30,4 @@ function operate!{T}(o::UniformMutation,
 
 end
 
-composer("mutation/uniform") do s
-  rep = s["stage"].representation
-  UniformMutation{typeof(rep), codon_type(rep)}(
-    rep, Base.get(s, "rate", 0.01))
-end
+register(joinpath(dirname(@__FILE__), "uniform.manifest.yml"))
