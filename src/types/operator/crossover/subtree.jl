@@ -38,9 +38,4 @@ function operate!{T <: KozaTree}(o::SubtreeCrossover,
 
 end
 
-composer("crossover/subtree") do s
-  rep = s["stage"].representation
-  SubtreeCrossover(rep,
-    Base.get(s, "rate", 0.7),
-    Base.get(s, "max_tries", 1))
-end
+register(joinpath(dirname(@__FILE__), "subtree.manifest.yml"))

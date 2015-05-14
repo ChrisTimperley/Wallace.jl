@@ -41,7 +41,4 @@ function operate!{T}(o::OnePointCrossover,
 
 end
 
-composer("crossover/one_point") do s
-  rep = s["stage"].representation
-  OnePointCrossover{typeof(rep)}(rep, Base.get(s, "rate", 0.7))
-end
+register(joinpath(dirname(@__FILE__), "one_point.manifest.yml"))

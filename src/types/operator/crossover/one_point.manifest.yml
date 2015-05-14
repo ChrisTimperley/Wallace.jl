@@ -1,0 +1,4 @@
+id: crossover/one_point
+composer: |
+  rep = s["stage"].representation
+  OnePointCrossover{typeof(rep)}(rep, Base.get(s, "rate", 0.7))
