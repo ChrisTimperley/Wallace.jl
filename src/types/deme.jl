@@ -22,4 +22,4 @@ prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
 # Produces the offspring for a given deme at each generation.
 breed!(d::Deme) = breed!(d.breeder, d)
 
-register(joinpath(dirname(@__FILE__), "deme.jl"))
+register(joinpath(dirname(@__FILE__), "deme.manifest.yml"))
