@@ -9,6 +9,4 @@ replace!(r::GenerationalReplacement, s::State) =
 replace!(r::GenerationalReplacement, d::Deme) =
   d.members[1:end] = d.offspring[1:d.capacity]
 
-composer("replacement/generational") do s
-  GenerationalReplacement()
-end
+register(joinpath(dirname(@__FILE__), "generational.manifest.yml"))
