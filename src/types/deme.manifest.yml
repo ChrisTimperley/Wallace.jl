@@ -10,15 +10,15 @@ properties:
 
   offspring:
     type:     Integer
-    default:  $capacity
+    default:  :capacity
     description: >
       The number of offspring that are produced at each generation.
 
 composer: |
-    s["species"] = compose_as(s["species"], "species")
-    s["breeder"]["species"] = s["species"]
-    s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
-    s["capacity"] = Base.get(s, "capacity", 100)
-    s["offspring"] = Base.get(s, "offspring", s["capacity"])
+  s["species"] = compose_as(s["species"], "species")
+  s["breeder"]["species"] = s["species"]
+  s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
+  s["capacity"] = Base.get(s, "capacity", 100)
+  s["offspring"] = Base.get(s, "offspring", s["capacity"])
 
-    Deme{ind_type(s["species])}(s["capacity", s["breeder"], s["species"], s["offspring"])
+  Deme{ind_type(s["species])}(s["capacity", s["breeder"], s["species"], s["offspring"])
