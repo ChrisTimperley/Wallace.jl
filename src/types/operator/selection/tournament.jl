@@ -39,6 +39,4 @@ function select!{I <: Individual}(
   return winners
 end
 
-composer("selection/tournament") do s
-  TournamentSelection(Base.get(s, "size", 7))
-end
+register(joinpath(dirname(@__FILE__), "tournament.manifest.yml"))

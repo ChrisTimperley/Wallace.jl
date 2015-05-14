@@ -1,0 +1,3 @@
+id: selection/tournament
+composer: |
+  TournamentSelection(Base.get(s, "size", 7))
