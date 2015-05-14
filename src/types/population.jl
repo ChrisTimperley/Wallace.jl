@@ -25,7 +25,4 @@ unevaluated(p::Population) = flatten(map(unevaluated, p.demes))
 unevaluated(d::Deme) = vcat(unevaluated(d.members), unevaluated(d.offspring))
 unevaluated{I <: Individual}(inds::Vector{I}) = filter(i -> !i.evaluated, inds)
 
-composer("population") do s
-  s["demes"] = Deme[compose_as(d, "deme") for d in s["demes"]]
-  Population(s["demes"])
-end
+register(joinpath(dirname(@__FILE__), "population.manifest.yml"))

@@ -20,3 +20,5 @@ close!(l::Logger) = l
 
 call!(ls::Vector{Logger}, s::State) = for l in ls; call!(l, s); end
 call!(l::Logger, s::State) = log!(l, s)
+
+register(joinpath(dirname(@__FILE__), "logger.manifest.yml"))

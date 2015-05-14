@@ -1,0 +1,5 @@
+id: population
+
+composer: |
+  s["demes"] = Deme[compose_as(d, "deme") for d in s["demes"]]
+  Population(s["demes"])

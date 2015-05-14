@@ -12,3 +12,5 @@ end
 initialize!{I <: Individual}(i::Initializer, d::Deme{I}) = for ind in d.members
   initialize!(i, ind)
 end
+
+register(joinpath(dirname(@__FILE__), "initializer.manifest.yml"))
