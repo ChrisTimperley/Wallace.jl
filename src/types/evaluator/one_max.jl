@@ -6,6 +6,4 @@ type OneMaxEvaluator <: SimpleEvaluator; end
 evaluate!(::OneMaxEvaluator, s::State, c::Individual) =
   SimpleFitness{Int}(true, sum(c.genome))
 
-composer("evaluator/one_max") do s
-  OneMaxEvaluator()
-end
+register(joinpath(dirname(@__FILE__), "one_max.manifest.yml"))

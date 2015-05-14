@@ -64,6 +64,4 @@ function evaluate!(e::MultiplexerEvaluator, s::State, c::Individual)
   SimpleFitness{Int64}(true, hits)
 end
 
-composer("evaluator/multiplexer") do s
-  return MultiplexerEvaluator(3)
-end
+register(joinpath(dirname(@__FILE__), "multiplexer.manifest.yml"))

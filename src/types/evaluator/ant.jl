@@ -16,6 +16,4 @@ function evaluate!(e::AntEvaluator, s::State, c::Individual)
   SimpleFitness{Int}(true, score)
 end
 
-composer("evaluator/ant") do s
-  AntEvaluator(Ant(s["moves"], load_trail(s["trail"])))
-end
+register(joinpath(dirname(@__FILE__), "ant.manifest.yml"))

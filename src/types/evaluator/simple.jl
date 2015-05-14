@@ -28,6 +28,8 @@ function evaluate!(
   
 end
 
+register(joinpath(dirname(@__FILE__), "simple.manifest.yml"))
+
 composer("evaluator/simple") do s
   eigen = anonymous_type(Wallace, "type <: SimpleEvaluator;end")
   define_function(Wallace, "evaluate!", ["::$(eigen)", "s::State", "i::Individual"],

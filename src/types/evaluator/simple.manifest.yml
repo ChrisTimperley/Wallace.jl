@@ -1,0 +1,6 @@
+id: evaluator/simple
+composer: |
+  eigen = anonymous_type(Wallace, "type <: SimpleEvaluator;end")
+  define_function(Wallace, "evaluate!", ["::$(eigen)", "s::State", "i::Individual"],
+    s["objective"])
+  return apply(eigen)
