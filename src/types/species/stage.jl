@@ -36,16 +36,4 @@ root(ss::Vector{SpeciesStage}) = for s in ss
   end
 end
 
-composer("species#stage") do s
-
-  # By default, all stages are treated as root stages (although there can only be one) and
-  # as non-lamarckian.
-  s["from"] = Base.get(s, "from", "")
-  s["lamarckian"] = Base.get(s, "lamarckian", false)
-
-  # Build the representation for this stage.
-  s["representation"] = compose_as(s["representation"], s["representation"]["type"])
-
-  return SpeciesStage(s["label"], s["from"], s["representation"], s["lamarckian"])
-  
-end
+register(joinpath(dirname(@__FILE__), "stage.manifest.yml"))

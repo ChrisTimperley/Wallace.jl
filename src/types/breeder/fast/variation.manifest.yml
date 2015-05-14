@@ -1,0 +1,6 @@
+id: breeder/fast:source/variation
+composer: |
+  s["operator"]["stage"] = s["stage"]
+  VariationBreederSource(compose_as(s["operator"], s["operator"]["type"]),
+    s["source"],
+    s["stage"])

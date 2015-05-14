@@ -1,0 +1,3 @@
+id: breeder/fast:source/selection
+composer: |
+  SelectionBreederSource(compose_as(s["operator"], s["operator"]["type"]))

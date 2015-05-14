@@ -27,13 +27,5 @@ type MultiBreederSource <: BreederSource
   MultiBreederSource(sources::Vector{BreederSource}) = new(sources)
 end
 
-composer("breeder/fast:source/selection") do s
-  SelectionBreederSource(compose_as(s["operator"], s["operator"]["type"]))
-end
-
-composer("breeder/fast:source/variation") do s
-  s["operator"]["stage"] = s["stage"]
-  VariationBreederSource(compose_as(s["operator"], s["operator"]["type"]),
-    s["source"],
-    s["stage"])
-end
+register(joinpath(dirname(@__FILE__), "selection.manifest.yml"))
+register(joinpath(dirname(@__FILE__), "variation.manifest.yml"))
