@@ -1,19 +1,5 @@
 id: deme
 
-properties:
-  capacity:
-    type:     Integer
-    default:  100
-    description: >
-      The maximum number of individuals that may exist within this
-      deme at any time.
-
-  offspring:
-    type:     Integer
-    default:  value(capacity)
-    description: >
-      The number of offspring that are produced at each generation.
-
 composer: |
   s["species"] = compose_as(s["species"], "species")
   s["breeder"]["species"] = s["species"]
