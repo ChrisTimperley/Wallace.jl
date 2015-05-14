@@ -1,6 +1,6 @@
 id: individual
 
-composer:
+composer: |
 
   # Create an array to hold each of the lines of the type definition.
   # Add the evaluated and species properties.
