@@ -8,6 +8,4 @@ end
 
 is_satisfied(c::EvaluationsCriterion, s::State) = s.evaluations >= c.limit
 
-composer("criterion/evaluations") do s
-  EvaluationsCriterion(s["limit"])
-end
+register(joinpath(dirname(@__FILE__), "evaluations.manifest.yml"))

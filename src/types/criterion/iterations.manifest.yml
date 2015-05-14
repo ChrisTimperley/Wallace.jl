@@ -1,0 +1,4 @@
+id: criterion/iterations
+
+composer: |
+  IterationsCriterion(s["limit"])

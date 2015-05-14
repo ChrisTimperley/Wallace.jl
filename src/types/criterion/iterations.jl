@@ -7,6 +7,4 @@ end
 
 is_satisfied(c::IterationsCriterion, s::State) = s.iterations >= c.limit
 
-composer("criterion/iterations") do s
-  IterationsCriterion(s["limit"])
-end
+register(joinpath(dirname(@__FILE__), "iterations.manifest.yml"))

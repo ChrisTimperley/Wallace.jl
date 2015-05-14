@@ -46,19 +46,4 @@ function run!(a::SimpleEvolutionaryAlgorithm)
   close!(a.loggers)
 end
 
-composer("algorithm/simple_evolutionary_algorithm") do s
-  s["output"] = abspath(Base.get(s, "output", "output"))
-  s["population"] = compose_as(s["population"], "population")
-  s["replacement"] = compose_as(s["replacement"], s["replacement"]["type"])
-  s["evaluator"] = compose_as(s["evaluator"], s["evaluator"]["type"])
-  s["loggers"] = Logger[compose_as(lg, lg["type"]) for lg in Base.get(s, "loggers", [])]
-
-  s["termination"] = Base.get(s, "termination", Dict{String, Criterion}())
-  for t in keys(s["termination"])
-    s["termination"][t] = compose_as(s["termination"][t], s["termination"][t]["type"])
-  end
-  s["termination"] = Dict{String, Criterion}(s["termination"])
-
-  SimpleEvolutionaryAlgorithm(s["population"], s["evaluator"], s["replacement"],
-    s["termination"], s["loggers"], s["output"])
-end
+register(joinpath(dirname(@__FILE__), "simple_evolutionary_algorithm.manifest.yml"))
