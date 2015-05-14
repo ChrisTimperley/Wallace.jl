@@ -8,7 +8,4 @@ function log!(l::BestIndividualLogger, s::State)
   println("Best fitness: $(describe(pbest.fitness))")
 end
 
-Wallace.register("types/logger/best_individual.manifest.yml")
-composer("logger/best_individual") do s
-  BestIndividualLogger()
-end
+Wallace.register(joinpath(dirname(@__FILE__), "best_individual.manifest.yml"))

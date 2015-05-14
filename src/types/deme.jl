@@ -22,12 +22,4 @@ prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
 # Produces the offspring for a given deme at each generation.
 breed!(d::Deme) = breed!(d.breeder, d)
 
-composer("deme") do s
-  s["species"] = compose_as(s["species"], "species")
-  s["breeder"]["species"] = s["species"]
-  s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
-  s["capacity"] = Base.get(s, "capacity", 100)
-  s["offspring"] = Base.get(s, "offspring", s["capacity"])
-
-  Deme{ind_type(s["species"])}(s["capacity"], s["breeder"], s["species"], s["offspring"])
-end
+register(joinpath(dirname(@__FILE__), "deme.jl"))
