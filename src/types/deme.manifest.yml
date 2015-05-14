@@ -9,12 +9,12 @@ properties:
       deme at any time.
 
   offspring:
-    type:   Integer
-    default: $capacity
+    type:     Integer
+    default:  value(capacity)
     description: >
       The number of offspring that are produced at each generation.
 
-composer:
+composer: |
   s["species"] = compose_as(s["species"], "species")
   s["breeder"]["species"] = s["species"]
   s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
