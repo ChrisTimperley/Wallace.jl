@@ -17,9 +17,4 @@ chromosome(::IntVectorRepresentation) = Vector{Int}
 describe(i::Vector{Int}) = "($(join(i, ",")))"
 Base.rand(r::IntVectorRepresentation) = rand(r.range, r.length)
 
-composer("representation/int_vector") do s
-  IntVectorRepresentation(
-    Base.get(s, "length", 80),
-    Base.get(s, "min", typemin(Int)),
-    Base.get(s, "max", typemax(Int)))
-end
+register(joinpath(dirname(@__FILE__), "int_vector.manifest.yml"))
