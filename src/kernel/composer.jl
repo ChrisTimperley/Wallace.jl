@@ -2,24 +2,9 @@ module Composer
   using  Wallace.Parser
   import Base.convert, Wallace.Registry
   export compose, compose_as, composer, compose_with
- 
-  # Composer register.
-  register = Dict{String, Function}()
 
   # Retrieves a given composer by its alias.
-  function composer(alias::String)
-    if Registry.exists(alias)
-      Registry.lookup(alias).composer
-    else
-      register[alias]
-    end
-  end
-
-  # Registers a composer with a given alias.
-  function composer(f::Function, alias::String)
-    println("Use of deprecated composer register: $alias")
-    register[alias] = f
-  end
+  composer(alias::String) = Registry.lookup(alias).composer
 
   # Composes a given specification file into an object.
   function compose(file::String)
