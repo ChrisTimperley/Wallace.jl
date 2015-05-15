@@ -17,12 +17,4 @@ chromosome(r::FloatVectorRepresentation) = Vector{Float}
 describe(i::Vector{Float}) = "($(join(i, ", ")))"
 Base.rand(r::FloatVectorRepresentation) = rand(r.range, r.length)
 
-composer("representation/float_vector") do s
-  r = FloatVectorRepresentation(
-    Base.get(s, "length", 80),
-    Base.get(s, "min", typemin(Float)),
-    Base.get(s, "max", typemax(Float))
-  )
-  println("Built float vector representation")
-  r
-end
+register(joinpath(dirname(@__FILE__), "float_vector.manifest.yml"))

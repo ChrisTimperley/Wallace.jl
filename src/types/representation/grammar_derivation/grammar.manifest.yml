@@ -1,0 +1,3 @@
+id: grammar
+composer: |
+  Grammar(s["root"], Dict{String, Vector{String}}(s["rules"]))

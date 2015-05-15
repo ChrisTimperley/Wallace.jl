@@ -1,8 +1,5 @@
-load("../koza", dirname(@__FILE__))
-load("tree", dirname(@__FILE__))
-load("builder/grow", dirname(@__FILE__))
-
-composer("representation/koza_tree") do s
+id: representation/koza
+composer: |
   s["min_depth"] = Base.get(s, "min_depth", 1)
   s["max_depth"] = Base.get(s, "max_depth", 9)
 
@@ -27,11 +24,10 @@ composer("representation/koza_tree") do s
   s["non_terminals"] = KozaNonTerminal[
     apply(ComposeKozaNonTerminal(s["inputs"], nt)) for nt in s["non_terminals"]]
 
-  KozaTreeRepresentation(tt,
+  return KozaTreeRepresentation(tt,
     s["min_depth"],
     s["max_depth"],
     s["terminals"],
     s["non_terminals"],
     s["inputs"],
     s["builder"])
-end

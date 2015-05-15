@@ -21,3 +21,5 @@ function convert!{I <: Individual}(
 end
 
 describe(i::Any) = "$(i)"
+
+register(joinpath(dirname(@__FILE__), "representation.manifest.yml"))

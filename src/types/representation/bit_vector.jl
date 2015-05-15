@@ -35,6 +35,4 @@ function convert!(r_from::IntVectorRepresentation, r_to::BitVectorRepresentation
   end
 end
 
-composer("representation/bit_vector") do s
-  BitVectorRepresentation(Base.get(s, "length", 100)) 
-end
+register(joinpath(dirname(@__FILE__), "bit_vector.manifest.yml"))

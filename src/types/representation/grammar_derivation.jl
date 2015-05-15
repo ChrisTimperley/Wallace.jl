@@ -22,8 +22,4 @@ convert!(r_from::IntVectorRepresentation,
 derive(r::GrammarDerivationRepresentation, s::Vector{Int}) =
   derive(r.grammar, s, r.max_wraps)
 
-composer("representation/grammar_derivation") do s
-  s["max_wraps"] = Base.get(s, "max_wraps", 0)
-  s["grammar"] = compose("grammar", s["grammar"])
-  GrammarDerivationRepresentation(s["max_wraps"], s["grammar"])
-end
+register(joinpath(dirname(@__FILE__), "grammar_derivation.manifest.yml"))

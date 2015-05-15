@@ -1,0 +1,3 @@
+id: representation/bit_vector
+composer: |
+  BitVectorRepresentation(Base.get(s, "length", 100))
