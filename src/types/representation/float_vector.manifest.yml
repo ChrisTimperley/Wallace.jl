@@ -5,5 +5,4 @@ composer: |
     Base.get(s, "min", typemin(Float)),
     Base.get(s, "max", typemax(Float))
   )
-  println("Built float vector representation")
   return r
