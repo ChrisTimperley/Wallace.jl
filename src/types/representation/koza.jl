@@ -36,3 +36,5 @@ sample_terminal(r::KozaTreeRepresentation, p::KozaParent) =
 
 sample_non_terminal(r::KozaTreeRepresentation, p::KozaParent) =
   fresh(r.non_terminals[rand(1:end)], p)
+
+register(joinpath(dirname(@__FILE__), "koza.manifest.yml"))
