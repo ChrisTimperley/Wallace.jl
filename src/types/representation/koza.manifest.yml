@@ -1,4 +1,4 @@
-id: representation/koza
+id: representation/koza_tree
 composer: |
   s["min_depth"] = Base.get(s, "min_depth", 1)
   s["max_depth"] = Base.get(s, "max_depth", 9)
