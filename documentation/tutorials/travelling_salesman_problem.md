@@ -1,4 +1,4 @@
-# Solving the Travelling Salesman Problem via Genetic Algorithms
+# Solving the Travelling Salesman Problem using Genetic Algorithms
 
 **Author:** [Chris Timperley](http://www.christimperley.co.uk),
 **Difficulty:** Beginner,
@@ -15,9 +15,8 @@ optimisation.
 **This tutorial assumes:**
 
 * A minimal knowledge of [Julia](http://julialang.org/).
-* You know how to navigate the Julia REPL when using Wallace.
-* You know how to load Wallace specification files and run them.
-* You know a little bit about the basic structure of Wallace specification files. 
+* You know how to create and run a basic genetic algorithm within Wallace.
+* You know how the advanced breeder works within Wallace.
 
 **By the end of this tutorial, you will be able to:**
 
@@ -27,6 +26,11 @@ optimisation.
 --------------------------------------------------------------------------------
 
 ## Basic setup
+
+```
+
+```
+
 
 ## Running the algorithm
 
