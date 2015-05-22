@@ -98,7 +98,9 @@ elsewhere within the file.
 type: algorithm/simple_evolutionary_algorithm
 population:
   demes:
-    - size: 100, species: $(_my_species), breeder: $(_my_breeder)
+    - size:     100
+      species:  $(_my_species)
+      breeder: $(_my_breeder)
 ```
 
 #### Setting up the species and representation.
@@ -189,15 +191,16 @@ functions, try to build your own selection-crossover-mutation breeding sequence.
 
 ```
 ...
-  _my_breeder: breeder/fast
-    sources[s]: selection
-      operator: selection/tournament { size: 2 }
-    sources[x]: variation
-      operator: crossover/one_point { rate: 1.0 }
-      source: "s"
-      stage: "bits"
-    sources[m]: variation
-      operator: mutation/bit_flip { rate: 0.1 }
+  _my_breeder<breeder/fast>:
+    sources:
+      s<selection>:
+        operator<selection/tournament>: { size: 2 }
+      x<variation>:
+        operator<crossover/one_point>: { rate: 1.0 }
+        source: "s"
+        stage: "bits"
+    m<variation>:
+      operator<mutation/bit_flip>: { rate: 0.1 }
       source: "x"
       stage: "bits"
 ...
@@ -236,10 +239,10 @@ individual within a given population using a provided `objective` function.
 This objective function will be implemented as a Julia function, accepting a
 single candidate individual, `i`, and producing a `Fitness` object containing
 its calculated objective value. In order to provide a Julia function to the
-Wallace specification language, we simply need to prepend `->` onto the start
+Wallace specification language, we simply need to prepend `|` onto the start
 of our objective definition, immediately after the opening colons; this
 instructs Wallace to treat all the code within the block below as a single
-function definition, and not as a specification.
+block of text, and not as a specification.
 
 To calculate the fitness of a candidate individual for our given problem, we
 need to count the number of binary 1s within the `bits` stage of the given
@@ -252,7 +255,7 @@ that the objective should be maximised by setting its first parameter to
 
 ```
 ...
-  evaluator: evaluator/simple
+  evaluator<evaluator/simple>:
     objective: ->
       SimpleFitness{Int}(true, sum(get(i.bits)))
 ...
@@ -275,14 +278,15 @@ that the objective should be maximised by setting its first parameter to
 #### Specifying the termination conditions.
 
 Finally, provide your algorithm specification with a set of termination
-conditions, implemented using the `termination` hash, as shown in the example
+conditions, implemented using the `termination` property, as shown in the example
 below. Once the state of the algorithm has satisfied any of these conditions, it
 will terminate before the start of the next iteration. For now, let's specify
 a simple limit on the number of iterations that the algorithm may run for.
 
 ```
 ...
-  termination[iterations]: criterion/iterations { limit: 100 }
+  termination:
+    iterations<criterion/iterations>: { limit: 100 }
 ...
 ```
 
