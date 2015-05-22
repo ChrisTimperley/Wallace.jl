@@ -230,6 +230,9 @@ functions, try to build your own selection-crossover-mutation breeding sequence.
   The number of individuals picked from each source may be based on either fixed
   proportions or a given probability distribution.
 
+#### Specifying a replacement scheme.
+
+
 #### Setting up the evaluator.
 Next, let's provide an evaluation function for algorithm so that we can assess
 the relative fitness of potential solutions. For this problem, you should use
@@ -301,7 +304,7 @@ a simple limit on the number of iterations that the algorithm may run for.
   known termination condition types registered with Wallace. To find out more
   about a particular type, just call `help("name_of_type")` in the REPL.
 
-#### Running the algorithm and analysing the results.
+## Running the algorithm and analysing the results.
 
 Having followed the steps above, you should be left with a specification looking
 somewhat similar to the one given below:
@@ -343,7 +346,7 @@ population:
       species:  $(_my_species)
 ```
 
-#### Optimising the algorithm parameters.
+## Optimising the algorithm parameters.
 
 -------------------------------------------------------------------------------
 
