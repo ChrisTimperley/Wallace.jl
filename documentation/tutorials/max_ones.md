@@ -303,11 +303,47 @@ a simple limit on the number of iterations that the algorithm may run for.
 
 #### Running the algorithm and analysing the results.
 
-> **Question:** *Does the fitness of the best individual in the population
-  always improve or stay the same?*
+Having followed the steps above, you should be left with a specification looking
+somewhat similar to the one given below:
 
+```
+type: algorithm/simple_evolutionary_algorithm
 
-#### Optimising our algorithm parameters.
+evaluator<evaluator/simple>:
+  objective: |
+    SimpleFitness{Int}(true, sum(get(i.bits)))
+
+replacement<replacement/generational>: { elitism: 0 }
+
+termination:
+  iterations<criterion/iterations>: { limit: 1000 }
+
+_my_species:
+  stages:
+    bits:
+      representation<representation/bit_vector>: { length: 100 }
+
+_my_breeder<breeder/fast>:
+  sources:
+    s<selection>:
+      operator<selection/tournament>: { size: 2 }
+    x<variation>:
+      operator<crossover/one_point>: { rate: 1.0 }
+      source: s
+      stage:  bits
+    m<variation>:
+      operator<mutation/bit_flip>: { rate: 0.1 }
+      source: x
+      stage:  bits
+
+population:
+  demes:
+    - capacity: 100
+      breeder:  $(_my_breeder)
+      species:  $(_my_species)
+```
+
+#### Optimising the algorithm parameters.
 
 -------------------------------------------------------------------------------
 
