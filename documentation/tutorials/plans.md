@@ -13,6 +13,12 @@
   * Symbolic regression.
   * Parsimony pressure.
 5. Strongly-Typed Genetic Programming.
-5. Robust Genetic Programming - PushGP
+6. Robust Genetic Programming - PushGP
   * PushGP.
   * Robocode.
+7. Competitive Co-Evolution
+  * Integer problem.
+  * Royal Roads
+8. Co-operative Co-Evolution
+9. Robocode Co-Evolution.
+  * Niching and crowding.
