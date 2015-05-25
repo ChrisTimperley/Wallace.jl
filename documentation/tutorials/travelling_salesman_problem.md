@@ -16,7 +16,7 @@ optimisation.
 
 * A minimal knowledge of [Julia](http://julialang.org/).
 * You know how to create and run a basic genetic algorithm within Wallace.
-* You know how the advanced breeder works within Wallace.
+* You know how the linear breeder works within Wallace.
 
 **By the end of this tutorial, you will be able to:**
 
@@ -28,49 +28,33 @@ optimisation.
 ## Basic setup
 
 ```
+type: algorithm/evolutionary_algorithm
 
-```
+evaluator<evaluator/tsp>:
+  cities: berlin52.tsp
 
-
-## Running the algorithm
-
-Having followed the steps above, you should be left with a specification looking
-somewhat similar to the one given below:
-
-```
-type: algorithm/simple_evolutionary_algorithm
-
-evaluator<evaluator/simple>:
-  objective: |
-    SimpleFitness{Int}(true, sum(get(i.bits)))
-
-replacement<replacement/generational>: { elitism: 0 }
+replacement<replacement/generational>: {}
 
 termination:
-  iterations<criterion/iterations>: { limit: 1000 }
+  evaluations<criterion/evaluations>: { limit: 100000 }
 
-_my_species:
-  stages:
-    bits:
-      representation<representation/bit_vector>: { length: 100 }
+_my_species<species/simple>:
+  representation<representation/permutation>:
+    alphabet: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+      26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+      50, 51, 52]
 
-_my_breeder<breeder/fast>:
+_my_breeder<breeder/linear>:
   sources:
-    s<selection>:
-      operator<selection/tournament>: { size: 2 }
-    x<variation>:
-      operator<crossover/one_point>: { rate: 1.0 }
-      source: s
-      stage:  bits
-    m<variation>:
-      operator<mutation/bit_flip>: { rate: 0.1 }
-      source: x
-      stage:  bits
+    - operator<selection/tournament>: { size: 4 }
+    - operator<crossover/pmx>: {}
+    - operator<mutation/2_opt>: {}
 
-population:
-  demes:
-    - capacity: 100
-      breeder:  $(_my_breeder)
-      species:  $(_my_species)
+population<population/simple>:
+  size:     100
+  breeder:  $(_my_breeder)
+  species:  $(_my_species)
 ```
+
+## Running the algorithm
 
