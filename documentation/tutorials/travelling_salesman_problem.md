@@ -46,9 +46,10 @@ _my_species<species/simple>:
 
 _my_breeder<breeder/linear>:
   sources:
-    - operator<selection/tournament>: { size: 4 }
-    - operator<crossover/pmx>: {}
-    - operator<mutation/2_opt>: {}
+    - type: selection/tournament
+      size: 4
+    - type: crossover/pmx
+    - type: mutation/2_opt
 
 population<population/simple>:
   size:     100
