@@ -16,10 +16,13 @@ optimisation.
 
 * A minimal knowledge of [Julia](http://julialang.org/).
 * You know how to create and run a basic genetic algorithm within Wallace.
-* You know how the linear breeder works within Wallace.
 
 **By the end of this tutorial, you will be able to:**
 
+* Implement memetic algorithms via local search operators, incorporated using
+  the linear breeder.
+* Extend Wallace with a simple evaluator, tailored to the travelling salesman
+  problem.
 * Use Wallace to implement genetic algorithms capable of solving
   permutation-based problems, such as the travelling salesman problem.
 
