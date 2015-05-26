@@ -46,7 +46,30 @@ components listed below:
 
 ### Solution Representation
 
+As in the previous tutorial, we will once again be using the `simple` species to
+describe our `simple` population. In this case, we will be using a `permutation`
+representation to represent our potential solutions; each tour is represented
+as an itinerary, where the cities are listed in the order in which they are
+visited, except for the return trip to the starting city, which is left out as
+that part of the journey is implicit.
 
+Instances of the `permutation` representation are specified by providing an
+alphabet of values which they should permute; this alphabet may contain any
+type of item, from strings, to integers, to arbitary objects. One may provide
+a alphabet to the specification either by explicitly stating it within a list,
+by providing a numeric range, or by providing an external alphabet file.
+
+If one were to take the explicit approach to representing the alphabet for the
+given problem, then the specification would look something like that given
+below:
+
+```
+_my_species<species/simple>:
+  representation<representation/permutation>:
+    alphabet: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,
+      26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,
+      51,52]
+```
 
 ## Setting up the Linear Breeder
 The linear breeder is the second simplest breeder provided by Wallace; it
