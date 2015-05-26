@@ -57,8 +57,8 @@ proto-offspring to each of these operators in sequence, until the desired number
 the required number have been produced as directed.
 
 To specify a linear breeder, one needs only to provide its definition with an
-ordered list of operators, and if necessary, their associated developmental
-stages, as demonstrated below:
+ordered list of operators, and if necessary, the stage of individual development
+upon which they operate, as demonstrated below:
 
 ```
 _my_breeder<breeder/linear>:
@@ -70,6 +70,21 @@ _my_breeder<breeder/linear>:
       stage:  genome
     - type:   mutation/2_opt
       stage:  genome
+```
+
+However, since we're using a simple species, which has only a single stage of
+development, there is no need for us to provide the `stage` property for each
+operator specification. In the event we omitted the `stage` property and our
+species had more than a single stage of development, then the stage would
+default to the canonical genotype.
+
+```
+_my_breeder<breeder/linear>:
+  operators:
+    - type: selection/tournament
+      size: 4
+    - type: crossover/pmx
+    - type: mutation/2_opt
 ```
 
 ## Running the Algorithm
