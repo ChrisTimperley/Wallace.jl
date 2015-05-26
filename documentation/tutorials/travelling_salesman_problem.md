@@ -28,6 +28,11 @@ optimisation.
 
 --------------------------------------------------------------------------------
 
+## The problem
+
+Could do with a short description of the problem being solved in this tutorial,
+perhaps along with a diagram of the Berlin-52 map, and links to the .tsp file.
+
 ## Basic setup
 For this problem, we shall be using a standard evolutionary algorithm, with the
 components listed below:
