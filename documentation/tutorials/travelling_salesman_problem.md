@@ -87,7 +87,12 @@ _my_breeder<breeder/linear>:
     - type: mutation/2_opt
 ```
 
+## Writing a Custom Evaluator
+
 ## Running the Algorithm
+
+After having followed all the preceding steps, you should have an algorithm
+that roughly looks similar to the one given below:
 
 ```
 type: algorithm/evolutionary_algorithm
