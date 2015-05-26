@@ -2,12 +2,14 @@
   * Simple genetic algorithm.
   * Bit-string optimisation - Max Ones.
   * Float-vector optimisation - Rastrigin.
+  * Visualising performance.
 2. Simple Evolution Strategies.
 2. Island Model GA - ?
   * Island model.
 3. Memetic Algorithms - Travelling Salesman Problem.
   * Permutation optimisation.
   * Complex breeder.
+  * Writing a custom breeder.
 4. Loosely-Typed Genetic Programming.
   * Genetic programming.
   * Symbolic regression.
