@@ -28,12 +28,12 @@ optimisation.
 
 --------------------------------------------------------------------------------
 
-## The problem
+## The Problem
 
 Could do with a short description of the problem being solved in this tutorial,
 perhaps along with a diagram of the Berlin-52 map, and links to the .tsp file.
 
-## Basic setup
+## Basic Setup
 For this problem, we shall be using a standard evolutionary algorithm, with the
 components listed below:
 
@@ -43,6 +43,36 @@ components listed below:
 | Population          | Simple (single deme)                              |
 | Representation      | Permutation                                       |
 | Breeder             | Linear Breeder                                    |
+
+### Solution Representation
+
+
+
+## Setting up the Linear Breeder
+The linear breeder is the second simplest breeder provided by Wallace; it
+relaxes the constraints imposed on the type and number of genetic operators
+imposed by the simple breeder, allowing the user to provide an arbitrary linear
+chain of operators instead. Offspring are produced by being subjecting batches of
+proto-offspring to each of these operators in sequence, until the desired number
+the required number have been produced as directed.
+
+To specify a linear breeder, one needs only to provide its definition with an
+ordered list of operators, and if necessary, their associated developmental
+stages, as demonstrated below:
+
+```
+_my_breeder<breeder/linear>:
+  operators:
+    - type:   selection/tournament
+      size:   4
+      stage:  genome
+    - type:   crossover/pmx
+      stage:  genome
+    - type:   mutation/2_opt
+      stage:  genome
+```
+
+## Running the Algorithm
 
 ```
 type: algorithm/evolutionary_algorithm
@@ -73,6 +103,4 @@ population<population/simple>:
   breeder:  $(_my_breeder)
   species:  $(_my_species)
 ```
-
-## Running the algorithm
 
