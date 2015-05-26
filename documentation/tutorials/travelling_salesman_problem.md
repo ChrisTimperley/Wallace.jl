@@ -14,7 +14,7 @@ optimisation.
 
 **This tutorial assumes:**
 
-* A minimal knowledge of [Julia](http://julialang.org/).
+* A basic knowledge of [Julia](http://julialang.org/).
 * You know how to create and run a basic genetic algorithm within Wallace.
 
 **By the end of this tutorial, you will be able to:**
@@ -124,3 +124,4 @@ population<population/simple>:
   species:  $(_my_species)
 ```
 
+## Visualising the Results
