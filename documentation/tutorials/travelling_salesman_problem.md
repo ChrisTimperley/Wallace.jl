@@ -29,6 +29,15 @@ optimisation.
 --------------------------------------------------------------------------------
 
 ## Basic setup
+For this problem, we shall be using a standard evolutionary algorithm, with the
+components listed below:
+
+| Component           | Setting                                           |
+| ------------------- | ------------------------------------------------- |
+| Replacement Scheme  | Generational (without elitism)                    |
+| Population          | Simple (single deme)                              |
+| Representation      | Permutation                                       |
+| Breeder             | Linear Breeder                                    |
 
 ```
 type: algorithm/evolutionary_algorithm
