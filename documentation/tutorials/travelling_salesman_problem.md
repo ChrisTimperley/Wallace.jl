@@ -71,6 +71,30 @@ _my_species<species/simple>:
       51,52]
 ```
 
+Clearly this approach is rather tedious and error-prone for our purposes,
+especially if we were to use our algorithm to solve other instances of the TSP.
+
+Alternatively, we could store our alphabet in an external line-delimited file,
+and instead provide the alphabet property with the path to that file.
+
+```
+representation<representation/permutation>:
+  alphabet: my_tsp_cities.txt
+```
+
+However, exhaustively listing the indices of each of the cities in our problem,
+whether inline or through an external alphabet file, is probably still a bit too
+monotonous for our liking.
+
+Fortunately, we can list the indices for each our cities in far more succinctly
+through the use of numeric ranges, which are specified in exactly the same way
+as they are within the Julia language.
+
+```
+representation<representation/permutation>:
+  alphabet: 1:52
+```
+
 ## Setting up the Linear Breeder
 The linear breeder is the second simplest breeder provided by Wallace; it
 relaxes the constraints imposed on the type and number of genetic operators
