@@ -1,6 +1,6 @@
 load("../../fitness", dirname(@__FILE__))
 
-type ScalarFitnessScheme{T} <: FitnessScheme
+type ScalarFitnessScheme{T <: Numeric} <: FitnessScheme
   maximise::Bool
 
   ScalarFitnessScheme(m::Bool) = new(m)
@@ -8,9 +8,7 @@ end
 
 uses{T}(s::ScalarFitnessScheme{T}) = T
 
-compare{I <: Individual}(s::ScalarFitnessScheme, x::I, y::I) =
-  compare(s, x, y)
-compare{T}(s::ScalarFitnessScheme{T}, x::T, y::T) =
+compare{T <: Numeric}(s::ScalarFitnessScheme{T}, x::T, y::T) =
   if x > y
     s.maximise ? -1 : 1
   elseif x < y
