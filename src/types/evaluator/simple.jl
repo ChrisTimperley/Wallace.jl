@@ -11,21 +11,16 @@ function evaluate!(
   s::State
   #termination_conditions::Array{Criterion, 1})
 )
-
-  # Compute the list of individuals which need to be evaluated.
-  # --- Limit to number of remaining evaluations.
-  candidates = unevaluated(s.population)
-
-  # Evaluate each individual (in parallel).
-  # Or pass as a lambda function?
-  for c in candidates
-    c.fitness = evaluate!(e, s, c)
-    c.evaluated = true
+  # Limit the number of evaluations, perform in parallel.
+  for deme in s.population.demes
+    for c in vcat(deme.members, deme.offspring)
+      if !c.evaluated
+        c.fitness = evaluate!(e, s, deme.species.fitness, c)
+        c.evaluated = true
+        s.evaluations += 1
+      end
+    end
   end
-
-  # Increment the number of evaluations.
-  s.evaluations += length(candidates)
-  
 end
 
 register(joinpath(dirname(@__FILE__), "simple.manifest.yml"))

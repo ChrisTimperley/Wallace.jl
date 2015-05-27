@@ -5,9 +5,10 @@ load("species/stage",   dirname(@__FILE__))
 type Species{T}
   genotype::SpeciesStage
   stages::Dict{String, SpeciesStage}
+  fitness::FitnessScheme
 
-  Species(stages::Dict{String, SpeciesStage}) =
-    new(root(stages), stages)
+  Species(st::Dict{String, SpeciesStage}, f::FitnessScheme) =
+    new(root(st), st, f)
 end
 
 # Returns the representation used by a given stage of a provided species.

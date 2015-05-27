@@ -26,4 +26,4 @@ composer: |
   ], "individual")
 
   # Instantiate this species.
-  Species{I}(Dict{String, SpeciesStage}(s["stages"]))
+  Species{I}(Dict{String, SpeciesStage}(s["stages"], s["fitness"]))
