@@ -1,0 +1,10 @@
+id: fitness/lexicographic
+
+properties:
+  objectives:
+    type:         list(objective)
+    description:  > A list of objectives to be optimised, in order of
+      preference, unless preference is to be chosen at random.
+  randomized:
+    type:         Boolean
+    description:  > 
