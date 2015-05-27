@@ -8,7 +8,7 @@ end
 
 uses{T}(s::ScalarFitnessScheme{T}) = T
 
-fitness{T}(s::ScalarFitnessScheme{T}, v::T) = T
+fitness(s::ScalarFitnessScheme, v) = v
 
 compare{T <: Number}(s::ScalarFitnessScheme{T}, x::T, y::T) =
   if x > y
