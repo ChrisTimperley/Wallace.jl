@@ -23,4 +23,15 @@ isbetter(s::FitnessScheme, x::Individual, y::Individual) =
 compare{I <: Individual}(s::FitnessScheme, x::I,  y::I) =
   !x.evaluated ? 1 : compare(s, x.fitness, y.fitness)
 
+# Will fail if list of individuals is empty.
+function best{I <: Individual}(s::FitnessScheme, inds::Vector{I})
+  bst = inds[1]
+  for i in inds
+    if isbetter(i, bst)
+      bst = i
+    end
+  end
+  return bst
+end
+
 register(joinpath(dirname(@__FILE__), "individual.manifest.yml"))

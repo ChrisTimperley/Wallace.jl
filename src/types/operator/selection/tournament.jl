@@ -20,7 +20,7 @@ function select{I <: Individual}(s::TournamentSelection, sp::Species, candidates
     for j in 1:s.size
       participants[j] = candidates[rand(1:end)]
     end
-    winners[i] = best(sp.scheme, participants)
+    winners[i] = best(sp.fitness, participants)
   end
   return winners
   
@@ -35,7 +35,7 @@ function select!{I <: Individual}(
   winners = Array(I, num)
   for i in 1:num
     participants = I[candidates[rand(1:end)] for i in 1:selector.size]
-    winners[i] = best(sp.scheme, participants)
+    winners[i] = best(sp.fitness, participants)
   end
   return winners
 end
