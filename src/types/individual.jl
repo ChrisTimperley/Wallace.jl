@@ -20,7 +20,7 @@ sort!{I <: Individual}(s::FitnessScheme, l::Vector{I}) =
 isbetter(s::FitnessScheme, x::Individual, y::Individual) =
   compare(s, x, y) == -1
 
-compare(s::FitnessScheme, x::Individual, y::Individual) =
+compare{I <: Individual}(s::FitnessScheme, x::I,  y::I) =
   !x.evaluated ? 1 : compare(s, x.fitness, y.fitness)
 
 Base.isless(x::Individual, y::Individual) =
