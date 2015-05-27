@@ -23,9 +23,4 @@ isbetter(s::FitnessScheme, x::Individual, y::Individual) =
 compare{I <: Individual}(s::FitnessScheme, x::I,  y::I) =
   !x.evaluated ? 1 : compare(s, x.fitness, y.fitness)
 
-Base.isless(x::Individual, y::Individual) =
-  !x.evaluated || (y.evaluated && x.fitness < y.fitness)
-Base.isequal(x::Individual, y::Individual) = 
-  !x.evaluated || (y.evaluated && x.fitness == y.fitness)
-
 register(joinpath(dirname(@__FILE__), "individual.manifest.yml"))
