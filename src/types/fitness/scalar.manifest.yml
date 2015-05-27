@@ -1,0 +1,19 @@
+id: fitness/scalar
+
+description: |
+  The scalar fitness scheme represents the fitness of an individual using a
+  single scalar value, which is either maximised or minimised.
+
+properties:
+  type:
+    type:         Type
+    default:      Float
+    description:  The type of the fitness value.
+
+  maximise:
+    type:         Boolean
+    default:      True
+    description:  A flag indicating whether the fitness value should be maximised. 
+
+composer: |
+  ScalarFitnessScheme(s["type"], s["maximise"])  
