@@ -23,6 +23,10 @@ composer: |
 
   s["fitness"] = Wallace.compose(s["fitness"])
 
+  println()
+  println("Composed fitness scheme.")
+  println()
+
   # Compose the individual type.
   I = compose_as([
     "fitness" => s["fitness"],
