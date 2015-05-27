@@ -17,6 +17,10 @@ composer: |
     "maximise" => true,
     "subtype" => "Float"
   ])
+
+  println("Composing fitness scheme:")
+  println(s["fitness"])
+
   s["fitness"] = Wallace.compose(s["fitness"])
 
   # Compose the individual type.
