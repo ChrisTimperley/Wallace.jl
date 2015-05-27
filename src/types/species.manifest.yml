@@ -15,13 +15,14 @@ composer: |
   s["fitness"] = Base.get(s, "fitness", [
     "type" => "fitness/scalar",
     "maximise" => true,
-    "subtype" => "Float"
+    "of" => "Float"
   ])
 
   println("Composing fitness scheme:")
   println(s["fitness"])
 
-  s["fitness"] = Wallace.compose(s["fitness"])
+  s["fitness"] = compose_as(s["fitness"], s["fitness"]["type"])
+  #s["fitness"] = Wallace.compose(s["fitness"])
 
   println()
   println("Composed fitness scheme.")
