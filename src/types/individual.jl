@@ -27,7 +27,7 @@ compare{I <: Individual}(s::FitnessScheme, x::I,  y::I) =
 function best{I <: Individual}(s::FitnessScheme, inds::Vector{I})
   bst = inds[1]
   for i in inds
-    if isbetter(i, bst)
+    if isbetter(s, i, bst)
       bst = i
     end
   end
