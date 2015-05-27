@@ -6,13 +6,8 @@ description: |
   or minimised.
 
 properties:
-  type:
-    type:         Type
-    default:      Float
-    description:  The numeric type used by each of the objective values.
 
   # Add objectives as a property instead?
-
   weights:
     type:         list(Float)
     default:      An equal set of weights, which sum to one.
@@ -32,12 +27,8 @@ files:
   - aggregate.jl
 
 composer: |
-  s["type"] = get(s, "type", "Float")
   s["maximise"] = get(s, "maximise", true)
 
   # Need to handle weights.
 
-  # Find type.
-  s["type"] = s["type"]
-
-  AggregateFitnessScheme{s["type"]}(s["weights"], s["maximise"]) 
+  AggregateFitnessScheme(s["weights"], s["maximise"]) 

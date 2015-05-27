@@ -1,15 +1,15 @@
 load("../../fitness", dirname(@__FILE__))
 
-immutable AggregateFitness{T}
+immutable AggregateFitness
   score::Float
-  objectives::Vector{T}
+  objectives::Vector{Float}
 end
 
 type AggregateFitnessScheme <: FitnessScheme
   weights::Vector{Float}
 end
 
-fitness(s::AggregateFitnessScheme, o::Vector{T}) =
+fitness(s::AggregateFitnessScheme, o::Vector{Float}) =
   AggregateFitness(sum(o .* weights), o)
 
 register(joinpath(dirname(@__FILE__), "aggregate.manifest.yml"))
