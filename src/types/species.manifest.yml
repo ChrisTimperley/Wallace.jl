@@ -17,16 +17,7 @@ composer: |
     "maximise" => true,
     "of" => "Float"
   ])
-
-  println("Composing fitness scheme:")
-  println(s["fitness"])
-
   s["fitness"] = compose_as(s["fitness"], s["fitness"]["type"])
-  #s["fitness"] = Wallace.compose(s["fitness"])
-
-  println()
-  println("Composed fitness scheme.")
-  println()
 
   # Compose the individual type.
   I = compose_as([
