@@ -17,7 +17,7 @@ composer: |
     "maximise" => true,
     "subtype" => "Float"
   ])
-  s["fitness"] = compose(s["fitness"])
+  s["fitness"] = Wallace.compose(s["fitness"])
 
   # Compose the individual type.
   I = compose_as([
