@@ -9,7 +9,7 @@ end
 
 # Selects a given number of individuals from a set of candidate individuals
 # according to a tournament selection method.
-function select{I <: Individual}(s::TournamentSelection, candidates::Vector{I}, n::Int)
+function select{I <: Individual}(s::TournamentSelection, sp::Species, candidates::Vector{I}, n::Int)
 
   # Pre-allocate an array of winners and an array to hold the participants
   # in each tournament.
@@ -20,7 +20,7 @@ function select{I <: Individual}(s::TournamentSelection, candidates::Vector{I}, 
     for j in 1:s.size
       participants[j] = candidates[rand(1:end)]
     end
-    winners[i] = best(participants)
+    winners[i] = best(sp.scheme, participants)
   end
   return winners
   
@@ -29,12 +29,13 @@ end
 # Selects a number of candidate individuals.
 function select!{I <: Individual}(
   selector::TournamentSelection,
+  sp::Species,
   candidates::Vector{I},
   num::Int)
   winners = Array(I, num)
   for i in 1:num
     participants = I[candidates[rand(1:end)] for i in 1:selector.size]
-    winners[i] = best(participants)
+    winners[i] = best(sp.scheme, participants)
   end
   return winners
 end

@@ -4,7 +4,7 @@ abstract Selection <: Operator
 
 # Selects a given number of individuals from a set of candidate individuals
 # according to a given selection method.
-select{I <: Individual}(s::Selection, candidates::Vector{I}, n::Int64) =
+select{I <: Individual}(s::Selection, sp::Species, candidates::Vector{I}, n::Integer) =
   error("Unimplemented `select` method for this selection operator: $(typeof(s)).")
 
 # Prepares this selection operator for the breeding process.

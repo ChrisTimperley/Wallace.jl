@@ -51,7 +51,7 @@ function breed!(
   caller::Union(FastBreeder, BreederSource)
 )# =
 #  sync(s.eigen, caller.eigen, sp, map!(clone, select(s.operator, d.members, n)))
-  inds = select(s.operator, d.members, n)
+  inds = select(s.operator, d.species, d.members, n)
   map!(clone, inds)
   sync(s.eigen, caller.eigen, sp, inds)
 end
