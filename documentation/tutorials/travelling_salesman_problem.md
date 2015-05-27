@@ -136,6 +136,33 @@ _my_breeder<breeder/linear>:
 
 ## Writing a Custom Evaluator
 
+```julia
+type MyTSPEvaluator <: Evaluator
+  distance::Array{Int64, 2}
+end
+```
+
+```
+type: alice#evaluator/tsp
+
+description: |
+  Evaluates the fitness of a TSP tour for a pre-determined set of cities.
+
+properties:
+  threads:
+    type:         Integer
+    description:  > The number of threads that the evaluation process should be
+      split across.
+
+  file:
+    type:         String
+    description:  > The path to the file containing the co-ordinates of each of
+      the cities for the TSP instance being solved.
+
+composer: |
+  ...
+```
+
 ## Running the Algorithm
 
 After having followed all the preceding steps, you should have an algorithm
