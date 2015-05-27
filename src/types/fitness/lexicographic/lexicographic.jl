@@ -9,6 +9,8 @@ end
 
 uses{T}(s::LexicographicFitnessScheme{T}) = Vector{T}
 
+fitness{T}(s::LexicographicFitnessScheme{T}, v::Vector{T}) = v
+
 function compare{T}(s::LexicographicFitnessScheme, x::Vector{T}, y::Vector{T})
   for i in (s.randomised ? shuffle(s.objectives) : s.objectives)
     if x[i] != y[i]
