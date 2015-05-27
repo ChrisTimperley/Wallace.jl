@@ -12,6 +12,9 @@ properties:
      objectives should be randomised at each comparison.
     default:      false
 
+files:
+  - lexicographic.jl
+
 composer: |
   s["randomised"] = get(s, "randomised", false)
   preferences = [1:size(s["objectives"])]

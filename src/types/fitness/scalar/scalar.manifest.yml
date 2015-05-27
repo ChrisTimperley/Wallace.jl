@@ -15,5 +15,8 @@ properties:
     default:      True
     description:  A flag indicating whether the fitness value should be maximised. 
 
+files:
+  - scalar.jl
+
 composer: |
   ScalarFitnessScheme(s["type"], s["maximise"])  

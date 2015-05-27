@@ -1,3 +1,5 @@
+load("../fitness", dirname(@__FILE__))
+
 type LexicographicFitnessScheme <: FitnessScheme
   randomised::Bool
   preferences::Vector{Integer} 
