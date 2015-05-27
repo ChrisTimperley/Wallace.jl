@@ -12,7 +12,7 @@ composer: |
 
   # Compose the fitness scheme for this species.
   # Default to maximization of a float scalar.
-  s["fitness"] = get(s, "fitness", [
+  s["fitness"] = Base.get(s, "fitness", [
     "type" => "fitness/scalar",
     "maximise" => true,
     "subtype" => "Float"

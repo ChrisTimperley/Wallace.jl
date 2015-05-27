@@ -5,7 +5,7 @@ description: |
   single scalar value, which is either maximised or minimised.
 
 properties:
-  type:
+  of:
     type:         Type
     default:      Float
     description:  The type of the fitness value.
@@ -19,4 +19,6 @@ files:
   - scalar.jl
 
 composer: |
-  ScalarFitnessScheme(s["type"], s["maximise"])  
+  s["of"] = Base.eval(Base.parse(Base.get(s, "of", "Float")))
+  s["maximise"] = Base.get(s, "maximise", true)
+  ScalarFitnessScheme{s["of"]}(s["maximise"])  

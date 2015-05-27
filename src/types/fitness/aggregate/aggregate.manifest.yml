@@ -29,7 +29,7 @@ files:
   - aggregate.jl
 
 composer: |
-  s["maximise"] = get(s, "maximise", true)
+  s["maximise"] = Base.get(s, "maximise", true)
 
   # Need to handle weights.
 

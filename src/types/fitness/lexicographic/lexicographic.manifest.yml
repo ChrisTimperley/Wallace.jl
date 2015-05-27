@@ -18,7 +18,7 @@ files:
   - lexicographic.jl
 
 composer: |
-  s["randomised"] = get(s, "randomised", false)
+  s["randomised"] = Base.get(s, "randomised", false)
   preferences = [1:size(s["objectives"])]
 
   LexicographicFitnessScheme(s["randomised"], preferences)
