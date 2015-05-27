@@ -11,14 +11,16 @@ properties:
   weights:
     type:         list(Float)
     default:      An equal set of weights, which sum to one.
-    description:  > A list holding the weights used for each of the objective
-      values upon aggregation.
+    description:  >
+      A list holding the weights used for each of the objective values upon
+      aggregation.
 
   maximise:
     type:         Boolean
     default:      True
-    description:  > A flag indicating whether the aggregated fitness value
-      should be maximised. 
+    description:  >
+      A flag indicating whether the aggregated fitness value should be
+      maximised. 
 
 requires:
   - wallace#fitness
