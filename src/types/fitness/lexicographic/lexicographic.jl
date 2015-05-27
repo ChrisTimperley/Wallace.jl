@@ -1,4 +1,4 @@
-load("../fitness", dirname(@__FILE__))
+load("../../fitness", dirname(@__FILE__))
 
 type LexicographicFitnessScheme <: FitnessScheme
   randomised::Bool
@@ -15,3 +15,5 @@ function compare{T}(s::LexicographicFitnessScheme, x::Vector{T}, y::Vector{T})
   end
   return 0
 end
+
+register(joinpath(dirname(@__FILE__), "lexicographic.manifest.yml"))

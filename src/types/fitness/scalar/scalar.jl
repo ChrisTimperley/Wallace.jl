@@ -1,4 +1,4 @@
-load("../fitness", dirname(@__FILE__))
+load("../../fitness", dirname(@__FILE__))
 
 type ScalarFitnessScheme{T} <: FitnessScheme
   maximise::Bool
@@ -14,3 +14,5 @@ compare{T}(s::ScalarFitnessScheme{T}, x::T, y::T) =
   else
     0
   end
+
+register(joinpath(dirname(@__FILE__), "scalar.manifest.yml"))
