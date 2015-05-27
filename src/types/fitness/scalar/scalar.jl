@@ -8,6 +8,8 @@ end
 
 uses{T}(s::ScalarFitnessScheme{T}) = T
 
+compare{I <: Individual}(s::ScalarFitnessScheme, x::I, y::I) =
+  compare(s, x, y)
 compare{T}(s::ScalarFitnessScheme{T}, x::T, y::T) =
   if x > y
     s.maximise ? -1 : 1
