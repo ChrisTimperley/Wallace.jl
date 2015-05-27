@@ -13,6 +13,7 @@ function evaluate!(
 )
   # Limit the number of evaluations, perform in parallel.
   for deme in s.population.demes
+    println("Deme")
     for c in vcat(deme.members, deme.offspring)
       if !c.evaluated
         c.fitness = evaluate!(e, s, deme.species.fitness, c)
