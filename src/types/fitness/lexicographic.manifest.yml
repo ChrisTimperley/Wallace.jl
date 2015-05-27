@@ -5,6 +5,15 @@ properties:
     type:         list(objective)
     description:  > A list of objectives to be optimised, in order of
       preference, unless preference is to be chosen at random.
-  randomized:
+
+  randomised:
     type:         Boolean
-    description:  > 
+    description:  > Flag indicating whether the preference for specific
+     objectives should be randomised at each comparison.
+    default:      false
+
+composer: |
+  s["randomised"] = get(s, "randomised", false)
+  preferences = [1:size(s["objectives"])]
+
+  LexicographicFitnessScheme(s["randomised"], preferences)
