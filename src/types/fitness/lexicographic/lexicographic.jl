@@ -1,11 +1,13 @@
 load("../../fitness", dirname(@__FILE__))
 
-type LexicographicFitnessScheme <: FitnessScheme
+type LexicographicFitnessScheme{T} <: FitnessScheme
   randomised::Bool
   preferences::Vector{Integer} 
 
   LexicographicFitnessScheme(r::Bool, o::Vector{Integer}) = new(r, o)
 end
+
+uses{T}(s::LexicographicFitnessScheme) = Vector{T}
 
 function compare{T}(s::LexicographicFitnessScheme, x::Vector{T}, y::Vector{T})
   for i in (s.randomised ? shuffle(s.objectives) : s.objectives)

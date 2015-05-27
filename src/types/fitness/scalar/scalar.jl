@@ -6,6 +6,8 @@ type ScalarFitnessScheme{T} <: FitnessScheme
   ScalarFitnessScheme(m::Bool) = new(m)
 end
 
+uses{T}(s::ScalarFitnessScheme{T}) = T
+
 compare{T}(s::ScalarFitnessScheme{T}, x::T, y::T) =
   if x > y
     s.maximise ? -1 : 1

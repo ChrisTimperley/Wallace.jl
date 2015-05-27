@@ -10,6 +10,15 @@ composer: |
     s["stages"][name] = compose_as(stage, "species#stage")
   end
 
+  # Compose the fitness scheme for this species.
+  # Default to maximization of a float scalar.
+  s["fitness"] = get(s, "fitness", [
+    "type" => "fitness/scalar",
+    "maximise" => true,
+    "subtype" => "Float"
+  ])
+  s["fitness"] = compose(s["fitness"])
+
   # Compose the individual type.
   I = compose_as([
     "fitness" => s["fitness"],

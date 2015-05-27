@@ -9,6 +9,8 @@ type AggregateFitnessScheme <: FitnessScheme
   weights::Vector{Float}
 end
 
+uses(s::AggregateFitnessScheme) = AggregateFitness
+
 fitness(s::AggregateFitnessScheme, o::Vector{Float}) =
   AggregateFitness(sum(o .* weights), o)
 

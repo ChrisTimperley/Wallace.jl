@@ -26,7 +26,7 @@ composer: |
   end
 
   # Add the fitness property.
-  push!(definition, "fitness::$(s["fitness"])")
+  push!(definition, "fitness::$(uses(s["fitness"]))")
   
   # Build the empty constructor.
   push!(definition, "constructor() = new(" * 
