@@ -7,7 +7,7 @@ type LexicographicFitnessScheme{T} <: FitnessScheme
   LexicographicFitnessScheme(r::Bool, o::Vector{Integer}) = new(r, o)
 end
 
-uses{T}(s::LexicographicFitnessScheme) = Vector{T}
+uses{T}(s::LexicographicFitnessScheme{T}) = Vector{T}
 
 function compare{T}(s::LexicographicFitnessScheme, x::Vector{T}, y::Vector{T})
   for i in (s.randomised ? shuffle(s.objectives) : s.objectives)
