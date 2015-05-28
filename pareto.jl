@@ -18,10 +18,6 @@ function dominates(x::Vector{Float64}, y::Vector{Float64})
   return dom
 end
 
-function dominates_any(p1::Wrapper, pts::Vector{Wrapper})
-
-end
-
 function nondominated(p1::Wrapper, pts::Vector{Wrapper})
   for p2 in pts
     if dominates(p2, p1)
@@ -72,7 +68,10 @@ end
 
 pts = [
 
-  # Pareto Front-1
+  # Pareto Front-1.
+  Wrapper({0.0, 0.0}),
+
+  # Pareto Front-2.
   Wrapper({0.5, 6.0}),
   Wrapper({1.0, 5.0}),
   Wrapper({1.5, 4.0}),
@@ -82,14 +81,18 @@ pts = [
   Wrapper({5.0, 1.5}),
   Wrapper({6.0, 1.0}),
 
-  # Pareto Front-2.
+  # Pareto Front-3.
   Wrapper({2.0, 6.0}),
   Wrapper({2.5, 5.0}),
   Wrapper({3.0, 4.0}),
   Wrapper({4.0, 3.0}),
   Wrapper({5.0, 2.5}),
-  Wrapper({6.0, 2.0})
+  Wrapper({6.0, 2.0}),
 
+  # Pareto Front-4.
+  Wrapper({4.0, 6.0}),
+  Wrapper({5.0, 4.0}),
+  Wrapper({7.0, 3.0})
 ]
 
 # Shuffle the points about
