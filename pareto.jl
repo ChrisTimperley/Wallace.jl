@@ -66,6 +66,9 @@ function describe(fronts::Vector{Vector{Wrapper}})
   end
 end
 
+pareto_rank(p1::Wrapper, pts::Vector{Wrapper}) =
+  1 + count(p2 -> dominates(p2, p1), pts)
+
 pts = [
 
   # Pareto Front-1.
@@ -95,7 +98,11 @@ pts = [
   Wrapper({7.0, 3.0})
 ]
 
-# Shuffle the points about
-shuffle!(pts)
+for p in pts
+  println("$(p): $(pareto_rank(p, pts))")
+end
 
-describe(pareto_sets(pts))
+# Shuffle the points about
+#shuffle!(pts)
+
+#describe(pareto_sets(pts))
