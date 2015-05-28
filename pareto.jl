@@ -25,8 +25,15 @@ function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   return dom
 end
 
-moga_rank(p1::Wrapper, pts::Vector{Wrapper}, maximise::Vector{Bool}) =
-  1 + count(p2 -> dominates(p2.fitness.scores, p1.fitness.scores, maximise), pts)
+type MOGAFitnessScheme
+  maximise::Vector{Bool}
+end
+
+function process!(s::MOGAFitnessScheme, inds::Vector{Wrapper})
+  for p1 in inds
+    p1.fitness.rank = 1 + count(p2 -> dominates(p2.fitness.scores, p1.fitness.scores, s.maximise), inds)
+  end
+end
 
 pts = [
 
@@ -57,6 +64,10 @@ pts = [
   Wrapper([7.0, 3.0])
 ]
 
+scheme = MOGAFitnessScheme([false, false])
+
+process!(scheme, pts)
+
 for p in pts
-  println("$(p): $(moga_rank(p, pts, [false, false]))")
+  println("$(p.fitness.scores): $(p.fitness.rank)")
 end
