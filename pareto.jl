@@ -18,23 +18,35 @@ function dominates(x::Vector{Float64}, y::Vector{Float64})
   return dom
 end
 
+function dominates_any(p1::Wrapper, pts::Vector{Wrapper})
+
+end
+
+function nondominated(p1::Wrapper, pts::Vector{Wrapper})
+  for p2 in pts
+    if dominates(p2, p1)
+      return false
+    end
+  end
+  return true
+end
+
 function pareto_sets(pts::Vector{Wrapper})
-  nfronts = 0
-  fronts = Vector{Wrapper}[]
-  for p in pts
+  fronts = Vector{Wrapper}[[pts[1]]]
+  for p in pts[2:end]
 
     # Does this point dominate any point in the pareto front?
     # If so, create a new pareto front containing this point and push the
     # others back.
-    if isempty(fronts) || dominates(p, fronts[1][1])
+    if any(p2 -> dominates(p, p2), fronts[1])
       unshift!(fronts, {p})
-      nfronts += 1
     else
-      # Does this point belong to any existing pareto fronts? 
+      # Is this point dominated by any members of this front?
+      # If not, then add it to this front.
       found = false
-      for f in 1:nfronts
-        if !dominates(fronts[f][1], p)
-          push!(fronts[f], p)
+      for (j, f) in enumerate(fronts)
+        if nondominated(p, f)
+          push!(f, p)
           found = true
           break
         end
@@ -44,7 +56,6 @@ function pareto_sets(pts::Vector{Wrapper})
       # for it.
       if !found
         push!(fronts, {p})
-        nfronts += 1
       end
     end
   end
@@ -69,8 +80,19 @@ pts = [
   Wrapper({3.0, 2.5}),
   Wrapper({4.0, 2.0}),
   Wrapper({5.0, 1.5}),
-  Wrapper({6.0, 1.0})
+  Wrapper({6.0, 1.0}),
+
+  # Pareto Front-2.
+  Wrapper({2.0, 6.0}),
+  Wrapper({2.5, 5.0}),
+  Wrapper({3.0, 4.0}),
+  Wrapper({4.0, 3.0}),
+  Wrapper({5.0, 2.5}),
+  Wrapper({6.0, 2.0})
 
 ]
+
+# Shuffle the points about
+shuffle!(pts)
 
 describe(pareto_sets(pts))
