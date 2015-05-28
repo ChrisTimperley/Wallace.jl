@@ -33,6 +33,16 @@ type GoldbergFitnessScheme
   maximise::Vector{Bool}
 end
 
+type BelegunduFitnessScheme
+  maximise::Vector{Bool}
+end
+
+function process!(s::BelegunduFitnessScheme, inds::Vector{Wrapper})
+  for p1 in inds
+    p1.fitness.rank = any(p2 -> dominates(p2.fitness.scores, p1.fitness.scores, s.maximise), inds) ? 1 : 0
+  end
+end
+
 function process!(s::MOGAFitnessScheme, inds::Vector{Wrapper})
   for p1 in inds
     p1.fitness.rank = 1 + count(p2 -> dominates(p2.fitness.scores, p1.fitness.scores, s.maximise), inds)
@@ -94,7 +104,8 @@ pts = [
 ]
 
 #scheme = MOGAFitnessScheme([false, false])
-scheme = GoldbergFitnessScheme([false, false])
+#scheme = GoldbergFitnessScheme([false, false])
+scheme = BelegunduFitnessScheme([false, false])
 
 process!(scheme, pts)
 
