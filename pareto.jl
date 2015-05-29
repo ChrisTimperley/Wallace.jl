@@ -1,3 +1,5 @@
+using Distances
+
 type GoldbergFitness{T}
   scores::Vector{T}
   rank::Integer
@@ -17,6 +19,15 @@ type Wrapper
 
   Wrapper(s::Vector{Float64}) = new(GoldbergFitness{Float64}(s))
 end
+
+distance_phenotype(::BoolVectorRepresentation, x::Vector{Bool}, y::Vector{Bool}) =
+  hamming(x, y)
+
+distance_phenotype(::FloatVectorRepresentation, x::Vector{Float64}, y::Vector{Float64}) =
+  euclidean(x, y)
+
+distance_phenotype(::IntVectorRepresentation, x::Vector{Integer}, y::Vector{Integer}) =
+  euclidean(x, y)
 
 function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   dom = false
@@ -39,6 +50,12 @@ type FitnessSharingScheme <: FitnessScheme
   radius::Float64
   alpha::Float64
   dist::Function
+  
+  FitnessSharingScheme(b::FitnessScheme, r::Float64, a::Float64) =
+    new(b, r, a, distance_phenotype)
+
+  FitnessSharingScheme(b::FitnessScheme, r::Float64, a::Float64, d::Function) =
+    new(b, r, a, d)
 end
 
 # Sharing function.
@@ -96,6 +113,7 @@ end
 
 function process!(s::FitnessSharingScheme, inds::Vector{Wrapper})
   for i1 in inds
+    # Vicinity parameter
     i1.fitness.shared = score(i1.fitness.fitness) /
       sum(i2 -> sh(s, s.distance(i1, i2)), inds)
   end
