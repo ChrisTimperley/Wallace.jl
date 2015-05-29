@@ -5,6 +5,13 @@ type GoldbergFitness{T}
   GoldbergFitness(s::Vector{T}) = new(s)
 end
 
+type SharedFitness{T}
+  fitness::T
+  shared::Float64
+
+  SharedFitness(f::T) = new(f)
+end
+
 type Wrapper
   fitness::GoldbergFitness{Float64}
 
@@ -24,6 +31,19 @@ function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   end
   return dom
 end
+
+abstract FitnessScheme
+
+type FitnessSharingScheme <: FitnessScheme
+  base::FitnessScheme
+  radius::Float64
+  alpha::Float64
+  dist::Function
+end
+
+# Sharing function.
+sh(s::FitnessSharingScheme, d::Float64) =
+  d <= s.radius ? 1 - (d/s.radius) ^ s.alpha : 0
 
 type MOGAFitnessScheme
   maximise::Vector{Bool}
@@ -71,6 +91,13 @@ function process!(s::GoldbergFitnessScheme, inds::Vector{Wrapper})
 
     j = k
     rank += 1
+  end
+end
+
+function process!(s::FitnessSharingScheme, inds::Vector{Wrapper})
+  for i1 in inds
+    i1.fitness.shared = score(i1.fitness.fitness) /
+      sum(i2 -> sh(s, s.distance(i1, i2)), inds)
   end
 end
 
