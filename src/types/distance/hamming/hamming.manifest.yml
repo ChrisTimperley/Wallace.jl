@@ -1,0 +1,7 @@
+id: distance/hamming
+
+description: |
+  The hamming distance between two sequenced collections, or strings, of equal
+  length is measured as the number of differences between them at each index.
+
+composer: HammingDistance()

@@ -20,6 +20,15 @@ type Wrapper
   Wrapper(s::Vector{Float64}) = new(GoldbergFitness{Float64}(s))
 end
 
+# Use distance objects.
+# - Need to specify which stage to use.
+
+# Could work for now...
+distance(d::Distance, x::Individual, y::Individual) =
+  distance(d, d.stage(x), d.stage(y)) 
+
+distance(::HammingDistance, x::Vector{Bool}, y::Vector{Bool}) = 0
+
 distance_phenotype(::BoolVectorRepresentation, x::Vector{Bool}, y::Vector{Bool}) =
   hamming(x, y)
 
@@ -49,7 +58,7 @@ type FitnessSharingScheme <: FitnessScheme
   base::FitnessScheme
   radius::Float64
   alpha::Float64
-  dist::Function
+  dist::Distance
   
   FitnessSharingScheme(b::FitnessScheme, r::Float64, a::Float64) =
     new(b, r, a, distance_phenotype)
