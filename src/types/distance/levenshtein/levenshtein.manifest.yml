@@ -1,0 +1,8 @@
+id: distance/levenshtein
+
+description: |
+  The Levenshtein distance between two sequences is the minimum number of
+  single element edits, which may be insertions, deletions, or substitutions,
+  that are required to transform one sequence into the other.
+
+composer: LevenshteinDistance()
