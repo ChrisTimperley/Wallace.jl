@@ -1,0 +1,2 @@
+immutable EuclideanDistance <: Distance
+end

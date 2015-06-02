@@ -1,0 +1,6 @@
+id: distance/euclidean
+
+description: |
+  Euclidean distance.
+
+composer: EuclideanDistance()
