@@ -1,3 +1,5 @@
+load("../../fitness.jl", dirname(@__FILE__))
+
 abstract ParetoFitnessScheme{T} <: FitnessScheme
 
 type ParetoFitness{T}
@@ -10,6 +12,13 @@ end
 uses{T}(::ParetoFitnessScheme{T}) = ParetoFitness{T}
 
 fitness{T}(::ParetoFitnessScheme{T}, v::Vector{T}) = ParetoFitness{T}(v)
+
+function compare(s::ParetoFitnessScheme, x::ParetoFitness, y::ParetoFitness)
+  if x.rank != y.rank
+    return y.rank > x.rank ? -1 : 1
+  end
+  return 0
+end
 
 function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   dom = false

@@ -1,6 +1,6 @@
 load("../pareto/pareto.jl", dirname(@__FILE__))
 
-type MOGAFitnessScheme <: FitnessScheme
+type MOGAFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
 
