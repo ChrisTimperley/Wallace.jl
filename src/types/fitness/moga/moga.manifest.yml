@@ -5,3 +5,5 @@ dependencies:
   - fitness/pareto
 files:
   - moga.jl
+composer: |
+  MOGAFitnessScheme(s["maximise"])

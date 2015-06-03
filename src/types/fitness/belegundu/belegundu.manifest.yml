@@ -7,3 +7,5 @@ dependencies:
   - fitness/pareto
 files:
   - belegundu.jl
+composer: |
+  BelegunduFitnessScheme(s["maximise"])

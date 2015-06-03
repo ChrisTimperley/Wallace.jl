@@ -11,3 +11,5 @@ dependencies:
   - fitness/pareto
 files:
   - goldberg.jl
+composer: |
+  GoldbergFitnessScheme(s["maximise"])
