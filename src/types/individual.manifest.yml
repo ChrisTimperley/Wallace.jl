@@ -1,5 +1,11 @@
 id: individual
 
+files:
+  - individual.jl
+
+dependencies:
+  - fitness
+
 composer: |
 
   # Create an array to hold each of the lines of the type definition.
