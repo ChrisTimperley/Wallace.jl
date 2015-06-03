@@ -7,7 +7,7 @@ type ScalarFitnessScheme{T <: Number} <: FitnessScheme
 end
 
 uses{T}(s::ScalarFitnessScheme{T}) = T
-
+maximise(s::ScalarFitnessScheme) = s.maximise
 fitness(s::ScalarFitnessScheme, v) = v
 
 compare{T <: Number}(s::ScalarFitnessScheme{T}, x::T, y::T) =

@@ -7,10 +7,13 @@ end
 
 type AggregateFitnessScheme <: FitnessScheme
   weights::Vector{Float}
+  maximise::Bool
+  
+  AggregateFitnessScheme(w::Vector{Float}, m::Bool) = new(w, m)
 end
 
 uses(s::AggregateFitnessScheme) = AggregateFitness
-
+maximise(s::AggregateFitnessScheme) = s.maximise
 fitness(s::AggregateFitnessScheme, o::Vector{Float}) =
   AggregateFitness(sum(o .* weights), o)
 

@@ -10,4 +10,9 @@ fitness(s::FitnessScheme) =
 uses(s::FitnessScheme) =
   error("No 'uses' function defined for this fitness scheme.")
 
+# Returns a flag indicating whether or not fitness values produced by a given
+# scheme should be maximised or minimised.
+maximise(::FitnessScheme) =
+  error("No 'maximise' function defined for this fitness scheme.")
+
 Wallace.register(joinpath(dirname(@__FILE__), "fitness.manifest.yml"))

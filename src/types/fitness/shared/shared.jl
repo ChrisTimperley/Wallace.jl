@@ -9,15 +9,14 @@ type FitnessSharingScheme <: FitnessScheme
   base::FitnessScheme
   radius::Float
   alpha::Float
-  maximise::Bool
   dist::Distance
 
-  FitnessSharingScheme(b::FitnessScheme, r::Float, a::Float, m::Bool, d::Distance) =
-    new(b, r, a, m, d)
+  FitnessSharingScheme(b::FitnessScheme, r::Float, a::Float, d::Distance) =
+    new(b, r, a, d)
 end
 
 uses{T}(s::FitnessSharingScheme{T}) = SharedFitness{T}
-
+maximise(s::FitnessSharingScheme) = maximise(s.base)
 fitness{T}(s::FitnessSharingScheme{T}, args...) =
   fitness(s.base, args...)
 
@@ -32,9 +31,9 @@ scale!{I <: Individual}(s::FitnessSharingScheme, inds::Vector{I}) =
 
 compare(s::FitnessSharingScheme, x::SharedFitness, y::SharedFitness) =
   if x.shared > y.shared
-    s.maximise ? -1 : 1
+    maximise(s) ? -1 : 1
   elseif x.shared < y.shared
-    s.maximise ? 1 : -1
+    maximise(s) ? 1 : -1
   else
     0
   end
