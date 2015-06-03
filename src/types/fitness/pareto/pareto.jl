@@ -1,4 +1,4 @@
-abstract ParetoFitnessScheme <: FitnessScheme
+abstract ParetoFitnessScheme{T} <: FitnessScheme
 
 type ParetoFitness{T}
   scores::Vector{T}
@@ -6,6 +6,10 @@ type ParetoFitness{T}
 
   ParetoFitness(s::Vector{T}) = new(s)
 end
+
+uses{T}(::ParetoFitnessScheme{T}) = ParetoFitness{T}
+
+fitness{T}(::ParetoFitnessScheme{T}, v::Vector{T}) = ParetoFitness{T}(v)
 
 function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   dom = false
