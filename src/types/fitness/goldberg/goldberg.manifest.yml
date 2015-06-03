@@ -12,4 +12,5 @@ dependencies:
 files:
   - goldberg.jl
 composer: |
-  GoldbergFitnessScheme(s["maximise"])
+   s["of"] = Base.eval(Base.parse(Base.get(s, "of", "Float")))
+   GoldbergFitnessScheme{s["of"]}(s["maximise"])

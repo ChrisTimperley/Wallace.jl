@@ -6,4 +6,5 @@ dependencies:
 files:
   - moga.jl
 composer: |
-  MOGAFitnessScheme(s["maximise"])
+  s["of"] = Base.eval(Base.parse(Base.get(s, "of", "Float")))
+  MOGAFitnessScheme{s["of"]}(s["maximise"])
