@@ -1,3 +1,5 @@
+load("../pareto/pareto.jl", dirname(@__FILE__))
+
 type GoldbergFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
