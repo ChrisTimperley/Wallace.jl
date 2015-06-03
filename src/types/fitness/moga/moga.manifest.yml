@@ -1,0 +1,7 @@
+id: fitness/moga
+description: |
+  Multiple Objective Genetic Algorithm.
+dependencies:
+  - fitness/pareto
+files:
+  - moga.jl

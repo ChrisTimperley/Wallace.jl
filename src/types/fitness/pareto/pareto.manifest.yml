@@ -1,0 +1,9 @@
+id: fitness/pareto
+abstract: true
+description: |
+  This package adds support for multiple-objective based fitness approaches,
+  through the addition of domination calculation and pareto rank-based fitness.
+dependencies:
+  - fitness
+files:
+  - pareto.jl
