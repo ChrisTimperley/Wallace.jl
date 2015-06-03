@@ -24,6 +24,6 @@ breed!(d::Deme) = breed!(d.breeder, d)
 
 # Returns a list of all the individuals, both current members and offspring,
 # belonging to a given deme.
-contents{I <: Individual}(d::Deme{I}) = I[d.offspring, d.members]
+contents{I <: Individual}(d::Deme{I}) = vcat(d.offspring, d.members)
 
 register(joinpath(dirname(@__FILE__), "deme.manifest.yml"))
