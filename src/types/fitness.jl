@@ -10,4 +10,8 @@ fitness(s::FitnessScheme) =
 uses(s::FitnessScheme) =
   error("No 'uses' function defined for this fitness scheme.")
 
+# Performs any necessary post-processing on the individuals using this fitness
+# scheme.
+scale!{I <: Individual}(::FitnessScheme, ::Vector{I}) = return
+
 Wallace.register(joinpath(dirname(@__FILE__), "fitness.manifest.yml"))

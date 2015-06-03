@@ -24,6 +24,7 @@ function run!(a::SimpleEvolutionaryAlgorithm)
   prepare!(a.loggers, a.output)
   initialize!(a.initializer, a.state.population)
   evaluate!(a.evaluator, a.state)
+  scale!(a.state.population)
 
   # Record the best individual from the population.
   #pbest = gbest = best(a.state.population)
@@ -33,6 +34,7 @@ function run!(a::SimpleEvolutionaryAlgorithm)
   while !any(c -> is_satisfied(c, a.state), values(a.termination))
     breed!(a.state.population)
     evaluate!(a.evaluator, a.state)
+    scale!(a.state.population)
 
     # Record the best individual from the population.
     # --- What does this mean for co-evolution?
@@ -40,6 +42,7 @@ function run!(a::SimpleEvolutionaryAlgorithm)
     #gbest = best([pbest, gbest])
 
     replace!(a.replacement, a.state)
+    scale!(a.state.population)
     call!(a.loggers, a.state)
     a.state.iterations += 1
   end

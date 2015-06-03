@@ -25,4 +25,9 @@ unevaluated(p::Population) = flatten(map(unevaluated, p.demes))
 unevaluated(d::Deme) = vcat(unevaluated(d.members), unevaluated(d.offspring))
 unevaluated{I <: Individual}(inds::Vector{I}) = filter(i -> !i.evaluated, inds)
 
+# Performs any necessary fitness scaling and processing on each of the
+# individuals within a given population.
+scale!(p::Population) = for deme in deme; scale!(deme); end
+scale!(d::Deme) = scale!(d.species.fitness, contents(d))
+
 register(joinpath(dirname(@__FILE__), "population.manifest.yml"))

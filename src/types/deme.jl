@@ -22,4 +22,8 @@ prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
 # Produces the offspring for a given deme at each generation.
 breed!(d::Deme) = breed!(d.breeder, d)
 
+# Returns a list of all the individuals, both current members and offspring,
+# belonging to a given deme.
+contents{I <: Individual}(d::Deme{I}) = I[d.offspring, d.members]
+
 register(joinpath(dirname(@__FILE__), "deme.manifest.yml"))

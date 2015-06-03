@@ -4,7 +4,7 @@ type GoldbergFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
 
-function process!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
+function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
   n = length(inds)
   j = k = rank = 1
 

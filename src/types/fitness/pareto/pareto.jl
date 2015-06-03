@@ -13,7 +13,7 @@ uses{T}(::ParetoFitnessScheme{T}) = ParetoFitness{T}
 
 fitness{T}(::ParetoFitnessScheme{T}, v::Vector{T}) = ParetoFitness{T}(v)
 
-function compare(s::ParetoFitnessScheme, x::ParetoFitness, y::ParetoFitness)
+function compare(::ParetoFitnessScheme, x::ParetoFitness, y::ParetoFitness)
   if x.rank != y.rank
     return y.rank > x.rank ? -1 : 1
   end

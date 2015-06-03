@@ -19,7 +19,7 @@ end
 sh(s::FitnessSharingScheme, d::Float) =
   d <= s.radius ? 1.0 - (d/s.radius) ^ s.alpha : 0.0
 
-function process!{I <: Individual}(s::FitnessSharingScheme, inds::Vector{I})
+function scale!{I <: Individual}(s::FitnessSharingScheme, inds::Vector{I})
   for i1 in inds
     # Vicinity parameter
     i1.fitness.shared = score(i1.fitness.base) /
