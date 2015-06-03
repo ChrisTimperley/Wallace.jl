@@ -1,8 +1,8 @@
-type GoldbergFitnessScheme <: ParetoFitnessScheme
+type GoldbergFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
 
-function process!(s::GoldbergFitnessScheme, inds::Vector{Wrapper})
+function process!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
   n = length(inds)
   j = k = rank = 1
 

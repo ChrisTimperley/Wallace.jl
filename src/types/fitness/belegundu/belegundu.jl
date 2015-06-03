@@ -1,4 +1,4 @@
-type BelegunduFitnessScheme <: ParetoFitnessScheme
+type BelegunduFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
 
