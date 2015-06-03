@@ -1,3 +1,5 @@
+load("../../distance.jl", dirname(@__FILE__))
+
 immutable LevenshteinDistance <: Distance
 end
 
