@@ -28,3 +28,5 @@ function process!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
     rank += 1
   end
 end
+
+register(joinpath(dirname(@__FILE__), "goldberg.manifest.yml"))

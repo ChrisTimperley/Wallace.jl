@@ -33,3 +33,5 @@ function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   end
   return dom
 end
+
+register(joinpath(dirname(@__FILE__), "pareto.manifest.yml"))

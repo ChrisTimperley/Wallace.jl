@@ -26,3 +26,5 @@ function process!{I <: Individual}(s::FitnessSharingScheme, inds::Vector{I})
       sum(i2 -> sh(s, distance(s.distance, i1, i2)), inds)
   end
 end
+
+register(joinpath(dirname(@__FILE__), "shared.manifest.yml"))
