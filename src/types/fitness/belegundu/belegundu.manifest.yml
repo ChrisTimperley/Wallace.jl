@@ -8,5 +8,5 @@ dependencies:
 files:
   - belegundu.jl
 composer: |
-   s["of"] = Base.eval(Base.parse(Base.get(s, "of", "Float")))
+   s["of"] = eval(Base.parse(Base.get(s, "of", "Float")))
    BelegunduFitnessScheme{s["of"]}(s["maximise"])
