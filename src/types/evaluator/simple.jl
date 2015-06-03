@@ -15,6 +15,7 @@ function evaluate!(
   for deme in s.population.demes
     for c in vcat(deme.members, deme.offspring)
       if !c.evaluated
+        println("About to evaluate.")
         c.fitness = evaluate!(e, s, deme.species.fitness, c)
         c.evaluated = true
         s.evaluations += 1
