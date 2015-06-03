@@ -7,7 +7,7 @@ type FloatVectorRepresentation <: Representation
   range::FloatRange
 
   FloatVectorRepresentation(length::Int, min::Float, max::Float) =
-    new(length, min, max, min:max)
+    new(length, min, max, min:eps():max)
 end
 
 minimum_value(r::FloatVectorRepresentation) = r.min
