@@ -1,4 +1,4 @@
-type GoldbergFitnessScheme <: FitnessScheme
+type GoldbergFitnessScheme <: ParetoFitnessScheme
   maximise::Vector{Bool}
 end
 

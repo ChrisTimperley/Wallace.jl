@@ -17,6 +17,9 @@ properties:
 files:
   - lexicographic.jl
 
+dependencies:
+  - fitness
+
 composer: |
   s["randomised"] = Base.get(s, "randomised", false)
   preferences = [1:size(s["objectives"])]
