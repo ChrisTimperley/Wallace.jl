@@ -34,4 +34,8 @@ function best{I <: Individual}(s::FitnessScheme, inds::Vector{I})
   return bst
 end
 
+# Performs any necessary post-processing on the individuals using this fitness
+# scheme.
+scale!{I <: Individual}(::FitnessScheme, ::Vector{I}) = return
+
 register(joinpath(dirname(@__FILE__), "individual.manifest.yml"))
