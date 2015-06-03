@@ -4,13 +4,12 @@ type GaussianMutation{R, T} <: Mutation
   representation::R
   mean::T
   std::T
-#  min_value::T
-#  max_value::T
+  min_value::T
+  max_value::T
   rate::Float
 
   GaussianMutation(rep::R, mean::T, std::T, rate::Float) =
-    new(rep, mean, std, rate)  
-  #new(rep, minimum_value(rep), maximum_value(rep), rate)
+    new(rep, mean, std, minimum_value(rep), maximum_value(rep), rate)  
 end
 
 gaussian{T}(mean::T, std::T) =
@@ -27,10 +26,10 @@ function operate!{T}(o::GaussianMutation,
   for i in 1:length(get(inputs[1]))
     if rand() <= o.rate
       get(inputs[1])[i] += gaussian(o.mean, o.std)
+      get(inputs[1])[i] = min(max(get(inputs[1])[i], o.min_value), o.max_value)
     end
   end
   return inputs
-
 end
 
 register(joinpath(dirname(@__FILE__), "gaussian.manifest.yml"))
