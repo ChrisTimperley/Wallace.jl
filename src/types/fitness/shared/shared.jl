@@ -15,9 +15,9 @@ type FitnessSharingScheme <: FitnessScheme
     new(b, r, a, d)
 end
 
-uses{T}(s::FitnessSharingScheme{T}) = SharedFitness{T}
+uses(s::FitnessSharingScheme) = SharedFitness{uses(s.base)}
 maximise(s::FitnessSharingScheme) = maximise(s.base)
-fitness{T}(s::FitnessSharingScheme{T}, args...) =
+fitness(s::FitnessSharingScheme, args...) =
   fitness(s.base, args...)
 
 sh(s::FitnessSharingScheme, d::Float) =
