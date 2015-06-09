@@ -24,7 +24,7 @@ composer: |
     ss = s["sources"][sn]
     if ss["type"] == "variation" && haskey(ss, "source")
       ss["source"] = s["sources"][ss["source"]]
-      ss["stage"] = haskey(ss, "stage") ? s["species"].stages[ss["stage"] : genotype(s["species"])
+      ss["stage"] = haskey(ss, "stage") ? s["species"].stages[ss["stage"]] : genotype(s["species"])
     end
     s["sources"][sn] = compose_as(ss, "breeder/fast:source/$(ss["type"])")
   end
