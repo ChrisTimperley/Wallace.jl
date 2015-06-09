@@ -27,7 +27,7 @@ components listed below:
 | Breeder             | Simple Breeder                                    |
 | Fitness Scheme      | Koza Fitness                                      |
 
-### Solution Representation
+## Solution Representation
 
 Loosely-typed Koza Trees.
 
@@ -45,6 +45,10 @@ _my_species<species/simple>:
       - "mul(x::Float, y::Float)::Float = x * y"
 ```
 
+### Tree Builders
+
+### Ephemeral Random Constants
+
 ## Setting up the Breeder
 
 ```
@@ -53,6 +57,7 @@ breeder<breeder/simple>:
   crossover<crossover/subtree>: { rate: 0.9 }
   mutation<mutation/subtree>: { rate: 0.01 }
 ```
+
 
 ## Running the Algorithm
 
