@@ -11,6 +11,9 @@ To simultaneously achieve performance and ease-of-use, Wallace utilises computat
 
 For technical documentation and an extensive set of tutorials, aimed at a wide range of different audiences, visit the Wallace website at: [http://www.christimperley.co.uk/Wallace.jl](http://www.christimperley.co.uk/Wallace.jl).
 
+The latest documentation and tutorials for Wallace can be found online at:
+[http://wallacejl.readthedocs.org](wallacejl.readthedocs.org)
+
 ## Usage
 To load an example problem in Wallace, follow the code below; a list of example problems can be found by calling the `examples()` function.
 
