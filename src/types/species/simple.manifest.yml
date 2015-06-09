@@ -12,10 +12,10 @@ properties:
 
 composer: |
   compose_as({
-    "fitness" => Base.get(s, "fitness", ["type" => "scalar"]),
-    "stages"  => [
-      "genome" => [
+    "fitness" => Base.get(s, "fitness", {"type" => "scalar"}),
+    "stages"  => {
+      "genome" => {
         "representation" => s["representation"]
-      ]
-    ]
-  ], "species")
+      }
+    }
+  }, "species")
