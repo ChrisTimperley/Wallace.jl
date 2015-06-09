@@ -1,9 +1,22 @@
 id: algorithm/simple_evolutionary_algorithm
 
+properties:
+  replacement:
+    type:         replacement
+    default:      replacement/generational
+    description:  >
+      The replacement scheme used to determine the individuals carried forward
+      within each deme at the end of each generation from its set of existing
+      members and its set of offspring.
+
 composer: |
   s["output"] = abspath(Base.get(s, "output", "output"))
   s["population"] = compose_as(s["population"], "population")
+
+  # Default the replacement scheme to use generational replacement.
+  s["replacement"] = Base.get(s, "replacement", {"type" => "replacement/generational"})
   s["replacement"] = compose_as(s["replacement"], s["replacement"]["type"])
+  
   s["evaluator"] = compose_as(s["evaluator"], s["evaluator"]["type"])
   s["loggers"] = Logger[compose_as(lg, lg["type"]) for lg in Base.get(s, "loggers", [])]
 

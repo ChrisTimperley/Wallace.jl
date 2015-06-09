@@ -1,3 +1,0 @@
-id: replacement/generational
-composer: |
-  GenerationalReplacement()

@@ -1,5 +1,5 @@
-load("../replacement",  dirname(@__FILE__))
-load("../state",        dirname(@__FILE__))
+load("../../replacement",  dirname(@__FILE__))
+load("../../state",        dirname(@__FILE__))
 
 type GenerationalReplacement <: Replacement; end
 
