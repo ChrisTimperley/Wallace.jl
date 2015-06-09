@@ -31,3 +31,4 @@ scale!(p::Population) = for deme in p.demes; scale!(deme); end
 scale!(d::Deme) = scale!(d.species.fitness, contents(d))
 
 register(joinpath(dirname(@__FILE__), "population.manifest.yml"))
+register(joinpath(dirname(@__FILE__), "population/simple.manifest.yml"))
