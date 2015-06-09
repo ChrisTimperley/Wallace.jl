@@ -47,6 +47,10 @@ _my_species<species/simple>:
 
 ### Tree Builders
 
+* Ramped Half-and-Half
+* Full
+* Grow
+
 ### Ephemeral Random Constants
 
 ## Setting up the Breeder
