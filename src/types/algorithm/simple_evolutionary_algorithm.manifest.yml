@@ -14,7 +14,7 @@ composer: |
 
   # If no type is provided for the population, proceed to use the full
   # population type.
-  s["population"] = compose_as(s["population"], get(s["population"], "type", "population")
+  s["population"] = compose_as(s["population"], get(s["population"], "type", "population"))
 
   # Default the replacement scheme to use generational replacement.
   s["replacement"] = Base.get(s, "replacement", {"type" => "replacement/generational"})
