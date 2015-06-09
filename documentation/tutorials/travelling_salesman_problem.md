@@ -158,15 +158,27 @@ a new Julia type to realise our evaluator.
 ### Julia Type
 
 ```julia
-type MyTSPEvaluator <: Evaluator
-  distance::Array{Int64, 2}
+type MyTSPEvaluator <: SimpleEvaluator
+  cities::Int
+  threads::Int
+  distance::Array{Int, 2}
+end
+
+function evaluate!(e::MyTSPEvaluator, s::State, c::Individual)
+  tour = get(c.genome)
+  length = zero(Float)
+  for i in 1:e.cities-1
+    length += e.distance[tour[i], tour[i+1]]
+  end
+  length + e.distance[tour[end], tour[1]]
 end
 ```
 
 ### Wallace Type Manifest
 
-```
-type: alice#evaluator/tsp
+```yaml
+type: alfred#evaluator/tsp
+author: Alfred Russel Wallace
 
 description: |
   Evaluates the fitness of a TSP tour for a pre-determined set of cities.
