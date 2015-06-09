@@ -11,6 +11,9 @@ type Species{T}
     new(root(st), st, f)
 end
 
+# Returns the canonical genotype of a given species.
+genotype(s::Species) = s.genotype
+
 # Returns the representation used by a given stage of a provided species.
 representation(species::Species, stage::String) = species.stages[stage].representation
 

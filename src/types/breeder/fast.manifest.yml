@@ -18,17 +18,15 @@ composer: |
   end
 
   # Create each of the breeding sources, in the established order.
+  # If no stage is defined for a given operation, then default to using the
+  # canonical genotype of the associated species.
   for sn in srcs
     ss = s["sources"][sn]
     if ss["type"] == "variation" && haskey(ss, "source")
       ss["source"] = s["sources"][ss["source"]]
-      ss["stage"] = s["species"].stages[Base.get(ss, "stage", "genome")]
+      ss["stage"] = haskey(ss, "stage") ? s["species"].stages[ss["stage"] : genotype(s["species"])
     end
     s["sources"][sn] = compose_as(ss, "breeder/fast:source/$(ss["type"])")
   end
   
-  # Create the breeder using the final breeding source.
-  # Annoyingly OrderedDict doesn't implement an endof(), nor does
-  # its iterator, and so we have to collect its values before determining
-  # which is the last.
   build_sync(s["species"], FastBreeder(s["species"], s["sources"][srcs[end]]))
