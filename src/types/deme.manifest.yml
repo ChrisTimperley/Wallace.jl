@@ -15,7 +15,7 @@ properties:
       The number of offspring that are produced at each generation.
 
 composer: |
-  s["species"] = compose_as(s["species"], "species")
+  s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
   s["breeder"]["species"] = s["species"]
   s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
   s["capacity"] = Base.get(s, "capacity", 100)

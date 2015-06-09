@@ -29,3 +29,4 @@ function convert!{I <: Individual}(
 end
 
 register(joinpath(dirname(@__FILE__), "species.manifest.yml"))
+register(joinpath(dirname(@__FILE__), "species/simple.manifest.yml"))

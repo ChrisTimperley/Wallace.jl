@@ -1,0 +1,21 @@
+id: species/simple
+
+properties:
+  representation:
+    type:         representation
+    description:  The solution representation used by members of this species.
+
+  fitness:
+    type:         fitness
+    description:  The fitness schema used by members of this species.
+    default:      Uses fitness/scalar with floating point maximisation.
+
+composer: |
+  compose_as({
+    "fitness" => Base.get(s, "fitness", ["type" => "scalar"]),
+    "stages"  => [
+      "genome" => [
+        "representation" => s["representation"]
+      ]
+    ]
+  ], "species")
