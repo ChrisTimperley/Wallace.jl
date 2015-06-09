@@ -31,7 +31,7 @@ composer: |
     "demes" => {
       {
         "capacity"  => s["size"],
-        "offspring" => get(s, "offspring", s["size"]),
+        "offspring" => Base.get(s, "offspring", s["size"]),
         "species"   => s["species"],
         "breeder"   => s["breeder"]
       }
