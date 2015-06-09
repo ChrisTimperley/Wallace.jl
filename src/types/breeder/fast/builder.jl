@@ -1,6 +1,6 @@
 load("breeder_source.jl",       dirname(@__FILE__))
 load("../../species/graph.jl",  dirname(@__FILE__))
-load("../fast.jl",              dirname(@__FILE__))
+load("fast.jl",              dirname(@__FILE__))
 
 # Deal with multiple-source nodes.
 function build_sync(s::Species, b::FastBreeder)

@@ -1,5 +1,5 @@
-load("../breeder.jl",           dirname(@__FILE__))
-load("fast/breeder_source.jl",  dirname(@__FILE__))
+load("../../breeder.jl",           dirname(@__FILE__))
+load("breeder_source.jl",  dirname(@__FILE__))
 
 # Lots of optimisation opportunities here!
 type FastBreeder <: Breeder
