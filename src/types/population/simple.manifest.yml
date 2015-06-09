@@ -34,5 +34,6 @@ composer: |
         "offspring" => get(s, "offspring", s["size"]),
         "species"   => s["species"],
         "breeder"   => s["breeder"]
+      }
     }
   }, "population")
