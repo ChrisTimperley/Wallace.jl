@@ -15,6 +15,11 @@ composer: |
     haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
   end
 
-  compose_as({
+  mfst = {
     "sources" => Dict(srcs, ["s$i" for i in 1:length(srcs)])
-  }, "breeder/fast")
+  }
+
+  # Debugging.
+  println(mfst)
+
+  compose_as(mfst, "breeder/fast")
