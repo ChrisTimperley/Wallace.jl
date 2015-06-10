@@ -1,0 +1,20 @@
+id: breeder/linear
+
+composer: |
+  srcs = {{ 
+    "operator" => op
+  } for op in s["operators"]}
+
+  # Mark the first operator as a selection stage.
+  srcs[1]["type"] = "selection"
+
+  # Mark all others as variators.
+  for (i, src) in enumerate(srcs[2:end])
+    src["source"] = "s$i"
+    src["type"] = "variation"
+    haskey(src["operator"], "stage") && src["stage"] = src["operator"]["stage"]
+  end
+
+  compose_as({
+    "sources" => Dict(srcs, ["s$i" for i in 1:length(srcs)])
+  }, "breeder/fast")
