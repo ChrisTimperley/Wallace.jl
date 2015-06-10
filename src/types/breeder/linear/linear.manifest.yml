@@ -12,7 +12,7 @@ composer: |
   for (i, src) in enumerate(srcs[2:end])
     src["source"] = "s$i"
     src["type"] = "variation"
-    haskey(src["operator"], "stage") && src["stage"] = src["operator"]["stage"]
+    haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
   end
 
   compose_as({
