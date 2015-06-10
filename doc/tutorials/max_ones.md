@@ -1,13 +1,9 @@
 # Max Ones
 ### An Introduction to Solving Optimisation Problems with Genetic Algorithms
 
-**Author:** [Chris Timperley](http://www.christimperley.co.uk),
-**Difficulty:** Beginner,
-**Duration:** 15-30 minutes.
-
 In this tutorial, we will be using Wallace to implement a simple Genetic
-Algorithm to solve the benchmark Max Ones optimisation problem, where we attempt
-to maximise the number of 1s in a fixed-length bit-string. This problem is
+Algorithm to solve the benchmark Max Ones optimisation problem, in which the object
+is to maximise the number of ones in a fixed-length binary string. This problem is
 trivial for humans, of course, but proves to be a little trickier for "blind"
 evolutionary algorithms.
 
@@ -68,14 +64,16 @@ below:
 julia> help("algorithm/simple_evolutionary_algorithm")
 
 Properties:
-- evaluator
-- replacement
-- termination
-- population
+* evaluator
+* replacement
+* termination
+* population
+* loggers
 
 julia> help("algorithm/simple_evolutionary_algorithm:evaluator")
 
-The method of evaluating individuals used by this algorithm.
+The method of evaluation used by this algorithm to assign fitness scores to
+individuals.
 ```
 
 > **Tip:** If you're running Wallace through the Julia REPL, try using
@@ -88,19 +86,20 @@ To begin with, let's make use of the look-up operator, *$*, in order to specify
 the population setup used by our algorithm. By default, the standard `population`
 type within Wallace is composed of a number of demes (also known as sub-populations),
 each of which undergoes its own evolutionary processes in isolation, perhaps running
-on its own compute node.
+on its own compute node. However, for our problem, we can use the far simpler
+`population/simple` type to create a single deme and species population of a given
+size.
 
-Following the example below, we can create a single-deme population, composed of
+Following the example below, we can create such a population, composed of
 100 individuals of a single species and using a given breeding setup, both defined
 elsewhere within the file.
 
 ```
 type: algorithm/simple_evolutionary_algorithm
-population:
-  demes:
-    - size:     100
-      species:  $(_my_species)
-      breeder: $(_my_breeder)
+population<population/simple>:
+  size:     100
+  species:  $(_my_species)
+  breeder:  $(_my_breeder)
 ```
 
 #### Setting up the species and representation.
