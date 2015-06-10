@@ -27,6 +27,7 @@ module Wallace
   using .Composer
   using .Help
   using DataStructures
+  using StatsBase
 
   # Imports a file into the Wallace environment, relative to a given directory.
   function load(file::ASCIIString, from::ASCIIString)
