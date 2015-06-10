@@ -21,7 +21,7 @@ represent fixed-length real-valued vectors.
 
 Benchmark | Equation | Minimum | Search Domain  
 --------- | -------- | ------- | -------------
-Sphere | ![Sphere function](https://upload.wikimedia.org/math/0/7/7/0770a5cfa1d5ad1f6c403315cca90493.png) | `n` | ???
+Sphere | ![Sphere function](https://upload.wikimedia.org/math/0/7/7/0770a5cfa1d5ad1f6c403315cca90493.png) | ![Sphere function minimum](https://upload.wikimedia.org/math/7/0/a/70a7231688ab8a6746e6096e69f858b3.png) | ![Sphere function domain](https://upload.wikimedia.org/math/6/e/d/6edd4ad0bea50fa9b2f0dbacd62fa911.png)
 Rastrigin | ![Rastrigin function](https://upload.wikimedia.org/math/5/8/3/5831f65c6b1d64c2cf83d8eac84e1c3c.png) | `n` | ???
 Rosenbrock | ![Rosenbrock function](https://upload.wikimedia.org/math/8/c/e/8ce1d6b5e80401a6df5e97bb984bb9b7.png) | `n` | ???
 
@@ -36,3 +36,5 @@ Rosenbrock | ![Rosenbrock function](https://upload.wikimedia.org/math/8/c/e/8ce1
 ### Breeding Operations
 
 ## Running the Algorithm 
+
+### Plotting the results using Gadfly.jl
