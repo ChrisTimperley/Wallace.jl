@@ -1,5 +1,4 @@
-# Max Ones
-### An Introduction to Solving Optimisation Problems with Genetic Algorithms
+# Tutorial 1: Max Ones
 
 In this tutorial, we will be using Wallace to implement a simple Genetic
 Algorithm to solve the benchmark Max Ones optimisation problem, in which the object

@@ -1,4 +1,4 @@
-# Solving the Travelling Salesman Problem using Genetic Algorithms
+# Tutorial 3: Travelling Salesman Problem and Memetic Algorithms
 
 **Author:** [Chris Timperley](http://www.christimperley.co.uk),
 **Difficulty:** Beginner,

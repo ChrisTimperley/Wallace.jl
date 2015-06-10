@@ -1,4 +1,4 @@
-# Symbolic Regression
+# Tutorial 4: Symbolic Regression via Genetic Programming
 
 Problem description.
 
