@@ -16,7 +16,7 @@ composer: |
   end
 
   mfst = {
-    "sources" => Dict(srcs, ["s$i" for i in 1:length(srcs)])
+    "sources" => Dict(["s$i" for i in 1:length(srcs)], srcs)
   }
 
   # Debugging.
