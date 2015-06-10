@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# bootstrap-datepicker documentation build configuration file, created by
-# sphinx-quickstart on Fri Aug  2 14:45:57 2013.
-#
 # This file is execfile()d with the current directory set to its containing dir.
 #
 # Note that not all possible configuration values are present in this
@@ -22,7 +19,7 @@ import sys, os
 # The full version, including alpha/beta/rc tags.
 #release = ''
 
-import sphinx_rtd_theme
+import sphinx_bootstrap_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -97,7 +94,7 @@ highlight_language = 'javascript'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'bootstrap'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -106,7 +103,7 @@ html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = ['_themes',]
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_theme_path = [sphinx_bootstrap_theme.get_html_theme_path()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
