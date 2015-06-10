@@ -1,4 +1,4 @@
-# Tutorial 2: Numerical Function Minimisation using Genetic Algorithms
+# Tutorial 2: Numerical Optimisation using Genetic Algorithms
 
 Building on the previous tutorial, in this tutorial we shall be using simple
 Genetic Algorithms once again, this time to minimise a series of
