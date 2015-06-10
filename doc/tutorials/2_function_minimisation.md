@@ -19,6 +19,10 @@ represent fixed-length real-valued vectors.
 
 ## The Problem
 
+| Benchmark Function | Equation                   | Dimensions | Minimum        |
+| ------------------ | -------------------------- | ---------- | -------------- |
+| Rastrigin          | `x`                        | `n`        |                |
+
 ## Basic Setup
 
 ### Fitness Schema
