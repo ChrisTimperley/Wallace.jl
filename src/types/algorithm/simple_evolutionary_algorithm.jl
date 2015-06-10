@@ -49,4 +49,5 @@ function run!(a::SimpleEvolutionaryAlgorithm)
   close!(a.loggers)
 end
 
+println("Registering manifest for: algorithm/simple_evolutionary_algorithm.")
 register(joinpath(dirname(@__FILE__), "simple_evolutionary_algorithm.manifest.yml"))
