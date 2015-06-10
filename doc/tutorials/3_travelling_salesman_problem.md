@@ -1,9 +1,5 @@
 # Tutorial 3: Travelling Salesman Problem and Memetic Algorithms
 
-**Author:** [Chris Timperley](http://www.christimperley.co.uk),
-**Difficulty:** Beginner,
-**Duration:** 15-30 minutes.
-
 In this tutorial, we shall use Wallace to implement a generic algorithm to
 solve the travelling salesman problem, in which we wish to find the shortest
 possible route through a given set of cities, which visits all cities exactly once
