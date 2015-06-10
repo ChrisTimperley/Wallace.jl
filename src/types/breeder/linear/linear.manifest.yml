@@ -16,7 +16,5 @@ composer: |
   end
   s["sources"] = Dict(["s$i" for i in 1:length(s["sources"])], s["sources"])
 
-  # Debugging.
-  println(s)
-
+  # Pass the modified specification to the fast breeder composer.
   compose_as(s, "breeder/fast")
