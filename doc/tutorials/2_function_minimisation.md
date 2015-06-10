@@ -19,9 +19,10 @@ represent fixed-length real-valued vectors.
 
 ## The Problem
 
-Benchmark Function | Equation                   | Dimensions | Minimum       
------------------- | -------------------------- | ---------- | --------------
+Benchmark Function | Equation | Minimum | Search Domain  
+------------------ | -------- | ------- | -------------
 Rastrigin | ![Rastrigin Equation](https://upload.wikimedia.org/math/5/8/3/5831f65c6b1d64c2cf83d8eac84e1c3c.png) | `n` | ???
+Rosenbrock function | ![Rosenbrock function](https://upload.wikimedia.org/math/8/c/e/8ce1d6b5e80401a6df5e97bb984bb9b7.png) | `n` | ???
 
 ## Basic Setup
 
