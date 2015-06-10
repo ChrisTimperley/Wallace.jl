@@ -21,7 +21,7 @@ represent fixed-length real-valued vectors.
 
 Benchmark Function | Equation                   | Dimensions | Minimum       
 ------------------ | -------------------------- | ---------- | --------------
-Rastrigin | ![Rastrigin Equation](https://en.wikipedia.org/wiki/Rastrigin_fuhttps://upload.wikimedia.org/math/5/8/3/5831f65c6b1d64c2cf83d8eac84e1c3c.pngnction) | `n` | ???
+Rastrigin | ![Rastrigin Equation](https://upload.wikimedia.org/math/5/8/3/5831f65c6b1d64c2cf83d8eac84e1c3c.png) | `n` | ???
 
 ## Basic Setup
 
