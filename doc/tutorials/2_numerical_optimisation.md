@@ -201,6 +201,7 @@ wish to optimise.
 ```
 type: algorithm/evolutionary_algorithm
 
+# Sphere function (n = 10)
 problem_size: 10
 problem_min:  0.0
 problem_max:  1.0
@@ -233,5 +234,11 @@ population<population/simple>:
   breeder:  $(_my_breeder)
   species:  $(_my_species)
 ```
+
+Starting with the Sphere problem, try running your algorithm on each of the
+benchmarks using a fixed number of evaluations, and attempt to determine an
+optimal set of operators and parameters common to all of them.
+
+### Statistics and visualisation
 
 ### Plotting the results using Gadfly.jl
