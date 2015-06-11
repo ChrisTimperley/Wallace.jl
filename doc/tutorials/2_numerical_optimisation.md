@@ -192,6 +192,46 @@ possibly subject to change).**
 
 -------------------------------------------------------------------------------
 
-## Running the Algorithm 
+## Running the Algorithm
+
+After following the steps above, you should end up with an algorithm that looks
+similar to the one given below, except tailored to the numerical function you
+wish to optimise.
+
+```
+type: algorithm/evolutionary_algorithm
+
+problem_size: 10
+problem_min:  0.0
+problem_max:  1.0
+
+evaluator<evaluator/simple>:
+  objective: |
+    f = 0.0
+    for x in get(i.genome)
+      f += x*x
+    end
+    fitness(scheme, f)
+
+termination:
+  evaluations<criterion/evaluations>: { limit: 10000 }
+
+_my_species<species/simple>:
+  fitness<fitness/scalar>: { of: Float, maximise: false }
+  representation<representation/float_vector>:
+    length: $(problem_size)
+    min:    $(problem_min)
+    max:    $(problem_max)
+
+_my_breeder<breeder/simple>:
+  selection<selection/tournament>: { size: 4 }
+  crossover<crossover/two_point>: { rate: 0.7 }
+  mutation<mutation/gaussian}: { rate: 0.01, mean: 0.0, std: 1.0 }
+
+population<population/simple>:
+  size:     30
+  breeder:  $(_my_breeder)
+  species:  $(_my_species)
+```
 
 ### Plotting the results using Gadfly.jl
