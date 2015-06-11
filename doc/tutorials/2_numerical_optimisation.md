@@ -29,6 +29,17 @@ Rosenbrock | ![Rosenbrock function](https://upload.wikimedia.org/math/8/c/e/8ce1
 
 ## Basic Setup
 
+For this problem we will be using a near-identical general setup to the one we
+used in the previous tutorial, given below.
+
+Component       | Setting                                           |
+--------------- | ------------------------------------------------- |
+Population      | Simple (single deme)                              |
+Breeder         | Simple (i.e. selection, crossover, mutation)      |
+Species         | Simple (single representation)                    |
+Fitness Schema  | Scalar (float, minimisation)                      |
+Representation  | Float vector (length tailored to function)        |
+
 ### Fitness Schema
 
 ### Problem Representation
