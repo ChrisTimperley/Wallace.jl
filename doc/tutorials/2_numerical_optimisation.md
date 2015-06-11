@@ -88,6 +88,19 @@ representation<representation/float_vector>:
 
 ### Breeding Operations
 
+As our problem is a relatively simple one, we will once again use the
+`breeder/simple` breeder to generate the offspring for the population at each
+generation. Feel free to investigate and experiment with different selection,
+mutation and crossover operators, but for the rest of the tutorial we will be
+using the setup given below.
+
+```
+_my_breeder<breeder/simple>:
+  selection<selection/tournament>: { size: 4 }
+  crossover<selection/two_point>: { rate: 0.7 }
+  mutation<mutation/gaussian>: { rate: 0.01, mean: 0.0, std: 1.0 }
+```
+
 ### Evaluator
 
 Finally, with our problem representation, breeding operations, and schema
