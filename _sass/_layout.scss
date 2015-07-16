@@ -26,21 +26,23 @@
 }
 
 .site-nav {
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 15px;
 
   .menu-icon {
       display: none;
   }
 
   .page-link {
+      display: inline-block;
+      padding: 4px 8px 4px 8px;
+      background-color: #eeeeee;
       color: $text-color;
       font-weight: bold;
       line-height: $base-line-height;
 
       // Gaps between nav items, but not on the first one
       &:not(:first-child) {
-          margin-left: 20px;
+          margin-left: 10px;
       }
   }
 
