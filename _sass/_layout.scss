@@ -1,30 +1,31 @@
-/**
- * Site header
- */
 .site-header {
     border-top: 5px solid $grey-color-dark;
     border-bottom: 1px solid $grey-color-light;
-    //min-height: 56px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
 }
 
 .site-title {
-    font-size: 5.0em;
-    //line-height: 56px;
+    font-family: Georgia;
+    font-size: 4.0em;
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
+    color: $grey-color-dark;
+}
 
-    & {
-        color: $grey-color-dark;
-    }
+.site-logo {
+
+}
+
+.site-subtitle {
+    clear: both;
 }
 
 .site-nav {
-    float: right;
-    //line-height: 56px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 
     .menu-icon {
         display: none;
