@@ -1,6 +1,6 @@
 # Site settings
 title: Wallace
-baseurl: ""
+baseurl: "/Wallace.jl/"
 url: "http://www.christimperley.co.uk/Wallace.jl/"
 
 # Build settings
