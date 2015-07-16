@@ -1,6 +1,7 @@
 .site-header {
     border-top: 5px solid $grey-color-dark;
     border-bottom: 1px solid $grey-color-light;
+    text-align: center;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -11,7 +12,7 @@
   font-size: 4.0em;
   margin-bottom: 0;
   float: left;
-  & { color: $grey-color-dark; }
+  &, &:visited { color: $grey-color-dark; }
 }
 
 .site-logo {
@@ -19,10 +20,10 @@
 }
 
 .site-subtitle {
-    clear: both;
-    font-family: Georgia;
-    font-size: 1.3em;
-    margin-bottom: 10px
+  clear: both;
+  font-family: Georgia;
+  font-size: 1.3em;
+  margin-bottom: 10px
 }
 
 .site-nav {
