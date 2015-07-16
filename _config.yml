@@ -1,0 +1,10 @@
+# Site settings
+title: Chris Timperley
+email: ct584@york.ac.uk
+baseurl: ""
+url: "http://www.christimperley.co.uk"
+twitter_username: ChrisTimps
+github_username:  ChrisTimperley
+
+# Build settings
+markdown: kramdown
