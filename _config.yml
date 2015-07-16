@@ -1,10 +1,7 @@
 # Site settings
-title: Chris Timperley
-email: ct584@york.ac.uk
+title: Wallace
 baseurl: ""
-url: "http://www.christimperley.co.uk"
-twitter_username: ChrisTimps
-github_username:  ChrisTimperley
+url: "http://www.christimperley.co.uk/Wallace.jl"
 
 # Build settings
 markdown: kramdown
