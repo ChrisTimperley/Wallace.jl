@@ -1,7 +1,7 @@
 # Site settings
 title: Wallace
 baseurl: ""
-url: "http://www.christimperley.co.uk/Wallace.jl"
+url: "http://www.christimperley.co.uk/Wallace.jl/"
 
 # Build settings
 markdown: kramdown
