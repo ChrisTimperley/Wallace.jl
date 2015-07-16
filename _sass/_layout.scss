@@ -26,22 +26,23 @@
 }
 
 .site-nav {
-    margin-bottom: 5px;
-    margin-top: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 
-    .menu-icon {
-        display: none;
-    }
+  .menu-icon {
+      display: none;
+  }
 
-    .page-link {
-        color: $text-color;
-        line-height: $base-line-height;
+  .page-link {
+      color: $text-color;
+      font-weight: bold;
+      line-height: $base-line-height;
 
-        // Gaps between nav items, but not on the first one
-        &:not(:first-child) {
-            margin-left: 20px;
-        }
-    }
+      // Gaps between nav items, but not on the first one
+      &:not(:first-child) {
+          margin-left: 20px;
+      }
+  }
 
     @include media-query($on-palm) {
         position: absolute;
