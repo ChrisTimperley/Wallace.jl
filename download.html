@@ -29,10 +29,22 @@ via the terminal, and calling the following command:
 
 Before doing so, you may wish to update the rest of your Julia packages,
 in order to avoid any installation issues. This can be done by calling the
-following:
+following from within the Julia REPL:
 
-<pre style="display: block; overflow-x: auto; margin-top: 15px">
+<pre style="display: block; overflow-x: auto; margin-top: 15px; font-size: 12px">
   julia> Pkg.update()
 </pre>
 
 <h3>Development Build</h3>
+
+To install the latest developmental version of Wallace, open up the Julia REPL,
+and call the following:
+
+<pre style="display: block; overflow-x: auto; margin-top: 15px; font-size: 12px">
+  julia> Pkg.remove("Wallace")
+  julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.git")
+</pre>
+
+This will remove any existing Wallace module from your Julia installation,
+before cloning the contents of the Wallace git repository into your local
+Julia modules directory.
