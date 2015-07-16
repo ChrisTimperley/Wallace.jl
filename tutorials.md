@@ -6,7 +6,7 @@ permalink: /tutorials/
 
 Tutorials belong here.
 
-* Tutorial 1: Max Ones
-* Tutorial 2: Numerical Optimisation
-* Tutorial 3: Travelling Salesman Problem
-* Tutorial 4: Symbolic Regression
+1. Max Ones
+2. Numerical Optimisation
+3. Travelling Salesman Problem
+4. Symbolic Regression
