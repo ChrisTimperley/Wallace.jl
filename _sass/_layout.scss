@@ -7,12 +7,11 @@
 }
 
 .site-title {
-    font-family: Georgia;
-    font-size: 4.0em;
-    letter-spacing: -1px;
-    margin-bottom: 0;
-    float: left;
-    color: $grey-color-dark;
+  font-family: Georgia;
+  font-size: 4.0em;
+  margin-bottom: 0;
+  float: left;
+  & { color: $grey-color-dark; }
 }
 
 .site-logo {
@@ -21,6 +20,9 @@
 
 .site-subtitle {
     clear: both;
+    font-family: Georgia;
+    font-size: 1.3em;
+    margin-bottom: 10px
 }
 
 .site-nav {
