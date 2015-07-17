@@ -44,9 +44,9 @@ describe a *simple evolutionary algorithm* to, so we prepend the
 `algorithm/simple_evolutionary_algorithm` type to the front of our description
 in order to let Wallace know how we want the object to be built.
 
-```
+<pre class="wallace">
 type: algorithm/simple_evolutionary_algorithm
-```
+</pre>
 
 > **What happens if you  omit the type of the root object in the specification
   file?**
@@ -65,7 +65,7 @@ can do this, we need to know more about the structure and properties of the
 information, we can call the `properties` or `help` function, as demonstrated
 below:
 
-```
+<pre class="julia">
 julia> help("algorithm/simple_evolutionary_algorithm")
 
 Properties:
@@ -79,7 +79,7 @@ julia> help("algorithm/simple_evolutionary_algorithm:evaluator")
 
 The method of evaluation used by this algorithm to assign fitness scores to
 individuals.
-```
+</pre>
 
 > **Tip:** If you're running Wallace through the Julia REPL, try using
   *help mode* by typing "?" into the console. Once in help mode, simply type
@@ -99,13 +99,13 @@ Following the example below, we can create such a population, composed of
 100 individuals of a single species and using a given breeding setup, both defined
 elsewhere within the file.
 
-```
+<pre class="wallace">
 type: algorithm/simple_evolutionary_algorithm
 population<population/simple>:
   size:     100
   species:  $(_my_species)
   breeder:  $(_my_breeder)
-```
+</pre>
 
 #### Setting up the species and representation.
 
@@ -116,7 +116,7 @@ information we need to provide our species definition with, we can once again
 make use of `help("species")` to find out more information about a given type,
 as demonstrated below:
 
-```
+<pre class="julia">
 julia> help("species")
 
 Properties:
@@ -129,7 +129,7 @@ for an individual belonging to this species, indexed by the name of the
 developmental stage.
 
 Type: IndexedCollection{String, species_stage}
-```
+</pre>
 
 As we can see from above, species are represented by a series of developmental
 stages; this is one of the features unique to Wallace. For a lot of problems,
@@ -142,7 +142,7 @@ definitions, before composing one for your algorithm specification. In this
 tutorial we won't be discussing how more complex multiple stage species are
 composed.
 
-```
+<pre class="julia">
 julia> help("species_stage")
 
 Describes a particular stage of individual development for a given species.
@@ -151,7 +151,7 @@ Properties:
 - Representation
 - From
 - Lamarckian
-```
+</pre>
 
 For our simple, single-stage problem, the only parameter we need to concern
 ourselves with is the `representation` parameter, which describes the
@@ -164,12 +164,12 @@ using `help()` to figure out what parameters to supply it with.
 Once you've done that, your species definition should look something like the
 one below:
 
-```
+<pre class="wallace">
 _my_species:
   stages:
     bits:
       representation: representation/bit_vector { length: 100 }
-```
+</pre>
 
 #### Specifying the breeding operations.
 
@@ -193,7 +193,7 @@ parameter, informing the breeder which source should be used to provide inputs.
 An example breeder setup is given below. Using the `listall()` and `help()`
 functions, try to build your own selection-crossover-mutation breeding sequence.
 
-```
+<pre class="wallace">
 ...
   _my_breeder<breeder/fast>:
     sources:
@@ -208,7 +208,7 @@ functions, try to build your own selection-crossover-mutation breeding sequence.
       source: "x"
       stage: "bits"
 ...
-```
+</pre>
 
 > **Why doesn't the selector specify a source or stage?**
   <br/>
@@ -260,13 +260,13 @@ computed objective value within a new `SimpleFitness` object, and specify
 that the objective should be maximised by setting its first parameter to
 `true`.
 
-```
+<pre class="wallace">
 ...
   evaluator<evaluator/simple>:
     objective: ->
       SimpleFitness{Int}(true, sum(get(i.bits)))
 ...
-```
+</pre>
 
 > **Why do I have to call `get(i.bits)` rather than `i.bits`?**
   <br/>
@@ -290,12 +290,12 @@ below. Once the state of the algorithm has satisfied any of these conditions, it
 will terminate before the start of the next iteration. For now, let's specify
 a simple limit on the number of iterations that the algorithm may run for.
 
-```
+<pre class="wallace">
 ...
   termination:
     iterations<criterion/iterations>: { limit: 100 }
 ...
-```
+</pre>
 
 > **What happens if I don't supply any termination conditions?**
   <br/>
@@ -313,7 +313,7 @@ a simple limit on the number of iterations that the algorithm may run for.
 Having followed the steps above, you should be left with a specification looking
 somewhat similar to the one given below:
 
-```
+<pre class="wallace">
 type: algorithm/simple_evolutionary_algorithm
 
 evaluator<evaluator/simple>:
@@ -348,7 +348,7 @@ population:
     - capacity: 100
       breeder:  $(_my_breeder)
       species:  $(_my_species)
-```
+</pre>
 
 ## Optimising the algorithm parameters.
 
