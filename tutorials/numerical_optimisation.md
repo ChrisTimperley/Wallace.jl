@@ -126,9 +126,9 @@ two children. For this operator, the `rate` property specifies the probability t
 a crossover will occur during a call; if this event occurs, then the two parents
 are passed to the mutation operator unaltered.
 
-<span class="wallace">
+<pre class="wallace">
 crossover&lt;crossover/two_point&gt;: { rate: 0.7 }
-</span>
+</pre>
 
 Once again, there are a multitude of different crossover operators that could
 be effectively applied to our given problem, and we encourage you to experiment
@@ -167,9 +167,9 @@ To calculate this function value and assign it as the fitness of individuals
 within the population we can make use of the same `evaluator/simple`
 evaluator that we used in the first tutorial.
 
-<span class="wallace">
+<pre class="wallace">
 evaluator&lt;evaluator/simple&gt;:
-</span>
+</pre>
 
 To recap, this evaluator takes only two parameters: `objective`, which
 provides a definition for a Julia function capable of computing the fitness
@@ -181,7 +181,7 @@ benchmark we're attempting to optimise, as the `objective` of our evaluator
 will be different for them all. Below is an example of how the Sphere
 benchmark might be calculated using a Julia function.
 
-<span class="wallace">
+<pre class="wallace">
 evaluator&lt;evaluator/simple&gt;:
   objective: |
     f = 0.0
@@ -189,7 +189,7 @@ evaluator&lt;evaluator/simple&gt;:
       f += x*x
     end
     fitness(scheme, f)
-</span>
+</pre>
 
 As in the first tutorial, we construct and return a fitness object for our
 individual using the `fitness()` function in combination with our schema,
@@ -204,7 +204,7 @@ After following the steps above, you should end up with an algorithm that looks
 similar to the one given below, except tailored to the numerical function you
 wish to optimise.
 
-<span class="wallace">
+<pre class="wallace">
 type: algorithm/evolutionary_algorithm
 
 # Sphere function (n = 10)
@@ -239,7 +239,7 @@ population&lt;population/simple&gt;:
   size:     30
   breeder:  $(_my_breeder)
   species:  $(_my_species)
-```
+</pre>
 
 Starting with the Sphere problem, try running your algorithm on each of the
 benchmarks using a fixed number of evaluations, and attempt to determine an
