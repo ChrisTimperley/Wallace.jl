@@ -84,32 +84,22 @@ replacement&lt;replacement/generational&gt;: { elitism: 0 }
 termination:
   iterations&lt;criterion/iterations&gt;: { limit: 1000 }
 
-_my_species:
+_my_species<species/simple>:
   fitness<fitness/simple>: { of: Float, maximise: false }
-  stages:
-    tree:
-      representation&lt;representation/koza_tree&gt;:
-        min_depth: 1
-        max_depth: 18
-        inputs: ["x::Float64"]
-        terminals: ["x::Float64"]
-        non_terminals:
-          - "add(x::Float64, y::Float64)::Float64 = x + y"
-          - "sub(x::Float64, y::Float64)::Float64 = x - y"
-          - "mul(x::Float64, y::Float64)::Float64 = x * y"
+  representation&lt;representation/koza_tree&gt;:
+    min_depth: 1
+    max_depth: 18
+    inputs: ["x::Float64"]
+    terminals: ["x::Float64"]
+    non_terminals:
+      - "add(x::Float64, y::Float64)::Float64 = x + y"
+      - "sub(x::Float64, y::Float64)::Float64 = x - y"
+      - "mul(x::Float64, y::Float64)::Float64 = x * y"
   
 _my_breeder&lt;breeder/fast&gt;:
-  sources:
-    s&lt;selection&gt;:
-      operator<selection/tournament>: { size: 7 }
-    m&lt;variation&gt;:
-      operator<mutation/subtree>: { rate: 0.01 }
-      source: s
-      stage: tree
-    x&lt;variation&gt;:
-      operator<crossover/subtree>: { rate: 0.9 }
-      source: m
-      stage: tree
+  selection&lt;selection/tournament&gt;: { size: 5 }
+  crossover&lt;crossover/subtree&gt;: { rate: 0.9 }
+  mutation&lt;mutation/subtree&gt;: { rate: 0.01 }
 
 population:
   demes:
