@@ -73,6 +73,10 @@ table tr {
   background-color: #FFF;
 }
 
+table tr:nth-child(2n) {
+  background-color: #F8F8F8;
+}
+
 table th, table td {
   padding: 6px 13px;
   border: 1px solid #DDD;
