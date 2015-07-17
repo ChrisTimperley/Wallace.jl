@@ -53,11 +53,11 @@ value for the function within the bounds of the search domain, our fitness
 schema should minimise a floating point value, representing the value of the
 function for a given set of co-ordinates.
 
-```
-fitness<fitness/scalar>:
+<pre class="wallace">
+fitness&lt;fitness/scalar&gt;:
   of:       Float
   maximise: false
-```
+</pre>
 
 ### Problem Representation
 
@@ -71,10 +71,10 @@ language, `$()`, to create a specification tailored to our problem by allowing
 the length of the vector to be specified within the top-level `problem_size`
 property of the specification.
 
-```
-representation<representation/float_vector>:
+<pre class="wallace">
+representation&lt;representation/float_vector&gt;:
   length: $(problem_size)
-```
+</pre>
 
 As the scope of our search will be confined within a given search domain for
 each of the benchmark problems, we can specify the minimum and maximum value that
@@ -85,12 +85,12 @@ Once again, we can use the look-up operator to allow the minimum and maximum
 values for all vector components to be specified at the top-level of the
 specification, allowing them be changed to suit our particular benchmark more easily.
 
-```
-representation<representation/float_vector>:
+<pre class="wallace">
+representation&lt;representation/float_vector&gt;:
   length: $(problem_size)
   min:    $(problem_min)
   max:    $(problem_max)
-```
+</pre>
 
 ### Breeding Operations
 
@@ -100,12 +100,12 @@ generation. Feel free to investigate and experiment with different selection,
 mutation and crossover operators, but for the rest of the tutorial we will be
 using the setup given below.
 
-```
-_my_breeder<breeder/simple>:
-  selection<selection/tournament>: { size: 4 }
-  crossover<selection/two_point>: { rate: 0.7 }
-  mutation<mutation/gaussian>: { rate: 0.01, mean: 0.0, std: 1.0 }
-```
+<pre class="wallace">
+_my_breeder&lt;breeder/simple&gt;:
+  selection&lt;selection/tournament&gt;: { size: 4 }
+  crossover&lt;selection/two_point&gt;: { rate: 0.7 }
+  mutation&lt;mutation/gaussian&gt;: { rate: 0.01, mean: 0.0, std: 1.0 }
+</pre>
 
 To perform parent selection, we will be using the simple but effective method
 of tournament selection once again, wherein a pre-determined number of parental
@@ -114,9 +114,9 @@ to determine the best amongst them, which becomes selected as a parent. You coul
 also try experimenting with other methods such as *roulette wheel selection* and
 *stochastic universal sampling*.
 
-```
-selection<selection/tournament>: { size: 4 }
-```
+<pre class="wallace">
+selection&lt;selection/tournament&gt;: { size: 4 }
+</pre>
 
 For our method of crossing over parents to produce proto-offspring, we shall be
 using the `two point crossover` method. This method takes two vectors of equal
@@ -126,9 +126,9 @@ two children. For this operator, the `rate` property specifies the probability t
 a crossover will occur during a call; if this event occurs, then the two parents
 are passed to the mutation operator unaltered.
 
-```
-crossover<crossover/two_point>: { rate: 0.7 }
-```
+<span class="wallace">
+crossover&lt;crossover/two_point&gt;: { rate: 0.7 }
+</span>
 
 Once again, there are a multitude of different crossover operators that could
 be effectively applied to our given problem, and we encourage you to experiment
@@ -143,12 +143,12 @@ predefined normal distribution. Here we can alter the probability that a mutatio
 will occur at a given gene, via the `rate` property, or we can specify the parameters of
 our normal distribution using the `mean` and `std` properties.
 
-```
-mutation<mutation/gaussian>:
+<span class="wallace">
+mutation&lt;mutation/gaussian&gt;:
   rate: 0.01
   mean: 0.0
   std:  1.0
-```
+</span>
 
 Alternatively, we could use *uniform mutation* to sample a new floating point value
 within the search domain at a given locus, or we could implement our own
@@ -167,9 +167,9 @@ To calculate this function value and assign it as the fitness of individuals
 within the population we can make use of the same `evaluator/simple`
 evaluator that we used in the first tutorial.
 
-```
-evaluator<evaluator/simple>:
-```
+<span class="wallace">
+evaluator&lt;evaluator/simple&gt;:
+</span>
 
 To recap, this evaluator takes only two parameters: `objective`, which
 provides a definition for a Julia function capable of computing the fitness
@@ -181,15 +181,15 @@ benchmark we're attempting to optimise, as the `objective` of our evaluator
 will be different for them all. Below is an example of how the Sphere
 benchmark might be calculated using a Julia function.
 
-```
-evaluator<evaluator/simple>:
+<span class="wallace">
+evaluator&lt;evaluator/simple&gt;:
   objective: |
     f = 0.0
     for x in get(i.genome)
       f += x*x
     end
     fitness(scheme, f)
-```
+</span>
 
 As in the first tutorial, we construct and return a fitness object for our
 individual using the `fitness()` function in combination with our schema,
@@ -204,7 +204,7 @@ After following the steps above, you should end up with an algorithm that looks
 similar to the one given below, except tailored to the numerical function you
 wish to optimise.
 
-```
+<span class="wallace">
 type: algorithm/evolutionary_algorithm
 
 # Sphere function (n = 10)
@@ -212,7 +212,7 @@ problem_size: 10
 problem_min:  0.0
 problem_max:  1.0
 
-evaluator<evaluator/simple>:
+evaluator&lt;evaluator/simple&gt;:
   objective: |
     f = 0.0
     for x in get(i.genome)
@@ -221,21 +221,21 @@ evaluator<evaluator/simple>:
     fitness(scheme, f)
 
 termination:
-  evaluations<criterion/evaluations>: { limit: 10000 }
+  evaluations&lt;criterion/evaluations&gt;: { limit: 10000 }
 
-_my_species<species/simple>:
-  fitness<fitness/scalar>: { of: Float, maximise: false }
-  representation<representation/float_vector>:
+_my_species&lt;species/simple&gt;:
+  fitness&lt;fitness/scalar&gt;: { of: Float, maximise: false }
+  representation&lt;representation/float_vector&gt;:
     length: $(problem_size)
     min:    $(problem_min)
     max:    $(problem_max)
 
-_my_breeder<breeder/simple>:
-  selection<selection/tournament>: { size: 4 }
-  crossover<crossover/two_point>: { rate: 0.7 }
-  mutation<mutation/gaussian}: { rate: 0.01, mean: 0.0, std: 1.0 }
+_my_breeder&lt;breeder/simple&gt;:
+  selection&lt;selection/tournament&gt;: { size: 4 }
+  crossover&lt;crossover/two_point&gt;: { rate: 0.7 }
+  mutation&lt;mutation/gaussian&gt;: { rate: 0.01, mean: 0.0, std: 1.0 }
 
-population<population/simple>:
+population&lt;population/simple&gt;:
   size:     30
   breeder:  $(_my_breeder)
   species:  $(_my_species)
