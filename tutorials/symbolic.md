@@ -76,7 +76,8 @@ that roughly looks similar to the one given below:
 <pre class="wallace">
 type: algorithm/simple_evolutionary_algorithm
 
-evaluator&lt;evaluator/regression&gt;: {}
+evaluator&lt;evaluator/regression&gt;:
+  file: points.csv
 
 replacement&lt;replacement/generational&gt;: { elitism: 0 }
 
@@ -84,7 +85,7 @@ termination:
   iterations&lt;criterion/iterations&gt;: { limit: 1000 }
 
 _my_species:
-  fitness: "SimpleFitness{Float64}"
+  fitness<fitness/simple>: { of: Float, maximise: false }
   stages:
     tree:
       representation&lt;representation/koza_tree&gt;:
