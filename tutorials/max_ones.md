@@ -101,7 +101,7 @@ elsewhere within the file.
 
 <pre class="wallace">
 type: algorithm/simple_evolutionary_algorithm
-population<population/simple>:
+population&lt;population/simple&gt;:
   size:     100
   species:  $(_my_species)
   breeder:  $(_my_breeder)
@@ -195,23 +195,20 @@ functions, try to build your own selection-crossover-mutation breeding sequence.
 
 <pre class="wallace">
 ...
-  _my_breeder<breeder/fast>:
+  _my_breeder&lt;breeder/fast&gt;:
     sources:
-      s<selection>:
-        operator<selection/tournament>: { size: 2 }
-      x<variation>:
-        operator<crossover/one_point>: { rate: 1.0 }
+      s&lt;selection&gt;:
+        operator<selection/tournament&gt;: { size: 2 }
+      x&lt;variation&gt;:
+        operator<crossover/one_point&gt;: { rate: 1.0 }
         source: "s"
         stage: "bits"
-    m<variation>:
-      operator<mutation/bit_flip>: { rate: 0.1 }
+    m&lt;variation&gt;:
+      operator&lt;mutation/bit_flip&gt;: { rate: 0.1 }
       source: "x"
       stage: "bits"
 ...
 </pre>
-
-
-x.
 
 > **Why doesn't the selector specify a source or stage?**
   <br/>
@@ -265,7 +262,7 @@ that the objective should be maximised by setting its first parameter to
 
 <pre class="wallace">
 ...
-  evaluator<evaluator/simple>:
+  evaluator&lt;evaluator/simple&gt;:
     objective: ->
       SimpleFitness{Int}(true, sum(get(i.bits)))
 ...
@@ -296,7 +293,7 @@ a simple limit on the number of iterations that the algorithm may run for.
 <pre class="wallace">
 ...
   termination:
-    iterations<criterion/iterations>: { limit: 100 }
+    iterations&lt;criterion/iterations&gt;: { limit: 100 }
 ...
 </pre>
 
@@ -319,30 +316,30 @@ somewhat similar to the one given below:
 <pre class="wallace">
 type: algorithm/simple_evolutionary_algorithm
 
-evaluator<evaluator/simple>:
+evaluator&lt;evaluator/simple&gt;:
   objective: |
     SimpleFitness{Int}(true, sum(get(i.bits)))
 
-replacement<replacement/generational>: { elitism: 0 }
+replacement&lt;replacement/generational&gt;: { elitism: 0 }
 
 termination:
-  iterations<criterion/iterations>: { limit: 1000 }
+  iterations&lt;criterion/iterations&gt;: { limit: 1000 }
 
 _my_species:
   stages:
     bits:
-      representation<representation/bit_vector>: { length: 100 }
+      representation&lt;representation/bit_vector&gt;: { length: 100 }
 
-_my_breeder<breeder/fast>:
+_my_breeder&lt;breeder/fast&gt;:
   sources:
-    s<selection>:
-      operator<selection/tournament>: { size: 2 }
-    x<variation>:
-      operator<crossover/one_point>: { rate: 1.0 }
+    s&lt;selection&gt;:
+      operator&lt;selection/tournament&gt;: { size: 2 }
+    x&lt;variation&gt;:
+      operator&lt;crossover/one_point&gt;: { rate: 1.0 }
       source: s
       stage:  bits
-    m<variation>:
-      operator<mutation/bit_flip>: { rate: 0.1 }
+    m&lt;variation&gt;:
+      operator&lt;mutation/bit_flip&gt;: { rate: 0.1 }
       source: x
       stage:  bits
 
