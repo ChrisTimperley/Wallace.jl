@@ -4,7 +4,15 @@ title: Tutorials
 permalink: /tutorials/
 ---
 
-Tutorials belong here.
+Below are a series of tutorials, designed to slowly introduce the user to various concepts
+and features within Wallace. After completing these tutorials, the user should have a solid
+grasp of how to use Wallace for a wide range of problems, and should be familiar with a
+number of different algorithms, representations and operators.
+
+These tutorials also make a great companion to any evolutionary computation course, and
+have successfully been used to teach in the classroom. If you're interested in using
+Wallace to teach part of your curriculum, then let us know by emailing:
+<a href="mailto:ct584@york.ac.uk">ct584@york.ac.uk</a>
 
 1. <a href="max_ones/"><b>Tutorial 1: Max Ones.</b></a>
     Demonstrates how to interact with Wallace via the REPL, and how to compose a basic
