@@ -38,7 +38,20 @@ components listed below:
 | Breeder             | Simple Breeder                                    |
 | Fitness Scheme      | Koza Fitness                                      |
 
-## Solution Representation
+### Fitness Schema
+
+As the objective for each of these benchmarks is to find the global minimum
+value for the function within the bounds of the search domain, our fitness
+schema should minimise a floating point value, representing the value of the
+function for a given set of co-ordinates.
+
+<pre class="wallace">
+fitness&lt;fitness/scalar&gt;:
+  of:       Float
+  maximise: false
+</pre>
+
+### Problem Representation
 
 Loosely-typed Koza Trees.
 
@@ -64,7 +77,7 @@ _my_species&lt;species/simple&gt;:
 
 ### Ephemeral Random Constants
 
-## Setting up the Breeder
+### Breeding Operations
 
 <pre class="wallace">
 breeder&lt;breeder/simple&gt;:
@@ -72,6 +85,8 @@ breeder&lt;breeder/simple&gt;:
   crossover&lt;crossover/subtree&gt;: { rate: 0.9 }
   mutation&lt;mutation/subtree&gt;: { rate: 0.01 }
 </pre>
+
+### Evaluator
 
 ## Running the Algorithm
 
