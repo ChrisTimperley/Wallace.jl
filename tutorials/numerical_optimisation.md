@@ -143,12 +143,12 @@ predefined normal distribution. Here we can alter the probability that a mutatio
 will occur at a given gene, via the `rate` property, or we can specify the parameters of
 our normal distribution using the `mean` and `std` properties.
 
-<span class="wallace">
+<pre class="wallace">
 mutation&lt;mutation/gaussian&gt;:
   rate: 0.01
   mean: 0.0
   std:  1.0
-</span>
+</pre>
 
 Alternatively, we could use *uniform mutation* to sample a new floating point value
 within the search domain at a given locus, or we could implement our own
@@ -244,7 +244,3 @@ population&lt;population/simple&gt;:
 Starting with the Sphere problem, try running your algorithm on each of the
 benchmarks using a fixed number of evaluations, and attempt to determine an
 optimal set of operators and parameters common to all of them.
-
-### Statistics and visualisation
-
-### Plotting the results using Gadfly.jl
