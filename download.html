@@ -11,19 +11,19 @@ installed, you may install the latest stable release of Wallace by opening up th
 via the terminal, and calling the following command:
 
 <pre style="display: block; font-size: 12px; overflow-x: auto; margin-top: 15px">
-  $ julia
+$ julia
+
+               _
+   _       _ _(_)_     |  A fresh approach to technical computing
+  (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
+   _ _   _| |_  __ _   |  Type "help()" for help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 0.3.10 (2015-06-24 13:54 UTC)
+ _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
+|__/                   |  x86_64-unknown-linux-gnu
   
-                 _
-     _       _ _(_)_     |  A fresh approach to technical computing
-    (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
-     _ _   _| |_  __ _   |  Type "help()" for help.
-    | | | | | | |/ _` |  |
-    | | |_| | | | (_| |  |  Version 0.3.10 (2015-06-24 13:54 UTC)
-   _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release
-  |__/                   |  x86_64-unknown-linux-gnu
   
-  
-  julia> Pkg.add("Wallace")
+julia> Pkg.add("Wallace")
 </pre>
 
 
@@ -32,7 +32,7 @@ in order to avoid any installation issues. This can be done by calling the
 following from within the Julia REPL:
 
 <pre style="display: block; overflow-x: auto; margin-top: 15px; font-size: 12px">
-  julia> Pkg.update()
+julia> Pkg.update()
 </pre>
 
 <h3>Development Build</h3>
@@ -41,8 +41,8 @@ To install the latest developmental version of Wallace, open up the Julia REPL,
 and call the following:
 
 <pre style="display: block; overflow-x: auto; margin-top: 15px; font-size: 12px">
-  julia> Pkg.remove("Wallace")
-  julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.git")
+julia> Pkg.remove("Wallace")
+julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.git")
 </pre>
 
 This will remove any existing Wallace module from your Julia installation,
