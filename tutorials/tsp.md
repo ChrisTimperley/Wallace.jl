@@ -205,7 +205,7 @@ composer: |
 After having followed all the preceding steps, you should have an algorithm
 that roughly looks similar to the one given below:
 
-```
+<pre class="wallace">
 type: algorithm/evolutionary_algorithm
 
 evaluator&lt;evaluator/tsp&gt;:
@@ -231,4 +231,4 @@ population&lt;population/simple&gt;:
   size:     100
   breeder:  $(_my_breeder)
   species:  $(_my_species)
-```
+</pre>
