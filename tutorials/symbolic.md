@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Symbolic Regression
-permalink: /tutorials/symbolic_regression/
+permalink: /tutorials/symbolic/
 ---
 
 # Tutorial 4: Symbolic Regression via Genetic Programming
