@@ -40,10 +40,12 @@ components listed below:
 
 ### Fitness Schema
 
-As the objective for each of these benchmarks is to find the global minimum
-value for the function within the bounds of the search domain, our fitness
-schema should minimise a floating point value, representing the value of the
-function for a given set of co-ordinates.
+In order to find an equation which best fits the data for our given problem,
+we define the fitness of a candidate solution as the sum of squared errors
+between the actual and expected result for each point within our dataset.
+The objective of our search should be to minimise this difference, and
+to ultimately reach a difference of zero, indicating a perfect fit (but
+possible overfit) with the data.
 
 <pre class="wallace">
 fitness&lt;fitness/scalar&gt;:
