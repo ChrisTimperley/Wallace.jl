@@ -68,18 +68,20 @@ In order to perform Koza-style genetic programming within Wallace, we must make
 use of the `koza_tree` representation, which models a single loosely-typed
 Koza tree.
 
+Koza trees are made up of terminal and non-terminal nodes. Terminal nodes
+belong at the leaves of the tree, representing constants, variables, or
+inputs to the program. Non-terminal nodes are used to represent operations
+on terminals, or the outputs of other non-terminal nodes.
+
 <pre class="wallace">
 representation&lt;representation/koza_tree&gt;:
   ...
 </pre>
 
-Koza trees are made up of terminal and non-terminal nodes. Terminal nodes
-belong at the leaves of the tree, and represent constants, variables, or
-inputs to the program. In order to specify the set of possible terminals
-for our given tree, we must list each of them under the `terminals` property,
-along with an optional type annotation. Although we are performing loosely-typed
-GP, this type annotation helps Wallace to optimise the performance of the
-tree interpreter.
+In order to specify the set of possible terminals for our given tree, we must
+list each of them under the `terminals` property, along with an optional type
+annotation. Although we are performing loosely-typed GP, this type annotation
+helps Wallace to optimise the performance of the tree interpreter.
 
 Below is an example of how we can create a terminal set for one of the
 regression problems given above. Notice that type annotations are provided
