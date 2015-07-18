@@ -16,6 +16,7 @@ fits and explains the data.
 **This tutorial assumes:**
 
 * A basic knowledge of [Julia](http://julialang.org/).
+* A basic knowledge of Koza-style genetic programming.
 * You know how to create and run a basic genetic algorithm within Wallace.
 * You know how to extend Wallace with a custom evaluator.
 
@@ -63,20 +64,31 @@ fitness&lt;fitness/scalar&gt;:
 
 ### Problem Representation
 
-Loosely-typed Koza Trees.
+In order to perform Koza-style genetic programming within Wallace, we must make
+use of the `koza_tree` representation, which models a single loosely-typed
+Koza tree.
 
 <pre class="wallace">
-_my_species&lt;species/simple&gt;:
-  fitness&lt;koza&gt;: { minimise: true }
+representation&lt;representation/koza_tree&gt;:
+  ...
+</pre>
+
+Koza trees are made up of terminal and non-terminal nodes. Terminal nodes
+belong at the leaves of the tree, and represent constants, variables, or
+inputs to the program. In order to specify the set of possible terminals
+for our given tree, we must list each of them under the `terminals` property,
+along with an optional type annotation. Although we are performing loosely-typed
+GP, this type annotation helps Wallace to optimise the performance of the
+tree interpreter.
+
+Below is an example of how we can create a terminal set for one of the
+regression problems given above. Notice that type annotations are provided
+by suffixing a given terminal with two colons, followed by the name of its
+type within Julia.
+
+<pre class="wallace">
   representation&lt;representation/koza_tree&gt;:
-    min_depth: 1
-    max_depth: 18
-    inputs: ["x::Float"]
-    terminals: ["x::Float"]
-    non_terminals:
-      - "add(x::Float, y::Float)::Float = x + y"
-      - "sub(x::Float, y::Float)::Float = x - y"
-      - "mul(x::Float, y::Float)::Float = x * y"
+    terminals: ["x::Float", "y::Float"]
 </pre>
 
 ### Tree Builders
