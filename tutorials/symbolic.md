@@ -6,16 +6,24 @@ permalink: /tutorials/symbolic/
 
 # Tutorial 4: Symbolic Regression via Genetic Programming
 
-Problem description.
+In this tutorial, we will be using a loosely-typed Koza-style version of
+genetic programming to evolve equations to fit some provided data, for a
+series of increasingly difficult symbolic regression problems. Starting
+with a set of observations taken from a target equation, our goal is to
+evolve an equation, in the form of a S-expression tree, which perfectly
+fits and explains the data.
 
 **This tutorial assumes:**
 
 * A basic knowledge of [Julia](http://julialang.org/).
 * You know how to create and run a basic genetic algorithm within Wallace.
+* You know how to extend Wallace with a custom evaluator.
 
 **By the end of this tutorial, you will be able to:**
 
 * Perform loosely-typed genetic programming within Wallace.
+* Solve symbolic regression problems using GP in Wallace.
+* Use a number of different tree creation algorithms.
 
 --------------------------------------------------------------------------------
 
