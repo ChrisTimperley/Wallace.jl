@@ -78,6 +78,9 @@ representation&lt;representation/koza_tree&gt;:
   ...
 </pre>
 
+
+#### Terminals
+
 In order to specify the set of possible terminals for our given tree, we must
 list each of them under the `terminals` property, along with an optional type
 annotation. Although we are performing loosely-typed GP, this type annotation
@@ -93,13 +96,38 @@ type within Julia.
     terminals: ["x::Float", "y::Float"]
 </pre>
 
+
+#### Inputs
+
+Inputs.
+
+<pre class="wallace">
+  representation&lt;representation/koza_tree&gt;:
+    terminals: ["x::Float", "y::Float", "a::Float", "b::Float"]
+    inputs: ["x::Float", "y::Float"]
+</pre>
+
+#### Ephemeral Random Constants
+
+Ephemeral random constants.
+
+<pre class="wallace">
+  representation&lt;representation/koza_tree&gt;:
+</pre>
+
+#### Non-terminals
+
+Non-terminals.
+
+<pre class="wallace">
+  representation&lt;representation/koza_tree&gt;:
+</pre>
+
 ### Tree Builders
 
 * Ramped Half-and-Half
 * Full
 * Grow
-
-### Ephemeral Random Constants
 
 ### Breeding Operations
 
