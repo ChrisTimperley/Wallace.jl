@@ -99,7 +99,9 @@ type within Julia.
 
 #### Inputs
 
-Inputs.
+In order to specify the subset of terminals that serve as inputs to the program,
+we provide a list of them to the `inputs` property, as shown below. Note that
+the input must also be present in the `terminals` list.
 
 <pre class="wallace">
   representation&lt;representation/koza_tree&gt;:
