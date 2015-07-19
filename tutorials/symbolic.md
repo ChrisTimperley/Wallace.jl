@@ -111,10 +111,37 @@ the input must also be present in the `terminals` list.
 
 #### Ephemeral Random Constants
 
-Ephemeral random constants.
+Ephemeral random constants are a special type of terminal node, in that their
+value is generated at random from a predefined range upon their initialisation
+and fixed thereafter. Unlike other types of terminal, ERCs are not declared
+within the `terminals` property. Instead, ERCs are defined using the `ercs`
+property, which accepts a list of ERC definitions.
+
+At the present time, there is only one type of ERC, namely the numeric ERC,
+which produces either an integer or a floating point number. An example
+definition for a numeric ERC is given below:
 
 <pre class="wallace">
   representation&lt;representation/koza_tree&gt;:
+    ercs:
+      - type:       erc/numeric
+        min:        0
+        max:        10
+        inclusive:  true
+</pre>
+
+Upon invocation, this ERC will generate a random integer between 0 and 10,
+inclusive. If we wished to modify this ERC to generate a random floating point
+number instead, we need only change the `min` and `max` values to include
+a decimal point, as in the example below.
+
+<pre class="wallace">
+  representation&lt;representation/koza_tree&gt;:
+    ercs:
+      - type:       erc/numeric
+        min:        0.0
+        max:        10.0
+        inclusive:  true
 </pre>
 
 #### Non-terminals
