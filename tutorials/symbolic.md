@@ -266,6 +266,18 @@ mutation&lt;mutation/subtree&gt;: { rate: 0.01 }
 
 ### Evaluator
 
+The last remaining component of this algorithm is the evaluator. For this problem,
+the fitness of each candidate solutions will be given by its sum of square
+differences between the actual and expected result for a predetermined set of inputs.
+
+We could tackle this problem by simply using a `evaluator/simple` evaluator,
+and iterating over an array of inputs and outputs, stated within the evaluator body.
+However, as we will be dealing with a large number of data points for each of the
+benchmark problems, it makes more sense for us to write another custom evaluator for
+the problem. Our custom evaluator should accept a CSV file, without headers,
+containing each of the data points for our benchmark, and should calculate the sum
+of square differences for given candidate solutions.
+
 ## Running the Algorithm
 
 After having followed all the preceding steps, you should have an algorithm
