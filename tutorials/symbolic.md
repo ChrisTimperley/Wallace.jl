@@ -200,9 +200,40 @@ representation&lt;representation/koza_tree&gt;:
 
 ### Tree Builders
 
-* Ramped Half-and-Half
-* Full
-* Grow
+At this point we have almost everything needed to form a complete definition
+for a Koza tree representation. The last remaining component in our definition
+is the building method, which is specified using the `builder` property.
+
+Wallace supports a number of different tree creation
+algorithms, but in this tutorial we will be looking at 3 of the most common
+techniques, all proposed by Koza, described below:
+
+* **Full:** Randomly selects a depth between the minimum and maximum depth,
+    and produces a complete tree to that depth.
+* **Grow:** Randomly selects a depth between the minimum and maximum depth, `d`,
+    and produces a tree whose depth does not exceed d. At each stage, the
+    algorithm decides with a given probability, `p`, whether to insert a terminal
+    node or another non-terminal.
+* **Ramped Half-and-Half:** Randomly selects a depth between the minimum and
+    maximum depth and at each step, generates a sub-tree using either the FULL
+    or GROW method with a given probability, `p_full`.
+
+For a more complete description of the above methods, and of the other tree
+creation methods not covered in this tutorial, please make use of the `help()`
+and `listall()` commands within the REPL. A list of the properties for each of
+the above methods can be found using the `help()` command with the name of the
+particular tree creation method, e.g. `help("koza:builder/full")`.
+
+An example of a ramped half-and-half builder is given below:
+
+<pre class="wallace">
+representation&lt;representation/koza_tree&gt;:
+  builder<koza:builder/full>:
+    min_depth: 3
+    max_depth: 6
+    prob_terminals: 0.5
+    prob_grow: 0.5
+</pre>
 
 ### Breeding Operations
 
