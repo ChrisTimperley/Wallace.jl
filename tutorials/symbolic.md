@@ -237,11 +237,31 @@ representation&lt;representation/koza_tree&gt;:
 
 ### Breeding Operations
 
+For this tutorial, we shall be using the simple breeder once again. Experiment
+with the different selection methods available within Wallace, or simply use
+tournament selection.
+
+As the crossover method, we will be using a sub-tree crossover, which accepts two
+individuals, and randomly selects a sub-tree from the first individual, before
+swapping it with a (legal) randomly sub-tree from the second individual. The only
+parameter for this operator is the crossover rate, `rate`, which specifies the
+probability that the two individuals provided to the operator will undergo
+recombination. An example crossover method definition for this problem is
+given below:
+
 <pre class="wallace">
-breeder&lt;breeder/simple&gt;:
-  selection&lt;selection/tournament&gt;: { size: 5 }
-  crossover&lt;crossover/subtree&gt;: { rate: 0.9 }
-  mutation&lt;mutation/subtree&gt;: { rate: 0.01 }
+crossover&lt;crossover/subtree&gt;: { rate: 0.9 }
+</pre>
+
+To perform mutation, we will be using the sub-tree mutation operator, which
+selects a sub-tree within a given individual at random, and replaces it with
+a randomly generated sub-tree, produced using the ramped half-and-half tree
+creation algorithm. A list of the necessary parameters for this operator can
+be found by calling `help("mutation/subtree")` from within the REPL. An example
+definition for a subtree mutation method is shown below:
+
+<pre class="wallace">
+mutation&lt;mutation/subtree&gt;: { rate: 0.01 }
 </pre>
 
 ### Evaluator
