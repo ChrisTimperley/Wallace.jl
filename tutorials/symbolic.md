@@ -97,9 +97,9 @@ type within Julia.
 </pre>
 
 
-#### Inputs
+#### Input
 
-In order to specify the subset of terminals that serve as inputs to the program,
+To specify the subset of terminals that serve as inputs to the program,
 we provide a list of them to the `inputs` property, as shown below. Note that
 the input must also be present in the `terminals` list.
 
@@ -119,10 +119,39 @@ Ephemeral random constants.
 
 #### Non-terminals
 
-Non-terminals.
+The non-terminals of the koza tree are specified by providing the
+`non_terminals` property with a list of each of the non-terminal
+operation descriptions. These descriptions take a similar form to
+Julia's inline method descriptions, shown below:
 
 <pre class="wallace">
-  representation&lt;representation/koza_tree&gt;:
+representation&lt;representation/koza_tree&gt;:
+  non_terminals:
+    - "add(x::Float64, y::Float64)::Float64 = x + y"
+    - "sub(x::Float64, y::Float64)::Float64 = x - y"
+</pre>
+
+The non-terminal description begins with the unique name used by
+that non-terminal, followed by a list of arguments, enclosed within
+a set of parentheses.
+
+<pre class="wallace">
+add(x::Float64, y::Float64)
+</pre>
+
+The list of arguments is delimited by commas, and each argument is
+specified by its name, followed `::` and its type in Julia.
+
+<pre class="wallace">
+(x::Float64, y::Float64)
+</pre>
+
+A type hint follows the closing parenthesis, describing the
+return type of the operation in Julia, before finally a definition of
+the operation is provided following the `=` sign.
+
+<pre class="wallace">
+add(x::Float64, y::Float64)::Float64 = x + y
 </pre>
 
 ### Tree Builders
