@@ -181,6 +181,23 @@ the operation is provided following the `=` sign.
 add(x::Float64, y::Float64)::Float64 = x + y
 </pre>
 
+### Depth Limits
+
+Now we've listed the set of terminal and non-terminal nodes for our trees, we
+can impose some limits on the minimum and maximum depth of trees that are
+generated, in order to narrow the search space and to prevent excessively large
+trees from being produced.
+
+The minimum and maximum depth for trees can be specified by the `min_depth` and
+`max_depth` properties, respectively. All tree initialisation, mutation, and
+crossover operations will produce trees within these limits.
+
+<pre class="wallace">
+representation&lt;representation/koza_tree&gt;:
+  min_depth: 3
+  max_depth: 16
+</pre>
+
 ### Tree Builders
 
 * Ramped Half-and-Half
