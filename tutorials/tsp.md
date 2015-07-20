@@ -41,7 +41,6 @@ components listed below:
 
 | Component           | Setting                                           |
 | ------------------- | ------------------------------------------------- |
-| Replacement Scheme  | Generational (without elitism)                    |
 | Population          | Simple (single deme)                              |
 | Representation      | Permutation                                       |
 | Breeder             | Linear Breeder                                    |
@@ -342,8 +341,6 @@ type: algorithm/evolutionary_algorithm
 
 evaluator&lt;evaluator/tsp&gt;:
   cities: berlin52.tsp
-
-replacement&lt;replacement/generational&gt;: {}
 
 termination:
   evaluations&lt;criterion/evaluations&gt;: { limit: 100000 }
