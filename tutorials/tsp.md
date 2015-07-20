@@ -207,7 +207,88 @@ type MyTSPEvaluator &lt;: SimpleEvaluator
 end
 </pre>
 
-x.
+With our type definition in place, we now need to implement the `evaluate!`
+method of our type, responsible for accepting an individual, along with the
+state of the search, and returning a valid fitness object. The `evaluate!`
+method for individual evaluation should accept the following arguments:
+
+* `e::MyTSPEvaluator` - The evaluator object itself must be provided as part
+of the call. From this object we will extract the distance matrix to perform
+the tour length calculations.
+* `s::State` - The current state of the evolution. We won't be using this,
+but as it forms a necessary part of the `evaluate!` method signature, we shall
+still include it.
+* `sch::FitnessScheme` - The fitness scheme used by the provided individual.
+We will use this to produce a fitness object from its tour length using the
+`fitness()` method.
+* `c::Individual` - The individual being passed for evaluation. We will access
+its `genome` property to extract details of the tour.
+
+Once we've added these method arguments together, our empty method should
+start to look something like the example below.
+
+<pre class="julia">
+function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
+
+end
+</pre>
+
+Ultimately our method should return a computed fitness object for its provided
+individual. In order to do this, we will call the `fitness` method, together with
+the fitness schema and the individual's tour length as its arguments, as shown
+below.
+
+<pre class="julia">
+function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
+  fitness(sch, length)
+end
+</pre>
+
+Now the last thing that remains is to add the tour length calculation logic
+into the top of our method body. In order to do this, the first thing that we should
+do is retrieve the tour from the provided individual, by calling `get(c.genome)`.
+
+<pre class="julia">
+function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
+  tour = get(c.genome)
+
+  fitness(sch, length)
+end
+</pre>
+
+Next, we want to create a temporary variable to store the total length of the
+individual's tour. Let's simply call this `length`. Without a little knowledge
+about the inner workings of Julia, you may be tempted to simply perform this
+operation via `length = 0`. But that would be a near-silent mistake, resulting
+in a slower performance and some strange artefacts.
+
+Why? Because setting the length to `0` will mark the length variable as an
+integer, and any subsequent operations will either proceed to convert the
+integer to a floating point, or they will simply treat inputs as integers.
+
+The simplest way to get round this is to initialise a floating point zero via
+`0.0`, but a safer, better practice, is to initialise the count using the
+`zero` function with the name of the underlying type, as shown below.
+
+<pre class="julia">
+function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
+  tour = get(c.genome)
+  length = zero(Float)
+
+  fitness(sch, length)
+end
+</pre>
+
+We now need to actually perform the tour length calculation. The fastest and
+simplest way to do this is to simply iterate across the indices of each of the
+cities, from 1 to the number of cities minus one, intentionally missing the
+last index. At each step, we then increment the tour length by the distance
+between the city at the current index and the city at the subsequent index
+using the distance matrix. Finally, we add the distance between the city at
+the final index and the starting index to complete the tour.
+
+We should now have a complete type definition for our evaluator that looks
+something like the one below.
 
 <pre class="julia">
 type MyTSPEvaluator &lt;: SimpleEvaluator
@@ -216,13 +297,14 @@ type MyTSPEvaluator &lt;: SimpleEvaluator
   distance::Array{Int, 2}
 end
 
-function evaluate!(e::MyTSPEvaluator, s::State, c::Individual)
+function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
   tour = get(c.genome)
   length = zero(Float)
   for i in 1:e.cities-1
     length += e.distance[tour[i], tour[i+1]]
   end
   length + e.distance[tour[end], tour[1]]
+  fitness(sch, length)
 end
 </pre>
 
