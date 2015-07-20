@@ -263,8 +263,8 @@ that the objective should be maximised by setting its first parameter to
 <pre class="wallace">
 ...
   evaluator&lt;evaluator/simple&gt;:
-    objective: ->
-      SimpleFitness{Int}(true, sum(get(i.bits)))
+    objective: |
+      fitness(scheme, sum(get(i.bits)))
 ...
 </pre>
 
