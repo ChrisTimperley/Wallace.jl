@@ -159,6 +159,56 @@ a new Julia type to realise our evaluator.
 
 ### Julia Type
 
+In order to implement our specialised TSP evaluator, we will first extend Wallace
+with a new Julia type for that evaluator. To do this, we'll need to open up a new
+Julia file (.jl) within our working directory, that we shall call
+`my_tsp_evaluator.jl`. Within this file we will write a standard Julia definition
+for a type that accepts details of a given TSP problem and evaluates provided
+candidate solutions against them.
+
+To create a new type within Julia, we simply write the keyword `type` followed
+by the name of our type. The definition of our type then immediately follows this
+line, and is terminated by the `end` keyword. However, as we're writing a special
+type of evaluator, we will need to extend the base evaluator type, or to make our
+lives a little easier, we'll be extending the `SimpleEvaluator` type; this is
+done by following the syntax below.
+
+<pre class="julia">
+type MyTSPEvaluator &lt;: SimpleEvaluator
+
+end
+</pre>
+
+Next, we shall define the attributes of our TSP evaluator type within the type
+definition block we have just created. This is done by simply providing the name
+of the attribute followed by two colons and the name of its underlying type within
+Julia. An example attribute, responsible for recording the number of cities within
+a given TSP instance is shown below.
+
+<pre class="julia">
+type MyTSPEvaluator &lt;: SimpleEvaluator
+  cities::Int
+end
+</pre>
+
+For our particular evaluator, we shall add two further attributes to its
+definition; namely, `threads`, specifying the number of threads that the
+evaluation workload should be split across, and `distance`, modelling the
+distance matrix between nodes. To model the distance matrix, we shall make use
+of Julia's multi-dimensional arrays, using an efficient two-dimensional array
+to store the distance between nodes. The complete definition for this type
+is given below:
+
+<pre class="julia">
+type MyTSPEvaluator &lt;: SimpleEvaluator
+  cities::Int
+  threads::Int
+  distance::Array{Int, 2}
+end
+</pre>
+
+x.
+
 <pre class="julia">
 type MyTSPEvaluator &lt;: SimpleEvaluator
   cities::Int
