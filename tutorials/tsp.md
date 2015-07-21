@@ -338,6 +338,77 @@ file with the following information:
 * `composer` - Provides the body of a Julia function, responsible for creating
   and returning an instance of the given type from a set of provided parameters.
 
+To begin with, let's write a short description for our type. Below is an
+example of a simple description. For those less familiar with YAML, the `|` symbol
+following the `description` property marks the beginning of a multi-line string
+on the line below.
+
+<pre class="yaml">
+type: alfred#evaluator/tsp
+
+description: |
+  Evaluates the fitness of a TSP tour for a pre-determined set of cities.
+</pre>
+
+Next, let's put together a list of the properties for our TSP evaluator. For
+our problem we would like our evaluator to accept a file containing the
+co-ordinates of a set of cities for our particular problem, as well as a
+property instructing the evaluator how many threads the process should be
+split across. Below we give an example of how this might be added to the
+manifest file. 
+
+<pre class="yaml">
+type: alfred#evaluator/tsp
+
+description: |
+  Evaluates the fitness of a TSP tour for a pre-determined set of cities.
+
+properties:
+  threads:
+    type:         Integer
+    description:  &gt; The number of threads that the evaluation process should be
+      split across.
+
+  file:
+    type:         String
+    description:  &gt; The path to the file containing the co-ordinates of each of
+</pre>
+
+Finally, we need to write a composer, which we will accept a set of parameters,
+provided by `s`, and should construct an instance of the Julia type using them.
+For our TSP evaluator, our composer will need to take the path to a file
+containing the co-ordinates of a set of cities, and to load and transform the
+contents of that file into a distance matrix.
+
+<pre class="yaml">
+composer: |
+
+  # Create a list to hold the co-ordinates of each city.
+  cities = Vector{Vector{Float}}() 
+  
+  # Open the text file up, remove any empty lines, convert remaining lines
+  f = open(s["file"], "r")
+ 
+  # Count the number of cities
+  n = length(cities)
+
+  # From the list of cities, compute distance matrix.
+  matrix = Array{Float, 2}()
+  for i = 1:n
+    for j = 1:n
+      matrix[i, j] = dist(cities[i], cities[j])
+    end
+  end
+
+  # Default to a single thread of evaluation.
+  s["threads"] ||= 1
+  s["threads"] = get(s, "threads", 1)
+ 
+  # Create an instance of the TSP evaluator type.
+  MyTSPEvaluator(n, s["threads"], matrix)  
+
+</pre>
+
 <pre class="yaml">
 type: alfred#evaluator/tsp
 
@@ -354,6 +425,8 @@ properties:
     type:         String
     description:  &gt; The path to the file containing the co-ordinates of each of
       the cities for the TSP instance being solved.
+
+     the cities for the TSP instance being solved.
 
 composer: |
   ...
