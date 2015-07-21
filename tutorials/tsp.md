@@ -405,6 +405,22 @@ end
 close(f)
 </pre>
 
+Now we have a way of computing the list of co-ordinates for each city,
+let's go about calculating the distance matrix. As we did before, in
+our type definition, we shall use a two-dimensional array to
+implement our distance matrix. A simple way to compute this matrix is
+given below:
+
+<pre class="julia">
+n = length(cities)
+matrix = Array(Float, 2)
+for i = 1:n
+  for j = 1:n
+    matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
+  end
+end
+</pre>
+
 <pre class="yaml">
 composer: |
 
