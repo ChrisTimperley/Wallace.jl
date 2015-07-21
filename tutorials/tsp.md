@@ -309,6 +309,24 @@ end
 
 ### Wallace Type Manifest
 
+With our type definition in place, we now need to write a manifest for our
+type, describing its internal structure and composer to Wallace. To do this,
+let's begin by creating a new manifest file, `tsp.manifest.yml`.
+
+At the top of our type manifest file, we should add a `type` property,
+specifying the name of the type that is being registered with Wallace;
+note that this name needn't be the same as the name of the Julia type.
+The name of our evaluator should follow Wallace's type naming conventions.
+Firstly, the name of the package, if any, that the type belongs to
+should appear first, followed by a colon. Then the name of the base type,
+if any, should appear, followed by a forward slash.
+
+<pre class="yaml">
+type: evaluator/tsp
+</pre>
+
+
+
 <pre class="yaml">
 type: alfred#evaluator/tsp
 author: Alfred Russel Wallace
