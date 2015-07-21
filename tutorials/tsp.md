@@ -380,6 +380,31 @@ For our TSP evaluator, our composer will need to take the path to a file
 containing the co-ordinates of a set of cities, and to load and transform the
 contents of that file into a distance matrix.
 
+In order to generate a distance matrix within the composer, we first need to
+load the contents of the cities file and convert it into an array of co-ordinates.
+The easiest way to do this is to first create an empty list to hold the
+co-ordinate lists for each city, and to then scan each line in the TSP file,
+convert it into a list of co-ordinates, and insert it into the array. A way of
+performing the above in Julia is given below.
+
+<pre class="julia">
+# Create a list to hold the co-ordinates of each city.
+cities = Vector{Float}[]
+
+# Open up a handle on the TSP city file with read permissions.
+f = open(s["file"], "r")
+
+# Iterate across each line in the file, and provided it isn't empty,
+# produce a list of co-ordinates from it and append them to the
+# city co-ordinates list.
+for l in readlines(f)
+  !isempty(l) && push!(cities, [float(n) for n in split(l, ",")])
+end
+
+# Close the file handle.
+close(f)
+</pre>
+
 <pre class="yaml">
 composer: |
 
