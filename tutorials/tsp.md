@@ -333,10 +333,8 @@ file with the following information:
 * `description` - A short description of the purpose and function of the type.
 * `properties` - An associated array (dictionary/hash) describing the parameters
     of this type, indexed by the name of each parameter. Each entry should
-    contain the following information:
-    
-      * Hello.
-
+    contain a `description`, a `type`, and optionally, a `default` tag,
+    describing, but not specifying, the default value / behaviour of the property.
 * `composer` - Provides the body of a Julia function, responsible for creating
   and returning an instance of the given type from a set of provided parameters.
 
