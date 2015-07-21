@@ -393,7 +393,7 @@ composer: |
   n = length(cities)
 
   # From the list of cities, compute distance matrix.
-  matrix = Array{Float, 2}()
+  matrix = Array(Float, 2)
   for i = 1:n
     for j = 1:n
       matrix[i, j] = dist(cities[i], cities[j])
