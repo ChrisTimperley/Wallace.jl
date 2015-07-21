@@ -384,7 +384,7 @@ contents of that file into a distance matrix.
 composer: |
 
   # Create a list to hold the co-ordinates of each city.
-  cities = Vector{Vector{Float}}() 
+  cities = Vector{Float}[] 
   
   # Open the text file up, remove any empty lines, convert remaining lines
   f = open(s["file"], "r")
