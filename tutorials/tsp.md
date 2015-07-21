@@ -319,17 +319,29 @@ note that this name needn't be the same as the name of the Julia type.
 The name of our evaluator should follow Wallace's type naming conventions.
 Firstly, the name of the package, if any, that the type belongs to
 should appear first, followed by a colon. Then the name of the base type,
-if any, should appear, followed by a forward slash.
+if any, should appear, followed by a forward slash. Finally, the name of
+the type itself should appear at the end. An example type name for our
+problem is given below:
 
 <pre class="yaml">
 type: evaluator/tsp
 </pre>
 
+With the name of our type in place, we now need to provide the manifest
+file with the following information:
 
+* `description` - A short description of the purpose and function of the type.
+* `properties` - An associated array (dictionary/hash) describing the parameters
+    of this type, indexed by the name of each parameter. Each entry should
+    contain the following information:
+    
+      * Hello.
+
+* `composer` - Provides the body of a Julia function, responsible for creating
+  and returning an instance of the given type from a set of provided parameters.
 
 <pre class="yaml">
 type: alfred#evaluator/tsp
-author: Alfred Russel Wallace
 
 description: |
   Evaluates the fitness of a TSP tour for a pre-determined set of cities.
