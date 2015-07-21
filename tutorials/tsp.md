@@ -421,34 +421,14 @@ for i = 1:n
 end
 </pre>
 
-<pre class="yaml">
-composer: |
+We now have everything in place to build an instance of our TSP
+evaluator type, and to complete our composer. We simply need to pass
+the number of cities, the number of threads, and the distance matrix
+to the TSP evaluator constructor (in the order in which they appear
+in the type definition). The only additional step we need to take is
+to provide a default number of threads.
 
-  # Create a list to hold the co-ordinates of each city.
-  cities = Vector{Float}[] 
-  
-  # Open the text file up, remove any empty lines, convert remaining lines
-  f = open(s["file"], "r")
- 
-  # Count the number of cities
-  n = length(cities)
-
-  # From the list of cities, compute distance matrix.
-  matrix = Array(Float, 2)
-  for i = 1:n
-    for j = 1:n
-      matrix[i, j] = dist(cities[i], cities[j])
-    end
-  end
-
-  # Default to a single thread of evaluation.
-  s["threads"] ||= 1
-  s["threads"] = get(s, "threads", 1)
- 
-  # Create an instance of the TSP evaluator type.
-  MyTSPEvaluator(n, s["threads"], matrix)  
-
-</pre>
+A complete example of our manifest file is given below.
 
 <pre class="yaml">
 type: alfred#evaluator/tsp
@@ -470,7 +450,29 @@ properties:
      the cities for the TSP instance being solved.
 
 composer: |
-  ...
+
+  # Create a list to hold the co-ordinates of each city.
+  cities = Vector{Float}[] 
+  
+  # Open the text file up, remove any empty lines, convert remaining lines
+  f = open(s["file"], "r")
+ 
+  # Count the number of cities
+  n = length(cities)
+
+  # From the list of cities, compute distance matrix.
+  matrix = Array(Float, 2)
+  for i = 1:n
+    for j = 1:n
+      matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
+    end
+  end
+
+  # Default to a single thread of evaluation.
+  s["threads"] = get(s, "threads", 1)
+ 
+  # Create an instance of the TSP evaluator type.
+  MyTSPEvaluator(n, s["threads"], matrix)  
 </pre>
 
 ## Running the Algorithm
