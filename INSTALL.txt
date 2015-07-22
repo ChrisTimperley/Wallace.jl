@@ -21,7 +21,7 @@ To install the latest developmental version of Wallace, open up the Julia REPL,
 and call the following:
 
 julia> Pkg.remove("Wallace")
-julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.git")
+julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.jl.git")
 
 This will remove any existing Wallace module from your Julia installation,
 before cloning the contents of the Wallace git repository into your local
