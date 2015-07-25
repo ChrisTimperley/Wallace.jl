@@ -46,7 +46,7 @@ function build(e::MultiplexerEvaluator)
   return e
 end
 
-function evaluate!(e::MultiplexerEvaluator, s::State, c::Individual)
+function evaluate!(e::MultiplexerEvaluator, s::State, sc::FitnessScheme, c::Individual)
   outputs = Array(Bool, e.permutations)
   for i in 1:e.permutations
     inp = e.inputs[i]
@@ -61,7 +61,7 @@ function evaluate!(e::MultiplexerEvaluator, s::State, c::Individual)
     end
   end
 
-  SimpleFitness{Int64}(true, hits)
+  fitness(scheme, hits)
 end
 
 register(joinpath(dirname(@__FILE__), "multiplexer.manifest.yml"))
