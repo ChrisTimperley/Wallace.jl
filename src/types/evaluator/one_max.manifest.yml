@@ -1,3 +1,0 @@
-id: evaluator/one_max
-composer: |
-  OneMaxEvaluator()
