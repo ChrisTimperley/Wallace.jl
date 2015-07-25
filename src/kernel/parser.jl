@@ -63,11 +63,19 @@ module Parser
     return join(lines, "\n")
   end
 
-  # Detect if a given (sub-)specification is a range object definition.
-  detect_range_object(d::Dict{Any, Any}) = haskey(d, "_range_object")
+  # Detect if a given (sub-)specification is a range definition.
+  detect_range(d::Dict{Any, Any}) = haskey(d, "_range_object")
 
-  # Converts a range object definition into a Julia range.
-  convert_range_object(d::Dict{Any, Any}) = int(d["start"]):int(d["end"])
+  # Converts a range definition into a Julia range.
+  convert_range(d::Dict{Any, Any}) = int(d["start"]):int(d["end"])
+
+  # Formats all range definitions into their Julia equivalents.
+  handle_ranges!(d::Dict{Any, Any}) =
+    detect_range(d) ? convert_range(d) : (_handle_ranges!(d);d)
+  _handle_ranges!(d::Dict{Any, Any}) = for (k, v) in d
+    isa(v, Dict{Any, Any}) &&
+      (detect_range(v) ? d[k] = convert_range(v) : _handle_ranges!(v))
+  end
 
   # Returns the leading indent for a given string.
   function indent_of(s::String)
@@ -90,7 +98,7 @@ module Parser
     # Handle all type tags.
     s = handle_type_tags(s)
 
-    # Prepare range objects.
+    # Format each range definition into an objects.
     s = replace(s, r"^\s*\w+:\s+((\d+):(\d+))$"m, ss -> (
       pts = rsplit(ss, ":", 3); "$(pts[1]): {\"_range_object\": true, \"start\": $(pts[2]), \"end\": $(pts[3])}"
     ))
@@ -101,6 +109,7 @@ module Parser
     # Parse as a YAML document, before handling insertion points and range
     # objects.
     d = YAML.load(s)
+    handle_ranges!(d)
     inj_ins!(d)
 
     return d
