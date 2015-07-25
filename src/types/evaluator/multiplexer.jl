@@ -50,7 +50,7 @@ function evaluate!(e::MultiplexerEvaluator, s::State, sc::FitnessScheme, c::Indi
   outputs = Array(Bool, e.permutations)
   for i in 1:e.permutations
     inp = e.inputs[i]
-    outputs[i] = execute(get(c.tree), inp[1], inp[2], inp[3],
+    outputs[i] = execute(get(c.genome), inp[1], inp[2], inp[3],
       inp[4], inp[5], inp[6], inp[7], inp[8], inp[9], inp[10], inp[11]) 
   end
 
