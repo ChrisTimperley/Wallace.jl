@@ -63,11 +63,11 @@ module Parser
     return join(lines, "\n")
   end
 
-  # Replaces each range object definition within a given Wallace DSL file
-  # with a 
-  function handle_range_objects(s::String)
-    # ^\s*\w+:\s+\d+:\d+
-  end
+  # Detect if a given (sub-)specification is a range object definition.
+  detect_range_object(d::Dict{Any, Any}) = haskey(d, "_range_object")
+
+  # Converts a range object definition into a Julia range.
+  convert_range_object(d::Dict{Any, Any}) = int(d["start"]):int(d["end"])
 
   # Returns the leading indent for a given string.
   function indent_of(s::String)
