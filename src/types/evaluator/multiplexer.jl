@@ -61,7 +61,7 @@ function evaluate!(e::MultiplexerEvaluator, s::State, sc::FitnessScheme, c::Indi
     end
   end
 
-  fitness(scheme, hits)
+  fitness(sc, hits)
 end
 
 register(joinpath(dirname(@__FILE__), "multiplexer.manifest.yml"))
