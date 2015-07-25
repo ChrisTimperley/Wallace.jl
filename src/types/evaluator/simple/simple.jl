@@ -1,12 +1,11 @@
-load("../evaluator",  dirname(@__FILE__))
-load("../state",      dirname(@__FILE__))
-load("../individual", dirname(@__FILE__))
-load("../fitness",    dirname(@__FILE__))
+load("../../evaluator",  dirname(@__FILE__))
+load("../../state",      dirname(@__FILE__))
+load("../../individual", dirname(@__FILE__))
+load("../../fitness",    dirname(@__FILE__))
 
 # Simple evaluators implement a single objective function.
 abstract SimpleEvaluator <: Evaluator
 
-# Evaluates the state of 
 function evaluate!(
   e::SimpleEvaluator,
   s::State
@@ -24,4 +23,4 @@ function evaluate!(
   end
 end
 
-register(joinpath(dirname(@__FILE__), "simple.manifest.yml"))
+register(joinpath(dirname(@__FILE__), "manifest.yml"))

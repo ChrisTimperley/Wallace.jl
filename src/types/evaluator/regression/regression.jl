@@ -1,5 +1,5 @@
-load("simple", dirname(@__FILE__))
-load("../fitness/simple", dirname(@__FILE__))
+load("../simple/simple",      dirname(@__FILE__))
+load("../../fitness/simple",  dirname(@__FILE__))
 
 type RegressionEvaluator <: SimpleEvaluator
   num_samples::Int
@@ -19,4 +19,4 @@ function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessScheme, c::Indiv
   fitness(sc, sse)
 end
 
-register(joinpath(dirname(@__FILE__), "regression.manifest.yml"))
+register(joinpath(dirname(@__FILE__), "manifest.yml"))

@@ -1,3 +1,0 @@
-id: evaluator/lambda
-composer: |
-  e.objective(e, s, c)

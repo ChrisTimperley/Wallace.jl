@@ -1,5 +1,5 @@
-load("simple", dirname(@__FILE__))
-load("../fitness/simple", dirname(@__FILE__))
+load("../simple/simple", dirname(@__FILE__))
+load("../../fitness/simple", dirname(@__FILE__))
 
 type MultiplexerEvaluator <: SimpleEvaluator
   input_lines::Int
@@ -64,4 +64,4 @@ function evaluate!(e::MultiplexerEvaluator, s::State, sc::FitnessScheme, c::Indi
   fitness(sc, hits)
 end
 
-register(joinpath(dirname(@__FILE__), "multiplexer.manifest.yml"))
+register(joinpath(dirname(@__FILE__), "manifest.yml"))
