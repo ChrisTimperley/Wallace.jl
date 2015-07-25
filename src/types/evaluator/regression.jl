@@ -9,7 +9,7 @@ type RegressionEvaluator <: SimpleEvaluator
     new(length(samples), samples)
 end
 
-function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessSchema, c::Individual)
+function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessScheme, c::Individual)
   sse = zero(Float)
   diff = zero(Float)
   for x in e.samples

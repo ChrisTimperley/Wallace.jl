@@ -1,6 +1,7 @@
 load("../evaluator",  dirname(@__FILE__))
 load("../state",      dirname(@__FILE__))
 load("../individual", dirname(@__FILE__))
+load("../fitness",    dirname(@__FILE__))
 
 # Simple evaluators implement a single objective function.
 abstract SimpleEvaluator <: Evaluator
