@@ -63,6 +63,12 @@ module Parser
     return join(lines, "\n")
   end
 
+  # Replaces each range object definition within a given Wallace DSL file
+  # with a 
+  function handle_range_objects(s::String)
+    # ^\s*\w+:\s+\d+:\d+
+  end
+
   # Returns the leading indent for a given string.
   function indent_of(s::String)
     indent = ""
@@ -84,12 +90,19 @@ module Parser
     # Handle all type tags.
     s = handle_type_tags(s)
 
+    # Prepare range objects.
+    s = replace(s, r"^\s*\w+:\s+((\d+):(\d+))$"m, ss -> (
+      pts = rsplit(ss, ":", 3); "$(pts[1]): {\"_range_object\": true, \"start\": $(pts[2]), \"end\": $(pts[3])}"
+    ))
+
     # Format each insertion point into an object.
     s = replace(s, r"\$\(\w+\)", x -> "{\"\$\":\"$(x[3:end-1])\"}")
 
-    # Parse as a YAML document, before handling insertion points.
+    # Parse as a YAML document, before handling insertion points and range
+    # objects.
     d = YAML.load(s)
     inj_ins!(d)
+
     return d
   end
 
