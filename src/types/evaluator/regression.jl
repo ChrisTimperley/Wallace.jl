@@ -9,14 +9,14 @@ type RegressionEvaluator <: SimpleEvaluator
     new(length(samples), samples)
 end
 
-function evaluate!(e::RegressionEvaluator, s::State, c::Individual)
+function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessSchema, c::Individual)
   sse = zero(Float)
   diff = zero(Float)
   for x in e.samples
     diff = x[2] - execute(get(c.tree), x[1])
     sse += diff * diff
   end
-  SimpleFitness{Float}(false, sse)
+  fitness(sc, sse)
 end
 
 register(joinpath(dirname(@__FILE__), "regression.manifest.yml"))
