@@ -13,7 +13,7 @@ function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessScheme, c::Indiv
   sse = zero(Float)
   diff = zero(Float)
   for x in e.samples
-    diff = x[2] - execute(get(c.tree), x[1])
+    diff = x[2] - execute(get(c.genome), x[1])
     sse += diff * diff
   end
   fitness(sc, sse)
