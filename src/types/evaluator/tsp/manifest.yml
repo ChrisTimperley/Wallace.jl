@@ -25,7 +25,7 @@ composer: |
   coords = open(s["file"], "r") do f
     c = Vector{Float}[]
     for ln in eachline(f)
-      !isempty(ln) && push!(c, Float[float(x) for x in split(ln, ",")]) 
+      !isempty(ln) && push!(c, Float[float(x) for x in split(ln)]) 
     end
     c
   end
