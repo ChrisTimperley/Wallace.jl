@@ -12,6 +12,9 @@ end
 
 function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
   tour = get(c.genome)
+  
+  println("Tour: $(tour)")
+
   length = zero(Float)
   for i in 1:e.cities-1
     length += e.distance[tour[i], tour[i+1]]
