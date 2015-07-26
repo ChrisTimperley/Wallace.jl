@@ -19,3 +19,5 @@ function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
   length += e.distance[tour[end], tour[1]]
   fitness(sch, length)
 end
+
+register(joinpath(dirname(@__FILE__), "manifest.yml"))
