@@ -21,7 +21,7 @@ function operate!{T}(o::OneSwapMutation,
   # Select two random points on the genome.
   p = get(inputs[1])
   ln = length(p)
-  x1 = rand(1:ln)
+  x1 = x2 = rand(1:ln)
   while true
     x2 = rand(1:ln)
     x2 != x1 && break
