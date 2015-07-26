@@ -33,8 +33,8 @@ composer: |
 
   # Generate a distance matrix from the set of co-ordinates.
   matrix = Array(Float, num, num)
-  for i = 1:n
-    for j = 1:n
+  for i = 1:num
+    for j = 1:num
       matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
     end
   end
