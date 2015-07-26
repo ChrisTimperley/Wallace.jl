@@ -12,18 +12,10 @@ end
 
 function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
   tour = get(c.genome)
-  
-  println("Tour: $(tour)")
-
   length = zero(Float)
-  println("No. cities: $(e.cities)")
-
   for i in 1:(e.cities - 1)
-    println("Comparing: $(i) to $(i+1)")
     length += e.distance[tour[i], tour[i+1]]
   end
-  println("Almost-length: $(length)")
-
   length += e.distance[tour[end], tour[1]]
   fitness(sch, length)
 end
