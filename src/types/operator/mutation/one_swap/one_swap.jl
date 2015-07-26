@@ -1,5 +1,5 @@
-load("../../mutation",        dirname(@__FILE__))
-load("../../../representation",  dirname(@__FILE__))
+load("../../mutation",            dirname(@__FILE__))
+load("../../../representation",   dirname(@__FILE__))
 
 type OneSwapMutation <: Mutation
   representation::Representation

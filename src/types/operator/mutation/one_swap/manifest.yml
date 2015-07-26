@@ -12,4 +12,4 @@ properties:
       The probability that a pair of genes within the genome will be swapped.
 
 composer: |
-  OneSwapMutation(s["stage"].representation, get(s, "rate", 0.1))
+  OneSwapMutation(s["stage"].representation, Base.get(s, "rate", 0.1))
