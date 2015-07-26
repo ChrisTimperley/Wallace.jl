@@ -16,7 +16,10 @@ function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
   println("Tour: $(tour)")
 
   length = zero(Float)
+  println("No. cities: $(e.cities)")
+
   for i in 1:(e.cities - 1)
+    println("Comparing: $(i) to $(i+1)")
     length += e.distance[tour[i], tour[i+1]]
   end
   println("Almost-length: $(length)")
