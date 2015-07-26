@@ -1,7 +1,7 @@
 id: koza:builder/half_and_half
 composer: |
   KozaHalfBuilder{s["tree"]}(
-    get(s, "min_depth", 1),
-    get(s, "max_depth", 9),
-    get(s, "prob_terminals", 0.5),
-    get(s, "prob_grow", 0.5))
+    Base.get(s, "min_depth", 1),
+    Base.get(s, "max_depth", 9),
+    Base.get(s, "prob_terminals", 0.5),
+    Base.get(s, "prob_grow", 0.5))

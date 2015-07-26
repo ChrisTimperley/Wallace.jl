@@ -12,7 +12,7 @@ composer: |
 
   # Construct the builder.
   # If none is given, default to ramped-half-and-half with 0.5 grow probability.
-  s["builder"] = get(s, "builder", {
+  s["builder"] = Base.get(s, "builder", {
     "type" => "koza#builder/half_and_half",
     "min_depth" => 2,
     "max_depth" => 6,
