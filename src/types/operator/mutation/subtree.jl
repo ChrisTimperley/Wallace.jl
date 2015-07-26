@@ -1,6 +1,6 @@
-load("../mutation", dirname(@__FILE__))
-load("../../representation/koza", dirname(@__FILE__))
-load("../../representation/koza/builder/full", dirname(@__FILE__))
+load("../mutation",                                 dirname(@__FILE__))
+load("../../representation/koza",                   dirname(@__FILE__))
+load("../../representation/koza/builder/full/full", dirname(@__FILE__))
 
 type SubtreeMutation <: Mutation
   representation::KozaTreeRepresentation
