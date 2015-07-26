@@ -1,0 +1,4 @@
+id: crossover/ordered
+composer: |
+  OrderedCrossover(s["stage"].representation,
+    Base.get(s, "rate", 1.0))
