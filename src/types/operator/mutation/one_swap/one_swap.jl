@@ -15,20 +15,20 @@ num_outputs(o::OneSwapMutation) = 1
 function operate!{T}(o::OneSwapMutation,
   inputs::Vector{IndividualStage{Vector{T}}})
 
-    # Enforce mutation rate.
-    rand() <= o.rate && return inputs
+  # Enforce mutation rate.
+  rand() <= o.rate && return inputs
 
-    # Select two random points on the genome.
-    ln = length(get(inputs[0]))
-    x1 = rand(1:ln)
-    while true
-      x2 = rand(1:ln)
-      x2 != x1 && break
-    end
+  # Select two random points on the genome.
+  p = get(inputs[0])
+  ln = length(p)
+  x1 = rand(1:ln)
+  while true
+    x2 = rand(1:ln)
+    x2 != x1 && break
+  end
 
-    # Swap the chosen alleles.
-    get(inputs[0][x1]), get(inputs[0][x2]) =
-      get(inputs[0][x2]), get(inputs[0][x1])
+  # Swap the chosen alleles.
+  p[x1], p[x2] = p[x2], p[x1]
 
   return inputs
 end
