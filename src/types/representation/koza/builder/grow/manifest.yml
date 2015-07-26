@@ -1,0 +1,6 @@
+id: koza:builder/grow
+composer: |
+  KozaGrowBuilder{s["tree"]}(
+    get(s, "min_depth", 1),
+    get(s, "max_depth", 8),
+    get(s, "prob_terminal", 0.5))

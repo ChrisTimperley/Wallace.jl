@@ -1,13 +1,10 @@
-load("../builder", dirname(@__FILE__))
-load("../parent",  dirname(@__FILE__))
-load("../../koza", dirname(@__FILE__))
+load("../../builder", dirname(@__FILE__))
+load("../../parent",  dirname(@__FILE__))
+load("../../../koza", dirname(@__FILE__))
 
 type KozaFullBuilder{T <: KozaTree} <: KozaBuilder
   min_depth::Int
   max_depth::Int
-
-  KozaFullBuilder(mind::Int, maxd::Int) =
-    new(mind, maxd)
 end
 
 function build{T}(b::KozaFullBuilder{T}, r::KozaTreeRepresentation)
@@ -31,3 +28,5 @@ build(::Type{KozaFullBuilder},
     end
     return n
   end
+
+register(joinpath(dirname(@__FILE__), "manifest.yml"))

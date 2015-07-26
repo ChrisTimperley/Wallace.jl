@@ -12,7 +12,15 @@ composer: |
 
   # Construct the builder.
   # If none is given, default to ramped-half-and-half with 0.5 grow probability.
-  s["builder"] = KozaHalfBuilder{tt}(2, 6, 0.5, 0.5) 
+  s["builder"] = get(s, "builder", {
+    "type" => "koza#builder/half_and_half",
+    "min_depth" => 2,
+    "max_depth" => 6,
+    "prob_terminals" => 0.5,
+    "prob_grow" => 0.5
+  })
+  s["builder"]["tree"] = tt
+  s["builder"] = compose(s["builder"])
 
   # Construct each terminal.
   s["terminals"] = Base.get(s, "terminals", String[])

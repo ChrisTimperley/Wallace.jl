@@ -1,15 +1,14 @@
-load("../builder", dirname(@__FILE__))
-load("../parent",  dirname(@__FILE__))
-load("../../koza", dirname(@__FILE__))
+load("../../builder", dirname(@__FILE__))
+load("../../parent",  dirname(@__FILE__))
+load("../../../koza", dirname(@__FILE__))
+load("../full/full",  dirname(@__FILE__))
+load("../grow/grow",  dirname(@__FILE__))
 
 type KozaHalfBuilder{T <: KozaTree} <: KozaBuilder
   min_depth::Int
   max_depth::Int
   prob_terminals::Float
   prob_grow::Float
-
-  KozaHalfBuilder(mind::Int, maxd::Int, pt::Float, pg::Float) =
-    new(mind, maxd, pt, pg)
 end
 
 function build{T}(b::KozaHalfBuilder{T}, r::KozaTreeRepresentation)
@@ -21,3 +20,5 @@ function build{T}(b::KozaHalfBuilder{T}, r::KozaTreeRepresentation)
   end
   return t
 end
+
+register(joinpath(dirname(@__FILE__), "manifest.yml"))
