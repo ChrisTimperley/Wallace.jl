@@ -32,14 +32,12 @@ composer: |
   num = length(coords)
 
   # Generate a distance matrix from the set of co-ordinates.
-  #matrix = Array(Float, num, num)
-  #for i = 1:n
-  #  for j = 1:n
-  # matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
-  #  end
-  #end
-
-  println("Testing!")
+  matrix = Array(Float, num, num)
+  for i = 1:n
+    for j = 1:n
+      matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
+    end
+  end
 
   # Build and return the evaluator.
-  #return TSPEvaluator(dist_matrix, s["threads"])
+  return TSPEvaluator(dist_matrix, s["threads"])
