@@ -40,4 +40,4 @@ composer: |
   end
 
   # Build and return the evaluator.
-  return TSPEvaluator(dist_matrix, s["threads"])
+  return TSPEvaluator(matrix, s["threads"])
