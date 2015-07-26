@@ -19,7 +19,7 @@ function operate!{T}(o::OneSwapMutation,
   rand() <= o.rate && return inputs
 
   # Select two random points on the genome.
-  p = get(inputs[0])
+  p = get(inputs[1])
   ln = length(p)
   x1 = rand(1:ln)
   while true
