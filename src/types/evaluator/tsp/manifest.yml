@@ -22,24 +22,22 @@ composer: |
   s["threads"] < 1 && s["threads"] = 1
 
   # Load the contents of the file and convert into a list of co-ordinates.
-  coords = open(s["file"]) do f
+  coords = open(s["file"], "r") do f
     c = Vector{Float}[]
     for ln in eachline(f)
-      push!(c, Float[float(x) for x in split(ln)]) 
+      !isempty(ln) && push!(c, Float[float(x) for x in split(ln, ",")]) 
     end
     c
   end
   num = length(coords)
 
   # Generate a distance matrix from the set of co-ordinates.
-  distance_matrix = Array(Float, num, num)
-  for (i, x) in enumerate(coords) 
-    for (j, y) in enumerate(coords)
-      distance_matrix[i, j] = distance(x, y)
+  matrix = Array(Float, num, num)
+  for i = 1:n
+    for j = 1:n
+      matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
     end
   end
 
-
-  #
-  TSPEvaluator(dist_matrix, s["threads"])
-
+  # Build and return the evaluator.
+  return TSPEvaluator(dist_matrix, s["threads"])
