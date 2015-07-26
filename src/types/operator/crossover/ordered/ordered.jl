@@ -25,19 +25,19 @@ function operate!{T}(o::OrderedCrossover,
   p2 = get(inputs[2])
 
   # Create the child chromosomes.
-  c1 = Array(op.atom, o.length)
-  c2 = Array(op.atom, o.length)
+  c1 = Array(o.atom, o.length)
+  c2 = Array(o.atom, o.length)
 
   # Randomly select two cut points from the parent chromosomes.
-  cut_from = rand(1:op.length)
-  cut_to = rand(cut_from:op.length)
+  cut_from = rand(1:o.length)
+  cut_to = rand(cut_from:o.length)
 
   # Calculate contents of each strip.
   s1 = p1[cut_from:cut_to]
   s2 = p2[cut_from:cut_to]
 
   # Fill in genes for both children, in sequence.
-  for i in 1:op.length
+  for i in 1:o.length
     if i >= cut_from && i <= cut_to
       c1[i] = p1[i]
       c2[i] = p2[i]
