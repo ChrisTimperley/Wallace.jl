@@ -18,7 +18,7 @@ properties:
 composer: |
 
   # Determine number of threads to use.
-  #s["threads"] = int(get(s, "threads", 1))
+  s["threads"] = int(get(s, "threads", 1))
   #s["threads"] < 1 && s["threads"] = 1
 
   # Load the contents of the file and convert into a list of co-ordinates.
