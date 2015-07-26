@@ -20,7 +20,7 @@ composer: |
     "prob_grow" => 0.5
   })
   s["builder"]["tree"] = tt
-  s["builder"] = compose(s["builder"])
+  s["builder"] = Wallace.compose(s["builder"])
 
   # Construct each terminal.
   s["terminals"] = Base.get(s, "terminals", String[])
