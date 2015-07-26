@@ -27,6 +27,8 @@ function operate!{T}(o::OneSwapMutation,
     x2 != x1 && break
   end
 
+  println("Swap: $(x1) and $(x2).")
+
   # Swap the chosen alleles.
   p[x1], p[x2] = p[x2], p[x1]
 
