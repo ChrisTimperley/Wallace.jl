@@ -7,7 +7,7 @@ type TSPEvaluator <: SimpleEvaluator
   distance::Array{Float, 2}
 
   TSPEvaluator(d::Array{Float, 2}, t::Int) =
-    new(length(d), t, d)
+    new(size(d, 1), t, d)
 end
 
 function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
