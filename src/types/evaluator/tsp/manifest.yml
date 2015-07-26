@@ -35,7 +35,7 @@ composer: |
   matrix = Array(Float, num, num)
   for i = 1:num
     for j = 1:num
-      matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
+      matrix[i, j] = sqrt(sum((coords[i] - coords[j]) .^ 2))
     end
   end
 
