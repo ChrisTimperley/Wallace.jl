@@ -311,11 +311,10 @@ _my_breeder&lt;breeder/fast&gt;:
   crossover&lt;crossover/subtree&gt;: { rate: 0.9 }
   mutation&lt;mutation/subtree&gt;: { rate: 0.01 }
 
-population:
-  demes:
-    - capacity: 100
-      species:  $(_my_species)
-      breeder:  $(_my_breeder)
+population<population/simple>:
+  capacity: 100
+  species:  $(_my_species)
+  breeder:  $(_my_breeder)
 </pre>
 
 ## Dealing with Bloat

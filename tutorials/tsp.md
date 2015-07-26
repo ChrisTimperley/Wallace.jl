@@ -344,7 +344,7 @@ following the `description` property marks the beginning of a multi-line string
 on the line below.
 
 <pre class="yaml">
-type: alfred#evaluator/tsp
+type: alfred:evaluator/tsp
 
 description: |
   Evaluates the fitness of a TSP tour for a pre-determined set of cities.
@@ -358,7 +358,7 @@ split across. Below we give an example of how this might be added to the
 manifest file. 
 
 <pre class="yaml">
-type: alfred#evaluator/tsp
+type: alfred:evaluator/tsp
 
 description: |
   Evaluates the fitness of a TSP tour for a pre-determined set of cities.
@@ -431,7 +431,7 @@ to provide a default number of threads.
 A complete example of our manifest file is given below.
 
 <pre class="yaml">
-type: alfred#evaluator/tsp
+type: alfred:evaluator/tsp
 
 description: |
   Evaluates the fitness of a TSP tour for a pre-determined set of cities.
