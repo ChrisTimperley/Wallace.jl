@@ -9,5 +9,6 @@ end
 
 Base.rand(r::PermutationRepresentation) = shuffle(r.alphabet) 
 chromosome{T}(r::PermutationRepresentation{T}) = Vector{T}
+atom{T}(r::PermutationRepresentation{T}) = T
 
 register(joinpath(dirname(@__FILE__), "manifest.yml"))
