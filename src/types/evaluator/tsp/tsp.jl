@@ -4,7 +4,7 @@ load("../../fitness/simple",  dirname(@__FILE__))
 type TSPEvaluator <: SimpleEvaluator
   cities::Int
   threads::Int
-  distance::Array{Int, 2}
+  distance::Array{Float, 2}
 
   TSPEvaluator(d::Array{Float, 2}, t::Int) =
     new(length(d), t, d)

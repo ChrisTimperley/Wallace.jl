@@ -10,7 +10,7 @@ properties:
       The number of threads that the evaluation process should be split across.
 
   file:
-    type: String
+    type:         String
     description: >
       The path to the file containing the co-ordinates of each of the cities
       for the geometric TSP instance being solved.
@@ -18,8 +18,8 @@ properties:
 composer: |
 
   # Determine number of threads to use.
-  s["threads"] = int(get(s, "threads", 1))
-  s["threads"] < 1 && s["threads"] = 1
+  #s["threads"] = int(get(s, "threads", 1))
+  #s["threads"] < 1 && s["threads"] = 1
 
   # Load the contents of the file and convert into a list of co-ordinates.
   #coords = open(s["file"], "r") do f
