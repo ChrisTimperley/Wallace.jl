@@ -20,7 +20,7 @@ To load an example problem in Wallace, follow the code below; a list of example 
 ```julia
 using Wallace
 
-ex = example("max_ones")
+ex = example("one_max")
 results = run!(ex)
 ```
 To compose an algorithm specification into executable Julia code tailored to a given problem, follow the example code below:

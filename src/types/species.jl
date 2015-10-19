@@ -5,7 +5,7 @@ load("species/stage",   dirname(@__FILE__))
 type Species{T}
   genotype::SpeciesStage
   stages::Dict{AbstractString, SpeciesStage}
-  fitness::FitnessSchetme
+  fitness::FitnessScheme
 
   Species(st::Dict{AbstractString, SpeciesStage}, f::FitnessScheme) =
     new(root(st), st, f)
