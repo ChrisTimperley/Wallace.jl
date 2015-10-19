@@ -8,7 +8,7 @@ composer: |
   s["sources"][1]["type"] = "selection"
 
   # Mark all others as variators.
-  for (i, src) in enumerate(s["sources"][2:end])
+  for (i, src::Dict{Any, Any}) in enumerate(s["sources"][2:end])
     src["source"] = "s$i"
     src["type"] = "variation"
     haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
