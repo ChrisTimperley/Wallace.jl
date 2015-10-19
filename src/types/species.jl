@@ -4,10 +4,10 @@ load("species/stage",   dirname(@__FILE__))
 
 type Species{T}
   genotype::SpeciesStage
-  stages::Dict{String, SpeciesStage}
-  fitness::FitnessScheme
+  stages::Dict{AbstractString, SpeciesStage}
+  fitness::FitnessSchetme
 
-  Species(st::Dict{String, SpeciesStage}, f::FitnessScheme) =
+  Species(st::Dict{AbstractString, SpeciesStage}, f::FitnessScheme) =
     new(root(st), st, f)
 end
 
@@ -15,7 +15,7 @@ end
 genotype(s::Species) = s.genotype
 
 # Returns the representation used by a given stage of a provided species.
-representation(species::Species, stage::String) = species.stages[stage].representation
+representation(species::Species, stage::AbstractString) = species.stages[stage].representation
 
 # Returns the unique individual type associated this species.
 ind_type{T}(s::Species{T}) = T
@@ -24,8 +24,8 @@ ind_type{T}(s::Species{T}) = T
 # for all individuals in a given list.
 function convert!{I <: Individual}(
   s::Species,
-  from::String,
-  to::String,
+  from::AbstractString,
+  to::AbstractString,
   inds::Vector{I}
 )
   convert!(representation(s, from), representation(s, to), from, to, inds)

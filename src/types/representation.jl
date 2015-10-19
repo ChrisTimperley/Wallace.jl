@@ -8,8 +8,8 @@ chromosome(r::Representation) =
 function convert!{I <: Individual}(
   r_from::Representation,
   r_to::Representation,
-  n_from::String,
-  n_to::String,
+  n_from::AbstractString,
+  n_to::AbstractString,
   inds::Vector{I}
 )
   getter = eval(parse("i -> i.$(n_from)"))

@@ -66,4 +66,3 @@ composer: |
   
   # Return the generated individual type.
   return t
-

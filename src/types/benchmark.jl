@@ -1,4 +1,4 @@
-function benchmark(s::String, output::String, runs::Int)
+function benchmark(s::AbstractString, output::AbstractString, runs::Int)
 
   # Load the algorithm at the specified location.
   alg = compose("algorithm/simple_evolutionary_algorithm",
