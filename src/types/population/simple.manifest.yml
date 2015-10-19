@@ -27,9 +27,9 @@ properties:
       The breeder used to generate the offspring for this population.
 
 composer: |
-  compose_as(Dict(
+  compose_as(Dict{Any, Any}(
     "demes" => [
-      Dict(
+      Dict{Any, Any}(
         "capacity"  => s["size"],
         "offspring" => Base.get(s, "offspring", s["size"]),
         "species"   => s["species"],

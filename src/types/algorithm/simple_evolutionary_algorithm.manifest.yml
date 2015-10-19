@@ -14,8 +14,8 @@ composer: |
 
   # If no type is provided for the population, proceed to use the full
   # population type.
-  println("Building population...")
-  s["population"] = compose_as(s["population"], Base.get(s["population"], "type", "population"))
+  s["population"] = compose_as(s["population"],
+    Base.get(s["population"], "type", "population"))
 
   # Default the replacement scheme to use generational replacement.
   println("Building replacement...")
