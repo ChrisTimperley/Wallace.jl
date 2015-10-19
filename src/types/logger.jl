@@ -4,7 +4,7 @@ abstract Logger
 
 # Creates a fresh empty output directory at the provided location,
 # and prepares each of the loggers for the upcoming run.
-function prepare!(ls::Vector{Logger}, output::String)
+function prepare!(ls::Vector{Logger}, output::AbstractString)
   if isdir(output)
     rm(output; recursive = true)
   end
@@ -13,7 +13,7 @@ function prepare!(ls::Vector{Logger}, output::String)
     prepare!(l, output)
   end
 end
-prepare!(l::Logger, output::String) = l
+prepare!(l::Logger, output::AbstractString) = l
 
 close!(ls::Vector{Logger}) = for l in ls; close!(l); end
 close!(l::Logger) = l

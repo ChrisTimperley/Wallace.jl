@@ -27,13 +27,13 @@ properties:
       The breeder used to generate the offspring for this population.
 
 composer: |
-  compose_as({
-    "demes" => {
-      {
+  compose_as(Dict(
+    "demes" => [
+      Dict(
         "capacity"  => s["size"],
         "offspring" => Base.get(s, "offspring", s["size"]),
         "species"   => s["species"],
         "breeder"   => s["breeder"]
-      }
-    }
-  }, "population")
+      )
+    ]
+  ), "population")
