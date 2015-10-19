@@ -74,7 +74,7 @@ function breed!{I <: Individual}(
 
   # Calculate the number of calls to the operator that are necessary to
   # produce the desired number of individuals.
-  calls = iceil(n / op_outputs)
+  calls = ceil(Integer, n / op_outputs)
 
   # Generate the necessary input proto-offspring.
   inputs = breed!(sp, s.source, d, calls * op_outputs, s)
