@@ -20,7 +20,7 @@ composer: |
   # Default the replacement scheme to use generational replacement.
   println("Building replacement...")
   s["replacement"] = Base.get(s, "replacement",
-    Dict("type" => "replacement/generational"))
+    Dict{Any, Any}("type" => "replacement/generational"))
   s["replacement"] = compose_as(s["replacement"], s["replacement"]["type"])
   
   println("Building evaluator...")
