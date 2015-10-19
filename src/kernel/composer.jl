@@ -32,6 +32,8 @@ module Composer
   function compose_as(s::Dict{Any, Any}, as::AbstractString)
     println("composing as: $(as)")
     c = composer(as)
-    c(s)
+    composed = c(s)
+    println("composed")
+    return composed
   end
 end

@@ -21,6 +21,8 @@ composer: |
   s["breeder"] = Dict{Any, Any}(s["breeder"])
   s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
   s["breeder"]["species"] = s["species"]
+
+  println("-- building breeder.")
   s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
   s["capacity"] = Base.get(s, "capacity", 100)
   s["offspring"] = Base.get(s, "offspring", s["capacity"])
