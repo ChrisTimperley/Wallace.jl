@@ -30,7 +30,7 @@ module Wallace
   using StatsBase
 
   # Imports a file into the Wallace environment, relative to a given directory.
-  function load(file::ASCIIString, from::ASCIIString)
+  function load(file::AbstractString, from::AbstractString)
     
     # Ensure the ".jl" suffix is added to the end of the file.
     if !(length(file) > 2 && file[end-2:end] == ".jl")
@@ -71,8 +71,8 @@ module Wallace
   end
 
   # Initialise the type registry and the list of loaded files.
-  type_registry = Dict{ASCIIString, Type}()
-  loaded_files = ASCIIString[]
+  type_registry = Dict{AbstractString, Type}()
+  loaded_files = AbstractString[]
 
   # Load all of the built-in types.
   load_all(joinpath(dirname(@__FILE__), "types"))
