@@ -2,7 +2,7 @@ id: breeder/linear
 
 composer: |
   s["sources"] = [
-    Dict("operator" => op) for op in pop!(s, "operators")
+    Dict{Any, Any}("operator" => op) for op in pop!(s, "operators")
   ]
   # Mark the first operator as a selection stage.
   s["sources"][1]["type"] = "selection"
@@ -13,7 +13,7 @@ composer: |
     src["type"] = "variation"
     haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
   end
-  s["sources"] = Dict(["s$i" for i in 1:length(s["sources"])], s["sources"])
+  s["sources"] = Dict{Any, Any}(["s$i" for i in 1:length(s["sources"])], s["sources"])
 
   # Pass the modified specification to the fast breeder composer.
   compose_as(s, "breeder/fast")
