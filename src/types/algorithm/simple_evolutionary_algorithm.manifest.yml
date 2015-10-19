@@ -17,7 +17,8 @@ composer: |
   s["population"] = compose_as(s["population"], Base.get(s["population"], "type", "population"))
 
   # Default the replacement scheme to use generational replacement.
-  s["replacement"] = Base.get(s, "replacement", {"type" => "replacement/generational"})
+  s["replacement"] = Base.get(s, "replacement",
+    Dict("type" => "replacement/generational"))
   s["replacement"] = compose_as(s["replacement"], s["replacement"]["type"])
   
   s["evaluator"] = compose_as(s["evaluator"], s["evaluator"]["type"])
