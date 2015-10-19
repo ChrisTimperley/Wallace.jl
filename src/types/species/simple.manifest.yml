@@ -12,7 +12,7 @@ properties:
 
 composer: |
   compose_as(Dict(
-    "fitness" => Base.get(s, "fitness", {"type" => "scalar"}),
+    "fitness" => Base.get(s, "fitness", Dict("type" => "scalar")),
     "stages"  => Dict(
       "genome" => Dict(
         "representation" => s["representation"]
