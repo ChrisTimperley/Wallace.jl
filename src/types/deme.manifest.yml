@@ -15,6 +15,7 @@ properties:
       The number of offspring that are produced at each generation.
 
 composer: |
+  println("- building deme.")
   s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
   s["breeder"]["species"] = s["species"]
   s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
