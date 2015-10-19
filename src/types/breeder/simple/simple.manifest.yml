@@ -17,11 +17,11 @@ properties:
     description:  The mutation operator used by this breeder.
 
 composer: |
-  s["operators"] = Dict{Any, Any}(
+  s["operators"] = [
     pop!(s, "selection"),
     pop!(s, "crossover"),
     pop!(s, "mutation")
-  )
+  ]
 
   # Pass the modified specification to the linear breeder composer.
   compose_as(s, "breeder/linear")
