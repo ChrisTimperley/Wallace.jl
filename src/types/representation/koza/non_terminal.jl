@@ -25,10 +25,10 @@ function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::AbstractString)
     constructor(p::KozaParent) =
       new(p, Array(KozaNode, $(length(accepts))))
     constructor($(
-      join([["p::KozaParent"], ["c$(i)::KozaNode" for i in 1:length(inputs)]], ",")
+      join(vcat(["p::KozaParent"], ["c$(i)::KozaNode" for i in 1:length(inputs)]), ",")
     )) =
       new($(
-      join([["p"], ["c$(i)" for i in 1:length(inputs)]], ",")
+      join(vcat(["p"], ["c$(i)" for i in 1:length(inputs)]), ",")
     ))
   end"
   t = anonymous_type(Wallace, src)
@@ -44,23 +44,22 @@ function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::AbstractString)
 
   # Compose the execution function.
   input_list = [i.label for i in inputs]
-  src = join([["n::$(t)"], ["$(i.label)::$(i.ty)" for i in inputs]], ",")
+  src = join(vcat(["n::$(t)"], ["$(i.label)::$(i.ty)" for i in inputs]), ",")
   src = "function execute($(src))\n"
 
   # Find each argument in the function body and replace with an execution call.
   for (i, a) in enumerate(accepts)
     body = replace(body, Regex("\\b$(a.label)\\b"),
-      "execute($(join([["n.children[$(i)]"], input_list], ", ")))")
+      "execute($(join(vcat(["n.children[$(i)]"], input_list), ", ")))")
   end
   src = src * body * "\nend"
   eval(Wallace, Base.parse(src))
 
   # Compose the clone function.
   src = "clone(n::$(t), p::KozaParent) = $(t)($(
-    join([["p"], ["clone(n.children[$(i)], n)" for i in 1:length(inputs)]], ",")
+    join(vcat(["p"], ["clone(n.children[$(i)], n)" for i in 1:length(inputs)]), ",")
   ))"
   eval(Wallace, Base.parse(src))
-
   return t
 end
 

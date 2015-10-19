@@ -21,10 +21,9 @@ function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::AbstractString)
   eval(Wallace, Base.parse("fresh(::$(t), p::KozaParent) = $(t)(p)"))
 
   # Compose the execution function.
-  src = join([["::$(t)"], ["$(i.label)::$(i.ty)" for i in inputs]], ",")
+  src = join(vcat(["::$(t)"], ["$(i.label)::$(i.ty)" for i in inputs]), ",")
   src = "execute($(src)) = $(label)"
   eval(Wallace, Base.parse(src))
-
   return t
 end
 
