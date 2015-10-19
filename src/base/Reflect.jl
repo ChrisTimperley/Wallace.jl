@@ -34,12 +34,12 @@ module Reflect
     return eval(m, Base.parse(name))
   end
 
-  define_inline_function(m::Module, n::ASCIIString, args::Vector{ASCIIString}, body::ASCIIString) =
+  define_inline_function(m::Module, n::AbstractString, args::Vector{AbstractString}, body::AbstractString) =
     eval(m, Base.parse("$(n)($(join(args, ",")) = $(body)"))
 
   # Never generates one-line functions (FOR NOW).
   # Won't work with less specific "String" type?
-  define_function(m::Module, n::ASCIIString, args::Vector{ASCIIString}, body::ASCIIString) =
+  define_function(m::Module, n::AbstractString, args::Vector{AbstractString}, body::AbstractString) =
     eval(m, Base.parse("function $(n)($(join(args, ",")));$(body);end"))
 
 end
