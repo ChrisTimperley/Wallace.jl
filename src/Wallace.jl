@@ -51,11 +51,11 @@ module Wallace
 
   # Imports a file into the Wallace environment, relative to the current
   # working directory.
-  load(file::ASCIIString) = load(file, pwd())
+  load(file::AbstractString) = load(file, pwd())
 
   # Imports all files within a given directory into the Wallace environment
   # recursively.
-  function load_all(directory::ASCIIString)
+  function load_all(directory::AbstractString)
     for f in readdir(directory)
       f = joinpath(directory, f)
       if endswith(f, ".jl")
