@@ -9,7 +9,7 @@ module Wallace
   end
 
   # Load and import the base and kernel modules.
-  require(joinpath(dirname(@__FILE__), "base/identity.jl"))
+  include(joinpath(dirname(@__FILE__), "base/identity.jl"))
   include("base/partition.jl")
   include("base/each.jl")
   include("base/Reflect.jl")

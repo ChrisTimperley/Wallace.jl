@@ -6,11 +6,11 @@ module Parser
   is_ins(::Any) = false
   is_ins(s::Dict{Any, Any}) = collect(keys(s)) == ["\$"]
 
-  match_ins(s::Dict{Any, Any}, loc::String) =
+  match_ins(s::Dict{Any, Any}, loc::AbstractString) =
     match_ins(s, String[ss for ss in split(loc, ".")])
-  match_ins(s::Dict{Any, Any}, loc::Vector{String}) =
+  match_ins(s::Dict{Any, Any}, loc::Vector{AbstractString}) =
     length(loc) == 1 ? s[loc[1]] : match_ins(s[shift!(loc)], loc)
-  match_ins(s::Vector{Any}, loc::Vector{String}) =
+  match_ins(s::Vector{Any}, loc::Vector{AbstractString}) =
     length(loc) == 1 ? s[parseint(loc[1])] : match_ins(s[parseint(shift!(loc))], loc)
 
   inj_ins!(s::Dict{Any, Any}) = inj_ins!(s, s)
@@ -27,7 +27,7 @@ module Parser
   end
 
   # Locate and parse each type tag within the document, line-by-line.
-  function handle_type_tags(s::String)
+  function handle_type_tags(s::AbstractString)
     i = 1
     lines = split(s, "\n")
     while i <= length(lines)
@@ -78,7 +78,7 @@ module Parser
   end
 
   # Returns the leading indent for a given string.
-  function indent_of(s::String)
+  function indent_of(s::AbstractString)
     indent = ""
     i = 1
     while isblank(s[i])
@@ -89,8 +89,8 @@ module Parser
   end
 
   # Parses a Wallace specification file as a pre-processed YAML file.
-  parse_file(f::String) = parse(readall(f))
-  function parse(s::String)
+  parse_file(f::AbstractString) = parse(readall(f))
+  function parse(s::AbstractString)
    
     # Remove all comments.
     s = replace(s, r"#.*", "")

@@ -25,7 +25,7 @@ module Registry
     has_composer::Bool
     composer::Function
 
-    Manifest(id::String, path::String) =
+    Manifest(id::AbstractString, path::AbstractString) =
       new(id, path, "", [], [], [], [], Dict{ASCIIString, Dict{ASCIIString, Any}}(), false)
   end
 
@@ -33,14 +33,14 @@ module Registry
   _contents = Dict{ASCIIString, Manifest}()
 
   # Searches the contents of the registry for a manifest with a given ID.
-  lookup(id::String) = _contents[id]
+  lookup(id::AbstractString) = _contents[id]
 
   # Determines whether a manifest with a given ID exists within the
   # registry.
-  exists(id::String) = haskey(_contents, id)
+  exists(id::AbstractString) = haskey(_contents, id)
 
   # Registers a manifest, encoded in a YAML format, with the registry.
-  function register(path::String)
+  function register(path::AbstractString)
   
     # Ensure the given path is an absolute one.
     path = abspath(path) 

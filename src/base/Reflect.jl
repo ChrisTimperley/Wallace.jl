@@ -14,7 +14,7 @@ module Reflect
   anonymous_type(m::Module) = anonymous_type(m, "type;end")
 
   # Generates an anonymous module from a provided definition.
-  function anonymous_module(d::String)
+  function anonymous_module(d::AbstractString)
     name = fresh_mod()
     d = "module $(name)\n$(d)\nend"
     eval(Base.parse(d))
@@ -22,7 +22,7 @@ module Reflect
   end
 
   # Generates an anonymous type from a provided definition.
-  function anonymous_type(m::Module, d::String)
+  function anonymous_type(m::Module, d::AbstractString)
     # Insert the name of the type after the first modifier.
     name = fresh()
     d = replace(d, r"(?<=\w)\b", " $(name)", 1)

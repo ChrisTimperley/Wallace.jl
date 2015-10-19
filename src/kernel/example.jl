@@ -2,7 +2,7 @@
 EXAMPLES_PATH = joinpath(dirname(@__FILE__), "../../examples")
 
 # Composes an instance of a given example problem.
-function example(name::String)
+function example(name::AbstractString)
   path = joinpath(EXAMPLES_PATH, "$(name).cfg")
 
   # Throw an error if the requested example doesn't exist.

@@ -5,12 +5,12 @@ module Help
   import Wallace.Registry.Manifest
 
   # Wallace version number.
-  version() = v"0.2.0-alpha"
+  version() = v"0.3.0-alpha"
 
-  help(q::String) =
+  help(q::AbstractString) =
     contains(q, ":") ? help_property(q) : help_type(q)
 
-  function help_type(q::String)
+  function help_type(q::AbstractString)
     if !Registry.exists(q)
       println("No documentation found for the requested type: $q.")
     else
@@ -18,7 +18,7 @@ module Help
     end
   end
 
-  function help_property(q::String)
+  function help_property(q::AbstractString)
     println("Unimplemented feature.")
   end
 
