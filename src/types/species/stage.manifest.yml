@@ -1,6 +1,5 @@
 id: species#stage
 composer: |
-
   println("- building species stage.")
 
   # By default, all stages are treated as root stages (although there can only be one) and
