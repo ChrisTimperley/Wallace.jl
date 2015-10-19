@@ -15,7 +15,7 @@ composer: |
   # Compose the fitness scheme for this species.
   # Default to maximization of a float scalar.
   println("-- composing fitness.")
-  s["fitness"] = Base.get(s, "fitness", Dict(
+  s["fitness"] = Base.get(s, "fitness", Dict{Any, Any}(
     "type" => "fitness/scalar",
     "maximise" => true,
     "of" => "Float"
@@ -24,7 +24,7 @@ composer: |
 
   # Compose the individual type.
   println("-- composing individual type.")
-  I = compose_as(Dict(
+  I = compose_as(Dict{Any, Any}(
     "fitness" => s["fitness"],
     "stages" => s["stages"]
   ), "individual")

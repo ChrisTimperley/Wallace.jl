@@ -16,6 +16,9 @@ properties:
 
 composer: |
   println("- building deme.")
+
+  s["species"] = Dict{Any, Any}(s["species"])
+  s["breeder"] = Dict{Any, Any}(s["breeder"])
   s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
   s["breeder"]["species"] = s["species"]
   s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
