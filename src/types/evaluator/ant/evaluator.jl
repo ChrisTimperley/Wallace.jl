@@ -7,7 +7,7 @@ type AntEvaluator <: SimpleEvaluator
   AntEvaluator(ant::Ant) = new(ant)
 end
 
-function evaluate!(e::AntEvaluator, s::State,sc::FitnessScheme,  c::Individual)
+function evaluate!(e::AntEvaluator, s::State, sc::FitnessScheme, c::Individual)
   while e.ant.moves < e.ant.max_moves && e.ant.score < e.ant.max_score
     execute(get(c.genome), e.ant)
   end

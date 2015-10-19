@@ -9,7 +9,7 @@ type Ant
   max_moves::Int
   max_score::Int
   map::Array{Bool, 2} #(x,y)
-  sources::Vector{(Int, Int)}
+  sources::Vector{Tuple{Int, Int}}
   
   Ant(max_moves::Int, map::Array{Bool, 2}) = 
     build(new(0, 0, 1, 1, 1, size(map, 1), size(map, 2), max_moves, 0, map))
