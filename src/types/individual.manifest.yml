@@ -42,7 +42,7 @@ composer: |
 
   # Build the full constructor.
   push!(definition, "constructor(" *
-    join([[], ["s$(i)::IndividualStage{$(chromosome(stages[i]))}" for i in 1:length(stages)]], ",") *
+    join(["s$(i)::IndividualStage{$(chromosome(stages[i]))}" for i in 1:length(stages)], ",") *
     ") = new(" *
     join(vcat(["false"], ["s$(i)" for i in 1:length(stages)]), ",") *
     ")"
@@ -55,7 +55,7 @@ composer: |
   t = anonymous_type(Wallace, join(definition, "\n"))
 
   # Build the cloning operation for this type.
-  cloner = join([[], ["i.$(stage.label)" for stage in stages]], ",")
+  cloner = join(["i.$(stage.label)" for stage in stages], ",")
   cloner = "clone(i::$(t)) = $(t)($(cloner))"
   eval(Wallace, Base.parse(cloner))
 
