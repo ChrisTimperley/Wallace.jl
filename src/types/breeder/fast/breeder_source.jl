@@ -15,7 +15,7 @@ type VariationBreederSource <: BreederSource
   eigen::Type
   operator::Variation
   source::BreederSource
-  stage_name::String
+  stage_name::AbstractString
   stage_getter::Function
   VariationBreederSource(v::Variation, s::BreederSource, stage::SpeciesStage) =
     new(anonymous_type(Wallace), v, s, stage.label,

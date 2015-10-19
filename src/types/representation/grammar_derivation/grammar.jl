@@ -1,17 +1,17 @@
 abstract GrammarToken
 type GrammarLiteral <: GrammarToken
-  value::String
+  value::AbstractString
 end
 type GrammarSymbol <: GrammarToken
-  value::String
+  value::AbstractString
 end
 
 type Grammar
   root::String
-  rules::Dict{String, Vector{Vector{GrammarToken}}}
+  rules::Dict{AbstractString, Vector{Vector{GrammarToken}}}
 
-  function Grammar(root::String, rules::Dict{String, Vector{String}})
-    p_rules = Dict{String, Vector{Vector{GrammarToken}}}()
+  function Grammar(root::AbstractString, rules::Dict{AbstractString, Vector{String}})
+    p_rules = Dict{AbstractString, Vector{Vector{GrammarToken}}}()
     for (sym, entries) in rules
       p_rules[sym] = [parse_rule_entry(entry) for entry in  entries]
     end
@@ -52,7 +52,7 @@ function derive(g::Grammar, s::Vector{Int}, max_wraps::Int)
   return derivation
 end
 
-function parse_rule_entry(entry::String)
+function parse_rule_entry(entry::AbstractString)
   tokens = GrammarToken[]
   while !isempty(entry)
     left, tag, entry = partition(entry, r"<[^\<\>]+>")

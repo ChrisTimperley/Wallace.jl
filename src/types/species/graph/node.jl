@@ -1,7 +1,7 @@
 # Stores the details of a node within a representation graph.
 type RepresentationGraphNode
-  label::String
-  parent::String
+  label::AbstractString
+  parent::AbstractString
   clean::Bool
   lamarckian::Bool
   destinations::Vector{RepresentationGraphNode}
@@ -15,7 +15,7 @@ type RepresentationGraphNode
 
   # Creates a new child node using a given label, a parent node, a clean flag
   # and a lamarckian flag.
-  RepresentationGraphNode(label::String, parent::String, clean::Bool, lamarckian::Bool) =
+  RepresentationGraphNode(label::AbstractString, parent::AbstractString, clean::Bool, lamarckian::Bool) =
     new(label, parent, clean, lamarckian, [], [], [], [])
 end
 

@@ -89,7 +89,7 @@ end
 describe(a::Ant) =
   join([join([draw(a, x, y, a.map[x,y]) for x in 1:a.lim_x],"") for y in 1:a.lim_y], "\n")
 
-function load_trail(path::String)
+function load_trail(path::AbstractString)
 
   # Load the contents of the trail file.
   f = open(path)

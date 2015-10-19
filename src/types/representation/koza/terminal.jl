@@ -2,7 +2,7 @@ load("input", dirname(@__FILE__))
 load("node", dirname(@__FILE__))
 
 abstract KozaTerminal <: KozaNode
-function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::String)
+function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::AbstractString)
   label = def[1:Base.search(def, ':')-1]
   ty = def[Base.last(Base.search(def, "::"))+1:end]
   

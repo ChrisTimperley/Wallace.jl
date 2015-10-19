@@ -2,14 +2,14 @@ load("node", dirname(@__FILE__))
 load("input", dirname(@__FILE__))
 
 type KozaNonTerminalArgument
-  label::String
-  ty::String
-  KozaNonTerminalArgument(def::String) = new(def[1:Base.search(def, ':')-1],
+  label::AbstractString
+  ty::AbstractString
+  KozaNonTerminalArgument(def::AbstractString) = new(def[1:Base.search(def, ':')-1],
     def[Base.last(Base.search(def, "::"))+1:end])
 end
 
 abstract KozaNonTerminal <: KozaNode
-function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::String)
+function ComposeKozaNonTerminal(inputs::Vector{KozaInput}, def::AbstractString)
   label = def[1:Base.search(def, '(')-1]
   returns = Base.strip(def[last(Base.search(def, ")::"))+1:Base.search(def, '=')-1])
   body = Base.strip(def[Base.search(def, '=')+1:end])

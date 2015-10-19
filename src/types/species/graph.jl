@@ -4,7 +4,7 @@ load("graph/node",    dirname(@__FILE__))
 # Representation graphs are used to indicate whether particular stages
 # of an individual are synchronised with the genome.
 type RepresentationGraph
-  nodes::Dict{String, RepresentationGraphNode}
+  nodes::Dict{AbstractString, RepresentationGraphNode}
 
   # Produces the representation graph for a given species.
   RepresentationGraph(s::Species) =
@@ -15,7 +15,7 @@ type RepresentationGraph
   RepresentationGraph(nodes::Vector{RepresentationGraphNode}) = begin
     
     # Construct a map storing each node within the graph by its label.
-    node_map = Dict{String, RepresentationGraphNode}()
+    node_map = Dict{AbstractString, RepresentationGraphNode}()
     for n in nodes
       node_map[n.label] = n
     end
@@ -133,7 +133,7 @@ find_clean(g::RepresentationGraph) = filter(n -> n.clean, nodes(g))
 # stage within the representation graph. Marks all nodes along the chain as
 # clean thereafter, before touching the edited node and dirtying any nodes
 # reachable from the edited node.
-function partial_sync!(g::RepresentationGraph, s::String)
+function partial_sync!(g::RepresentationGraph, s::AbstractString)
   # Calculate the shortest path to synchronising the requested stage.
   path = path_to_clean(g.nodes[s])  
 
@@ -149,14 +149,14 @@ function partial_sync!(g::RepresentationGraph, s::String)
 
   # Return the chain of operations (as a vector of pairs) required to synchronise
   # the representation graph for the desired operation.
-  return (String, String)[(path[i], path[i + 1]) for i in 1:(length(path) - 1)]
+  return (AbstractString, AbstractString)[(path[i], path[i + 1]) for i in 1:(length(path) - 1)]
 end
 
 # Calculates the chain of synchronisation operations required to fully
 # synchronise all the stages of a given representation graph. Marks all
 # nodes within the graph as clean thereafter.
 function full_sync!(g::RepresentationGraph)
-  ops = (String, String)[]
+  ops = (AbstractString, AbstractString)[]
   q = find_clean(g)
 
   while !isempty(q)

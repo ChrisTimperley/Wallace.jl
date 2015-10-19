@@ -15,7 +15,7 @@ type SimpleEvolutionaryAlgorithm <: Algorithm
   initializer::Initializer
   output::AbstractString
 
-  SimpleEvolutionaryAlgorithm(p::Population, ev::Evaluator, r::Replacement, td::Dict{String, Criterion}, ls::Vector{Logger}, o::String) =
+  SimpleEvolutionaryAlgorithm(p::Population, ev::Evaluator, r::Replacement, td::Dict{AbstractString, Criterion}, ls::Vector{Logger}, o::AbstractString) =
     new(State(p), ev, r, td, ls, DefaultInitializer(), o)
 end
 

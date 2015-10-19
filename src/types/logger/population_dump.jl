@@ -2,12 +2,12 @@ load("../logger", dirname(@__FILE__))
 
 type PopulationDumpLogger <: Logger
   # The destination directory of the population dumps.
-  destination::String
+  destination::AbstractString
 
   PopulationDumpLogger() = new()
 end
 
-function prepare!(l::PopulationDumpLogger, output::String)
+function prepare!(l::PopulationDumpLogger, output::AbstractString)
   l.destination = joinpath(output, "population_dumps")
   mkdir(l.destination)
 end

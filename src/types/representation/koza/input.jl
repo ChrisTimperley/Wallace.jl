@@ -1,8 +1,8 @@
 type KozaInput
-  label::String
-  ty::String
+  label::AbstractString
+  ty::AbstractString
 
-  KozaInput(def::String) = new(def[1:Base.search(def, ':')-1],
+  KozaInput(def::AbstractString) = new(def[1:Base.search(def, ':')-1],
     def[Base.last(Base.search(def, "::"))+1:end])
 end
 
