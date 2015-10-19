@@ -17,7 +17,7 @@ properties:
     description:  The mutation operator used by this breeder.
 
 composer: |
-  s["operators"] = Dict(
+  s["operators"] = Dict{Any, Any}(
     pop!(s, "selection"),
     pop!(s, "crossover"),
     pop!(s, "mutation")
