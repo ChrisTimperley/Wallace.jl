@@ -10,13 +10,13 @@ type GrammarDerivationRepresentation <: Representation
     new(max_wraps, grammar)
 end
 
-chromosome(::GrammarDerivationRepresentation) = String
+chromosome(::GrammarDerivationRepresentation) = AbstractString
 
 # Converts from a vector of codons to a grammar derivation.
 convert!(r_from::IntVectorRepresentation,
   r_to::GrammarDerivationRepresentation,
   c_from::IndividualStage{Vector{Int}},
-  c_to::IndividualStage{String}) =
+  c_to::IndividualStage{AbstractString}) =
   c_to = derive(r_to, c_from.value)
 
 derive(r::GrammarDerivationRepresentation, s::Vector{Int}) =

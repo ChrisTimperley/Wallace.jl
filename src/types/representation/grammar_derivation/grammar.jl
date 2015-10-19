@@ -7,10 +7,10 @@ type GrammarSymbol <: GrammarToken
 end
 
 type Grammar
-  root::String
+  root::AbstractString
   rules::Dict{AbstractString, Vector{Vector{GrammarToken}}}
 
-  function Grammar(root::AbstractString, rules::Dict{AbstractString, Vector{String}})
+  function Grammar(root::AbstractString, rules::Dict{AbstractString, Vector{AbstractString}})
     p_rules = Dict{AbstractString, Vector{Vector{GrammarToken}}}()
     for (sym, entries) in rules
       p_rules[sym] = [parse_rule_entry(entry) for entry in  entries]
