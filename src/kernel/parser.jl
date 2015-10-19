@@ -35,6 +35,8 @@ module Parser
       if loc.stop != -1
         typ = lines[i][loc.start+1:loc.stop-2]
 
+        @printf "Found type tag: %s" typ
+
         # Inline block handling.
         bloc = search(lines[i], '{', loc.stop+1)
         if bloc != 0
@@ -42,7 +44,7 @@ module Parser
      
         # Indented block handling.
         # - Determine correct indent from the line below.
-        elseif lines[i][loc.stop+1:end] == ' ' || lines[i][loc.stop+1:end] == '\t'
+        elseif ismatch(r"\s*", lines[i][loc.stop+1:end])
           insert!(lines, i+1, "$(indent_of(lines[i+1]))type: $(typ)")
 
         # Tried injecting type tags into unsupported element.
