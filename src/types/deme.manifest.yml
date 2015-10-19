@@ -19,6 +19,8 @@ composer: |
 
   s["species"] = Dict{Any, Any}(s["species"])
   s["breeder"] = Dict{Any, Any}(s["breeder"])
+
+  println("- about to compose species: $(typeof(s["species"]))")
   s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
   s["breeder"]["species"] = s["species"]
 
