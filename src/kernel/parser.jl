@@ -7,7 +7,7 @@ module Parser
   is_ins(s::Dict{Any, Any}) = collect(keys(s)) == ["\$"]
 
   match_ins(s::Dict{Any, Any}, loc::AbstractString) =
-    match_ins(s, String[ss for ss in split(loc, ".")])
+    match_ins(s, AbstractString[ss for ss in split(loc, ".")])
   match_ins(s::Dict{Any, Any}, loc::Vector{AbstractString}) =
     length(loc) == 1 ? s[loc[1]] : match_ins(s[shift!(loc)], loc)
   match_ins(s::Vector{Any}, loc::Vector{AbstractString}) =
@@ -42,7 +42,7 @@ module Parser
      
         # Indented block handling.
         # - Determine correct indent from the line below.
-        elseif isblank(lines[i][loc.stop+1:end])
+        elseif lines[i][loc.stop+1:end] == ' ' || lines[i][loc.stop+1:end] == '\t'
           insert!(lines, i+1, "$(indent_of(lines[i+1]))type: $(typ)")
 
         # Tried injecting type tags into unsupported element.

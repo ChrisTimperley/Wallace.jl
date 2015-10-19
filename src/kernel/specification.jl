@@ -1,5 +1,5 @@
 type Specification
-  path::String
+  path::AbstractString
   root::SubSpecification
 end
 
