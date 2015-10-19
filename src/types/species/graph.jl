@@ -157,7 +157,7 @@ end
 # synchronise all the stages of a given representation graph. Marks all
 # nodes within the graph as clean thereafter.
 function full_sync!(g::RepresentationGraph)
-  ops = (AbstractString, AbstractString)[]
+  ops = Tuple{AbstractString, AbstractString}[]
   q = find_clean(g)
   while !isempty(q)
     n1 = pop!(q)
