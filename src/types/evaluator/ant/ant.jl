@@ -97,7 +97,7 @@ function load_trail(path::AbstractString)
   close(f)
 
   # Find the dimensions of the trail.
-  dims = [parseint(i) for i in Base.split(Base.strip(shift!(lines)), " ")]
+  dims = [parse(Int, i) for i in Base.split(Base.strip(shift!(lines)), " ")]
 
   # Construct the trail, row by row.
   trail = Array(Bool, dims[1], dims[2])
