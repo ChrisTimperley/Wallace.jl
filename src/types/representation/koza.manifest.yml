@@ -25,12 +25,14 @@ composer: |
   # Construct each terminal.
   s["terminals"] = Base.get(s, "terminals", AbstractString[])
   s["terminals"] = KozaTerminal[
-    apply(ComposeKozaTerminal(s["inputs"], t)) for t in s["terminals"]]
+    ComposeKozaTerminal(s["inputs"], t)() for t in s["terminals"]
+  ]
 
   # Construct each non-terminal.
   s["non_terminals"] = Base.get(s, "non_terminals", AbstractString[])
   s["non_terminals"] = KozaNonTerminal[
-    apply(ComposeKozaNonTerminal(s["inputs"], nt)) for nt in s["non_terminals"]]
+    ComposeKozaNonTerminal(s["inputs"], nt)() for nt in s["non_terminals"]
+  ]
 
   return KozaTreeRepresentation(tt,
     s["min_depth"],
