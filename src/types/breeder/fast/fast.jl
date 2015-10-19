@@ -19,7 +19,7 @@ type FastBreeder <: Breeder
 end
 
 # Returns a list of the sources to a breeding operation or a breeder.
-sources(s::Union(VariationBreederSource, FastBreeder)) = if isa(s.source, MultiBreederSource)
+sources(s::Union{VariationBreederSource, FastBreeder}) = if isa(s.source, MultiBreederSource)
   return s.source.sources
 else
   return BreederSource[s.source]
@@ -35,7 +35,7 @@ function breed!{I <: Individual}(
   s::MultiBreederSource,
   d::Deme{I},
   n::Int,
-  caller::Union(FastBreeder, BreederSource)
+  caller::Union{FastBreeder, BreederSource}
 )
   proportions = proportion(n, s.proportions)
   vcat([breed!(s.sources[i], d, proportions[i], caller) for i in 1:length(s.sources)])
@@ -48,7 +48,7 @@ function breed!(
   s::SelectionBreederSource,
   d::Deme,
   n::Int,
-  caller::Union(FastBreeder, BreederSource)
+  caller::Union{FastBreeder, BreederSource}
 )# =
 #  sync(s.eigen, caller.eigen, sp, map!(clone, select(s.operator, d.members, n)))
   inds = select(s.operator, d.species, d.members, n)
@@ -61,7 +61,7 @@ function breed!{I <: Individual}(
   s::VariationBreederSource,
   d::Deme{I},
   n::Int64,
-  caller::Union(FastBreeder, BreederSource)
+  caller::Union{FastBreeder, BreederSource}
 )
   # Full-time cache?
 
