@@ -149,7 +149,8 @@ function partial_sync!(g::RepresentationGraph, s::AbstractString)
 
   # Return the chain of operations (as a vector of pairs) required to synchronise
   # the representation graph for the desired operation.
-  return (AbstractString, AbstractString)[(path[i], path[i + 1]) for i in 1:(length(path) - 1)]
+  return Tuple{AbstractString, AbstractString}[
+    (path[i], path[i + 1]) for i in 1:(length(path) - 1)]
 end
 
 # Calculates the chain of synchronisation operations required to fully
