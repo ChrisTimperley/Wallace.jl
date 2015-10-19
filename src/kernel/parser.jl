@@ -35,8 +35,6 @@ module Parser
       if loc.stop != -1
         typ = lines[i][loc.start+1:loc.stop-2]
 
-        @printf "Found type tag: %s" typ
-
         # Inline block handling.
         bloc = search(lines[i], '{', loc.stop+1)
         if bloc != 0
