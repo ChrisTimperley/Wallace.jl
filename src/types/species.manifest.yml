@@ -8,8 +8,9 @@ composer: |
   # Compose each of the stages for this species.
   println("-- composing species stages.")
   for (name, stage) in s["stages"]
-    println("-- about to build stage: $(name)")
+    println("stage type: $(typeof(stage))")
     stage["label"] = name
+    println("-- about to build stage: $(name)")
     s["stages"][name] = compose_as(stage, "species#stage")
   end
 
