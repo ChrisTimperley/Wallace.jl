@@ -41,6 +41,7 @@ module Registry
 
   # Registers a manifest, encoded in a YAML format, with the registry.
   function register(path::AbstractString)
+
   
     # Ensure the given path is an absolute one.
     path = abspath(path) 
@@ -49,6 +50,8 @@ module Registry
     # Manifest data structure.
     yml = YAML.load_file(path)
     mfst = Manifest(yml["id"], path)
+
+    @printf "Registering manifest: %s (%s)" yml["id"] path
 
     # Add in each of the optional properties.
     mfst.description = get(yml, "description", "")
