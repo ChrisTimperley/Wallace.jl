@@ -51,7 +51,6 @@ function operate!{T}(o::OrderedCrossover,
   set(inputs[1], c1)
   set(inputs[2], c2)
   return inputs
-
 end
 
 register(joinpath(dirname(@__FILE__), "manifest.yml"))

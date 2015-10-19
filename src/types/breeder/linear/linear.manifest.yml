@@ -1,10 +1,9 @@
 id: breeder/linear
 
 composer: |
-  s["sources"] = {{ 
-    "operator" => op
-  } for op in pop!(s, "operators")}
-
+  s["sources"] = [
+    Dict("operator" => op) for op in pop!(s, "operators")
+  ]
   # Mark the first operator as a selection stage.
   s["sources"][1]["type"] = "selection"
 
