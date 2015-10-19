@@ -29,8 +29,9 @@ module Composer
 
   # Composes a given specification object (in the form of a JSON object)
   # into the object it describes.
-  compose_as{X,Y}(s::Dict{X, Y}, as::AbstractString) =
+  function compose_as{X,Y}(s::Dict{X, Y}, as::AbstractString)
     println("composing as: $(as)")
     c = composer(as)
     c(s)
+  end
 end
