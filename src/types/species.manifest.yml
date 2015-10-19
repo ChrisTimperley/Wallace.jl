@@ -9,6 +9,8 @@ composer: |
   println("-- composing species stages.")
   for (name, stage) in s["stages"]
     println("stage type: $(typeof(stage))")
+    stage["foo"] = "bar"
+    println("foobar")
     stage["label"] = name
     println("-- about to build stage: $(name)")
     s["stages"][name] = compose_as(stage, "species#stage")
