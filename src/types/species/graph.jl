@@ -89,8 +89,8 @@ function find_reachable(node::RepresentationGraphNode)
   while !isempty(q)
     node = shift!(q)
     buffer = filter(d -> d != target && !in(d, reachable), node.destinations)
-    reachable = [[reachable], [buffer]]
-    q = [[q], [buffer]]
+    reachable = vcat(reachable, buffer)
+    q = vcat(q, buffer)
   end
   return reachable
 end
@@ -104,8 +104,8 @@ function find_reachable_from(node::RepresentationGraphNode)
   while !isempty(q)
     node = shift!(q)
     buffer = filter(d -> d != target && !in(d, reachable_from), node.sources)
-    reachable_from = [[reachable_from], [buffer]]
-    q = [[q], [buffer]]
+    reachable_from = vcat(reachable_from, buffer)
+    q = vcat(q, buffer)
   end
   return reachable_from
 end
@@ -158,7 +158,6 @@ end
 function full_sync!(g::RepresentationGraph)
   ops = (AbstractString, AbstractString)[]
   q = find_clean(g)
-
   while !isempty(q)
     n1 = pop!(q)
     for n2 in n1.destinations
@@ -169,6 +168,5 @@ function full_sync!(g::RepresentationGraph)
       end
     end
   end
-
   return ops
 end
