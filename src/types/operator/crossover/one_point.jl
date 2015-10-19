@@ -17,16 +17,10 @@ function operate!{T}(o::OnePointCrossover,
   inputs::Vector{IndividualStage{Vector{T}}})
 
   # Enforce the crossover rate.
-  if rand() > o.rate
-    return
-    #return inputs
-  end
+  rand() > o.rate && return inputs
 
   # Ensure that the inputs are greater than length 1 (should we do this dynamically?).
-  if length(get(inputs[1])) <= 1 || length(get(inputs[2])) <= 1
-    return
-    #return inputs
-  end
+  (length(get(inputs[1])) <= 1 || length(get(inputs[2])) <= 1) && return inputs
 
   # Calculate the crossover point, split A and B into four substrings
   # and combine those substrings to form two children. 
@@ -38,7 +32,6 @@ function operate!{T}(o::OnePointCrossover,
   set(inputs[2], vcat(get(inputs[2])[1:x], t))
 
   return inputs
-
 end
 
 register(joinpath(dirname(@__FILE__), "one_point.manifest.yml"))

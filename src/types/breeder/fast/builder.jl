@@ -45,9 +45,6 @@ function build_sync(g::RepresentationGraph, n::VariationBreederSource)
 end
 
 function build_sync(from::Type, to::Type, ops::Vector{Tuple{AbstractString, AbstractString}})
-  println("Building sync operator: $(from) to $(to).")
-  println("Sync operators: $(ops)")
-
   body = "function sync{I <: Individual}(from::Type{$(from)}, to::Type{$(to)}, s::Species{I}, inds::Vector{I})\n" *
     join(["convert!(s, \"$(s_from)\", \"$(s_to)\", inds)" for (s_from, s_to) in ops], "\n") *
     "\nreturn inds" *

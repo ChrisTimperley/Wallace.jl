@@ -4,13 +4,9 @@ EXAMPLES_PATH = joinpath(dirname(@__FILE__), "../../examples")
 # Composes an instance of a given example problem.
 function example(name::AbstractString)
   path = joinpath(EXAMPLES_PATH, "$(name).cfg")
-
-  # Throw an error if the requested example doesn't exist.
   if !isfile(path)
     error("Failed to locate specified example within examples directory: $(name).") 
   end
-  
-  # Otherwise load and compose the configuration file for the given example.
   return compose(path)
 end
 export example
