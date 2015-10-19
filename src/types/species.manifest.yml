@@ -3,8 +3,10 @@ description: |
   Placeholder description for species type.
 
 composer: |
-  
+  println("- composing species.")
+
   # Compose each of the stages for this species.
+  println("-- composing species stages.")
   for (name, stage) in s["stages"]
     stage["label"] = name
     s["stages"][name] = compose_as(stage, "species#stage")
@@ -12,6 +14,7 @@ composer: |
 
   # Compose the fitness scheme for this species.
   # Default to maximization of a float scalar.
+  println("-- composing fitness.")
   s["fitness"] = Base.get(s, "fitness", Dict(
     "type" => "fitness/scalar",
     "maximise" => true,
@@ -20,6 +23,7 @@ composer: |
   s["fitness"] = compose_as(s["fitness"], s["fitness"]["type"])
 
   # Compose the individual type.
+  println("-- composing individual type.")
   I = compose_as(Dict(
     "fitness" => s["fitness"],
     "stages" => s["stages"]
