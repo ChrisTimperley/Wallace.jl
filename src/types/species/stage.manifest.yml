@@ -1,12 +1,15 @@
 id: species#stage
 composer: |
 
+  println("- building species stage.")
+
   # By default, all stages are treated as root stages (although there can only be one) and
   # as non-lamarckian.
   s["from"] = Base.get(s, "from", "")
   s["lamarckian"] = Base.get(s, "lamarckian", false)
 
   # Build the representation for this stage.
+  println("-- building representation.")
   s["representation"] = compose_as(s["representation"], s["representation"]["type"])
 
   SpeciesStage(s["label"], s["from"], s["representation"], s["lamarckian"])
