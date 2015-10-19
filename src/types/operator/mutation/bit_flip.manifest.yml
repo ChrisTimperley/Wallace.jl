@@ -30,4 +30,7 @@ properties:
     required:     True
 
 composer: |
+  println("Building bit-flip mutation.")
+  println("Stage type: $(typeof(s["stage"]))")
+
   BitFlipMutation(s["stage"].representation, s["rate"])
