@@ -11,11 +11,11 @@ properties:
     default:      Uses fitness/scalar with floating point maximisation.
 
 composer: |
-  compose_as({
+  compose_as(Dict(
     "fitness" => Base.get(s, "fitness", {"type" => "scalar"}),
-    "stages"  => {
-      "genome" => {
+    "stages"  => Dict(
+      "genome" => Dict(
         "representation" => s["representation"]
-      }
-    }
-  }, "species")
+      )
+    )
+  ), "species")
