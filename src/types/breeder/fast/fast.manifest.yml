@@ -16,10 +16,12 @@ composer: |
       i += 1
     end
   end
+  println("Determined correct order of breeding sources.")
 
   # Create each of the breeding sources, in the established order.
   # If no stage is defined for a given operation, then default to using the
   # canonical genotype of the associated species.
+  println("Building breeding sources...")
   for sn in srcs
     ss = s["sources"][sn]
     if ss["type"] == "variation" && haskey(ss, "source")
@@ -28,5 +30,6 @@ composer: |
     end
     s["sources"][sn] = compose_as(ss, "breeder/fast:source/$(ss["type"])")
   end
-  
+  println("Built breeding sources, in correct order.")
+  println("Building sync operators.") 
   build_sync(s["species"], FastBreeder(s["species"], s["sources"][srcs[end]]))
