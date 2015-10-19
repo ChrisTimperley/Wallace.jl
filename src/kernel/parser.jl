@@ -81,7 +81,7 @@ module Parser
   function indent_of(s::AbstractString)
     indent = ""
     i = 1
-    while isblank(s[i])
+    while s[i] == ' ' || s[i] == '\t'
       indent *= "$(s[i])"
       i += 1
     end
