@@ -7,7 +7,7 @@ composer: |
 
   # Compose each of the stages for this species.
   println("-- composing species stages.")
-  for (name, stage) in s["stages"]
+  for (name, stage::Dict{Any, Any}) in s["stages"]
     println("stage type: $(typeof(stage))")
     stage["foo"] = "bar"
     println("what is happening?")
