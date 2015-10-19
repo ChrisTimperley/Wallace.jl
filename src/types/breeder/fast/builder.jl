@@ -18,7 +18,6 @@ function build_sync(s::Species, b::FastBreeder)
 
   # Return the built breeder.
   return b
-
 end
 
 build_sync(g::RepresentationGraph, n::SelectionBreederSource) =
@@ -45,7 +44,7 @@ function build_sync(g::RepresentationGraph, n::VariationBreederSource)
   return rep_graph
 end
 
-function build_sync(from::Type, to::Type, ops::Vector{(AbstractString, AbstractString)})
+function build_sync(from::Type, to::Type, ops::Vector{Tuple{AbstractString, AbstractString}})
   body = "function sync{I <: Individual}(from::Type{$(from)}, to::Type{$(to)}, s::Species{I}, inds::Vector{I})\n" *
     join(["convert!(s, \"$(s_from)\", \"$(s_to)\", inds)" for (s_from, s_to) in ops], "\n") *
     "\nreturn inds" *
