@@ -51,7 +51,7 @@ module Registry
     yml = YAML.load_file(path)
     mfst = Manifest(yml["id"], path)
 
-    @printf "Registering manifest: %s (%s)" yml["id"] path
+    @printf "Registering manifest: %s (%s)\n" yml["id"] path
 
     # Add in each of the optional properties.
     mfst.description = get(yml, "description", "")

@@ -2,10 +2,10 @@ load("../representation",  dirname(@__FILE__))
 
 type SpeciesStage
   # The label, or name, of this stage.
-  label::String
+  label::AbstractString
 
   # The label of the parent for this stage.
-  parent::String
+  parent::AbstractString
 
   # The representation used by this stage.
   representation::Representation
@@ -15,7 +15,7 @@ type SpeciesStage
   lamarckian::Bool
 
   # Constructs a new species stage.
-  SpeciesStage(label::String, parent::String, representation::Representation, lamarckian::Bool) =
+  SpeciesStage(label::AbstractString, parent::AbstractString, representation::Representation, lamarckian::Bool) =
     new(label, parent, representation, lamarckian)
 end
 
@@ -29,7 +29,7 @@ chromosome(s::SpeciesStage) = chromosome(s.representation)
 root(s::SpeciesStage) = s.parent == ""
 
 # Returns the root stage from a collection of species stages.
-root(ss::Dict{String, SpeciesStage}) = root(collect(values(ss)))
+root(ss::Dict{AbstractString, SpeciesStage}) = root(collect(values(ss)))
 root(ss::Vector{SpeciesStage}) = for s in ss
   if root(s)
     return s
