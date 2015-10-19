@@ -1,19 +1,26 @@
 id: breeder/linear
 
 composer: |
+  println("Building list of sources.")
   s["sources"] = [
     Dict{Any, Any}("operator" => op) for op in pop!(s, "operators")
   ]
+
   # Mark the first operator as a selection stage.
+  println("Marking selection stage.")
   s["sources"][1]["type"] = "selection"
 
   # Mark all others as variators.
+  println("Marking variators.")
   for (i, src::Dict{Any, Any}) in enumerate(s["sources"][2:end])
     src["source"] = "s$i"
     src["type"] = "variation"
     haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
   end
+
+  println("Composing sources.")
   s["sources"] = Dict{Any, Any}(["s$i" for i in 1:length(s["sources"])], s["sources"])
+  println("Composed sources.")
 
   # Pass the modified specification to the fast breeder composer.
   compose_as(s, "breeder/fast")
