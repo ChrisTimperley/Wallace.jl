@@ -12,13 +12,12 @@ function ComposeKozaTree(inputs::Vector{KozaInput})
   end")
 
   # Implement the execution method for this tree type.
-  src = join([["_t::$(t)"], ["$(a.label)::$(a.ty)" for a in inputs]], ",")
-  src = "execute($(src)) = execute($(join([["_t.root"], [
-  a.label for a in inputs]], ",")))"
+  src = join(vcat(["_t::$(t)"], ["$(a.label)::$(a.ty)" for a in inputs]), ",")
+  src = "execute($(src)) = execute($(join(vcat(["_t.root"], [
+  a.label for a in inputs]), ",")))"
   eval(Wallace, Base.parse(src))
 
   # Implement the cloning method for this tree type.
-
   return t
 end
 
