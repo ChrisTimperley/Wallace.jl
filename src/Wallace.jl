@@ -13,6 +13,7 @@ module Wallace
   using DataStructures
   using StatsBase
 
+  using state; export state
   using criterion; export criterion
   using replacement; export replacement
   using evaluator; export evaluator
