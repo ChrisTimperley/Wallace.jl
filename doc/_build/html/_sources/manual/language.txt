@@ -1,5 +1,5 @@
 ==============================
-Wallace Specification Language
+Language
 ==============================
 
 Top-Level Structure
@@ -7,7 +7,7 @@ Top-Level Structure
 
 All specification files should contain a top-level ``type`` parameter,
 stipulating the type of object described by the file. Failing to provide
-a ``type`` parameter will cause Wallace to be unable to compose the
+a :code:`type` parameter will cause Wallace to be unable to compose the
 object via the ``compose(FILE)`` function; however, the object can still
 be constructing by forcing it to be constructed as a given type, using
 ``compose_as(FILE, TYPE)``.

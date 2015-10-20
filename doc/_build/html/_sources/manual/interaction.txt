@@ -1,8 +1,5 @@
-Interacting with Wallace
+Interaction
 ========================
-
-Modes of Interaction
---------------------
 
 Julia Read-Eval-Print-Loop (REPL)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
