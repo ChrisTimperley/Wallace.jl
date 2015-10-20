@@ -1,3 +1,0 @@
-id: evaluator/multiplexer
-composer: |
-  MultiplexerEvaluator(3)

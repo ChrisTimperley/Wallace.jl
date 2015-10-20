@@ -1,6 +1,6 @@
-load("../simple/simple", dirname(@__FILE__))
-load("../../fitness/simple", dirname(@__FILE__))
-
+"""
+This evaluator is specialised for dealing with boolean multiplexer problems.
+"""
 type MultiplexerEvaluator <: SimpleEvaluator
   input_lines::Int
   select_lines::Int
@@ -13,7 +13,15 @@ type MultiplexerEvaluator <: SimpleEvaluator
     build(new(2^bits, bits))
 end
 
-function build(e::MultiplexerEvaluator)
+"""
+Boolean multiplexer evaluator.
+
+**Parameters:**
+
+* `bits::Int`, the number of selection bits for this multiplexer.
+"""
+function multiplexer(bits::Int)
+  e = MultiplexerEvaluator(bits)
   e.total_lines = e.input_lines + e.select_lines
   e.permutations = 2 ^ e.total_lines
   e.outputs = Array(Bool, e.permutations)
@@ -46,6 +54,7 @@ function build(e::MultiplexerEvaluator)
   return e
 end
 
+"""
 function evaluate!(e::MultiplexerEvaluator, s::State, sc::FitnessScheme, c::Individual)
   outputs = Array(Bool, e.permutations)
   for i in 1:e.permutations
@@ -63,5 +72,4 @@ function evaluate!(e::MultiplexerEvaluator, s::State, sc::FitnessScheme, c::Indi
 
   fitness(sc, hits)
 end
-
-register(joinpath(dirname(@__FILE__), "manifest.yml"))
+"""
