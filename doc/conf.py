@@ -7,7 +7,6 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-
 import sys, os
 
 # The version info for the project you're documenting, acts as replacement for
@@ -18,8 +17,7 @@ import sys, os
 #version = ''
 # The full version, including alpha/beta/rc tags.
 #release = ''
-
-import sphinx_bootstrap_theme
+import sphinx_rtd_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -32,8 +30,6 @@ sys.path.append(os.path.abspath('_themes'))
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
-primary_domain = 'js'
-
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = []
@@ -42,7 +38,7 @@ extensions = []
 templates_path = ['_templates']
 
 # The suffix of source filenames.
-source_suffix = '.md'
+source_suffix = '.rst'
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -85,6 +81,7 @@ exclude_patterns = ['_build']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+primary_domain = 'jl'
 highlight_language = 'javascript'
 
 # A list of ignored prefixes for module index sorting.
@@ -95,13 +92,12 @@ highlight_language = 'javascript'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'bootstrap'
+html_theme = 'kr'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #html_theme_options = {}
-
 html_theme_path = ['_themes']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
@@ -216,7 +212,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'wallace', u'Wallace Documentation',
+    ('index', 'wallace', u'Wallace Documentation', \
      [u'Christopher Steven Timperley'], 1)
 ]
 
@@ -230,9 +226,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'wallace', u'Wallace Documentation',
-   u'Christopher Steven Timperley', 'wallace', 'High-performance evolutionary
-   computation in Julia.', 'Miscellaneous'),
+  ('index', 'wallace', u'Wallace Documentation', \
+   u'Christopher Steven Timperley', 'wallace', \
+   'High-performance evolutionary computation in Julia.', 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
