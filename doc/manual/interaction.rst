@@ -125,10 +125,9 @@ environment.
     - selection/random
     - selection/truncation
 
-``aliases`` function
+function **aliases**\(**type**)
 
-The ``aliases`` function returns a list of all known aliases for a given
-property or type.
+Returns a list of all known aliases for a given property or type.
 
 ::
 

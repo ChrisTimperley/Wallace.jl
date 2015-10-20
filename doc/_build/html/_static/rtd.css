@@ -54,6 +54,7 @@ div.body {
     padding: 0.5em 1.3em;
     max-width: 55em;
     min-width: 20em;
+    font-size: 0.9em
 }
 
 div.related {
