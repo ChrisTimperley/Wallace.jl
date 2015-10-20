@@ -1,6 +1,0 @@
-id: population
-
-composer: |
-  println("- composing demes.")
-  s["demes"] = Deme[compose_as(d, "deme") for d in s["demes"]]
-  Population(s["demes"])
