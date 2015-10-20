@@ -1,4 +1,0 @@
-id: criterion/evalutions
-
-composer: |
-  EvaluationsCriterion(s["limit"])

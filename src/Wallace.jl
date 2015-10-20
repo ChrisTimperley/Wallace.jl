@@ -30,8 +30,12 @@ module Wallace
   using StatsBase
 
   include("types/criterion.jl")
-
   export criterion
+  using .criterion
+
+  include("types/replacement.jl")
+  export replacement
+  using .replacement
 
   # Imports a file into the Wallace environment, relative to a given directory.
   function load(file::AbstractString, from::AbstractString)
