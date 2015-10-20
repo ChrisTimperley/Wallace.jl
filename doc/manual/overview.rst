@@ -2,7 +2,9 @@
 Overview
 ========
 
-Meta-statement.
+This chapter provides a high-level overview of Wallace.jl, installation
+instructions, information on the different ways to interact with Wallace,
+and an example algorithm for solving the Max Ones problem.
 
 Installation
 ============
