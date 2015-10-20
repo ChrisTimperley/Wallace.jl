@@ -15,13 +15,18 @@ much easier!
 module evaluator
   export Evaluator
 
+  # Dependencies
+  using criterion
+
   # Utility modules.
-  include("../base/float.jl")
+  include("base/float.jl")
  
   """
   The base type used by all evaluators.
   """
   abstract Evaluator
+
+  do_nothing(c::Criterion) = "hello"
 
   # Load each of the evaluators.
   include("evaluator/_simple.jl")

@@ -1,3 +1,5 @@
+push!(LOAD_PATH, dirname(@__FILE__))
+
 module Wallace
   export register, compose
 
@@ -23,15 +25,12 @@ module Wallace
   using DataStructures
   using StatsBase
 
-  include("types/criterion.jl")
+  using criterion
   export criterion
-  using .criterion
 
-  include("types/replacement.jl")
+  using replacement
   export replacement
-  using .replacement
 
-  include("types/evaluator.jl")
+  using evaluator
   export evaluator
-  using .evaluator
 end
