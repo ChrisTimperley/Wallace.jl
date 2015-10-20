@@ -33,6 +33,6 @@ module Wallace
 
   using evaluator
   export evaluator
-
+ 
   using logger; export logger
 end

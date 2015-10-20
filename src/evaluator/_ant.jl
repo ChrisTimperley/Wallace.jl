@@ -112,3 +112,30 @@ function load_trail(path::AbstractString)
   return trail
 
 end
+
+"""
+An evaluator, specialised to the artifical ant problem.
+"""
+type AntEvaluator <: SimpleEvaluator
+  ant::Ant
+  AntEvaluator(ant::Ant) = new(ant)
+end
+
+#function evaluate!(e::AntEvaluator, s::State, sc::FitnessScheme, c::Individual)
+#  while e.ant.moves < e.ant.max_moves && e.ant.score < e.ant.max_score
+#    execute(get(c.genome), e.ant)
+#  end
+#  score = e.ant.score
+#  reset!(e.ant)
+#  fitness(sc, score)
+#end
+
+"""
+An evaluator, specialised for the artifical ant problem.
+
+**Properties:**
+
+* `moves::Int`, the maximum number of moves the ant is permitted to make.
+* `trail::String`, the path to the file describing the trail for this problem.
+"""
+ant(s::Dict{Any,Any}) = AntEvaluator(Ant(s["moves"], load_trail(s["trail"])))

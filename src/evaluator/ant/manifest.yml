@@ -1,3 +1,0 @@
-id: evaluator/ant
-composer: |
-  AntEvaluator(Ant(s["moves"], load_trail(s["trail"])))

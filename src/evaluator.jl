@@ -33,4 +33,5 @@ module evaluator
   include("evaluator/_tsp.jl")
   include("evaluator/_regression.jl")
   include("evaluator/_multiplexer.jl")
+  include("evaluator/_ant.jl")
 end
