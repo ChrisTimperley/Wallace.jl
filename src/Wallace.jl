@@ -29,6 +29,10 @@ module Wallace
   using DataStructures
   using StatsBase
 
+  include("types/criterion.jl")
+
+  export criterion
+
   # Imports a file into the Wallace environment, relative to a given directory.
   function load(file::AbstractString, from::AbstractString)
     
@@ -73,8 +77,4 @@ module Wallace
   # Initialise the type registry and the list of loaded files.
   type_registry = Dict{AbstractString, Type}()
   loaded_files = AbstractString[]
-
-  # Load all of the built-in types.
-  load_all(joinpath(dirname(@__FILE__), "types"))
-
 end

@@ -1,24 +1,30 @@
 load("../pareto/pareto.jl", dirname(@__FILE__))
 
+module GoldbergFitness
+
+export goldberg_fitness_scheme
+export scale!
+
 type GoldbergFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
 
 """
-  Implements a pareto-based multiple-objective fitness scheme through the use
-  of Goldberg fitness ranking, wherein individuals are assigned a rank based
-  upon the number of individuals by whom they are dominated, as given by
-  the formula:
+Implements a pareto-based multiple-objective fitness scheme through the use
+of Goldberg fitness ranking, wherein individuals are assigned a rank based
+upon the number of individuals by whom they are dominated, as given by
+the formula:
 
-    Rank(i) = 1 + DominatedBy(i)
+  Rank(i) = 1 + DominatedBy(i)
 
-  **Parameters:**
-  `of:Type` - the base fitness type (default is Float).
-  `maximise:Bool` - a flag, indicating whether fitness values are to be
-    maximised or minimised.
+**Parameters:**\n
+`of:Type`, the base fitness type (default is Float).\n
+`maximise:Bool`, a flag, indicating whether fitness values are to be maximised
+or minimised.
 """
 function goldberg_fitness_scheme(s::Dict{Any, Any})
-
+   s["of"] = eval(Base.parse(Base.get(s, "of", "Float")))
+   GoldbergFitnessScheme{s["of"]}(s["maximise"])
 end
 
 function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
@@ -47,3 +53,5 @@ function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
 end
 
 register(joinpath(dirname(@__FILE__), "goldberg.manifest.yml"))
+
+end

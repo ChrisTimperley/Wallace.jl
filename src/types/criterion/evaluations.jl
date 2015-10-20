@@ -1,9 +1,12 @@
 load("../state",      dirname(@__FILE__))
 load("../criterion",  dirname(@__FILE__))
 
+module evaluations
+
 type EvaluationsCriterion <: Criterion
   limit::Int
   EvaluationsCriterion(limit::Int) = new(limit)
+end
 end
 
 is_satisfied(c::EvaluationsCriterion, s::State) = s.evaluations >= c.limit
