@@ -126,7 +126,6 @@ environment.
     - selection/truncation
 
 ``aliases`` function
-~~~~~~~~~~~~~~~~~~~~
 
 The ``aliases`` function returns a list of all known aliases for a given
 property or type.
@@ -142,7 +141,6 @@ property or type.
     - #probability
 
 ``version`` function
-~~~~~~~~~~~~~~~~~~~~
 
 To see which version of Wallace you're running on your system, you may
 make use of the provided ``version`` function.
@@ -153,7 +151,6 @@ make use of the provided ``version`` function.
     v"0.0.1"
 
 ``examples`` function
-~~~~~~~~~~~~~~~~~~~~~
 
 The ``examples`` function can be used to return a list of all the
 official example solutions bundled with your current version of Wallace.
