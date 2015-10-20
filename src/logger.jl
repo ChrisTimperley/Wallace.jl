@@ -34,10 +34,10 @@ module logger
   """
   close!(l::Logger) = l
 
-  """
-  call!(ls::Vector{Logger}, s::State) = for l in ls; call!(l, s); end
-  call!(l::Logger, s::State) = log!(l, s)
-  """
+  #call!(ls::Vector{Logger}, s::State) = for l in ls; call!(l, s); end
+  #call!(l::Logger, s::State) = log!(l, s)
 
   # Load each of the loggers.
+  include("logger/best_individual.jl")
+  include("logger/population_dump.jl")
 end

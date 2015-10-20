@@ -1,3 +1,0 @@
-id: logger/population_dump
-composer: |
-  PopulationDumpLogger()

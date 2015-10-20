@@ -1,8 +1,0 @@
-id:     logger/best_individual
-parent: logger
-description: |
-  Records information about the best individual within the population after each
-  generation. Writes a serialised form of the individual to a YAML file named
-  after the generation number.
-composer: |
-  BestIndividualLogger()
