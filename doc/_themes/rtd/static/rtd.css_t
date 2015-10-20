@@ -80,14 +80,12 @@ h1 {
 }
 
 h2 {
-    margin: 2em 0 0.2em 0;
     font-size: 1.35em;
     padding: 0;
     color: #465158;
 }
 
 h3 {
-    margin: 1em 0 -0.3em 0;
     font-size: 1.2em;
     color: #6c818f;
 }
