@@ -14,6 +14,9 @@ much easier!
 """
 module evaluator
   export Evaluator
+
+  # Utility modules.
+  include("../base/float.jl")
  
   """
   The base type used by all evaluators.
@@ -22,4 +25,5 @@ module evaluator
 
   # Load each of the evaluators.
   include("evaluator/_simple.jl")
+  include("evaluator/_tsp.jl")
 end
