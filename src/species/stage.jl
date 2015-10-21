@@ -32,7 +32,7 @@ TODO: Composes a species stage.
 By default, all stages are treated as root stages (although there can only
 be one) and as non-lamarckian.
 """
-function stage(label::String, def::Function)
+function stage(label::AbstractString, def::Function)
   ss = stage(def)
   ss.label = label
   ss
@@ -42,11 +42,11 @@ function stage(def::Function)
   def(ss)
   ss
 end
-stage(label::String, rep::Representation) =
+stage(label::AbstractString, rep::Representation) =
   stage(label, rep, "", false)
-stage(label::String, rep::Representation, from::String) =
+stage(label::AbstractString, rep::Representation, from::AbstractString) =
   stage(label, rep, from, false)
-stage(label::String, rep::Representation, from::String, lamarckian::Bool) =
+stage(label::AbstractString, rep::Representation, from::AbstractString, lamarckian::Bool) =
   stage(label, rep, from, lamarckian)
 
 # Returns the representation used by a given species stage.

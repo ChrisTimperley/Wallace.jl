@@ -1,7 +1,13 @@
-module
-using individual, representation, fitness, core, utility
-export Species, convert!, compose!
+module species
+using representation, fitness, core, utility
+export Species, convert!, compose!, genotype, rep, ind_type
 
+# Load species stages.
+include("species/stage.jl")
+
+"""
+Used to hold information about a given species.
+"""
 type Species{T}
   stages::Dict{AbstractString, SpeciesStage}
   fitness::FitnessScheme
@@ -15,7 +21,8 @@ end
 genotype(s::Species) = s.genotype
 
 # Returns the representation used by a given stage of a provided species.
-representation(species::Species, stage::AbstractString) = species.stages[stage].representation
+rep(species::Species, stage::AbstractString) =
+  species.stages[stage].representation
 
 # Returns the unique individual type associated this species.
 ind_type{T}(s::Species{T}) = T
@@ -28,11 +35,10 @@ function convert!{I <: Individual}(
   to::AbstractString,
   inds::Vector{I}
 )
-  convert!(representation(s, from), representation(s, to), from, to, inds)
+  convert!(rep(s, from), rep(s, to), from, to, inds)
 end
 
 # Include all other components of the species module.
-include("species/stage.jl")
 include("species/individual_type.jl")
 include("species/graph.jl")
 include("species/simple.jl")

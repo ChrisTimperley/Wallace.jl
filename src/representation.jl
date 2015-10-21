@@ -1,5 +1,6 @@
 module representation
-using individual
+using individual, core, utility
+export Representation, chromosome, convert!, describe
 
 """
 The base type used by all representations.

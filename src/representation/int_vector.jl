@@ -22,7 +22,7 @@ Defaults to `typemax(Int)`, if no value is supplied.
 int_vector{S <: AbstractString}(args::Dict{S, Any}) =
   int_vector( get(args, "length", 80),
               get(args, "min", typemin(Int)),
-              get(args, "max", typemax(Int))
+              get(args, "max", typemax(Int)))
 int_vector() =
   int_vector(80, typemin(Int), typemax(Int))
 int_vector(length::Int) =

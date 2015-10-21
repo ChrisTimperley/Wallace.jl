@@ -1,4 +1,4 @@
-include("species/graph/node.jl")
+include("graph/node.jl")
 
 # Representation graphs are used to indicate whether particular stages
 # of an individual are synchronised with the genome.
