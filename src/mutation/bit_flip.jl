@@ -1,6 +1,6 @@
 type BitFlipMutation <: Mutation
   rate::Float
-  representation::Representation.BitVectorRepresentation
+  representation::representation.BitVectorRepresentation
 
   BitFlipMutation(rate::Float) = new(rate)
 end

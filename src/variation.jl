@@ -1,7 +1,6 @@
 module variation
 using   core, representation
-export  Variation, representation, num_inputs, num_outputs, prepare, operate!,
-        call!
+export  Variation, rep, num_inputs, num_outputs, prepare, operate!, call!
 
 """
 The base type used by all variation operators.
@@ -11,7 +10,7 @@ abstract Variation <: Operator
 """
 Returns the representation used by inputs to this operator.
 """
-representation(v::Variation) = v.representation
+rep(v::Variation) = v.representation
 
 """
 Returns the number of inputs to a given variation operator.

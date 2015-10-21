@@ -2,7 +2,8 @@
 TODO: Provide description of crossover module.
 """
 module crossover
-using core, variation, utility
+using core, variation, utility, representation, individual
+export Crossover
 
 """
 Base type used all by crossover operators.
