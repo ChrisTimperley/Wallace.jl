@@ -1,5 +1,7 @@
-load("../../fitness.jl", dirname(@__FILE__))
-
+"""
+This scheme adds support for multiple-objective based fitness approaches,
+through the addition of domination calculation and pareto rank-based fitness.
+"""
 abstract ParetoFitnessScheme{T} <: FitnessScheme
 
 type ParetoFitness{T}
@@ -33,5 +35,3 @@ function dominates{T}(x::Vector{T}, y::Vector{T}, maximise::Vector{Bool})
   end
   return dom
 end
-
-register(joinpath(dirname(@__FILE__), "pareto.manifest.yml"))

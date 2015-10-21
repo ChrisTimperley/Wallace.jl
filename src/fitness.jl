@@ -12,7 +12,10 @@ Base type used by all fitness schemes.
 abstract FitnessScheme
 
 # Load each of the fitness schemes.
+include("fitness/_pareto.jl")
 include("fitness/_aggregate.jl")
+include("fitness/_belegundu.jl")
+include("fitness/_goldberg.jl")
 
 """
 Responsible for generating a fitness value according to a given scheme.

@@ -1,10 +1,3 @@
-load("../pareto/pareto.jl", dirname(@__FILE__))
-
-module GoldbergFitness
-
-export goldberg_fitness_scheme
-export scale!
-
 type GoldbergFitnessScheme{T} <: ParetoFitnessScheme{T}
   maximise::Vector{Bool}
 end
@@ -17,12 +10,13 @@ the formula:
 
   Rank(i) = 1 + DominatedBy(i)
 
-**Parameters:**\n
-`of:Type`, the base fitness type (default is Float).\n
-`maximise:Bool`, a flag, indicating whether fitness values are to be maximised
+**Parameters:**
+
+* `of:Type`, the base fitness type (default is Float).
+* `maximise:Bool`, a flag, indicating whether fitness values are to be maximised
 or minimised.
 """
-function goldberg_fitness_scheme(s::Dict{Any, Any})
+function goldberg(s::Dict{Any, Any})
    s["of"] = eval(Base.parse(Base.get(s, "of", "Float")))
    GoldbergFitnessScheme{s["of"]}(s["maximise"])
 end
@@ -50,8 +44,4 @@ function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
     j = k
     rank += 1
   end
-end
-
-register(joinpath(dirname(@__FILE__), "goldberg.manifest.yml"))
-
 end
