@@ -15,4 +15,7 @@ state.
 """
 run!(a::Algorithm) = 
   error("No `run!` method defined for this algorithm: $(a).")
+
+# Load each of the algorithms.
+include("algorithm/genetic.jl")
 end

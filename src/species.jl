@@ -2,12 +2,20 @@ module
 using individual, representation, fitness
 
 type Species{T}
-  genotype::SpeciesStage
   stages::Dict{AbstractString, SpeciesStage}
   fitness::FitnessScheme
+  genotype::SpeciesStage
 
   Species(st::Dict{AbstractString, SpeciesStage}, f::FitnessScheme) =
-    new(root(st), st, f)
+    new(st, f)
+end
+
+"""
+Composes a given species.
+"""
+function compose!(s::Species)
+  s.genotype = root(s.stages)
+  s
 end
 
 """
@@ -25,6 +33,10 @@ of this species.
 * `fitness::FitnessScheme`, the fitness scheme used by members of this
 species. Defaults to (maximised) scalar fitness if unspecified.
 """
+function simple(def::Function)
+  def
+end
+
 simple(s::Dict{Any, Any}) =
   complex(Dict{Any, Any}(
     "fitness" => Base.get(s, "fitness", fitness.scalar()),
