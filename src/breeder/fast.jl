@@ -1,23 +1,49 @@
 type FastBreeder <: Breeder
-
-  # A dictionary containing the sources of this breeder.
-  sources::Vector{BreederSource}
-
   # The eigentype for this breeder.
   eigen::Type
 
   # The terminal source of this breeder.
   source::BreederSource
 
-  FastBreeder(sources::Vector{BreederSource}) = new(sources)
+  FastBreeder() = new()
 end
 
-function compose!(b::FastBreeder, s::Species)
+"""
+Provides a specification for composing a fast breeder.
+"""
+type FastBreederSpecification <: BreederSpecification
+  """
+  A dictionary containing the sources of this breeder.
+  """
+  sources::Vector{BreederSource}
+end
+
+"""
+Composes a fast breeder from a provided specification.
+"""
+function compose!(spec::FastBreederSpecification, s::Species)
+  b = FastBreeder()
   b.eigen = anonymous_type(Wallace)
 
+  # Calculate the order of the breeding sources.
+  labels = collect(keys(b.sources))
+  i = 1
+  while i < length(srcs)
+    gt_i = findfirst(srcs) do j
+      isa(b.sources[labels[i]], VariationBreederSource) &&
+        b.sources[src_names[i]].source_name == j
+    end
+    if gt_i != 0 && gt_i > i
+      labels[gt_i], labels[i] = labels[i], labels[gt_i]
+    else
+      i += 1
+    end
+  end
+
   # Determine the terminal breeding source.
+  b.terminal = b.sources[labels[end]]
 
-
+  # Build the synchronisation operations.
   build_sync(s, b)
   b
 end
@@ -26,7 +52,7 @@ end
 TODO: Document breeder.fast
 """
 fast(sources::Dict{AbstractString, BreederSource}) =
-  FastBreeder(sources)
+  FastBreederSpecification(sources)
 
 # Returns a list of the sources to a breeding operation or a breeder.
 sources(s::Union{VariationBreederSource, FastBreeder}) = if isa(s.source, MultiBreederSource)
