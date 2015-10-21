@@ -33,6 +33,7 @@ end
 
 # Include all other components of the species module.
 include("species/stage.jl")
+include("species/individual_type.jl")
 include("species/graph.jl")
 include("species/simple.jl")
 include("species/complex.jl")
