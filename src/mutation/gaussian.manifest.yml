@@ -1,0 +1,5 @@
+id: mutation/gaussian
+composer: |
+  rep = s["stage"].representation
+  GaussianMutation{typeof(rep), codon_type(rep)}(
+    rep, s["mean"], s["std"], Base.get(s, "rate", 0.01))

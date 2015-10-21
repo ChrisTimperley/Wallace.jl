@@ -1,0 +1,15 @@
+id: mutation/one_swap
+
+description: >
+  The one-swap mutation operator picks two points along the genome and swaps
+  their alleles (values) with a probability given by the mutation rate.
+
+properties:
+  rate:
+    type:         Float
+    default:      0.1
+    description:  >
+      The probability that a pair of genes within the genome will be swapped.
+
+composer: |
+  OneSwapMutation(s["stage"].representation, Base.get(s, "rate", 0.1))
