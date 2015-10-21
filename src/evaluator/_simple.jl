@@ -6,14 +6,13 @@ abstract SimpleEvaluator <: Evaluator
 """
 Simple evaluator!
 """
-function simple(s::Dict{Any, Any})
+function simple(definition::AbstractString)
   eigen = anonymous_type(Wallace, "type <: SimpleEvaluator;end")
   define_function(Wallace, "evaluate!", ["::$(eigen)", "s::State", "scheme::FitnessScheme", "i::Individual"],
-    s["objective"])
+    definition)
   return eigen()
 end
 
-"""
 function evaluate!(e::SimpleEvaluator, s::State)
   # TODO: Limit the number of evaluations, perform in parallel.
   for deme in s.population.demes
@@ -26,4 +25,3 @@ function evaluate!(e::SimpleEvaluator, s::State)
     end
   end
 end
-"""

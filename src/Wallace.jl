@@ -14,12 +14,16 @@ module Wallace
   using StatsBase
 
   # Load the core types.
-  include("_core.jl")
-
+  using core
   using distance; export distance
   using fitness; export fitness
   using individual
   using representation; export representation
+  using selection; export selection
+  using variation; export variation
+  using crossover; export crossover
+  using mutation; export mutation
+  using breeder; export breeder
   importall deme
   using population; export population
   using initialiser; export initialiser

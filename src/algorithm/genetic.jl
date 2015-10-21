@@ -32,6 +32,7 @@ supplied builder.
 """
 function compose!(b::GeneticAlgorithmBuilder)
   alg = GeneticAlgorithm()
+  alg.population = compose!(alg.population)
   alg.state = State(alg.population)
   alg.evaluator = b.evaluator
   alg.replacement = b.replacement

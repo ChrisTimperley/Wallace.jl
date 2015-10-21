@@ -16,7 +16,7 @@ module evaluator
   export Evaluator
 
   # Dependencies
-  using criterion
+  using criterion, state
 
   # Utility modules.
   include("base/float.jl")

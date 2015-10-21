@@ -2,8 +2,8 @@
 TODO: Description of the current population model.
 """
 module population
-using deme, individual
-export Population
+using core, deme, individual
+export Population, compose!, best!, prepare!, breed!, unevaluated, scale!
 
 include("../base/flatten")
 
@@ -16,6 +16,14 @@ type Population
 
   Population() = new([])
   Population(dl::Vector{Deme}) = new(dl)
+end
+
+"""
+Composes a given population.
+"""
+function compose!(p::Population)
+  p.demes = Deme[compose!(d) for d in p.demes]
+  p
 end
 
 """

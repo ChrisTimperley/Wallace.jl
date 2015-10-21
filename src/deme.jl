@@ -2,7 +2,7 @@
 Need to add a deme composer
 """
 module deme
-  using breeder, species
+  using core, breeder, species
   export Deme, prepare!, breed!, contents, deme
 
   type Deme{T}
