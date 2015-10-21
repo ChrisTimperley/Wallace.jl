@@ -1,5 +1,4 @@
-load("../../breeder.jl",           dirname(@__FILE__))
-load("breeder_source.jl",  dirname(@__FILE__))
+include("breeder/source.jl")
 
 # Lots of optimisation opportunities here!
 type FastBreeder <: Breeder
@@ -16,6 +15,41 @@ type FastBreeder <: Breeder
 
   FastBreeder(species::Species, src::BreederSource) =
     new(anonymous_type(Wallace), src)
+end
+
+function fast(s::Dict{Any, Any}) =
+
+  # Determine the correct order in which to construct each of the breeding
+  # sources.
+  srcs = collect(keys(Dict{ASCIIString, Any}(s["sources"])))
+  i = 1
+  while i < length(srcs)
+    gt_i = findfirst(srcs) do j
+      haskey(s["sources"][srcs[i]], "source") && s["sources"][srcs[i]]["source"] == j
+    end
+    if gt_i != 0 && gt_i > i
+      srcs[gt_i], srcs[i] = srcs[i], srcs[gt_i]
+    else
+      i += 1
+    end
+  end
+  println("Determined correct order of breeding sources.")
+
+  # Create each of the breeding sources, in the established order.
+  # If no stage is defined for a given operation, then default to using the
+  # canonical genotype of the associated species.
+  println("Building breeding sources...")
+  for sn in srcs
+    ss = s["sources"][sn]
+    if ss["type"] == "variation" && haskey(ss, "source")
+      ss["source"] = s["sources"][ss["source"]]
+      ss["stage"] = haskey(ss, "stage") ? s["species"].stages[ss["stage"]] : genotype(s["species"])
+    end
+    s["sources"][sn] = compose_as(ss, "breeder/fast:source/$(ss["type"])")
+  end
+  println("Built breeding sources, in correct order.")
+  println("Building sync operators.") 
+  build_sync(s["species"], FastBreeder(s["species"], s["sources"][srcs[end]]))
 end
 
 # Returns a list of the sources to a breeding operation or a breeder.
@@ -110,7 +144,4 @@ function breed!{I <: Individual}(
   # Limit the number of produced offspring to the number desired.
   # (Is it faster to limit, or to not produce more than you need?)
   return sync(s.eigen, caller.eigen, sp, outputs[1:n])
-
 end
-
-register(joinpath(dirname(@__FILE__), "fast.manifest.yml"))

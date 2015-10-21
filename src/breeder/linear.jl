@@ -1,20 +1,19 @@
-id: breeder/linear
-
-composer: |
+"""
+TODO: Describe breeder.linear.
+"""
+function linear(operators::Vector{Operator})
   println("Building list of sources.")
-  s["sources"] = [
-    Dict{Any, Any}("operator" => op) for op in pop!(s, "operators")
-  ]
-
-  # Mark the first operator as a selection stage.
-  println("Marking selection stage.")
-  s["sources"][1]["type"] = "selection"
+  
+  sources = Source[]
+  sources << selection(operators[1])
 
   # Mark all others as variators.
-  println("Marking variators.")
-  for (i, src::Dict{Any, Any}) in enumerate(s["sources"][2:end])
+  for (i, op) in enumerate(operators[2:end])
     src["source"] = "s$i"
     src["type"] = "variation"
+
+    v = variation("s$i", op)
+
     haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
   end
 
@@ -26,3 +25,4 @@ composer: |
 
   # Pass the modified specification to the fast breeder composer.
   compose_as(s, "breeder/fast")
+end
