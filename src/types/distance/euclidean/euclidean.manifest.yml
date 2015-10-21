@@ -1,9 +1,0 @@
-id: distance/euclidean
-
-description: |
-  Euclidean distance.
-
-files:
-  - eucliean.jl
-
-composer: EuclideanDistance()

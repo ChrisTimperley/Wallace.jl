@@ -1,7 +1,11 @@
-load("../../distance.jl", dirname(@__FILE__))
-
 immutable HammingDistance <: Distance
 end
+
+"""
+The hamming distance between two sequenced collections, or strings, of equal
+length is measured as the number of differences between them at each index.
+"""
+hamming() = HammingDistance()
 
 # Shouldn't be repeating code here.
 # Need to find a way to unify these two method headers.

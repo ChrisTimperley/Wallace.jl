@@ -1,7 +1,9 @@
-load("../../distance.jl", dirname(@__FILE__))
+immutable EuclideanDistance <: Distance; end
 
-immutable EuclideanDistance <: Distance
-end
+"""
+Measures the euclidean distance between two vectors.
+"""
+euclidean() = EuclideanDistance()
 
 distance(::EuclideanDistance, x::Number, y::Number) = abs(x - y)
 
