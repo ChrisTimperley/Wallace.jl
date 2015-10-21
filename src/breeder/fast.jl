@@ -1,7 +1,7 @@
-include("breeder/source.jl")
-
-# Lots of optimisation opportunities here!
 type FastBreeder <: Breeder
+
+  # A dictionary containing the sources of this breeder.
+  sources::Vector{BreederSource}
 
   # The eigentype for this breeder.
   eigen::Type
@@ -9,48 +9,24 @@ type FastBreeder <: Breeder
   # The terminal source of this breeder.
   source::BreederSource
 
-  # Maintain buffers?
-
-  # Maintain the offspring buffers if all the numbers are static?
-
-  FastBreeder(species::Species, src::BreederSource) =
-    new(anonymous_type(Wallace), src)
+  FastBreeder(sources::Vector{BreederSource}) = new(sources)
 end
 
-function fast(s::Dict{Any, Any}) =
+function compose!(b::FastBreeder, s::Species)
+  b.eigen = anonymous_type(Wallace)
 
-  # Determine the correct order in which to construct each of the breeding
-  # sources.
-  srcs = collect(keys(Dict{ASCIIString, Any}(s["sources"])))
-  i = 1
-  while i < length(srcs)
-    gt_i = findfirst(srcs) do j
-      haskey(s["sources"][srcs[i]], "source") && s["sources"][srcs[i]]["source"] == j
-    end
-    if gt_i != 0 && gt_i > i
-      srcs[gt_i], srcs[i] = srcs[i], srcs[gt_i]
-    else
-      i += 1
-    end
-  end
-  println("Determined correct order of breeding sources.")
+  # Determine the terminal breeding source.
 
-  # Create each of the breeding sources, in the established order.
-  # If no stage is defined for a given operation, then default to using the
-  # canonical genotype of the associated species.
-  println("Building breeding sources...")
-  for sn in srcs
-    ss = s["sources"][sn]
-    if ss["type"] == "variation" && haskey(ss, "source")
-      ss["source"] = s["sources"][ss["source"]]
-      ss["stage"] = haskey(ss, "stage") ? s["species"].stages[ss["stage"]] : genotype(s["species"])
-    end
-    s["sources"][sn] = compose_as(ss, "breeder/fast:source/$(ss["type"])")
-  end
-  println("Built breeding sources, in correct order.")
-  println("Building sync operators.") 
-  build_sync(s["species"], FastBreeder(s["species"], s["sources"][srcs[end]]))
+
+  build_sync(s, b)
+  b
 end
+
+"""
+TODO: Document breeder.fast
+"""
+fast(sources::Dict{AbstractString, BreederSource}) =
+  FastBreeder(sources)
 
 # Returns a list of the sources to a breeding operation or a breeder.
 sources(s::Union{VariationBreederSource, FastBreeder}) = if isa(s.source, MultiBreederSource)
