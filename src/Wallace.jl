@@ -13,6 +13,9 @@ module Wallace
   using DataStructures
   using StatsBase
 
+  # Load the core types.
+  include("_core.jl")
+
   using fitness; export fitness
   using individual
   using population; export population

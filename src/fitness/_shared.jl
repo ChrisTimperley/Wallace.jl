@@ -1,3 +1,8 @@
+# TODO:
+# Shared fitness cannot be used until a better distance calculation scheme has
+# been implemented. Fitness should not depend on "Individual". Distance schemes
+# should be interchangeable.
+
 type SharedFitness{T}
   base::T
   shared::Float
@@ -14,6 +19,13 @@ type FitnessSharingScheme <: FitnessScheme
   FitnessSharingScheme(b::FitnessScheme, r::Float, a::Float, d::Distance) =
     new(b, r, a, d)
 end
+
+"""
+TODO: Document shared fitness schemes.
+
+"""
+shared(s::Dict{Any, Any}) =
+  SharedFitnessScheme(s["base"], s["radius"], s["alpha"], s["distance"])
 
 uses(s::FitnessSharingScheme) = SharedFitness{uses(s.base)}
 maximise(s::FitnessSharingScheme) = maximise(s.base)
@@ -37,5 +49,3 @@ compare(s::FitnessSharingScheme, x::SharedFitness, y::SharedFitness) =
   else
     0
   end
-
-register(joinpath(dirname(@__FILE__), "shared.manifest.yml"))

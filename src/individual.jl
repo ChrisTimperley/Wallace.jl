@@ -3,15 +3,10 @@ Description of individual model.
 """
 module individual
 using fitness
-export Individual, sort, sort!, isbetter, compare, best, scale!, individual
+export sort, sort!, isbetter, compare, best, scale!, individual
 
 # Load contents.
 include("individual/stage.jl")
-
-"""
-The base type used by all individuals.
-"""
-abstract Individual
 
 function individual(s::Dict{Any, Any})
   # Create an array to hold each of the lines of the type definition.
@@ -117,4 +112,5 @@ Performs any necessary post-processing on the individuals using this fitness
 scheme.
 """
 scale!{I <: Individual}(::FitnessScheme, ::Vector{I}) = return
+
 end
