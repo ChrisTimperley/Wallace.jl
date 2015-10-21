@@ -1,0 +1,6 @@
+id: crossover/subtree
+composer: |
+  rep = s["stage"].representation
+  SubtreeCrossover(rep,
+    Base.get(s, "rate", 0.7),
+    Base.get(s, "max_tries", 1))
