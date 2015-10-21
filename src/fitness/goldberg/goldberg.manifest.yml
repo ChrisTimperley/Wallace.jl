@@ -1,0 +1,16 @@
+id: fitness/goldberg
+description: |
+  Implements a pareto-based multiple-objective fitness scheme through the use
+  of Goldberg fitness ranking, wherein individuals are assigned a rank based
+  upon the number of individuals by whom they are dominated, as given by
+  the formula:
+
+    Rank(i) = 1 + DominatedBy(i)
+
+dependencies:
+  - fitness/pareto
+files:
+  - goldberg.jl
+composer: |
+   s["of"] = eval(Base.parse(Base.get(s, "of", "Float")))
+   GoldbergFitnessScheme{s["of"]}(s["maximise"])

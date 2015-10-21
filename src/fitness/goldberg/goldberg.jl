@@ -1,0 +1,57 @@
+load("../pareto/pareto.jl", dirname(@__FILE__))
+
+module GoldbergFitness
+
+export goldberg_fitness_scheme
+export scale!
+
+type GoldbergFitnessScheme{T} <: ParetoFitnessScheme{T}
+  maximise::Vector{Bool}
+end
+
+"""
+Implements a pareto-based multiple-objective fitness scheme through the use
+of Goldberg fitness ranking, wherein individuals are assigned a rank based
+upon the number of individuals by whom they are dominated, as given by
+the formula:
+
+  Rank(i) = 1 + DominatedBy(i)
+
+**Parameters:**\n
+`of:Type`, the base fitness type (default is Float).\n
+`maximise:Bool`, a flag, indicating whether fitness values are to be maximised
+or minimised.
+"""
+function goldberg_fitness_scheme(s::Dict{Any, Any})
+   s["of"] = eval(Base.parse(Base.get(s, "of", "Float")))
+   GoldbergFitnessScheme{s["of"]}(s["maximise"])
+end
+
+function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
+  n = length(inds)
+  j = k = rank = 1
+
+  # Keep calculating each of the pareto fronts until all individuals have
+  # been handled.
+  while j <= n
+
+    # Check each remaining member for inclusion in the current pareto front.
+    # If the individual belongs to the pareto front then swap it with the 
+    # first unsorted individual.
+    for i in j:n
+      p1 = inds[i]
+      if all(p2 -> p1 == p2 || !dominates(p2.fitness.scores, p1.fitness.scores, s.maximise), inds[j:end])
+        p1.fitness.rank = rank
+        inds[k], inds[i] = inds[i], inds[k]
+        k += 1
+      end
+    end
+
+    j = k
+    rank += 1
+  end
+end
+
+register(joinpath(dirname(@__FILE__), "goldberg.manifest.yml"))
+
+end

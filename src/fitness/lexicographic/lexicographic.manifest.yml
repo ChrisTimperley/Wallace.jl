@@ -1,0 +1,27 @@
+id: fitness/lexicographic
+
+properties:
+  objectives:
+    type:         list(objective)
+    description:  >
+      A list of objectives to be optimised, in order of preference, unless
+      preference is to be chosen at random.
+
+  randomised:
+    type:         Boolean
+    default:      false
+    description:  >
+      Flag indicating whether the preference for specific objectives should be
+      randomised at each comparison.
+
+files:
+  - lexicographic.jl
+
+dependencies:
+  - fitness
+
+composer: |
+  s["randomised"] = Base.get(s, "randomised", false)
+  preferences = [1:size(s["objectives"])]
+
+  LexicographicFitnessScheme(s["randomised"], preferences)

@@ -1,7 +1,0 @@
-id: fitness
-authors:
-  - name:   Chris Timperley
-    email:  christimperley@googlemail.co.uk
-description: |
-  Fitness objects are used to provide an empirical means of assessing the
-  relative quality of one potential solution to another.

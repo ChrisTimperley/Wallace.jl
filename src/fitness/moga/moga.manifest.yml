@@ -1,0 +1,10 @@
+id: fitness/moga
+description: |
+  Multiple Objective Genetic Algorithm.
+dependencies:
+  - fitness/pareto
+files:
+  - moga.jl
+composer: |
+  s["of"] = eval(Base.parse(Base.get(s, "of", "Float")))
+  MOGAFitnessScheme{s["of"]}(s["maximise"])
