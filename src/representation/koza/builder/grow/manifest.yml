@@ -1,0 +1,6 @@
+id: koza:builder/grow
+composer: |
+  KozaGrowBuilder{s["tree"]}(
+    Base.get(s, "min_depth", 1),
+    Base.get(s, "max_depth", 8),
+    Base.get(s, "prob_terminal", 0.5))

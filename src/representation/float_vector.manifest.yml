@@ -1,0 +1,8 @@
+id: representation/float_vector
+composer: |
+  r = FloatVectorRepresentation(
+    Base.get(s, "length", 80),
+    Base.get(s, "min", typemin(Float)),
+    Base.get(s, "max", typemax(Float))
+  )
+  return r
