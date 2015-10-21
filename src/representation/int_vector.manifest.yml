@@ -1,6 +1,0 @@
-id: representation/int_vector
-composer: |
-  IntVectorRepresentation(
-    Base.get(s, "length", 80),
-    Base.get(s, "min", typemin(Int)),
-    Base.get(s, "max", typemax(Int)))
