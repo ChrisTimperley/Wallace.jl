@@ -13,6 +13,7 @@ module Wallace
   using DataStructures
   using StatsBase
 
+  using fitness; export fitness
   using individual
   using population; export population
   using state; export state

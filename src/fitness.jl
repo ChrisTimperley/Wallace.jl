@@ -16,6 +16,7 @@ include("fitness/_pareto.jl")
 include("fitness/_aggregate.jl")
 include("fitness/_belegundu.jl")
 include("fitness/_goldberg.jl")
+include("fitness/_moga.jl")
 
 """
 Responsible for generating a fitness value according to a given scheme.
