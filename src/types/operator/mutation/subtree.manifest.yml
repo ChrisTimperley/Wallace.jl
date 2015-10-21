@@ -1,7 +1,0 @@
-id: mutation/subtree
-composer: |
-  SubtreeMutation(s["stage"].representation,
-    Base.get(s, "rate", 0.01),
-    Base.get(s, "prob_terminal", 0.5),
-    Base.get(s, "min_depth", 1),
-    Base.get(s, "max_depth", 5))
