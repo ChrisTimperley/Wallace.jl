@@ -2,48 +2,95 @@
 Need to add a deme composer
 """
 module deme
-  using core, breeder, species
-  export Deme, prepare!, breed!, contents, deme
+using core, breeder, species
+export Deme, prepare!, breed!, contents, deme, compose!, DemeSpecification
 
-  type Deme{T}
-    capacity::Int
-    breeder::Breeder
-    species::Species
-    num_offspring::Int
-    offspring::Vector{T}
-    members::Vector{T}
+type Deme{T}
+  capacity::Int
+  breeder::Breeder
+  species::Species
+  num_offspring::Int
+  offspring::Vector{T}
+  members::Vector{T}
 
-    Deme(capacity::Int, breeder::Breeder, species::Species, num_offspring::Int = capacity) =
-      new(capacity, breeder, species, num_offspring, [], [T() for i in 1:capacity])
-  end
+  Deme(capacity::Int, breeder::Breeder, species::Species, num_offspring::Int = capacity) =
+    new(capacity, breeder, species, num_offspring, [], [T() for i in 1:capacity])
+end
 
-  # TODO: Needs lots of work!
-  function deme(s::Dict{Any, Any})
-    println("- building deme.")
-    s["species"] = Dict{Any, Any}(s["species"])
-    s["breeder"] = Dict{Any, Any}(s["breeder"])
+"""
+Used to provide a specification for building a deme.
+"""
+type DemeSpecification
+  """
+  The number of individuals within this deme.
+  """
+  capacity::Int
 
-    println("- about to compose species: $(typeof(s["species"]))")
-    s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
-    s["breeder"]["species"] = s["species"]
+  """
+  The number of offspring produced by this deme at each generation.
+  If set to `0`, the number of offspring will default to being equal to
+  the capacity of the deme.
+  """
+  offspring::Int
 
-    println("-- building breeder.")
-    s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
-    s["capacity"] = Base.get(s, "capacity", 100)
-    s["offspring"] = Base.get(s, "offspring", s["capacity"])
+  """
+  The species to which all members of this deme belong.
+  """
+  species::Species
 
-    Deme{ind_type(s["species"])}(s["capacity"], s["breeder"], s["species"], s["offspring"])
-  end
+  """
+  The breeder used to produce the offspring for this deme.
+  """
+  breeder::Breeder
 
-  # Prepares a deme for the evolutionary process, by allocating the
-  # offspring array. This way we operate on the same array for the rest of
-  # the process.
-  prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
+  DemeSpecification() = new(100, -1)
+end
 
-  # Produces the offspring for a given deme at each generation.
-  breed!(d::Deme) = breed!(d.breeder, d)
+"""
+Composes a deme from a provided specification.
+"""
+function compose!(d::DemeSpecification)
+  species = compose!(d.species)
+  breeder = compose!(d.breeder, species)
+  ind_type = ind_type(species)
+  d.offspring == 0 && d.offspring = d.capacity
+  Deme{ind_type}(d.capacity, breeder, species, d.offspring)
+end
 
-  # Returns a list of all the individuals, both current members and offspring,
-  # belonging to a given deme.
-  contents{I <: Individual}(d::Deme{I}) = vcat(d.offspring, d.members)
+"""
+TODO: Description of deme models.
+
+**Properties:**
+
+* `capacity::Int`, the number of individuals that this deme may hold.
+* `offspring::Int`, the number of offspring that should be produced by this
+deme at every generation.
+* `species::SpeciesSpecification`, the species to which the individuals in the
+deme belong.
+* `breeder::BreederSpecification`, the breeder used to produce the offspring
+for this deme.
+"""
+function deme(spec::Function)
+  ds = DemeSpecification()
+  spec(ds)
+  ds
+end
+
+"""
+Prepares a deme for the evolutionary process, by allocating the
+offspring array. This way we operate on the same array for the rest of
+the process.
+"""
+prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
+
+"""
+Produces the offspring for a given deme at each generation.
+"""
+breed!(d::Deme) = breed!(d.breeder, d)
+
+"""
+Returns a list of all the individuals, both current members and offspring,
+belonging to a given deme.
+"""
+contents{I <: Individual}(d::Deme{I}) = vcat(d.offspring, d.members)
 end
