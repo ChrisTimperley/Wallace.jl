@@ -19,14 +19,42 @@ type Population
 end
 
 """
-Constructs a custom population, composed from a list of deme descriptions.
+Simple populations consist of a single fixed-size deme containing individuals of
+the same species.
+
+**Properties:**
+
+* `size::Int`, the number of individuals within the population.
+* `offspring::Int`, the number of offspring that should be produced at each
+  generation.
+* `species::Species`, the species to which all individuals within this
+  population belong.
+* `breeder::Breeder`, the breeder used to generate the offspring for this
+  population at each generation.
+"""
+function simple(s::Dict{Any, Any})
+  complex(Dict{Any, Any}(
+    "demes" => [
+      Dict{Any, Any}(
+        "capacity"  => s["size"],
+        "offspring" => Base.get(s, "offspring", s["size"]),
+        "species"   => s["species"],
+        "breeder"   => s["breeder"]
+      )
+    ]
+  ))
+end
+
+"""
+Complex populations may consist of multiple demes, where all members of a given
+deme belong to the same species, but each deme may use a different species.
 
 **Properties:**
 
 *`demes::Vector{Specification}`, an ordered list containing specifications
   for each of the demes within this population.
 """
-function custom(s::Dict{Any, Any})
+function complex(s::Dict{Any, Any})
   s["demes"] = Deme[deme(d) for d in s["demes"]]
   Population(s["demes"])
 end
