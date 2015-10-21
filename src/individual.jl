@@ -3,21 +3,26 @@ Description of individual model.
 """
 module individual
 using fitness
-export sort, sort!, isbetter, compare, best, scale!, individual
+export sort, sort!, isbetter, compare, best, scale!, individual_type()
 
 # Load contents.
 include("individual/stage.jl")
 
-function individual(s::Dict{Any, Any})
+"""
+Composes the specialised Individual type for a species (given by its
+parameters, rather than a Species object).
+"""
+function individual_type(stages::Vector{SpeciesStage},
+  fitness::FitnessScheme
+)
   # Create an array to hold each of the lines of the type definition.
   # Add the evaluated and species properties.
   definition = ["evaluated::Bool"]#, "species::Species"]
 
   # Generate a property for each stage of development for this individual.
-  # The genotype must be placed first; in order to do this, we generate a list
-  # of stages, search for the genotype, and swap the stage at the first index
+  # The genotype must be placed first; in order to do this, we search for the
+  # genotype, and swap the stage at the first index
   # with the genotype stage.
-  stages = collect(values(s["stages"]))
   for i in length(stages)
     if root(stages[i])
       t = stages[1]
@@ -112,5 +117,4 @@ Performs any necessary post-processing on the individuals using this fitness
 scheme.
 """
 scale!{I <: Individual}(::FitnessScheme, ::Vector{I}) = return
-
 end

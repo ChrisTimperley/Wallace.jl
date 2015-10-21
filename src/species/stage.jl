@@ -1,18 +1,27 @@
 type SpeciesStage
-  # The label, or name, of this stage.
-  label::AbstractString
-
-  # The label of the parent for this stage.
-  parent::AbstractString
-
-  # The representation used by this stage.
-  representation::Representation
-
-  # A flag indicating whether changes to this stage are lamarckian, i.e.
-  # they are reflected to the parent stage.
+  """
+  A flag indicating whether changes to this stage are lamarckian, i.e. they are
+  reflected to the parent stage.
+  """
   lamarckian::Bool
 
-  # Constructs a new species stage.
+  """
+  The label of the parent for this stage.
+  """
+  parent::AbstractString
+
+  """
+  The label, or name, of this stage.
+  """
+  label::AbstractString
+
+  """
+  The representation used by this stage.
+  """
+  representation::Representation
+
+  SpeciesStage() =
+    new(false, "")
   SpeciesStage(label::AbstractString, parent::AbstractString, representation::Representation, lamarckian::Bool) =
     new(label, parent, representation, lamarckian)
 end
@@ -22,12 +31,16 @@ TODO: Composes a species stage.
 
 By default, all stages are treated as root stages (although there can only
 be one) and as non-lamarckian.
-
 """
-function stage(s::Dict{Any, Any})
-  s["from"] = Base.get(s, "from", "")
-  s["lamarckian"] = Base.get(s, "lamarckian", false)
-  stage(s["label"], s["representation"], s["from"], s["lamarckian"])
+function stage(label::String, def::Function)
+  ss = stage(def)
+  ss.label = label
+  ss
+end
+function stage(def::Function)
+  ss = SpeciesStage()
+  def(ss)
+  ss
 end
 stage(label::String, rep::Representation) =
   stage(label, rep, "", false)
