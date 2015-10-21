@@ -1,14 +1,34 @@
-load("../crossover", dirname(@__FILE__))
-load("../../representation/koza", dirname(@__FILE__))
-
 type SubtreeCrossover <: Crossover
-  rep::KozaTreeRepresentation
   rate::Float
-  max_depth::Int
   max_tries::Int
+  max_depth::Int
+  rep::Representation.KozaTreeRepresentation
 
-  SubtreeCrossover(rep::KozaTreeRepresentation, rate::Float, max_tries::Int) =
-    new(rep, rate, rep.max_depth, max_tries)
+  SubtreeCrossover() =
+    new(0.7, 1)
+  SubtreeCrossover(rate::Float, max_tries::Int) =
+    new(rate, max_tries)
+end
+
+"""
+Composes a given sub-tree crossover operator.
+"""
+function compose!(c::SubtreeCrossover, r::Representation)
+  c.max_depth = r.max_depth
+  c.rep = r
+  c
+end
+
+"""
+TODO: Write representation.subtree
+"""
+subtree() = subtree(0.7, 1)
+subtree(rate::Float) = subtree(rate, 0.7)
+subtree(limit::Int) = subtree(0.7, limit)
+function subtree(def::Function)
+  c = subtree()
+  def(c)
+  c
 end
 
 num_inputs(o::SubtreeCrossover) = 2
@@ -37,5 +57,3 @@ function operate!{T <: KozaTree}(o::SubtreeCrossover,
   end
 
 end
-
-register(joinpath(dirname(@__FILE__), "subtree.manifest.yml"))
