@@ -61,42 +61,48 @@ else
   return BreederSource[s.source]
 end
 
-# Could we perform this breeding in-place?
-breed!(b::FastBreeder, d::Deme) =
-  d.offspring = breed!(d.species, b.source, d, d.num_offspring, b)
+breed!{I <: Individual}(
+  b::FastBreeder,
+  s::Species,
+  members::Vector{I},
+  capacity::Int,
+  num_offspring::Int
+) =
+  breed!(b.source, s, members, num_offspring, b)
 
-# Produces a requested number of (proto-)offspring from a multiple breeding source.
+"""
+Produces a requested number of (proto-)offspring from a multiple breeding source.
+"""
 function breed!{I <: Individual}(
-  sp::Species,
   s::MultiBreederSource,
-  d::Deme{I},
+  sp::Species,
+  members::Vector{I},
   n::Int,
   caller::Union{FastBreeder, BreederSource}
 )
   proportions = proportion(n, s.proportions)
-  vcat([breed!(s.sources[i], d, proportions[i], caller) for i in 1:length(s.sources)])
+  vcat([breed!(s.sources[i], sp, members, proportions[i], caller) for i in 1:length(s.sources)])
 end
 
 # Produces a requested number of individuals for breeding using a given selection source.
 # Each selected individual is cloned to avoid changes to the original population.
-function breed!(
-  sp::Species,
+function breed!{I <: Individual}(
   s::SelectionBreederSource,
-  d::Deme,
+  species::Species,
+  members::Vector{I},
   n::Int,
   caller::Union{FastBreeder, BreederSource}
-)# =
-#  sync(s.eigen, caller.eigen, sp, map!(clone, select(s.operator, d.members, n)))
-  inds = select(s.operator, d.species, d.members, n)
+)
+  inds = select(s.operator, species, members, n)
   map!(clone, inds)
   sync(s.eigen, caller.eigen, sp, inds)
 end
 
 function breed!{I <: Individual}(
-  sp::Species,
   s::VariationBreederSource,
-  d::Deme{I},
-  n::Int64,
+  sp::Species,
+  members::Vector{I},
+  n::Int,
   caller::Union{FastBreeder, BreederSource}
 )
   # Full-time cache?
@@ -113,7 +119,7 @@ function breed!{I <: Individual}(
   calls = ceil(Integer, n / op_outputs)
 
   # Generate the necessary input proto-offspring.
-  inputs = breed!(sp, s.source, d, calls * op_outputs, s)
+  inputs = breed!(s.source, sp, members, calls * op_outputs, s)
 
   # Now we need to synchronise the representation graph of our proto-offspring, such
   # that the stage that this operator works on is marked as clean.
