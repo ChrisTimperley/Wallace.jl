@@ -1,3 +1,0 @@
-id: selection/random
-composer: |
-  RandomSelection()
