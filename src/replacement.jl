@@ -1,6 +1,6 @@
 module replacement
-  export  Replacement,
-          GenerationalReplacement
+  using state
+  export  Replacement
 
   """
   The base type used by all replacement schemes.
@@ -11,7 +11,8 @@ module replacement
   Performs replacement on each deme within the population for a given algorithm
   state, according to a provided replacement scheme.
   """
-  #replace!(::Replacement, ::State) = CRASH
+  replace!(::Replacement, ::State) =
+    error("No replace! operator implemented by this replacement scheme.")
 
   """
   Replaces the existing members of a deme with their offspring at the end of
@@ -28,9 +29,9 @@ module replacement
   generational() = GenerationalReplacement()
   comma = generational
 
-  #replace!(r::GenerationalReplacement, s::State) =
-  #  for d in s.population.demes; replace!(r, d); end
+  replace!(r::GenerationalReplacement, s::State) =
+    for d in s.population.demes; replace!(r, d); end
 
-  #replace!(r::GenerationalReplacement, d::Deme) =
-  #  d.members[1:end] = d.offspring[1:d.capacity]
+  replace!(r::GenerationalReplacement, d::Deme) =
+    d.members[1:end] = d.offspring[1:d.capacity]
 end

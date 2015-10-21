@@ -1,3 +1,0 @@
-id: grammar
-composer: |
-  Grammar(s["root"], Dict{AbstractString, Vector{AbstractString}}(s["rules"]))

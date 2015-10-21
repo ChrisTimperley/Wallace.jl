@@ -1,5 +1,0 @@
-id: koza#builder/full
-composer: |
-  KozaFullBuilder{s["tree"]}(
-    Base.get(s, "min_depth", 1),
-    Base.get(s, "max_depth", 8))

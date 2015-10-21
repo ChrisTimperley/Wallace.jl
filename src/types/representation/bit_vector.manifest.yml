@@ -1,6 +1,0 @@
-id: representation/bit_vector
-composer: |
-  println("Building bit vector representation.")
-  r = BitVectorRepresentation(Base.get(s, "length", 100))
-  println("Built bit vector representation.")
-  r

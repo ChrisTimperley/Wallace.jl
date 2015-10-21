@@ -18,8 +18,8 @@ module Wallace
 
   using distance; export distance
   using fitness; export fitness
-  using representation; export representation
   using individual
+  using representation; export representation
   importall deme
   using population; export population
   using initialiser; export initialiser
