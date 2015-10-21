@@ -19,6 +19,7 @@ module Wallace
   using fitness; export fitness
   using representation; export representation
   using individual
+  importall deme
   using population; export population
   using initialiser; export initialiser
   using state; export state

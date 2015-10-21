@@ -1,5 +1,9 @@
+"""
+Need to add a deme composer
+"""
 module deme
-  export Deme
+  using breeder, species
+  export Deme, prepare!, breed!, contents, deme
 
   type Deme{T}
     capacity::Int
@@ -11,6 +15,24 @@ module deme
 
     Deme(capacity::Int, breeder::Breeder, species::Species, num_offspring::Int = capacity) =
       new(capacity, breeder, species, num_offspring, [], [T() for i in 1:capacity])
+  end
+
+  # TODO: Needs lots of work!
+  function deme(s::Dict{Any, Any})
+    println("- building deme.")
+    s["species"] = Dict{Any, Any}(s["species"])
+    s["breeder"] = Dict{Any, Any}(s["breeder"])
+
+    println("- about to compose species: $(typeof(s["species"]))")
+    s["species"] = compose_as(s["species"], Base.get(s["species"], "type", "species"))
+    s["breeder"]["species"] = s["species"]
+
+    println("-- building breeder.")
+    s["breeder"] = compose_as(s["breeder"], s["breeder"]["type"])
+    s["capacity"] = Base.get(s, "capacity", 100)
+    s["offspring"] = Base.get(s, "offspring", s["capacity"])
+
+    Deme{ind_type(s["species"])}(s["capacity"], s["breeder"], s["species"], s["offspring"])
   end
 
   # Prepares a deme for the evolutionary process, by allocating the
