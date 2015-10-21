@@ -39,7 +39,7 @@ Composes a variation breeder source.
 * `sources::Dict{AbstractString, Source}`, a dictionary containing the sources
 of the breeder that this source belongs to.
 """
-function compose!(v::VariationBreederSource, sources::Dict{AbstractString, Source})
+function compose!(v::VariationBreederSource, sources::Dict{AbstractString, BreederSource})
   v.eigen = anonymous_type(Wallace)
   v.source = sources[v.source_name]
   v.stage_getter =
@@ -50,7 +50,7 @@ end
 """
 DOCUMENT: breeder.variation
 """
-variation(stage::String, source::String, op::Variator) =
+variation(stage::AbstractString, source::AbstractString, op::Variation) =
   VariationBreederSource(op, source, stage)
 
 type MultiBreederSource <: BreederSource

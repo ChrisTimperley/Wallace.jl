@@ -1,5 +1,5 @@
 module breeder
-using species, individual, operator, selection, mutation, crossover
+using species, individual, core, variation, selection, mutation, crossover
 export Breeder, BreederSpecification
 
 abstract Breeder
