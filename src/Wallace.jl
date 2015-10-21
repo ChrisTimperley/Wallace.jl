@@ -16,6 +16,7 @@ module Wallace
   # Load the core types.
   include("_core.jl")
 
+  using distance; export distance
   using fitness; export fitness
   using representation; export representation
   using individual

@@ -1,5 +1,3 @@
-load("../representation",  dirname(@__FILE__))
-
 type SpeciesStage
   # The label, or name, of this stage.
   label::AbstractString
@@ -19,6 +17,25 @@ type SpeciesStage
     new(label, parent, representation, lamarckian)
 end
 
+"""
+TODO: Composes a species stage.
+
+By default, all stages are treated as root stages (although there can only
+be one) and as non-lamarckian.
+
+"""
+function stage(s::Dict{Any, Any})
+  s["from"] = Base.get(s, "from", "")
+  s["lamarckian"] = Base.get(s, "lamarckian", false)
+  stage(s["label"], s["representation"], s["from"], s["lamarckian"])
+end
+stage(label::String, rep::Representation) =
+  stage(label, rep, "", false)
+stage(label::String, rep::Representation, from::String) =
+  stage(label, rep, from, false)
+stage(label::String, rep::Representation, from::String, lamarckian::Bool) =
+  stage(label, rep, from, lamarckian)
+
 # Returns the representation used by a given species stage.
 representation(s::SpeciesStage) = s.representation
 
@@ -35,5 +52,3 @@ root(ss::Vector{SpeciesStage}) = for s in ss
     return s
   end
 end
-
-register(joinpath(dirname(@__FILE__), "stage.manifest.yml"))

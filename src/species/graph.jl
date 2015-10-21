@@ -1,5 +1,4 @@
-load("../species.jl", dirname(@__FILE__))
-load("graph/node",    dirname(@__FILE__))
+include("species/graph/node.jl")
 
 # Representation graphs are used to indicate whether particular stages
 # of an individual are synchronised with the genome.
