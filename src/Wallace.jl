@@ -17,11 +17,14 @@ module Wallace
   include("_core.jl")
 
   using fitness; export fitness
+  using representation; export representation
   using individual
   using population; export population
+  using initialiser; export initialiser
   using state; export state
   using criterion; export criterion
   using replacement; export replacement
   using evaluator; export evaluator
   using logger; export logger
+  using algorithm; export algorithm
 end
