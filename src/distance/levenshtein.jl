@@ -8,5 +8,5 @@ that are required to transform one sequence into the other.
 """
 levenshtein() = LevenshteinDistance()
 
-distance(::LevenshteinDistance, x::DirectIndexString, y::DirectIndexString) =
+dist(::LevenshteinDistance, x::DirectIndexString, y::DirectIndexString) =
   error("Not implemented!")

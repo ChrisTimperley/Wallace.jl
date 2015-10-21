@@ -35,5 +35,5 @@ aggregate(maximise::Bool, weights::Vector{Float}) =
 
 uses(s::AggregateFitnessScheme) = AggregateFitness
 maximise(s::AggregateFitnessScheme) = s.maximise
-fitness(s::AggregateFitnessScheme, o::Vector{Float}) =
+assign(s::AggregateFitnessScheme, o::Vector{Float}) =
   AggregateFitness(sum(o .* weights), o)

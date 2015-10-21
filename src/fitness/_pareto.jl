@@ -13,7 +13,7 @@ end
 
 uses{T}(::ParetoFitnessScheme{T}) = ParetoFitness{T}
 maximise(::ParetoFitnessScheme) = false
-fitness{T}(::ParetoFitnessScheme{T}, v::Vector{T}) = ParetoFitness{T}(v)
+assign{T}(::ParetoFitnessScheme{T}, v::Vector{T}) = ParetoFitness{T}(v)
 
 function compare(::ParetoFitnessScheme, x::ParetoFitness, y::ParetoFitness)
   if x.rank != y.rank

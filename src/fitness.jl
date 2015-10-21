@@ -3,7 +3,11 @@ Fitness objects are used to provide an empirical means of assessing the
 relative quality of one potential solution to another.
 """
 module fitness
+export assign, use, maximise, Fitness, FitnessScheme
 
+"""
+Base type used by all fitness values.
+"""
 abstract Fitness
 
 """
@@ -23,7 +27,7 @@ include("fitness/_shared.jl")
 """
 Responsible for generating a fitness value according to a given scheme.
 """
-fitness(s::FitnessScheme) =
+assign(s::FitnessScheme) =
   error("No 'fitness' function defined for this fitness scheme.")
 
 """

@@ -24,7 +24,7 @@ scalar(t::Type, maximise::Bool) =
 
 uses{T}(s::ScalarFitnessScheme{T}) = T
 maximise(s::ScalarFitnessScheme) = s.maximise
-fitness(s::ScalarFitnessScheme, v) = v
+assign(s::ScalarFitnessScheme, v) = v
 
 compare{T <: Number}(s::ScalarFitnessScheme{T}, x::T, y::T) =
   if x > y

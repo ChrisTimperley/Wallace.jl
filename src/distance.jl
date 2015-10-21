@@ -2,6 +2,7 @@
 TODO: Add description of distance module.
 """
 module distance
+export dist, Distance
 
 """
 The base type used by all distance metrics.

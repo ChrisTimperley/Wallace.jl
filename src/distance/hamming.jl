@@ -9,7 +9,7 @@ hamming() = HammingDistance()
 
 # Shouldn't be repeating code here.
 # Need to find a way to unify these two method headers.
-function distance(::HammingDistance, x::DirectIndexString, y::DirectIndexString)
+function dist(::HammingDistance, x::DirectIndexString, y::DirectIndexString)
   dst = 0
   for i in 1 : min(length(x), length(y))
     @inbounds if x[i] != y[i]
@@ -19,7 +19,7 @@ function distance(::HammingDistance, x::DirectIndexString, y::DirectIndexString)
   return dst
 end
 
-function distance{T}(::HammingDistance, x::Vector{T}, y::Vector{T})
+function dist{T}(::HammingDistance, x::Vector{T}, y::Vector{T})
   dst = 0
   for i in 1 : min(length(x), length(y))
     @inbounds if x[i] != y[i]

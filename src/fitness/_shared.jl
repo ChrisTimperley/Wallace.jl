@@ -29,7 +29,7 @@ shared(s::Dict{Any, Any}) =
 
 uses(s::FitnessSharingScheme) = SharedFitness{uses(s.base)}
 maximise(s::FitnessSharingScheme) = maximise(s.base)
-fitness(s::FitnessSharingScheme, args...) =
+assign(s::FitnessSharingScheme, args...) =
   fitness(s.base, args...)
 
 sh(s::FitnessSharingScheme, d::Float) =
