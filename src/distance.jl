@@ -2,6 +2,7 @@
 TODO: Add description of distance module.
 """
 module distance
+using utility
 export dist, Distance
 
 """

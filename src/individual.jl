@@ -2,7 +2,7 @@
 Description of individual model.
 """
 module individual
-using fitness, core, Utility
+using fitness, core, utility
 export sort, sort!, isbetter, compare, best, scale!
 
 # Load contents.

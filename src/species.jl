@@ -1,5 +1,5 @@
 module
-using individual, representation, fitness
+using individual, representation, fitness, core, utility
 export Species, convert!, compose!
 
 type Species{T}

@@ -1,4 +1,4 @@
-module Utility
+module utility
 export Float, each, flatten, identity, partition
 
 # Load the submodules.

@@ -1,9 +1,11 @@
 push!(LOAD_PATH, dirname(@__FILE__))
 
+"""
+TODO: Document Wallace module.
+"""
 module Wallace
   using StatsBase
-
-  # Load the core types.
+  using utility
   using core
   using distance; export distance
   using fitness; export fitness

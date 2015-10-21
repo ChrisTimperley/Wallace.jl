@@ -3,7 +3,7 @@ Fitness objects are used to provide an empirical means of assessing the
 relative quality of one potential solution to another.
 """
 module fitness
-using Utility, core, distance
+using utility, core, distance
 export assign, use, maximise, Fitness, FitnessScheme
 
 """
