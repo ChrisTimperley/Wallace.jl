@@ -2,7 +2,7 @@
 TODO: Description of algorithm module.
 """
 module algorithm
-export run!, compose!
+export run!
 
 """
 The base type used by all algorithms.

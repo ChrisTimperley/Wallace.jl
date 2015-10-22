@@ -5,4 +5,4 @@ def = algorithm.genetic() do
   println("hello!")
 end
 
-alg = Wallace.compose!(def)
+alg = algorithm.compose!(def)
