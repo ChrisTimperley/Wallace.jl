@@ -4,6 +4,9 @@ push!(LOAD_PATH, dirname(@__FILE__))
 TODO: Document Wallace module.
 """
 module Wallace
+
+  compose!(x::Any) = x
+
   using StatsBase
   using utility
   using core
@@ -24,5 +27,7 @@ module Wallace
   using replacement; export replacement
   using evaluator; export evaluator
   using logger; export logger
-  using algorithm; export algorithm
+
+  import algorithm.genetic
+  import algorithm.compose!
 end

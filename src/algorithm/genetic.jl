@@ -11,7 +11,7 @@ type GeneticAlgorithmBuilder
   population::Population
   evaluator::Evaluator
 
-  GeneticAlgorithm() =
+  GeneticAlgorithmBuilder() =
     new(replacement.generational(), [], Dict())
 end
 
@@ -48,7 +48,7 @@ TODO: Explain algorithm.genetic
 """
 function genetic(def::Function)
   builder = GeneticAlgorithmBuilder()
-  def(builder)
+  #def(builder)
   builder
 end
 
