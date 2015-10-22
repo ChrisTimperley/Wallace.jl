@@ -20,7 +20,7 @@ Composes a simple population from a provided definition.
 function compose!(def::SimplePopulationDefinition)
   dd = deme(def.size, def.offspring, def.species, def.breeder)
   dm = _deme_.compose!(dd)
-  Population([dm]) 
+  Population(Deme[dm]) 
 end
 
 """

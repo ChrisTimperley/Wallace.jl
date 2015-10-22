@@ -5,6 +5,7 @@ using state, breeder, evaluator, logger, replacement, criterion, initialiser,
 Builder for algorithm.genetic.
 """
 type GeneticAlgorithmDefinition
+  output::AbstractString
   replacement::Replacement
   loggers::Vector{Logger}
   termination::Dict{AbstractString, Criterion}
@@ -12,7 +13,7 @@ type GeneticAlgorithmDefinition
   evaluator::Evaluator
 
   GeneticAlgorithmDefinition() =
-    new(replacement.generational(), [], Dict())
+    new("output", replacement.generational(), [], Dict())
 end
 
 type GeneticAlgorithm <: Algorithm
@@ -31,15 +32,15 @@ end
 Composes an `algorithm.genetic` instance from information provided within a
 supplied builder.
 """
-function compose!(b::GeneticAlgorithmDefinition)
+function compose!(def::GeneticAlgorithmDefinition)
   alg = GeneticAlgorithm()
-  pop = population.compose!(b.population)
+  pop = population.compose!(def.population)
   alg.state = State(pop)
-  alg.evaluator = b.evaluator
-  alg.replacement = b.replacement
-  alg.termination = b.termination
-  alg.initialiser = DefaultInitialiser()
-  alg.output = abspath(alg.output)
+  alg.evaluator = def.evaluator
+  alg.replacement = def.replacement
+  alg.termination = def.termination
+  alg.initialiser = initialiser.DefaultInitialiser()
+  alg.output = abspath(def.output)
   alg
 end
 

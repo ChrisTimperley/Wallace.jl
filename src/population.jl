@@ -23,14 +23,6 @@ type Population
 end
 
 """
-Composes a given population.
-"""
-function compose!(p::Population)
-  p.demes = Deme[compose!(d) for d in p.demes]
-  p
-end
-
-"""
 Prepares a given population for the main loop of the EA.
 """
 prepare!(p::Population) = for deme in p.demes; prepare!(deme); end

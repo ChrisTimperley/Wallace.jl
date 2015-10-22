@@ -47,7 +47,8 @@ type DemeDefinition
   Constructs a partial deme specification using default values.
   """
   DemeDefinition() = new(100, -1)
-  DemeDefinition(capacity::Int,
+  DemeDefinition(
+    capacity::Int,
     offspring::Int,
     species::SpeciesDefinition,
     breeder::BreederDefinition
@@ -62,11 +63,11 @@ function compose!(d::DemeDefinition)
   println("building deme")
   sp = species.compose!(d.species)
   br = breeder.compose!(d.breeder, sp)
-  ind_type = ind_type(sp)
+  I = ind_type(sp)
   if d.offspring == 0
     d.offspring = d.capacity
   end
-  Deme{ind_type}(d.capacity, br, sp, d.offspring)
+  Deme{I}(d.capacity, br, sp, d.offspring)
 end
 
 """
