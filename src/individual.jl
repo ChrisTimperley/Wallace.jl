@@ -3,7 +3,7 @@ Description of individual model.
 """
 module individual
 using fitness, core, utility
-export sort, sort!, isbetter, compare, best, scale!
+export sort, sort!, isbetter, compare, best, scale!, IndividualStage
 
 # Load contents.
 include("individual/stage.jl")

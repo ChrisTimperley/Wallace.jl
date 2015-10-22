@@ -4,7 +4,7 @@ relative quality of one potential solution to another.
 """
 module fitness
 using utility, core, distance
-export assign, use, maximise, Fitness, FitnessScheme
+export assign, uses, maximise, Fitness, FitnessScheme
 
 """
 Base type used by all fitness values.

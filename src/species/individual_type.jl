@@ -28,7 +28,7 @@ function individual_type(stages::Vector{SpeciesStage},
   end
 
   # Add the fitness property.
-  push!(definition, "fitness::$(uses(s["fitness"]))")
+  push!(definition, "fitness::$(uses(fitness))")
   
   # Build the empty constructor.
   push!(definition, "constructor() = new(" * 
@@ -48,17 +48,17 @@ function individual_type(stages::Vector{SpeciesStage},
   # into an anonymous type.
   unshift!(definition, "type <: Individual")
   push!(definition, "end")
-  t = anonymous_type(Wallace, join(definition, "\n"))
+  t = anonymous_type(species, join(definition, "\n"))
 
   # Build the cloning operation for this type.
   cloner = join(["i.$(stage.label)" for stage in stages], ",")
   cloner = "clone(i::$(t)) = $(t)($(cloner))"
-  eval(Wallace, Base.parse(cloner))
+  eval(species, Base.parse(cloner))
 
   # Build the describe operation for this type.
   describer = join(vcat(["fitness: \$(describe(i.fitness))"], ["$(stage.label):\n\$(describe(i.$(stage.label)))" for stage in stages]), "\n")
   describer = "describe(i::$(t)) = \"$(describer)\""
-  eval(Wallace, Base.parse(describer))
+  eval(species, Base.parse(describer))
   
   # Return the generated individual type.
   return t

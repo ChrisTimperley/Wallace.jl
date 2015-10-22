@@ -1,6 +1,7 @@
 module species
-using representation, fitness, core, utility
-export Species, convert!, compose!, genotype, rep, ind_type, SpeciesDefinition
+using utility, core
+importall representation, fitness, individual
+export Species, convert!, genotype, rep, ind_type, SpeciesDefinition
 
 """
 The base type used by all species definitions.

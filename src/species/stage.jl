@@ -54,7 +54,7 @@ stage(label::AbstractString, rep::Representation, from::AbstractString, lamarcki
   SpeciesStage(label, rep, from, lamarckian)
 
 # Returns the representation used by a given species stage.
-representation(s::SpeciesStage) = s.representation
+rep(s::SpeciesStage) = s.representation
 
 # Returns the chromosome used by this species stage.
 chromosome(s::SpeciesStage) = chromosome(s.representation)
