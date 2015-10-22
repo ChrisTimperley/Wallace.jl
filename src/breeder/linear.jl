@@ -1,10 +1,10 @@
 """
 TODO: Describe breeder.linear.
 """
-function linear(operators::Vector{Operator})
+function linear(operators::Vector{OperatorDefinition})
   println("Building list of sources.")
   
-  sources = Source[]
+  sources = BreederSource[]
   sources << selection(operators[1])
 
   # Mark all others as variators.

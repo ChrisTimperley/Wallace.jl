@@ -8,7 +8,7 @@ export Crossover, CrossoverDefinition
 """
 Base type used by all crossover operation definitions.
 """
-abstract CrossoverDefinition
+abstract CrossoverDefinition <: VariationDefinition
 
 """
 Base type used all by crossover operators.

@@ -1,6 +1,12 @@
 module variation
 using   core, representation
-export  Variation, rep, num_inputs, num_outputs, prepare, operate!, call!
+export  Variation, rep, num_inputs, num_outputs, prepare, operate!, call!,
+        VariationDefinition
+
+"""
+The base type used by all variation operator definitions.
+"""
+abstract VariationDefinition <: OperatorDefinition
 
 """
 The base type used by all variation operators.

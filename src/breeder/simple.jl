@@ -25,8 +25,8 @@ end
 Composes a simple breeder for a given species from a provided definition.
 """
 function compose!(def::SimpleBreederDefinition, s::Species)
-  compose!(linear([b.selection, b.mutation, b.crossover]), s)
-  b
+  compose!(linear([def.selection, def.mutation, def.crossover]), s)
+  def
 end
 
 """

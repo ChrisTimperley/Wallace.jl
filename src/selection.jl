@@ -5,7 +5,7 @@ export Selection, select, prepare, SelectionDefinition
 """
 The base type used by all selection operator definitions.
 """
-abstract SelectionDefinition
+abstract SelectionDefinition <: OperatorDefinition
 
 """
 The base type used by all selection operators.

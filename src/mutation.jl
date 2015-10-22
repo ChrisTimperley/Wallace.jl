@@ -8,7 +8,7 @@ export Individual, Mutation, MutationDefinition
 """
 The base type used by all mutation operation definitions.
 """
-abstract MutationDefinition
+abstract MutationDefinition <: VariationDefinition
 
 """
 The base type for all mutation operations.
