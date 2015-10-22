@@ -1,5 +1,5 @@
 module representation
-using individual, core, utility
+importall individual, core, utility
 export Representation, chromosome, convert!, describe
 
 """

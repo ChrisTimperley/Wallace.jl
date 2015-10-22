@@ -6,6 +6,7 @@ TODO: Document Wallace module.
 module Wallace
   using StatsBase
   using utility
+  using common
   using core
   using distance; export distance
   using fitness; export fitness
