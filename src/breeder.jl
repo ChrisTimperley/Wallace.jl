@@ -1,9 +1,9 @@
 module breeder
 using species, individual, core, variation, selection, mutation, crossover
-export Breeder, BreederSpecification
+export Breeder, BreederDefinition
 
 abstract Breeder
-abstract BreederSpecification
+abstract BreederDefinition
 
 # Include each of the breeders.
 include("breeder/source.jl")

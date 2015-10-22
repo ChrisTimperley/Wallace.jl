@@ -1,19 +1,19 @@
-type ComplexSpeciesSpecification
+type ComplexSpeciesDefinition <: SpeciesDefinition
   fitness::FitnessScheme
   stages::Vector{SpeciesStage}
 
-  ComplexSpeciesSpecification() =
+  ComplexSpeciesDefinition() =
     new(fitness.scalar())
-  ComplexSpeciesSpecification(st::Vector{SpeciesStage}) =
+  ComplexSpeciesDefinition(st::Vector{SpeciesStage}) =
     new(fitness.scalar(), st)
-  ComplexSpeciesSpecification(f::FitnessScheme, st::Vector{SpeciesStage}) =
+  ComplexSpeciesDefinition(f::FitnessScheme, st::Vector{SpeciesStage}) =
     new(f, st)
 end
 
 """
-Composes a complex species from a provided specification.
+Composes a complex species from a provided definition.
 """
-function compose!(c::ComplexSpeciesSpecification)
+function compose!(c::ComplexSpeciesDefinition)
   # Transform the stages of this species into a dictionary, for easy access.
   stages = Dict{String, SpeciesStage}()
   for st in c.stages
@@ -39,10 +39,10 @@ complex(fitness::FitnessScheme, stages::Vector{SpeciesStage}) =
   ComplexSpeciesSpecification(fitness, stages)
 
 complex(stages::Vector{SpeciesStage}) =
-  ComplexSpeciesSpecification(stages)
+  ComplexSpeciesDefinition(stages)
 
 function complex(spec::Function)
-  ss = ComplexSpeciesSpecification()
+  ss = ComplexSpeciesDefinition()
   spec(ss)
   ss
 end

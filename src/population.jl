@@ -2,8 +2,14 @@
 TODO: Description of the current population model.
 """
 module population
-using core, _deme_, individual, utility
-export Population, best!, prepare!, breed!, unevaluated, scale!
+using   core, _deme_, individual, utility, species, breeder
+export  Population, best!, prepare!, breed!, unevaluated, scale!,
+        PopulationDefinition
+
+"""
+The base type used by all population definitions.
+"""
+abstract PopulationDefinition
 
 """
 Used to hold the contents of a population, where a population is modelled
@@ -22,47 +28,6 @@ Composes a given population.
 function compose!(p::Population)
   p.demes = Deme[compose!(d) for d in p.demes]
   p
-end
-
-"""
-Simple populations consist of a single fixed-size deme containing individuals of
-the same species.
-
-**Properties:**
-
-* `size::Int`, the number of individuals within the population.
-* `offspring::Int`, the number of offspring that should be produced at each
-  generation.
-* `species::Species`, the species to which all individuals within this
-  population belong.
-* `breeder::Breeder`, the breeder used to generate the offspring for this
-  population at each generation.
-"""
-function simple(s::Dict{Any, Any})
-  complex(Dict{Any, Any}(
-    "demes" => [
-      Dict{Any, Any}(
-        "capacity"  => s["size"],
-        "offspring" => Base.get(s, "offspring", s["size"]),
-        "species"   => s["species"],
-        "breeder"   => s["breeder"]
-      )
-    ]
-  ))
-end
-
-"""
-Complex populations may consist of multiple demes, where all members of a given
-deme belong to the same species, but each deme may use a different species.
-
-**Properties:**
-
-*`demes::Vector{Specification}`, an ordered list containing specifications
-  for each of the demes within this population.
-"""
-function complex(s::Dict{Any, Any})
-  s["demes"] = Deme[deme(d) for d in s["demes"]]
-  Population(s["demes"])
 end
 
 """
@@ -111,4 +76,8 @@ individuals within a given population.
 """
 scale!(p::Population) = for deme in p.demes; scale!(deme); end
 scale!(d::Deme) = scale!(d.species.fitness, contents(d))
+
+# Load each of the population types.
+include("population/simple.jl")
+include("population/complex.jl")
 end

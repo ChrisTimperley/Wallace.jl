@@ -4,14 +4,14 @@ using state, breeder, evaluator, logger, replacement, criterion, initialiser,
 """
 Builder for algorithm.genetic.
 """
-type GeneticAlgorithmBuilder
+type GeneticAlgorithmDefinition
   replacement::Replacement
   loggers::Vector{Logger}
   termination::Dict{AbstractString, Criterion}
-  population::Population
+  population::PopulationDefinition
   evaluator::Evaluator
 
-  GeneticAlgorithmBuilder() =
+  GeneticAlgorithmDefinition() =
     new(replacement.generational(), [], Dict())
 end
 
@@ -31,10 +31,10 @@ end
 Composes an `algorithm.genetic` instance from information provided within a
 supplied builder.
 """
-function compose!(b::GeneticAlgorithmBuilder)
+function compose!(b::GeneticAlgorithmDefinition)
   alg = GeneticAlgorithm()
-  alg.population = compose!(alg.population)
-  alg.state = State(alg.population)
+  population = compose!(b.population)
+  alg.state = State(population)
   alg.evaluator = b.evaluator
   alg.replacement = b.replacement
   alg.termination = b.termination
@@ -47,9 +47,9 @@ end
 TODO: Explain algorithm.genetic
 """
 function genetic(def::Function)
-  builder = GeneticAlgorithmBuilder()
-  #def(builder)
-  builder
+  d = GeneticAlgorithmDefinition()
+  def(d)
+  d
 end
 
 function run!(a::GeneticAlgorithm)

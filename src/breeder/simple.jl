@@ -1,22 +1,22 @@
 """
 Used to specify the properties of simple breeders.
 """
-type SimpleBreederDefinition
+type SimpleBreederDefinition <: BreederDefinition
 
   """
   The selection operator to be used by this breeder.
   """
-  selection::Selection
+  selection::SelectionDefinition
 
   """
   The mutation operator to be used by this breeder.
   """
-  mutation::Mutation
+  mutation::MutationDefinition
 
   """
   The crossover operator to be used by this breeder.
   """
-  crossover::Crossover
+  crossover::CrossoverDefinition
 
   SimpleBreederDefinition() = new()
 end

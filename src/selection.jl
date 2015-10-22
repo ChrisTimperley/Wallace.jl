@@ -1,6 +1,11 @@
 module selection
 using core, species, individual
-export Selection, select, prepare
+export Selection, select, prepare, SelectionDefinition
+
+"""
+The base type used by all selection operator definitions.
+"""
+abstract SelectionDefinition
 
 """
 The base type used by all selection operators.

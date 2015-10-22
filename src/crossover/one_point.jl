@@ -8,29 +8,29 @@ end
 """
 Used for composing one point crossover operators.
 """
-type OnePointCrossoverBuilder
+type OnePointCrossoverDefinition <: CrossoverDefinition
   rate::Float
   
-  OnePointCrossoverBuilder() = new(0.7)
-  OnePointCrossoverBuilder(r::Float) = new(r)
+  OnePointCrossoverDefinition() = new(0.7)
+  OnePointCrossoverDefinition(r::Float) = new(r)
 end
 
 """
 Composes a one-point crossover operator from a provided definition, for a given
 representation.
 """
-compose!(c::OnePointCrossoverBuilder, r::Representation) =
+compose!(c::OnePointCrossoverDefinition, r::Representation) =
   OnePointCrossover{typeof(r)}(r, c.rate)
 
 """
 TODO: Description of one-point crossover.
 """
 one_point() = one_point(0.7)
-one_point(rate::Float) = OnePointCrossoverBuilder(rate)
+one_point(rate::Float) = OnePointCrossoverDefinition(rate)
 function one_point(def::Function)
-  b = one_point()
-  def(b)
-  b
+  d = one_point()
+  def(d)
+  d
 end
 
 num_inputs(o::OnePointCrossover) = 2

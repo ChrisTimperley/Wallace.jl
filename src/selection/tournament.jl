@@ -1,7 +1,16 @@
+type TournamentSelectionDefinition <: SelectionDefinition
+  size::Int
+
+  TournamentSelectionDefinition(size::Int) = new(size)
+end
+
 type TournamentSelection <: Selection
   size::Int
   TournamentSelection(size::Int) = new(size)
 end
+
+compose!(def::TournamentSelectionDefinition) =
+  TournamentSelection(def.size)
 
 """
 TODO: Description of tournament selection.
@@ -11,7 +20,7 @@ TODO: Description of tournament selection.
 `7`, if no value is provided.
 """
 tournament() = tournament(7)
-tournament(size::Int) = TournamentSelection(size)
+tournament(size::Int) = TournamentSelectionDefinition(size)
 
 # Selects a given number of individuals from a set of candidate individuals
 # according to a tournament selection method.

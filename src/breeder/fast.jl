@@ -9,9 +9,9 @@ type FastBreeder <: Breeder
 end
 
 """
-Provides a specification for composing a fast breeder.
+Provides a definition for composing a fast breeder.
 """
-type FastBreederSpecification <: BreederSpecification
+type FastBreederDefinition <: BreederDefinition
   """
   A dictionary containing the sources of this breeder.
   """
@@ -19,9 +19,9 @@ type FastBreederSpecification <: BreederSpecification
 end
 
 """
-Composes a fast breeder from a provided specification.
+Composes a fast breeder from a provided definition.
 """
-function compose!(spec::FastBreederSpecification, s::Species)
+function compose!(spec::FastBreederDefinition, s::Species)
   b = FastBreeder()
   b.eigen = anonymous_type(Wallace)
 

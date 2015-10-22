@@ -1,7 +1,7 @@
 """
 Holds a specification for composing a simple species.
 """
-type SimpleSpeciesSpecification
+type SimpleSpeciesDefinition <: SpeciesDefinition
   """
   The fitness scheme used by members of this species.
   Defaults to (maximised) scalar fitness if unspecified.
@@ -13,7 +13,7 @@ type SimpleSpeciesSpecification
   """
   representation::Representation
 
-  SimpleSpeciesSpecification() =
+  SimpleSpeciesDefinition() =
     new(fitness.scalar())
 end
 
@@ -22,8 +22,8 @@ Composes a simple specification from a provided specification.
 Operates by transforming the simple specification into a complex one and then
 composing that specification.
 """
-function compose!(spec::SimpleSpeciesSpecification)
-  cspec = ComplexSpeciesSpecification()
+function compose!(spec::SimpleSpeciesDefinition)
+  cspec = ComplexSpeciesDefinition()
   cspec.stages = [stage("genome", spec.representation)]
   cspec.fitness = spec.fitness
   compose!(cspec)
@@ -45,7 +45,7 @@ of this species.
 species. Defaults to (maximised) scalar fitness if unspecified.
 """
 function simple(def::Function)
-  spec = SimpleSpeciesSpecification
+  spec = SimpleSpeciesDefinition()
   def(spec)
   spec
 end

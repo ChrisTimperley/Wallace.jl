@@ -1,10 +1,13 @@
+type RandomSelectionDefinition <: SelectionDefinition; end
 type RandomSelection <: Selection; end
+
+compose!(d::RandomSelectionDefinition) = RandomSelection()
 
 """
 Random selection operates by selecting individuals at random with
 replacement.
 """
-random() = RandomSelection()
+random() = RandomSelectionDefinition()
 
 select{I <: Individual}(::RandomSelection,
   ::Species,

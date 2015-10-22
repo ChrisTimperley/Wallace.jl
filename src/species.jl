@@ -1,6 +1,11 @@
 module species
 using representation, fitness, core, utility
-export Species, convert!, compose!, genotype, rep, ind_type
+export Species, convert!, compose!, genotype, rep, ind_type, SpeciesDefinition
+
+"""
+The base type used by all species definitions.
+"""
+abstract SpeciesDefinition
 
 # Load species stages.
 include("species/stage.jl")

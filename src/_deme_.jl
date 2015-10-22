@@ -3,7 +3,7 @@ TODO: Description of _deme_ module.
 """
 module _deme_
 using core, breeder, species
-export Deme, prepare!, breed!, contents, deme, DemeSpecification
+export Deme, prepare!, breed!, contents, deme, DemeDefinition
 
 type Deme{T}
   capacity::Int
@@ -18,9 +18,9 @@ type Deme{T}
 end
 
 """
-Used to provide a specification for building a deme.
+Used to provide a definition for building a deme.
 """
-type DemeSpecification
+type DemeDefinition
   """
   The number of individuals within this deme.
   """
@@ -36,23 +36,29 @@ type DemeSpecification
   """
   The species to which all members of this deme belong.
   """
-  species::Species
+  species::species.SpeciesDefinition
 
   """
   The breeder used to produce the offspring for this deme.
   """
-  breeder::Breeder
+  breeder::breeder.BreederDefinition
 
   """
   Constructs a partial deme specification using default values.
   """
   DemeSpecification() = new(100, -1)
+  DemeSpecification(capacity::Int,
+    offspring::Int,
+    species::species.SpeciesDefinition,
+    breeder::breeder.BreederDefinition
+  ) =
+    new(capacity, offspring, species, breeder)
 end
 
 """
 Composes a deme from a provided specification.
 """
-function compose!(d::DemeSpecification)
+function compose!(d::DemeDefinition)
   species = compose!(d.species)
   breeder = compose!(d.breeder, species)
   ind_type = ind_type(species)
@@ -75,8 +81,14 @@ deme belong.
 * `breeder::BreederSpecification`, the breeder used to produce the offspring
 for this deme.
 """
+deme( capacity::Int,
+      offspring::Int,
+      species::species.SpeciesDefinition,
+      breeder::breeder.BreederDefinition) =
+  DemeDefinition(capacity, offspring, species, breeder)
+
 function deme(spec::Function)
-  ds = DemeSpecification()
+  ds = DemeDefinition()
   spec(ds)
   ds
 end
