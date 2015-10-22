@@ -1,8 +1,16 @@
 module breeder
-using species, individual, core, variation, selection, mutation, crossover
+importall common, selection, representation
+using core, utility, mutation, variation, crossover, individual, species
 export Breeder, BreederDefinition
 
+"""
+The base type used by all breeders.
+"""
 abstract Breeder
+
+"""
+The base type used by all breeder definitions.
+"""
 abstract BreederDefinition
 
 # Include each of the breeders.

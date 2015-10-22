@@ -1,5 +1,7 @@
 include("graph/node.jl")
 
+export  RepresentationGraph
+
 # Representation graphs are used to indicate whether particular stages
 # of an individual are synchronised with the genome.
 type RepresentationGraph

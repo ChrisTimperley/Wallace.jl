@@ -1,4 +1,5 @@
 module selection
+importall common
 using core, species, individual
 export Selection, select, prepare, SelectionDefinition
 

@@ -8,7 +8,7 @@ function build_sync(s::Species, b::FastBreeder)
   # each.
   for child in sources(b)
     rep_graph = build_sync(RepresentationGraph(s), child)
-    sync_path = full_sync!(rep_graph)
+    sync_path = species.full_sync!(rep_graph)
     build_sync(child.eigen, b.eigen, sync_path)
   end
 
@@ -17,7 +17,7 @@ function build_sync(s::Species, b::FastBreeder)
 end
 
 build_sync(g::RepresentationGraph, n::SelectionBreederSource) =
-  initialize!(clone(g))
+  species.initialize!(species.clone(g))
 
 function build_sync(g::RepresentationGraph, n::VariationBreederSource)
   rep_graph::RepresentationGraph = g
@@ -26,7 +26,7 @@ function build_sync(g::RepresentationGraph, n::VariationBreederSource)
   # synchronisation operations required to generate the stage used by this operator.
   for child in sources(n)
     rep_graph = build_sync(g, child)
-    sync_path = partial_sync!(rep_graph, n.stage_name)
+    sync_path = species.partial_sync!(rep_graph, n.stage_name)
 
     # If it's multi-source?
     # Mark all nodes except the edited node as dirty; DODGY.
@@ -47,5 +47,5 @@ function build_sync(from::Type, to::Type, ops::Vector{Tuple{AbstractString, Abst
     "\nend"
 
   # Dynamically evaluate the function definition
-  eval(Wallace, Base.parse(body))
+  eval(breeder, Base.parse(body))
 end

@@ -31,16 +31,22 @@ end
 """
 Composes a given selection breeder source.
 """
-function compose!(def::SelectionBreederSourceDefinition)
-  s = BreederSource(selection.compose!(def.label, def.operator))
-  s.eigen = anonymous_type(selection)
+function compose!(
+  def::SelectionBreederSourceDefinition,
+  ::Species,
+  ::Dict{AbstractString, BreederSource}
+)
+  op = compose!(def.operator)
+  println(op)
+  s = SelectionBreederSource(def.label, op)
+  s.eigen = anonymous_type(breeder)
   s
 end
 
 """
 A selection source.
 """
-selection(label::AbstractString, op::SelectionDefinition) =
+selection_source(label::AbstractString, op::SelectionDefinition) =
   SelectionBreederSourceDefinition(label, op) 
 
 """
@@ -48,8 +54,8 @@ Provides a definition of a variation breeder source.
 """
 type VariationBreederSourceDefinition <: BreederSourceDefinition
   label::AbstractString
-  stage::AbstractString
   source::AbstractString
+  stage::AbstractString
   operator::VariationDefinition
 
   VariationBreederSourceDefinition(
@@ -58,7 +64,7 @@ type VariationBreederSourceDefinition <: BreederSourceDefinition
     stage::AbstractString,
     operator::VariationDefinition
   ) =
-    new(label, stage, source, operator)
+    new(label, source, stage, operator)
 end
 
 type VariationBreederSource <: BreederSource
@@ -84,26 +90,39 @@ Composes a variation breeder source.
 
 **Parameters:**
 
-* `v::VariationBreederSource`, the breeder source being composed.
+* `def::VariationBreederSourceDefinition`, a definition of the breeder source
+that is to be composed.
+* `species::Species`, the species that this breeder belongs to.
 * `sources::Dict{AbstractString, Source}`, a dictionary containing the sources
 of the breeder that this source belongs to.
 """
-function compose!(def::VariationBreederSourceDefinition, sources::Dict{AbstractString, BreederSource})
-  v = VariationBreederSource(compose!(def.label, def.operator, def.source, def.stage))
-  v.eigen = anonymous_type(Wallace)
+function compose!(def::VariationBreederSourceDefinition,
+  sp::Species,
+  sources::Dict{AbstractString, BreederSource}
+)
+  # Find the stage and representation used by this source.
+  stage = sp.stages[def.stage]
+  representation = species.rep(stage) # TODO: FIX FIX FIX
+
+  # Build the variation operator.
+  op = compose!(def.operator, representation)
+
+  # Build the breeder source.
+  v = VariationBreederSource(def.label, op, def.source, def.stage)
+  v.eigen = anonymous_type(breeder)
   v.source = sources[def.source]
   v.stage_getter =
-    eval(Base.parse("inds -> IndividualStage{$(chromosome(def.stage.representation))}[i.$(def.stage.label) for i in inds]"))
+    eval(Base.parse("inds -> IndividualStage{$(chromosome(representation))}[i.$(def.stage) for i in inds]"))
   v
 end
 
 """
 DOCUMENT: breeder.variation
 """
-variation(
+variation_source(
   label::AbstractString,
-  stage::AbstractString,
   source::AbstractString,
+  stage::AbstractString,
   op::VariationDefinition
 ) =
   VariationBreederSourceDefinition(label, source, stage, op)

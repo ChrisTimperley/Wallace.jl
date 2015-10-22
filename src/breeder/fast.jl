@@ -23,7 +23,7 @@ Composes a fast breeder from a provided definition.
 """
 function compose!(def::FastBreederDefinition, species::Species)
   b = FastBreeder()
-  b.eigen = anonymous_type(Wallace)
+  b.eigen = anonymous_type(breeder)
 
   # Construct a dictionary containing the sources for this breeder, indexed by
   # their labels.
@@ -34,8 +34,8 @@ function compose!(def::FastBreederDefinition, species::Species)
 
   # Calculate the order of the breeding sources.
   i = 1
-  while i < length(srcs)
-    gt_i = findfirst(srcs) do j
+  while i < length(labels)
+    gt_i = findfirst(labels) do j
       isa(sd_dict[labels[i]], VariationBreederSourceDefinition) &&
         sd_dict[labels[i]].source == j
     end
@@ -49,11 +49,12 @@ function compose!(def::FastBreederDefinition, species::Species)
   # Compose each of the breeding sources, in the established order.
   sources = Dict{AbstractString, BreederSource}()
   for label in labels
-    sources[label] = compose!(sd_dict[label], sources)
+    println(label)
+    sources[label] = compose!(sd_dict[label], species, sources)
   end
 
   # Determine the terminal breeding source.
-  b.terminal = sources[labels[end]]
+  b.source = sources[labels[end]]
 
   # Build the synchronisation operations.
   build_sync(species, b)
@@ -165,3 +166,6 @@ function breed!{I <: Individual}(
   # (Is it faster to limit, or to not produce more than you need?)
   return sync(s.eigen, caller.eigen, sp, outputs[1:n])
 end
+
+# Load the components of this breeder.
+include("fast/builder.jl")
