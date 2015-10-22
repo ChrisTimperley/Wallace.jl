@@ -1,5 +1,5 @@
-module
-using population, deme
+module initialiser
+using population, _deme_, core
 
 """
 The base type used by all initialisers.

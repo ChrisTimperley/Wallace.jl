@@ -3,7 +3,7 @@ TODO: Document mutation module.
 """
 module mutation
 using core, variation, utility, representation, individual
-export Individual
+export Individual, Mutation
 
 """
 The base type for all mutation operations.

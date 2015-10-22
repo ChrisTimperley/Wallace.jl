@@ -1,7 +1,7 @@
 """
 Used to specify the properties of simple breeders.
 """
-type _SimpleBreederBuilder
+type SimpleBreederDefinition
 
   """
   The selection operator to be used by this breeder.
@@ -18,13 +18,13 @@ type _SimpleBreederBuilder
   """
   crossover::Crossover
 
-  _SimpleBreederBuilder() = new()
+  SimpleBreederDefinition() = new()
 end
 
 """
 Composes a simple breeder for a given species from a provided definition.
 """
-function compose!(b::SimpleBreederBuilder, s::Species)
+function compose!(def::SimpleBreederDefinition, s::Species)
   compose!(linear([b.selection, b.mutation, b.crossover]), s)
   b
 end
@@ -41,7 +41,7 @@ this breeder will suffice.
 * `crossover::Crossover`, the crossover operator to be used by this breeder.
 """
 function simple(f::Function)
-  b = _SimpleBreederBuilder()
+  b = SimpleBreederDefinition()
   f(b)
   b
 end

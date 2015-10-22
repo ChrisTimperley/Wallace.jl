@@ -16,7 +16,7 @@ module Wallace
   using crossover; export crossover
   using mutation; export mutation
   using breeder; export breeder
-  importall deme
+  using _deme_
   using population; export population
   using initialiser; export initialiser
   using state; export state

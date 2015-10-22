@@ -2,10 +2,8 @@
 TODO: Description of the current population model.
 """
 module population
-using core, deme, individual
+using core, _deme_, individual, utility
 export Population, compose!, best!, prepare!, breed!, unevaluated, scale!
-
-include("../base/flatten")
 
 """
 Used to hold the contents of a population, where a population is modelled
