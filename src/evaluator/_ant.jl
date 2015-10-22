@@ -136,6 +136,6 @@ An evaluator, specialised for the artifical ant problem.
 **Properties:**
 
 * `moves::Int`, the maximum number of moves the ant is permitted to make.
-* `trail::String`, the path to the file describing the trail for this problem.
+* `trail::AbstractString`, the path to the file describing the trail for this problem.
 """
 ant(s::Dict{Any,Any}) = AntEvaluator(Ant(s["moves"], load_trail(s["trail"])))

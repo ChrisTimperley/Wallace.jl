@@ -24,7 +24,8 @@ composing that specification.
 """
 function compose!(spec::SimpleSpeciesDefinition)
   cspec = ComplexSpeciesDefinition()
-  cspec.stages = [stage("genome", spec.representation)]
+  genome = stage("genome", spec.representation)
+  cspec.stages = [genome]
   cspec.fitness = spec.fitness
   compose!(cspec)
 end

@@ -1,8 +1,8 @@
 type SimplePopulationDefinition <: PopulationDefinition
   size::Int
   offspring::Int
-  species::species.SpeciesDefinition
-  breeder::breeder.BreederDefinition
+  species::SpeciesDefinition
+  breeder::BreederDefinition
 
   SimplePopulationDefinition() =
     new(80, 0)
@@ -18,7 +18,8 @@ end
 Composes a simple population from a provided definition.
 """
 function compose!(def::SimplePopulationDefinition)
-  dm = _deme_.compose!(deme(def.size, def.offspring, def.species, def.breeder))
+  dd = deme(def.size, def.offspring, def.species, def.breeder)
+  dm = _deme_.compose!(dd)
   Population([dm]) 
 end
 

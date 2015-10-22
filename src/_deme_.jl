@@ -36,21 +36,21 @@ type DemeDefinition
   """
   The species to which all members of this deme belong.
   """
-  species::species.SpeciesDefinition
+  species::SpeciesDefinition
 
   """
   The breeder used to produce the offspring for this deme.
   """
-  breeder::breeder.BreederDefinition
+  breeder::BreederDefinition
 
   """
   Constructs a partial deme specification using default values.
   """
-  DemeSpecification() = new(100, -1)
-  DemeSpecification(capacity::Int,
+  DemeDefinition() = new(100, -1)
+  DemeDefinition(capacity::Int,
     offspring::Int,
-    species::species.SpeciesDefinition,
-    breeder::breeder.BreederDefinition
+    species::SpeciesDefinition,
+    breeder::BreederDefinition
   ) =
     new(capacity, offspring, species, breeder)
 end
@@ -59,13 +59,14 @@ end
 Composes a deme from a provided specification.
 """
 function compose!(d::DemeDefinition)
-  species = compose!(d.species)
-  breeder = compose!(d.breeder, species)
-  ind_type = ind_type(species)
+  println("building deme")
+  sp = species.compose!(d.species)
+  br = breeder.compose!(d.breeder, sp)
+  ind_type = ind_type(sp)
   if d.offspring == 0
     d.offspring = d.capacity
   end
-  Deme{ind_type}(d.capacity, breeder, species, d.offspring)
+  Deme{ind_type}(d.capacity, br, sp, d.offspring)
 end
 
 """

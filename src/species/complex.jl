@@ -14,6 +14,7 @@ end
 Composes a complex species from a provided definition.
 """
 function compose!(c::ComplexSpeciesDefinition)
+  println("Composing complex species.")
   # Transform the stages of this species into a dictionary, for easy access.
   stages = Dict{String, SpeciesStage}()
   for st in c.stages

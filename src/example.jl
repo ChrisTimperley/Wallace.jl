@@ -22,4 +22,4 @@ def = algorithm.genetic() do alg
   ")
 end
 
-#alg = algorithm.compose!(def)
+alg = algorithm.compose!(def)

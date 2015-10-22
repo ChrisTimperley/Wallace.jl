@@ -22,8 +22,12 @@ type SpeciesStage
 
   SpeciesStage() =
     new(false, "")
-  SpeciesStage(label::AbstractString, parent::AbstractString, representation::Representation, lamarckian::Bool) =
-    new(label, parent, representation, lamarckian)
+  SpeciesStage(label::AbstractString,
+    representation::Representation,
+    parent::AbstractString,
+    lamarckian::Bool
+  ) =
+    new(lamarckian, parent, label, representation)
 end
 
 """
@@ -47,7 +51,7 @@ stage(label::AbstractString, rep::Representation) =
 stage(label::AbstractString, rep::Representation, from::AbstractString) =
   stage(label, rep, from, false)
 stage(label::AbstractString, rep::Representation, from::AbstractString, lamarckian::Bool) =
-  stage(label, rep, from, lamarckian)
+  SpeciesStage(label, rep, from, lamarckian)
 
 # Returns the representation used by a given species stage.
 representation(s::SpeciesStage) = s.representation
