@@ -49,7 +49,6 @@ function compose!(def::FastBreederDefinition, species::Species)
   # Compose each of the breeding sources, in the established order.
   sources = Dict{AbstractString, BreederSource}()
   for label in labels
-    println(label)
     sources[label] = compose!(sd_dict[label], species, sources)
   end
 
