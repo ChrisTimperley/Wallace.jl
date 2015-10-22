@@ -2,27 +2,13 @@
 TODO: Describe breeder.linear.
 """
 function linear(operators::Vector{OperatorDefinition})
-  println("Building list of sources.")
-  
-  sources = BreederSource[]
-  sources << selection(operators[1])
-
-  # Mark all others as variators.
+  # Produce a list of breeder sources definitions from the provided operator
+  # definitions.
+  sources = BreederSourceDefinition[selection("s1", operators[1])]
   for (i, op) in enumerate(operators[2:end])
-    src["source"] = "s$i"
-    src["type"] = "variation"
-
-    v = variation("s$i", op)
-
-    haskey(src["operator"], "stage") && (src["stage"] = src["operator"]["stage"])
+    push!(sources, variation("s$(i+1)", "s$i", "genome", op))
   end
 
-  println("Composing sources.")
-  s["sources"] = Dict{Any, Any}(
-    zip(["s$i" for i in 1:length(s["sources"])], s["sources"])
-  )
-  println("Composed sources.")
-
-  # Pass the modified specification to the fast breeder composer.
-  compose_as(s, "breeder/fast")
+  # Compose as a fast breeder.
+  fast(sources)
 end

@@ -12,22 +12,27 @@ abstract BreederSourceDefinition
 Provides a definition of a selection breeder source.
 """
 type SelectionBreederSourceDefinition <: BreederSourceDefinition
+  label::AbstractString
   operator::SelectionDefinition
   
-  SelectionBreederSourceDefinition(op::SelectionDefinition) = new(op)
+  SelectionBreederSourceDefinition(label::AbstractString, op::SelectionDefinition) =
+    new(label, op)
 end
 
 type SelectionBreederSource <: BreederSource
+  label::AbstractString
   operator::Selection
   eigen::Type
-  SelectionBreederSource(s::Selection) = new(s)
+
+  SelectionBreederSource(label::AbstractString, s::Selection) =
+    new(label, s)
 end
 
 """
 Composes a given selection breeder source.
 """
 function compose!(def::SelectionBreederSourceDefinition)
-  s = BreederSource(selection.compose!(def.operator))
+  s = BreederSource(selection.compose!(def.label, def.operator))
   s.eigen = anonymous_type(selection)
   s
 end
@@ -35,32 +40,43 @@ end
 """
 A selection source.
 """
-selection(op::SelectionDefinition) = SelectionBreederSourceDefinition(op) 
+selection(label::AbstractString, op::SelectionDefinition) =
+  SelectionBreederSourceDefinition(label, op) 
 
 """
 Provides a definition of a variation breeder source.
 """
 type VariationBreederSourceDefinition <: BreederSourceDefinition
+  label::AbstractString
   stage::AbstractString
   source::AbstractString
   operator::VariationDefinition
 
-  VariationBreederSourceDefinition(stage::AbstractString,
+  VariationBreederSourceDefinition(
+    label::AbstractString,
     source::AbstractString,
+    stage::AbstractString,
     operator::VariationDefinition
   ) =
-    new(stage, source, operator)
+    new(label, stage, source, operator)
 end
 
 type VariationBreederSource <: BreederSource
+  label::AbstractString
   operator::Variation
   source_name::AbstractString
   stage_name::AbstractString
   eigen::Type
   source::BreederSource
   stage_getter::Function
-  VariationBreederSource(v::Variation, source_name::AbstractString, stage_name::AbstractString) =
-    new(v, source_name, stage_name)
+
+  VariationBreederSource(
+    label::AbstractString,
+    v::Variation,
+    source_name::AbstractString,
+    stage_name::AbstractString
+  ) =
+    new(label, v, source_name, stage_name)
 end
 
 """
@@ -73,7 +89,7 @@ Composes a variation breeder source.
 of the breeder that this source belongs to.
 """
 function compose!(def::VariationBreederSourceDefinition, sources::Dict{AbstractString, BreederSource})
-  v = VariationBreederSource(compose!(def.operator, def.source, def.stage))
+  v = VariationBreederSource(compose!(def.label, def.operator, def.source, def.stage))
   v.eigen = anonymous_type(Wallace)
   v.source = sources[def.source]
   v.stage_getter =
@@ -84,8 +100,13 @@ end
 """
 DOCUMENT: breeder.variation
 """
-variation(stage::AbstractString, source::AbstractString, op::VariationDefinition) =
-  VariationBreederSourceDefinition(op, source, stage)
+variation(
+  label::AbstractString,
+  stage::AbstractString,
+  source::AbstractString,
+  op::VariationDefinition
+) =
+  VariationBreederSourceDefinition(label, source, stage, op)
 
 type MultiBreederSource <: BreederSource
   sources::Vector{BreederSource}

@@ -13,25 +13,31 @@ Provides a definition for composing a fast breeder.
 """
 type FastBreederDefinition <: BreederDefinition
   """
-  A dictionary containing the sources of this breeder.
+  A list containing definitions for the different sources used by this breeder.
   """
-  sources::Vector{BreederSource}
+  sources::Vector{BreederSourceDefinition}
 end
 
 """
 Composes a fast breeder from a provided definition.
 """
-function compose!(spec::FastBreederDefinition, s::Species)
+function compose!(def::FastBreederDefinition, species::Species)
   b = FastBreeder()
   b.eigen = anonymous_type(Wallace)
 
+  # Construct a dictionary containing the sources for this breeder, indexed by
+  # their labels.
+  sd_dict = Dict{AbstractString, BreederSourceDefinition}(
+    [(s.label, s) for s in def.sources] 
+  )
+  labels = map(s -> s.label, def.sources)
+
   # Calculate the order of the breeding sources.
-  labels = collect(keys(b.sources))
   i = 1
   while i < length(srcs)
     gt_i = findfirst(srcs) do j
-      isa(b.sources[labels[i]], VariationBreederSource) &&
-        b.sources[src_names[i]].source_name == j
+      isa(sd_dict[labels[i]], VariationBreederSourceDefinition) &&
+        sd_dict[labels[i]].source == j
     end
     if gt_i != 0 && gt_i > i
       labels[gt_i], labels[i] = labels[i], labels[gt_i]
@@ -40,19 +46,25 @@ function compose!(spec::FastBreederDefinition, s::Species)
     end
   end
 
+  # Compose each of the breeding sources, in the established order.
+  sources = Dict{AbstractString, BreederSource}()
+  for label in labels
+    sources[label] = compose!(sd_dict[label], sources)
+  end
+
   # Determine the terminal breeding source.
-  b.terminal = b.sources[labels[end]]
+  b.terminal = sources[labels[end]]
 
   # Build the synchronisation operations.
-  build_sync(s, b)
+  build_sync(species, b)
   b
 end
 
 """
 TODO: Document breeder.fast
 """
-fast(sources::Dict{AbstractString, BreederSource}) =
-  FastBreederSpecification(sources)
+fast(sources::Vector{BreederSourceDefinition}) =
+  FastBreederDefinition(sources)
 
 # Returns a list of the sources to a breeding operation or a breeder.
 sources(s::Union{VariationBreederSource, FastBreeder}) = if isa(s.source, MultiBreederSource)
