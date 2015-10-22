@@ -1,5 +1,6 @@
 module initialiser
 using population, _deme_, core
+export Initialiser, initialise!
 
 """
 The base type used by all initialisers.
@@ -9,15 +10,15 @@ abstract Initialiser
 """
 Initialises all members within a given population.
 """
-initialize!(i::Initialiser, p::Population) = for d in p.demes
-  initialize!(i, d)
+initialise!(i::Initialiser, p::Population) = for d in p.demes
+  initialise!(i, d)
 end
 
 """
 Initialises all members within a given deme.
 """
-initialize!{I <: Individual}(i::Initialiser, d::Deme{I}) = for ind in d.members
-  initialize!(i, ind)
+initialise!{I <: Individual}(i::Initialiser, d::Deme{I}) = for ind in d.members
+  initialise!(i, ind)
 end
 
 """

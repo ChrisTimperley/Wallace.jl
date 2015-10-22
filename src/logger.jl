@@ -2,7 +2,8 @@
 TODO: Description of logging system.
 """
 module logger
-  using state
+  using state, core, utility
+  export Logger
 
   """
   The base type used by all loggers.

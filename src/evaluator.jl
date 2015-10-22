@@ -13,13 +13,9 @@ diversity promotion techniques, multi-objective problems, and fuzzy evaluation
 much easier!
 """
 module evaluator
+  using criterion, state, core, utility
   export Evaluator
 
-  # Dependencies
-  using criterion, state
-
-  # Utility modules.
-  include("base/float.jl")
  
   """
   The base type used by all evaluators.

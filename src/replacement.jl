@@ -1,5 +1,5 @@
 module replacement
-  using state
+  using state, _deme_
   export  Replacement
 
   """

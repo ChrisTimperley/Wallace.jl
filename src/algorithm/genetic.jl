@@ -1,4 +1,5 @@
-using state, breeder, evaluator, logger, replacement, criterion, initialiser
+using state, breeder, evaluator, logger, replacement, criterion, initialiser,
+      population
 
 """
 Builder for algorithm.genetic.
