@@ -7,8 +7,8 @@ abstract SimpleEvaluator <: Evaluator
 Simple evaluator!
 """
 function simple(definition::AbstractString)
-  eigen = anonymous_type(Wallace, "type <: SimpleEvaluator;end")
-  define_function(Wallace, "evaluate!", ["::$(eigen)", "s::State", "scheme::FitnessScheme", "i::Individual"],
+  eigen = anonymous_type(evaluator, "type <: SimpleEvaluator;end")
+  define_function(evaluator, "evaluate!", ["::$(eigen)", "s::State", "scheme::FitnessScheme", "i::Individual"],
     definition)
   return eigen()
 end

@@ -1,14 +1,20 @@
+type BitFlipMutationDefinition <: MutationDefinition
+  rate::Float
+  
+  BitFlipMutationDefinition() = new(0.01)
+  BitFlipMutationDefinition(rate::Float) = new(rate)
+end
+
 type BitFlipMutation <: Mutation
   rate::Float
   representation::representation.BitVectorRepresentation
 
-  BitFlipMutation(rate::Float) = new(rate)
+  BitFlipMutation(rate::Float, rep::representation.BitVectorRepresentation) =
+    new(rate, rep)
 end
 
-function compose!(m::BitFlipMutation, r::Representation)
-  m.representation = r
-  m
-end
+compose!(d::BitFlipMutationDefinition, r::Representation) =
+  BitFlipMutation(d.rate, r)
 
 """
 Performs bit-flip mutation on a fixed or variable length chromosome of binary
@@ -19,7 +25,7 @@ with a given probability, equal to the mutation rate.
 * `rate::Float`, the probability of a bit flip at any given index.
 """
 bit_flip() = bit_flip(0.01)
-bit_flip(rate::Float) = BitFlipMutation(rate)
+bit_flip(rate::Float) = BitFlipMutationDefinition(rate)
 
 num_inputs(o::BitFlipMutation) = 1
 num_outputs(o::BitFlipMutation) = 1

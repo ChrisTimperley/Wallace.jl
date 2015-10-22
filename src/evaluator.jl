@@ -13,7 +13,7 @@ diversity promotion techniques, multi-objective problems, and fuzzy evaluation
 much easier!
 """
 module evaluator
-  using criterion, state, core, utility
+  using criterion, state, core, utility, fitness
   export Evaluator
 
  
