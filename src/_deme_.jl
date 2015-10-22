@@ -60,7 +60,6 @@ end
 Composes a deme from a provided specification.
 """
 function compose!(d::DemeDefinition)
-  println("building deme")
   sp = species.compose!(d.species)
   br = breeder.compose!(d.breeder, sp)
   I = ind_type(sp)

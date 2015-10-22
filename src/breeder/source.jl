@@ -37,7 +37,6 @@ function compose!(
   ::Dict{AbstractString, BreederSource}
 )
   op = compose!(def.operator)
-  println(op)
   s = SelectionBreederSource(def.label, op)
   s.eigen = anonymous_type(breeder)
   s

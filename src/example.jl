@@ -23,3 +23,5 @@ def = algorithm.genetic() do alg
 end
 
 alg = algorithm.compose!(def)
+
+algorithm.run!(alg)
