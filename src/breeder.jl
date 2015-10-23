@@ -1,6 +1,6 @@
 module breeder
-importall common, selection, representation
-using core, utility, mutation, variation, crossover, individual, species
+importall common, selection, representation, mutation, variation, crossover, species
+using core, utility, individual
 export Breeder, BreederDefinition
 
 """

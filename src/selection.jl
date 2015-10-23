@@ -1,7 +1,7 @@
 module selection
-importall common
-using core, species, individual
-export Selection, select, prepare, SelectionDefinition
+importall common, species
+using core, individual
+export Selection, select, SelectionDefinition
 
 """
 The base type used by all selection operator definitions.

@@ -1,6 +1,6 @@
 module variation
 using   core, representation
-export  Variation, rep, num_inputs, num_outputs, prepare, operate!, call!,
+export  Variation, num_inputs, num_outputs, operate!, call!,
         VariationDefinition
 
 """

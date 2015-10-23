@@ -2,9 +2,9 @@
 TODO: Description of the current population model.
 """
 module population
+importall common
 using   core, _deme_, individual, utility, species, breeder
-export  Population, best!, prepare!, breed!, unevaluated, scale!,
-        PopulationDefinition
+export  Population, best!, unevaluated, PopulationDefinition
 
 """
 The base type used by all population definitions.

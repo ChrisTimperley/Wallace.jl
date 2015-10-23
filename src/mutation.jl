@@ -2,8 +2,8 @@
 TODO: Document mutation module.
 """
 module mutation
-importall common
-using core, variation, utility, representation, individual
+importall common, variation
+using core, utility, representation, individual
 export Individual, Mutation, MutationDefinition
 
 """

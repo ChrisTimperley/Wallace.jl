@@ -2,8 +2,8 @@
 TODO: Provide description of crossover module.
 """
 module crossover
-importall common
-using core, variation, utility, representation, individual
+importall common, variation
+using core, utility, representation, individual
 export Crossover, CrossoverDefinition
 
 """

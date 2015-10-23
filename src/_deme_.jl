@@ -2,8 +2,9 @@
 TODO: Description of _deme_ module.
 """
 module _deme_
+importall common
 using core, breeder, species
-export Deme, prepare!, breed!, contents, deme, DemeDefinition
+export Deme, contents, deme, DemeDefinition
 
 type Deme{T}
   capacity::Int
