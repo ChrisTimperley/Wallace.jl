@@ -1,13 +1,56 @@
-load("../../builder", dirname(@__FILE__))
-load("../../../koza", dirname(@__FILE__))
-load("../../parent",  dirname(@__FILE__))
+"""
+Provides a definition of a GROW method for constructing Koza trees.
+"""
+type KozaGrowBuilderDefinition <: KozaBuilderDefinition
+  min_depth::Int
+  max_depth::Int
+  prob_terminal::Float
 
+  KozaGrowBuilderDefinition() = new(1, 8, 0.5)
+  KozaGrowBuilderDefinition(min::Int, max::Int) = new(min, max 0.5)
+  KozaGrowBuilderDefinition(min::Int, max::Int, p_terminal) =
+    new(min, max, p_terminal)
+end
+
+"""
+Implements the GROW method for constructing Koza trees.
+"""
 type KozaGrowBuilder{T <: KozaTree} <: KozaBuilder
   min_depth::Int
   max_depth::Int
   prob_terminal::Float
+
+  KozaGrowBuilder(min::Int, max::Int, p::Float) = new(min, max, p)
 end
 
+"""
+Composes a Koza Grow builder, for a given sub-type of Koza Tree, using a
+provided definition.
+"""
+compose!(d::KozaGrowBuilderDefinition, t::KozaTree) =
+  KozaGrowBuilder{t}(d.min_depth, d.max_depth, d.prob_terminal)
+
+"""
+
+**Properties:**
+
+* `min::Int`, the minimum tree depth.
+* `max::Int`, the maximum tree depth.
+* `p::Float`, pt.
+"""
+grow() = KozaGrowBuilderDefinition()
+grow(min::Int, max::Int) = KozaGrowBuilderDefinition(min, max)
+grow(min::Int, max::Int, p::Float) = KozaGrowBuilderDefinition(min, max, p)
+function grow(f::Function)
+  def = KozaGrowBuilderDefinition()
+  f(def)
+  def
+end
+
+"""
+Constructs a Koza Tree belonging to a given representation using the GROW
+method, according to a set of provided specifics.
+"""
 function build{T}(b::KozaGrowBuilder{T}, r::KozaTreeRepresentation)
   t = T()
   t.root = build(KozaGrowBuilder, r, t, 1, rand(b.min_depth:b.max_depth), b.prob_terminal)
@@ -30,5 +73,3 @@ build(::Type{KozaGrowBuilder},
     end
     return n
   end
-
-register(joinpath(dirname(@__FILE__), "manifest.yml"))

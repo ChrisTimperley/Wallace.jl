@@ -1,4 +1,22 @@
 """
+Provides a definition of a FULL method for constructing Koza trees.
+"""
+type KozaFullBuilderDefinition <: KozaBuilderDefinition
+  """
+  The minimum depth of trees created according to this method.
+  """
+  min_depth::Int
+
+  """
+  The maximum depth of trees created according to this method.
+  """
+  max_depth::Int
+
+  KozaFullBuilderDefinition() = new(1, 8)
+  KozaFullBuilderDefinition(min::Int, max::Int) = new(min, max)
+end
+
+"""
 Implements the Koza FULL initialisation method.
 """
 type KozaFullBuilder{T <: KozaTree} <: KozaBuilder
@@ -17,6 +35,13 @@ type KozaFullBuilder{T <: KozaTree} <: KozaBuilder
 end
 
 """
+Composes a Koza Full builder, for a given sub-type of Koza Tree, using a
+provided definition.
+"""
+compose!(d::KozaFullBuilderDefinition, t::KozaTree) =
+  KozaFullBuilder{t}(d.min_depth, d.max_depth)
+
+"""
 Implements the Koza FULL initialisation method, where some `d` is selected
 between a specified minimum and maximum depth, and used to generate a full tree
 with a depth equal to `d`.
@@ -26,10 +51,10 @@ with a depth equal to `d`.
 * `min::Int`, the minimum tree depth.
 * `max::Int`, the maximum tree depth.
 """
-full() = KozaFullBuilder()
-full(min::Int, max::Int) = KozaFullBuilder(min, max)
+full() = KozaFullBuilderDefinition()
+full(min::Int, max::Int) = KozaFullBuilderDefinition(min, max)
 function full(f::Function)
-  def = KozaFullBuilder()
+  def = KozaFullBuilderDefinition()
   f(def)
   def
 end
