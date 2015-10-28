@@ -1,3 +1,24 @@
+"""
+Used to provide a definition for a Gaussian mutation operator.
+"""
+type GaussianMutationDefinition <: MutationDefinition
+  rate::Float
+  mean::Float
+  std::Float
+
+  GaussianMutationDefinition() = new(0.01, 0.0, 1.0) 
+  GaussianMutationDefinition(r::Float) =
+    new(r)
+  GaussianMutationDefinition(r::Float, u::Float, s::Float) =
+    new(r, u, s)
+end
+
+"""
+Composes a Gaussian mutation operator from a provided definition.
+"""
+compose!(d::GaussianMutationDefinition, r::Representation) =
+  GaussianMutation{Float}(d.mean, d.std, d.rate, r)
+
 type GaussianMutation{T} <: Mutation
   mean::T
   std::T
@@ -6,11 +27,27 @@ type GaussianMutation{T} <: Mutation
   rate::Float
   representation::Representation
 
-  GaussianMutation() = new()
-  GaussianMutation(mean::T, std::T, rate::Float) =
-    new(mean, std, minimum_value(rep), maximum_value(rep), rate)  
+  GaussianMutation(mean::T, std::T, rate::Float, rep::Representation) =
+    new(mean, std, representation.minimum_value(rep), representation.maximum_value(rep), rate, rep)
 end
 
+"""
+TODO: DESCRIPTION OF GAUSSIAN MUTATION.
+"""
+gaussian() = GaussianMutationDefinition()
+gaussian(rate::Float) = GaussianMutationDefinition(rate)
+gaussian(rate::Float, mean::Float, std::Float) =
+  GaussianMutationDefinition(rate, mean, std)
+function gaussian(f::Function)
+  def = GaussianMutationDefinition()
+  f(def)
+  def
+end
+
+"""
+Produces some Gaussian noise from a given distribution, specified by its mean
+and standard deviation.
+"""
 gaussian_noise{T}(mean::T, std::T) =
   mean + std * sqrt(-2 * log(1 - rand())) * sin(2 * pi * rand())
 

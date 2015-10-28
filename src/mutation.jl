@@ -18,4 +18,5 @@ abstract Mutation <: Variation
 
 # Load all mutation operations.
 include("mutation/bit_flip.jl")
+include("mutation/gaussian.jl")
 end

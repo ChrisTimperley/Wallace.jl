@@ -1,6 +1,6 @@
 module representation
 importall individual, core, utility
-export Representation, chromosome, convert!, describe
+export Representation, chromosome, convert!, describe, minimum_value, maximum_value
 
 """
 The base type used by all representations.
