@@ -26,4 +26,5 @@ module Wallace
   importall evaluator
   importall logger
   importall algorithm
+  import example
 end

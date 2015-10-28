@@ -1,25 +1,13 @@
-require("Wallace.jl")
-using Wallace
+"""
+The examples module demonstrates how Wallace can be used to solve a number of
+example problems. Each method within this module is named after the problem
+being solved (using snake case), and returns a composed algorithm definition
+which can be executed using the `run!` method.
+"""
+module example
+  using algorithm, logger, criterion, evaluator, replacement, crossover,
+        mutation, selection, fitness, population, breeder, initialiser
 
-def = algorithm.genetic() do alg
-  alg.population = population.simple() do pop
-    pop.size = 100
-    pop.species = species.simple() do sp
-      sp.fitness = fitness.scalar()
-      sp.representation = representation.bit_vector()
-    end
-    pop.breeder = breeder.simple() do br
-      br.selection = selection.tournament(5)
-      br.mutation = mutation.bit_flip()
-      br.crossover = crossover.one_point()
-    end
-  end
-  alg.evaluator = evaluator.simple("
-    assign(scheme, sum(get(i.genome)))
-  ")
-
-  alg.termination["generations"] = criterion.generations(100)
+  # Load each of the examples.
+  include("example/one_max.jl")
 end
-
-alg = algorithm.compose!(def)
-algorithm.run!(alg)
