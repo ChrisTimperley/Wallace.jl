@@ -1,4 +1,5 @@
-export IndividualStage, copy, describe, valid, get, set
+import Base
+export IndividualStage, copy, describe, valid
 
 """
 Used to contain the data for a stage of development for a given individual.

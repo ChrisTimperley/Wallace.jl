@@ -2,6 +2,7 @@
 TODO: Description of algorithm module.
 """
 module algorithm
+importall common
 export run!
 
 """

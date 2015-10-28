@@ -5,7 +5,8 @@ packages.
 Should aim to reduce the number of methods in this package.
 """
 module common
-  export compose!, compose, rep, prepare, prepare!
+  importall Base
+  export compose!, compose, rep, prepare, prepare!, get, set
 
   """
   Stub method for scale! functions.

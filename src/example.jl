@@ -16,12 +16,11 @@ def = algorithm.genetic() do alg
       println("hello_again")
     end
   end
-
   alg.evaluator = evaluator.simple("
-    fitness(scheme, sum(get(i.genome)))
+    println(\"HELLO!\")
+    assign(scheme, sum(get(i.genome)))
   ")
 end
 
 alg = algorithm.compose!(def)
-
 algorithm.run!(alg)

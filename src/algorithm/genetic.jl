@@ -41,6 +41,7 @@ function compose!(def::GeneticAlgorithmDefinition)
   alg.termination = def.termination
   alg.initialiser = initialiser.DefaultInitialiser()
   alg.output = abspath(def.output)
+  alg.loggers = []
   alg
 end
 
@@ -56,7 +57,7 @@ end
 function run!(a::GeneticAlgorithm)
   reset!(a.state)
   prepare!(a.loggers, a.output)
-  initialise!(a.initializer, a.state.population)
+  initialise!(a.initialiser, a.state.population)
   evaluate!(a.evaluator, a.state)
   scale!(a.state.population)
 

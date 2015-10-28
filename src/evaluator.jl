@@ -13,8 +13,9 @@ diversity promotion techniques, multi-objective problems, and fuzzy evaluation
 much easier!
 """
 module evaluator
+  importall common
   using criterion, state, core, utility, fitness
-  export Evaluator
+  export Evaluator, evaluate!, call
 
  
   """

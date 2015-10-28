@@ -2,6 +2,7 @@
 Description of individual model.
 """
 module individual
+importall common
 using fitness, core, utility
 export sort, sort!, isbetter, compare, best, scale!
 
