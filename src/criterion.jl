@@ -4,6 +4,7 @@ criteria), such as the number of generations or evaluation passed, or the
 amount of an resource consumed, in a flexible manner.
 """
 module criterion
+  using   state
   export  is_satisfied,
           Criterion,
           EvaluationsCriterion,
@@ -57,11 +58,11 @@ module criterion
   Determines whether a given evaluation limit has been hit by a provided
   algorithm state.
   """
-  #is_satisfied(c::EvaluationsCriterion, s::State) = s.evaluations >= c.limit
+  is_satisfied(c::EvaluationsCriterion, s::State) = s.evaluations >= c.limit
 
   """
   Determines whether a given iteration limit has been reached by a provided
   algorithm state.
   """
-  #is_satisfied(c::IterationsCriterion, s::State) = s.iterations >= c.limit
+  is_satisfied(c::IterationsCriterion, s::State) = s.iterations >= c.limit
 end

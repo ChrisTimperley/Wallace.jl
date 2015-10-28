@@ -17,6 +17,8 @@ def = algorithm.genetic() do alg
   alg.evaluator = evaluator.simple("
     assign(scheme, sum(get(i.genome)))
   ")
+
+  alg.termination["generations"] = criterion.generations(100)
 end
 
 alg = algorithm.compose!(def)
