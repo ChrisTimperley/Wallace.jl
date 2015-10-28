@@ -6,4 +6,3 @@ type NumericERC{N} <: ERC
 end
 
 call{N}(erc::NumericERC{N}) = rand(erc.min, erc.max)
-

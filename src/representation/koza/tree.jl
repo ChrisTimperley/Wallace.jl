@@ -1,10 +1,18 @@
-load("parent",  dirname(@__FILE__))
-load("node",    dirname(@__FILE__))
-load("input",   dirname(@__FILE__))
-
+"""
+The base type used by all koza trees. A new, concrete type is dynamically
+created for each problem, tailored to its specifics, giving it a higher level
+of performance. This has the effect of essentially creating a highly optimised
+interpreter for each problem.
+"""
 abstract KozaTree <: KozaParent
+
+"""
+Constructs the koza tree (type) for a given problem, based on the inputs to that
+tree.
+"""
 function ComposeKozaTree(inputs::Vector{KozaInput})
-  t = anonymous_type(Wallace, "type <: KozaTree
+  # Generate an anonymous type for the tree.
+  t = anonymous_type(representation, "type <: KozaTree
     root::KozaNode
 
     constructor() = new()
@@ -21,13 +29,35 @@ function ComposeKozaTree(inputs::Vector{KozaInput})
   return t
 end
 
+"""
+Produces a deep-clone of a provided Koza Tree.
+"""
 clone{T <: KozaTree}(t::T) = T(clone(t.root), t)
+
+"""
+Selects a node from a provided Koza Tree at random uniformly.
+"""
 sample(t::KozaTree) = sample(t.root)
+
+"""
+Determines whether a given node is the root of the tree to which it belongs.
+"""
 isroot(n::KozaNode) = isa(n.parent, KozaTree)
+
+"""
+Returns the number of nodes in a given Koza Tree.
+"""
 num_nodes(t::KozaTree) = num_nodes(t.root)
 height(t::KozaTree) = height(t.root)
+
+"""
+Produces a string-based description of a given Koza Tree.
+"""
 describe(t::KozaTree) = describe(t.root)
 
+"""
+Destructively swaps the position of two given nodes within the same Koza Tree.
+"""
 function swap!(n1::KozaNode, n2::KozaNode)
   t = n1.parent
   swap!(n2.parent, n2, n1)
