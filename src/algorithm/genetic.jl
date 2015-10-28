@@ -78,8 +78,8 @@ function run!(a::GeneticAlgorithm)
 
     replace!(a.replacement, a.state)
     scale!(a.state.population)
-    call!(a.loggers, a.state)
+    logger.call!(a.loggers, a.state)
     a.state.iterations += 1
   end
-  close!(a.loggers)
+  logger.close!(a.loggers)
 end

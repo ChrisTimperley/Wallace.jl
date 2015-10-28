@@ -1,6 +1,6 @@
 module replacement
   using state, _deme_
-  export  Replacement
+  export  Replacement, replace!
 
   """
   The base type used by all replacement schemes.

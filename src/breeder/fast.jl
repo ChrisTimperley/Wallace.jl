@@ -107,7 +107,7 @@ function breed!{I <: Individual}(
 )
   inds = select(s.operator, species, members, n)
   map!(clone, inds)
-  sync(s.eigen, caller.eigen, sp, inds)
+  sync(s.eigen, caller.eigen, species, inds)
 end
 
 function breed!{I <: Individual}(

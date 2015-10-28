@@ -9,15 +9,12 @@ def = algorithm.genetic() do alg
       sp.representation = representation.bit_vector()
     end
     pop.breeder = breeder.simple() do br
-      println("b")
       br.selection = selection.tournament(5)
       br.mutation = mutation.bit_flip()
       br.crossover = crossover.one_point()
-      println("hello_again")
     end
   end
   alg.evaluator = evaluator.simple("
-    println(\"HELLO!\")
     assign(scheme, sum(get(i.genome)))
   ")
 end

@@ -4,10 +4,16 @@ Description of individual model.
 module individual
 importall common
 using fitness, core, utility
-export sort, sort!, isbetter, compare, best, scale!
+export sort, sort!, isbetter, best!, best, clone
 
 # Load contents.
 include("individual/stage.jl")
+
+"""
+Produces a clone of a provided individual.
+"""
+clone(::Individual) =
+  error("Unimplemented method for `Individual` sub-type: clone.")
 
 """
 Sorts a list of individuals in descending order of fitness, from best to worst.

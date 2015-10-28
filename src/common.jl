@@ -6,7 +6,10 @@ Should aim to reduce the number of methods in this package.
 """
 module common
   importall Base
-  export compose!, compose, rep, prepare, prepare!, get, set
+  export  compose!, compose, rep, prepare, prepare!, get, set, scale!, breed!,
+          compare
+
+  compare(::Any) = error("Common stub method: compare")
 
   """
   Stub method for scale! functions.
@@ -37,4 +40,8 @@ module common
   Should return the representation used by some given object.
   """
   rep(::Any) = error("Common stub method: rep")
+
+  get(::Any) = error("Common stub method: get")
+
+  set(::Any) = error("Common stub method: set")
 end
