@@ -25,6 +25,6 @@ module Wallace
   importall replacement
   importall evaluator
   importall logger
-  importall algorithm
+  using algorithm; export run!
   import example
 end

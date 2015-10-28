@@ -6,7 +6,8 @@ which can be executed using the `run!` method.
 """
 module example
   using algorithm, logger, criterion, evaluator, replacement, crossover,
-        mutation, selection, fitness, population, breeder, initialiser
+        mutation, selection, fitness, population, breeder, initialiser,
+        species, representation
 
   # Load each of the examples.
   include("example/one_max.jl")
