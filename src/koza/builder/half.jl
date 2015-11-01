@@ -24,7 +24,7 @@ type KozaHalfBuilderDefinition <: KozaBuilderDefinition
   """
   prob_grow::Float
 
-  KozaHalfBuilderDefinition() = new(1, 8, 0.5, 0.5)
+  KozaHalfBuilderDefinition() = new(1, 9, 0.5, 0.5)
   KozaHalfBuilderDefinition(min::Int, max::Int) = new(min, max, 0.5, 0.5)
   KozaHalfBuilderDefinition(min::Int, max::Int, pt::Float, pg::Float) =
     new(min, max, pt, pg)
