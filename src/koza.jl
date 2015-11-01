@@ -2,16 +2,6 @@ module koza
 
 importall common
 
-# Load the sub-components.
-# May want to define this as its own module?
-include("koza/node")
-include("koza/input")
-include("koza/tree")
-include("koza/terminal")
-include("koza/non_terminal")
-include("koza/input")
-include("koza/builder")
-
 """
 The base type of all types which may serve as the parent of a Koza tree node.
 For the root of the tree, this parent is the tree itself, and for all other
@@ -19,6 +9,23 @@ nodes, this type will be a node.
 """
 abstract KozaParent
 abstract KozaCarrier
+
+"""
+The base type used by all koza trees. A new, concrete type is dynamically
+created for each problem, tailored to its specifics, giving it a higher level
+of performance. This has the effect of essentially creating a highly optimised
+interpreter for each problem.
+"""
+abstract KozaTree <: KozaParent
+
+# Load the sub-components.
+include("koza/node")
+include("koza/input")
+include("koza/tree")
+include("koza/terminal")
+include("koza/non_terminal")
+include("koza/input")
+include("koza/builder")
 
 type KozaTreeRepresentationDefinition <: RepresentationDefinition
   min_depth::Int

@@ -10,7 +10,7 @@ abstract KozaTree <: KozaParent
 Constructs the koza tree (type) for a given problem, based on the inputs to that
 tree.
 """
-function ComposeKozaTree(inputs::Vector{KozaInput})
+function compose_tree(inputs::Vector{KozaInput})
   # Generate an anonymous type for the tree.
   t = anonymous_type(representation, "type <: KozaTree
     root::KozaNode
