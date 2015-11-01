@@ -1,5 +1,7 @@
 module koza
 
+importall common
+
 # Load the sub-components.
 # May want to define this as its own module?
 include("koza/node")
@@ -17,6 +19,18 @@ nodes, this type will be a node.
 """
 abstract KozaParent
 abstract KozaCarrier
+
+type KozaTreeRepresentationDefinition <: RepresentationDefinition
+  min_depth::Int
+  max_depth::Int
+  builder::KozaBuilder
+  terminals::Vector{AbstractString}
+  non_terminals::Vector{AbstractString}
+  inputs::Vector{AbstractString}
+
+  KozaTreeRepresentationDefinition() =
+    new(1, 9, HalfBuilder(), [], [], [])
+end
 
 type KozaTreeRepresentation <: Representation
   """
@@ -66,6 +80,45 @@ type KozaTreeRepresentation <: Representation
     i::Vector{KozaInput},
     b::KozaBuilder) =
     new(tree, min_d, max_d, t, nt, i, b)
+end
+
+"""
+Description of Koza tree representation.
+"""
+function tree(f::Function)
+  def = KozaTreeRepresentationDefinition()
+  f(def)
+  def
+end
+
+function compose(def::KozaTreeRepresentationDefinition)
+  # Construct the inputs.
+  inputs = [KozaInput(i) for i in def.inputs]
+
+  # Build the Koza tree type.
+  tree = compose_tree_type(inputs)
+
+  # Construct the builder.
+  # If none is given, default to ramped-half-and-half with 0.5 grow probability.
+  s["builder"] = Base.get(s, "builder", Dict{Any, Any}(
+    "type" => "koza:builder/half_and_half",
+    "min_depth" => 2,
+    "max_depth" => 6,
+    "prob_terminals" => 0.5,
+    "prob_grow" => 0.5
+  ))
+  s["builder"]["tree"] = tt
+  s["builder"] = compose_as(s["builder"], s["builder"]["type"])
+
+  # Construct each terminal.
+  terminals = [compose_terminal(inputs, t)() for t in def.terminals]
+
+  # Construct each non-terminal.
+  non_terminals = [compose_non_terminal(inputs, nt)() for nt in def.non_terminals]
+
+  # Put everything together.
+  KozaTreeRepresentation(tree, min_depth, max_depth, terminals, non_terminals,
+    inputs, builder)
 end
 
 """

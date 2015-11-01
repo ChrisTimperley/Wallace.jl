@@ -1,9 +1,17 @@
-load("node", dirname(@__FILE__))
-load("input", dirname(@__FILE__))
-
+"""
+Used to represent arguments to non-terminal nodes.
+"""
 type KozaNonTerminalArgument
+  """
+  The label used by this non-terminal.
+  """
   label::AbstractString
+
+  """
+  The (name of the) type used by this non-terminal.
+  """
   ty::AbstractString
+
   KozaNonTerminalArgument(def::AbstractString) = new(def[1:Base.search(def, ':')-1],
     def[Base.last(Base.search(def, "::"))+1:end])
 end
