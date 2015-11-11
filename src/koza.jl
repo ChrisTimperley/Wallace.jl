@@ -1,6 +1,8 @@
 module koza
 
-importall common
+importall common, representation
+
+export tree
 
 """
 The base type of all types which may serve as the parent of a Koza tree node.
@@ -19,14 +21,17 @@ interpreter for each problem.
 abstract KozaTree <: KozaParent
 
 # Load the sub-components.
-include("koza/node")
-include("koza/input")
-include("koza/tree")
-include("koza/terminal")
-include("koza/non_terminal")
-include("koza/input")
-include("koza/builder")
+include("koza/node.jl")
+include("koza/input.jl")
+include("koza/tree.jl")
+include("koza/terminal.jl")
+include("koza/non_terminal.jl")
+include("koza/input.jl")
+include("koza/builder.jl")
 
+"""
+Used to provide a definition for a Koza tree representation.
+"""
 type KozaTreeRepresentationDefinition <: RepresentationDefinition
   min_depth::Int
   max_depth::Int
@@ -90,7 +95,7 @@ type KozaTreeRepresentation <: Representation
 end
 
 """
-Description of Koza tree representation.
+TODO: Description of Koza tree representation.
 """
 function tree(f::Function)
   def = KozaTreeRepresentationDefinition()
@@ -98,6 +103,9 @@ function tree(f::Function)
   def
 end
 
+"""
+Composes a Koza tree representation from a provided definition.
+"""
 function compose(def::KozaTreeRepresentationDefinition)
   # Construct the inputs.
   inputs = [KozaInput(i) for i in def.inputs]

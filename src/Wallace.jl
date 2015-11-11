@@ -25,6 +25,7 @@ module Wallace
   importall replacement
   importall evaluator
   importall logger
+  importall koza
   using algorithm; export run!
   import example
 end

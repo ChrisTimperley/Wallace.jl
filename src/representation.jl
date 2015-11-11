@@ -1,11 +1,17 @@
 module representation
 importall individual, core, utility
-export Representation, chromosome, convert!, describe, minimum_value, maximum_value
+export  Representation, RepresentationDefinition, chromosome, convert!,
+        describe, minimum_value, maximum_value
 
 """
 The base type used by all representations.
 """
 abstract Representation
+
+"""
+The base type used by all representation definitions.
+"""
+abstract RepresentationDefinition
 
 """
 Returns the type used to implement instances of a given representation.
