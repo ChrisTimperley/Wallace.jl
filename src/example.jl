@@ -12,4 +12,5 @@ module example
   # Load each of the examples.
   include("example/one_max.jl")
   include("example/rastrigin.jl")
+  include("example/symbolic.jl")
 end
