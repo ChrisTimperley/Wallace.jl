@@ -2,8 +2,13 @@
 Composes the specialised Individual type for a species (given by its
 parameters, rather than a Species object).
 """
-function individual_type(stages::Vector{SpeciesStage},
-  fitness::FitnessScheme
+individual_type(stages::Vector{SpeciesStage}, fitness::FitnessScheme) =
+  individual_type(stages, fitness, species)
+
+function individual_type(
+  stages::Vector{SpeciesStage},
+  fitness::FitnessScheme,
+  context::Module
 )
   # Create an array to hold each of the lines of the type definition.
   # Add the evaluated and species properties.
@@ -48,17 +53,17 @@ function individual_type(stages::Vector{SpeciesStage},
   # into an anonymous type.
   unshift!(definition, "type <: Individual")
   push!(definition, "end")
-  t = anonymous_type(species, join(definition, "\n"))
+  t = anonymous_type(context, join(definition, "\n"))
 
   # Build the cloning operation for this type.
   cloner = join(["i.$(stage.label)" for stage in stages], ",")
   cloner = "clone(i::$(t)) = $(t)($(cloner))"
-  eval(species, Base.parse(cloner))
+  eval(context, Base.parse(cloner))
 
   # Build the describe operation for this type.
   describer = join(vcat(["fitness: \$(describe(i.fitness))"], ["$(stage.label):\n\$(describe(i.$(stage.label)))" for stage in stages]), "\n")
   describer = "describe(i::$(t)) = \"$(describer)\""
-  eval(species, Base.parse(describer))
+  eval(context, Base.parse(describer))
   
   # Return the generated individual type.
   return t

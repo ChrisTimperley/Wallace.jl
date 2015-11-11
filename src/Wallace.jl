@@ -17,6 +17,7 @@ module Wallace
   importall crossover
   importall mutation
   importall breeder
+  importall species
   importall _deme_
   importall population
   importall initialiser
