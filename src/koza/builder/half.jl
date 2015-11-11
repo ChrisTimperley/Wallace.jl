@@ -46,10 +46,11 @@ TODO
 * `max::Int`, the maximum tree depth.
 * `prob_terminal::Float`, the probability of a terminal - TODO!
 """
-full() = KozaFullBuilderDefinition()
-full(min::Int, max::Int) = KozaFullBuilderDefinition(min, max)
-function full(f::Function)
-  def = KozaFullBuilderDefinition()
+half() = KozaHalfBuilderDefinition()
+half(min::Int, max::Int, pt::Float, pg::Float) =
+  KozaHalfBuilderDefinition(min, max, pt, pg)
+function half(f::Function)
+  def = KozaHalfBuilderDefinition()
   f(def)
   def
 end

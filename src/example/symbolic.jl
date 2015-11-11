@@ -8,6 +8,7 @@ function symbolic()
       pop.species = species.simple() do sp
         sp.fitness = fitness.scalar()
         sp.representation = koza.tree() do t
+          println("HELLO!")
           t.min_depth = 1
           t.max_depth = 18
           t.inputs = ["x::Float64"]
@@ -17,11 +18,14 @@ function symbolic()
             "sub(x::Float64, y::Float64)::Float64 = x - y"
             "mul(x::Float64, y::Float64)::Float64 = x * y"
           ]
+          println("Finished specification")
         end
       end
       pop.breeder = breeder.simple() do br
         br.selection = selection.tournament(2)
-        br.mutation = koza.subtree_mutation(0.01)
+        br.mutation = koza.subtree_mutation() do mut
+          mut.rate = 0.1
+        end
         br.crossover = koza.subtree_crossover(0.9)
       end
     end

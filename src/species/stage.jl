@@ -20,9 +20,8 @@ type SpeciesStage
   """
   representation::Representation
 
-  SpeciesStage() =
-    new(false, "")
-  SpeciesStage(label::AbstractString,
+  SpeciesStage(
+    label::AbstractString,
     representation::Representation,
     parent::AbstractString,
     lamarckian::Bool
@@ -30,8 +29,27 @@ type SpeciesStage
     new(lamarckian, parent, label, representation)
 end
 
+type SpeciesStageDefinition
+  lamarckian::Bool
+  parent::AbstractString
+  label::AbstractString
+  representation::RepresentationDefinition
+
+  SpeciesStageDefinition() = new(false, "")
+  SpeciesStageDefinition(
+    label::AbstractString,
+    representation::RepresentationDefinition,
+    parent::AbstractString,
+    lamarckian::Bool
+  ) =
+    new(lamarckian, parent, label, representation)
+end
+
+compose!(def::SpeciesStageDefinition) =
+  SpeciesStage(def.label, compose!(def.representation), def.parent, def.lamarckian)
+
 """
-TODO: Composes a species stage.
+TODO: Describe species stages.
 
 By default, all stages are treated as root stages (although there can only
 be one) and as non-lamarckian.
@@ -42,16 +60,16 @@ function stage(label::AbstractString, def::Function)
   ss
 end
 function stage(def::Function)
-  ss = SpeciesStage()
+  ss = SpeciesStageDefinition()
   def(ss)
   ss
 end
-stage(label::AbstractString, rep::Representation) =
+stage(label::AbstractString, rep::RepresentationDefinition) =
   stage(label, rep, "", false)
-stage(label::AbstractString, rep::Representation, from::AbstractString) =
+stage(label::AbstractString, rep::RepresentationDefinition, from::AbstractString) =
   stage(label, rep, from, false)
-stage(label::AbstractString, rep::Representation, from::AbstractString, lamarckian::Bool) =
-  SpeciesStage(label, rep, from, lamarckian)
+stage(label::AbstractString, rep::RepresentationDefinition, from::AbstractString, lamarckian::Bool) =
+  SpeciesStageDefinition(label, rep, from, lamarckian)
 
 # Returns the representation used by a given species stage.
 rep(s::SpeciesStage) = s.representation

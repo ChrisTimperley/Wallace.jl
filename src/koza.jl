@@ -1,9 +1,6 @@
 module koza
-
 using utility, individual
 importall core, common, representation, crossover, mutation
-
-#export tree
 
 """
 The base type of all types which may serve as the parent of a Koza tree node.
@@ -36,13 +33,13 @@ Used to provide a definition for a Koza tree representation.
 type KozaTreeRepresentationDefinition <: RepresentationDefinition
   min_depth::Int
   max_depth::Int
-  builder::KozaBuilder
+  builder::KozaBuilderDefinition
   terminals::Vector{AbstractString}
   non_terminals::Vector{AbstractString}
   inputs::Vector{AbstractString}
 
   KozaTreeRepresentationDefinition() =
-    new(1, 9, HalfBuilder(), [], [], [])
+    new(1, 9, KozaHalfBuilderDefinition(), [], [], [])
 end
 
 type KozaTreeRepresentation <: Representation
@@ -107,32 +104,13 @@ end
 """
 Composes a Koza tree representation from a provided definition.
 """
-function compose(def::KozaTreeRepresentationDefinition)
-  # Construct the inputs.
+function compose!(def::KozaTreeRepresentationDefinition)
+  println("COMPOSING KOZA TREE")
   inputs = [KozaInput(i) for i in def.inputs]
-
-  # Build the Koza tree type.
   tree = compose_tree_type(inputs)
-
-  # Construct the builder.
-  # If none is given, default to ramped-half-and-half with 0.5 grow probability.
-  s["builder"] = Base.get(s, "builder", Dict{Any, Any}(
-    "type" => "koza:builder/half_and_half",
-    "min_depth" => 2,
-    "max_depth" => 6,
-    "prob_terminals" => 0.5,
-    "prob_grow" => 0.5
-  ))
-  s["builder"]["tree"] = tt
-  s["builder"] = compose_as(s["builder"], s["builder"]["type"])
-
-  # Construct each terminal.
+  builder = compose!(def.builder, tree)
   terminals = [compose_terminal(inputs, t)() for t in def.terminals]
-
-  # Construct each non-terminal.
   non_terminals = [compose_non_terminal(inputs, nt)() for nt in def.non_terminals]
-
-  # Put everything together.
   KozaTreeRepresentation(tree, min_depth, max_depth, terminals, non_terminals,
     inputs, builder)
 end
@@ -162,4 +140,8 @@ sample_non_terminal(r::KozaTreeRepresentation, p::KozaParent) =
 include("koza/subtree_crossover.jl")
 include("koza/subtree_mutation.jl")
 
+# Load each of the building methods.
+include("koza/builder/full.jl")
+include("koza/builder/grow.jl")
+include("koza/builder/half.jl")
 end

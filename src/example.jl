@@ -5,9 +5,9 @@ being solved (using snake case), and returns a composed algorithm definition
 which can be executed using the `run!` method.
 """
 module example
-  using algorithm, logger, criterion, evaluator, replacement, crossover,
+  using common, algorithm, logger, criterion, evaluator, replacement, crossover,
         mutation, selection, fitness, population, breeder, initialiser,
-        species, representation
+        species, representation, koza
 
   # Load each of the examples.
   include("example/one_max.jl")

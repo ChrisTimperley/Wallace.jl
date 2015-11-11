@@ -43,13 +43,15 @@ function compose!(c::SubtreeCrossoverDefinition, r::KozaTreeRepresentation)
 end
 
 """
-TODO: Write koza.subtree documentation.
+TODO: Write koza.subtree_crossover documentation.
 """
-subtree() = subtree(0.7, 1)
-subtree(rate::Float) = subtree(rate, 0.7)
-subtree(limit::Int) = subtree(0.7, limit)
-function subtree(def::Function)
-  c = subtree()
+subtree_crossover() = subtree_crossover(0.7, 1)
+subtree_crossover(rate::Float) = subtree_crossover(rate, 1)
+subtree_crossover(limit::Int) = subtree_crossover(0.7, limit)
+subtree_crossover(rate::Float, limit::Int) =
+  SubtreeCrossoverDefinition(rate, limit)
+function subtree_crossover(def::Function)
+  c = subtree_crossover()
   def(c)
   c
 end

@@ -11,7 +11,7 @@ type SimpleSpeciesDefinition <: SpeciesDefinition
   """
   The representation used by members of this species.
   """
-  representation::Representation
+  representation::RepresentationDefinition
 
   SimpleSpeciesDefinition() =
     new(fitness.scalar())
@@ -40,8 +40,8 @@ through its `genome` property.
 
 **Properties:**
 
-* `representation::Representation`, the solution represented used by members
-of this species.
+* `representation::RepresentationDefinition`, the representation used by
+members of this species.
 * `fitness::FitnessScheme`, the fitness scheme used by members of this
 species. Defaults to (maximised) scalar fitness if unspecified.
 """

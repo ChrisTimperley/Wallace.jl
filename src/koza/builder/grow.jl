@@ -7,7 +7,7 @@ type KozaGrowBuilderDefinition <: KozaBuilderDefinition
   prob_terminal::Float
 
   KozaGrowBuilderDefinition() = new(1, 8, 0.5)
-  KozaGrowBuilderDefinition(min::Int, max::Int) = new(min, max 0.5)
+  KozaGrowBuilderDefinition(min::Int, max::Int) = new(min, max, 0.5)
   KozaGrowBuilderDefinition(min::Int, max::Int, p_terminal) =
     new(min, max, p_terminal)
 end

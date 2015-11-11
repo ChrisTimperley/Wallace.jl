@@ -1,12 +1,12 @@
 type ComplexSpeciesDefinition <: SpeciesDefinition
   fitness::FitnessScheme
-  stages::Vector{SpeciesStage}
+  stages::Vector{SpeciesStageDefinition}
 
   ComplexSpeciesDefinition() =
     new(fitness.scalar())
-  ComplexSpeciesDefinition(st::Vector{SpeciesStage}) =
+  ComplexSpeciesDefinition(st::Vector{SpeciesStageDefinition}) =
     new(fitness.scalar(), st)
-  ComplexSpeciesDefinition(f::FitnessScheme, st::Vector{SpeciesStage}) =
+  ComplexSpeciesDefinition(f::FitnessScheme, st::Vector{SpeciesStageDefinition}) =
     new(f, st)
 end
 
@@ -14,10 +14,10 @@ end
 Composes a complex species from a provided definition.
 """
 function compose!(c::ComplexSpeciesDefinition)
-  # Transform the stages of this species into a dictionary, for easy access.
+  # Compose each of the stages within this species.
   stages = Dict{String, SpeciesStage}()
   for st in c.stages
-    stages[st.label] = st
+    stages[st.label] = compose!(st)
   end
 
   # Construct the individual type for this species.
@@ -35,10 +35,10 @@ For example, in the case of grammatical evolution, one may wish to represent
 use different stages to represent the individual as a bit vector, codon
 vector, program string, and compiled program.
 """
-complex(fitness::FitnessScheme, stages::Vector{SpeciesStage}) =
+complex(fitness::FitnessScheme, stages::Vector{SpeciesStageDefinition}) =
   ComplexSpeciesSpecification(fitness, stages)
 
-complex(stages::Vector{SpeciesStage}) =
+complex(stages::Vector{SpeciesStageDefinition}) =
   ComplexSpeciesDefinition(stages)
 
 function complex(spec::Function)

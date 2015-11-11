@@ -1,6 +1,6 @@
 module species
 using utility, core
-importall representation, fitness, individual
+importall representation, fitness, individual, common
 export Species, convert!, genotype, ind_type, SpeciesDefinition
 
 """
