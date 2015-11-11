@@ -7,12 +7,12 @@ interpreter for each problem.
 abstract KozaTree <: KozaParent
 
 """
-Constructs the koza tree (type) for a given problem, based on the inputs to that
+Constructs the koza tree type for a given problem, based on the inputs to that
 tree.
 """
-function compose_tree(inputs::Vector{KozaInput})
+function compose_tree_type(inputs::Vector{KozaInput})
   # Generate an anonymous type for the tree.
-  t = anonymous_type(representation, "type <: KozaTree
+  t = anonymous_type(koza, "type <: KozaTree
     root::KozaNode
 
     constructor() = new()
@@ -23,7 +23,7 @@ function compose_tree(inputs::Vector{KozaInput})
   src = join(vcat(["_t::$(t)"], ["$(a.label)::$(a.ty)" for a in inputs]), ",")
   src = "execute($(src)) = execute($(join(vcat(["_t.root"], [
   a.label for a in inputs]), ",")))"
-  eval(Wallace, Base.parse(src))
+  eval(koza, Base.parse(src))
 
   # Implement the cloning method for this tree type.
   return t

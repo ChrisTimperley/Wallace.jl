@@ -3,7 +3,7 @@ The base type used by all terminals within a Koza tree.
 """
 abstract KozaTerminal <: KozaNode
 
-function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::AbstractString)
+function compose_terminal(inputs::Vector{KozaInput}, def::AbstractString)
   label = def[1:Base.search(def, ':')-1]
   ty = def[Base.last(Base.search(def, "::"))+1:end]
   
@@ -13,7 +13,7 @@ function ComposeKozaTerminal(inputs::Vector{KozaInput}, def::AbstractString)
     constructor() = new()
     constructor(p::KozaParent) = new(p)
   end"
-  t = anonymous_type(Wallace, src)
+  t = anonymous_type(koza, src)
 
   # Compose the label function.
   eval(koza, Base.parse("label(::$(t)) = $(label)"))

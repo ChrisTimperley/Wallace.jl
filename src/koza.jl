@@ -82,7 +82,8 @@ type KozaTreeRepresentation <: Representation
   builder::KozaBuilder
   # ERCs
 
-  KozaTreeRepresentation(tree::Type,
+  KozaTreeRepresentation(
+    tree::Type,
     min_d::Int,
     max_d::Int,
     t::Vector{KozaTerminal},
@@ -105,13 +106,14 @@ end
 Composes a Koza tree representation from a provided definition.
 """
 function compose!(def::KozaTreeRepresentationDefinition)
-  println("COMPOSING KOZA TREE")
-  inputs = [KozaInput(i) for i in def.inputs]
+  inputs = KozaInput[KozaInput(i) for i in def.inputs]
   tree = compose_tree_type(inputs)
+  println("Composing builder...")
   builder = compose!(def.builder, tree)
-  terminals = [compose_terminal(inputs, t)() for t in def.terminals]
-  non_terminals = [compose_non_terminal(inputs, nt)() for nt in def.non_terminals]
-  KozaTreeRepresentation(tree, min_depth, max_depth, terminals, non_terminals,
+  println("Composed builder.")
+  terminals = KozaTerminal[compose_terminal(inputs, t)() for t in def.terminals]
+  non_terminals = KozaNonTerminal[compose_non_terminal(inputs, nt)() for nt in def.non_terminals]
+  KozaTreeRepresentation(tree, def.min_depth, def.max_depth, terminals, non_terminals,
     inputs, builder)
 end
 

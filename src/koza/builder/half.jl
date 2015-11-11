@@ -1,4 +1,14 @@
 """
+Implements the Koza HALF-TO-HALF initialisation method.
+"""
+type KozaHalfBuilder{T <: KozaTree} <: KozaBuilder
+  min_depth::Int
+  max_depth::Int
+  prob_terminals::Float
+  prob_grow::Float
+end
+
+"""
 Provides a definition of a HALF-TO-HALF method for constructing Koza trees.
 """
 type KozaHalfBuilderDefinition <: KozaBuilderDefinition
@@ -34,8 +44,8 @@ end
 Composes a Koza HALF-AND-HALF builder, for a given sub-type of Koza Tree, using
 a provided definition.
 """
-compose!(d::KozaHalfBuilderDefinition, t::KozaTree) =
-  KozaHalfBuilder{t}(d.min_depth, d.max_depth, m.prob_terminals, m.prob_grow)
+compose!(d::KozaHalfBuilderDefinition, t::Type) =
+  KozaHalfBuilder{t}(d.min_depth, d.max_depth, d.prob_terminals, d.prob_grow)
 
 """
 TODO
@@ -53,16 +63,6 @@ function half(f::Function)
   def = KozaHalfBuilderDefinition()
   f(def)
   def
-end
-
-"""
-Implements the Koza HALF-TO-HALF initialisation method.
-"""
-type KozaHalfBuilder{T <: KozaTree} <: KozaBuilder
-  min_depth::Int
-  max_depth::Int
-  prob_terminals::Float
-  prob_grow::Float
 end
 
 """

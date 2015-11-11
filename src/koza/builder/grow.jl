@@ -8,7 +8,7 @@ type KozaGrowBuilderDefinition <: KozaBuilderDefinition
 
   KozaGrowBuilderDefinition() = new(1, 8, 0.5)
   KozaGrowBuilderDefinition(min::Int, max::Int) = new(min, max, 0.5)
-  KozaGrowBuilderDefinition(min::Int, max::Int, p_terminal) =
+  KozaGrowBuilderDefinition(min::Int, max::Int, p_terminal::Float) =
     new(min, max, p_terminal)
 end
 
@@ -27,25 +27,24 @@ end
 Composes a Koza Grow builder, for a given sub-type of Koza Tree, using a
 provided definition.
 """
-compose!(d::KozaGrowBuilderDefinition, t::KozaTree) =
+function compose!(d::KozaGrowBuilderDefinition, t::Type)
+  println("BUILDING GROW")
   KozaGrowBuilder{t}(d.min_depth, d.max_depth, d.prob_terminal)
+end
 
-"""
-
-**Properties:**
-
-* `min::Int`, the minimum tree depth.
-* `max::Int`, the maximum tree depth.
-* `p::Float`, pt.
 """
 grow() = KozaGrowBuilderDefinition()
-grow(min::Int, max::Int) = KozaGrowBuilderDefinition(min, max)
-grow(min::Int, max::Int, p::Float) = KozaGrowBuilderDefinition(min, max, p)
+grow(mn::Int, mx::Int) = KozaGrowBuilderDefinition(mn, mx)
+function grow(min::Int, max::Int, p::Float)
+  println("GROW DADDSADAS")
+  KozaGrowBuilderDefinition(min, max, p)
+end
 function grow(f::Function)
   def = KozaGrowBuilderDefinition()
   f(def)
   def
 end
+"""
 
 """
 Constructs a Koza Tree belonging to a given representation using the GROW

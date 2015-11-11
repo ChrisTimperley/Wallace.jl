@@ -38,7 +38,7 @@ end
 Composes a Koza Full builder, for a given sub-type of Koza Tree, using a
 provided definition.
 """
-compose!(d::KozaFullBuilderDefinition, t::KozaTree) =
+compose!(d::KozaFullBuilderDefinition, t::Type) =
   KozaFullBuilder{t}(d.min_depth, d.max_depth)
 
 """
