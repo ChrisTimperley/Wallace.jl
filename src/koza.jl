@@ -1,8 +1,9 @@
 module koza
 
-importall common, representation
+using utility, individual
+importall core, common, representation, crossover, mutation
 
-export tree
+#export tree
 
 """
 The base type of all types which may serve as the parent of a Koza tree node.
@@ -156,4 +157,9 @@ sample_terminal(r::KozaTreeRepresentation, p::KozaParent) =
 
 sample_non_terminal(r::KozaTreeRepresentation, p::KozaParent) =
   fresh(r.non_terminals[rand(1:end)], p)
+
+# Load the operators.
+include("koza/subtree_crossover.jl")
+include("koza/subtree_mutation.jl")
+
 end

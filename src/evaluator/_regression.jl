@@ -15,7 +15,7 @@ the agreement with a series of provided sample observations from an oracle.
 
 TODO: FOR NOW THESE OBSERVATIONS ARE FIXED.
 """
-function regression(s::Dict{Any, Any})
+function regression()#s::Dict{Any, Any})
   # Flatten to 1D array?
   samples = Vector{Float}[
     [-10.0, 9090.0],
