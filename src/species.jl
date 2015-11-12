@@ -14,13 +14,24 @@ include("species/stage.jl")
 """
 Used to hold information about a given species.
 """
-type Species{T}
+type Species
   stages::Dict{AbstractString, SpeciesStage}
   fitness::FitnessScheme
   genotype::SpeciesStage
 
   Species(st::Dict{AbstractString, SpeciesStage}, f::FitnessScheme) =
     new(st, f, root(st))
+end
+
+"""
+Constructs an empty hash of stage containers for this species.
+"""
+function empty_offspring_dict(s::Species)
+  d = Dict{AbstractString, Any}()
+  for st in s.stages
+    d[st.label] = chromosome(st.representation)[]
+  end
+  return d
 end
 
 # Returns the canonical genotype of a given species.

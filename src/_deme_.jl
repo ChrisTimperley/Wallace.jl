@@ -6,16 +6,16 @@ importall common
 using core, breeder, species
 export Deme, contents, deme, DemeDefinition
 
-type Deme{T}
+type Deme
   capacity::Int
   breeder::Breeder
   species::Species
   num_offspring::Int
-  offspring::Vector{T}
-  members::Vector{T}
+  offspring::Dict{AbstractString, Vector{Any}}
+  members::Dict{AbstractString, Vector{Any}}
 
   Deme(capacity::Int, breeder::Breeder, species::Species, num_offspring::Int) =
-    new(capacity, breeder, species, num_offspring, [], [T() for i in 1:capacity])
+    new(capacity, breeder, species, num_offspring, empty_offspring_dict(species), empty_offspring_dict(species))
 end
 
 """
