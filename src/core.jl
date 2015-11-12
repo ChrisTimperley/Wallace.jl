@@ -10,6 +10,13 @@ The base type used by all individuals.
 """
 abstract Individual
 
+type Individual{F}
+  id::Int # need to be able to locate.
+  fitness::F
+end
+
+"get(deme, ind, 'genome')" "get('genome')"
+
 """
 The base type used by all search operators.
 """
