@@ -44,6 +44,14 @@ function convert!{I <: Individual}(
   convert!(rep(s, from), rep(s, to), from, to, inds)
 end
 
+
+"""
+
+"""
+__wallace__ = Base
+startUp(m::Module) =
+  __wallace__ = m
+
 # Include all other components of the species module.
 include("species/individual_type.jl")
 include("species/graph.jl")

@@ -51,9 +51,8 @@ end
 """
 Composes a subtree mutation operator from a provided definition.
 """
-function compose!(def::SubtreeMutationDefinition, rep::KozaTreeRepresentation)
-  
-end
+compose!(def::SubtreeMutationDefinition, rep::KozaTreeRepresentation) =
+  SubtreeMutation(rep, def.rate, def.p_terminal, def.min_depth, def.max_depth)  
 
 num_inputs(o::SubtreeMutation) = 1
 num_outputs(o::SubtreeMutation) = 1

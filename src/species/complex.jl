@@ -23,8 +23,6 @@ function compose!(c::ComplexSpeciesDefinition)
   # Construct the individual type for this species.
   I = individual_type(collect(values(stages)), c.fitness)
   
-  println("Built individual type.")
-
   # Build the species object.
   Species{I}(stages, c.fitness)
 end

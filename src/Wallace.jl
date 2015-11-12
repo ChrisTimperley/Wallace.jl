@@ -17,7 +17,7 @@ module Wallace
   importall crossover
   importall mutation
   importall breeder
-  importall species
+  importall species; species.startUp(Wallace)
   importall _deme_
   importall population
   importall initialiser

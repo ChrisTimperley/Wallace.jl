@@ -30,7 +30,7 @@ module Reflect
     # Format the constructors using the name of the type.
     d = replace(d, r"constructor(?=\()", name)
 
-    eval(Base.parse(d))
-    return eval(Base.parse(name))
+    eval(m, Base.parse(d))
+    return eval(m, Base.parse(name))
   end
 end

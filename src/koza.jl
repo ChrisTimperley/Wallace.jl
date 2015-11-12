@@ -108,9 +108,7 @@ Composes a Koza tree representation from a provided definition.
 function compose!(def::KozaTreeRepresentationDefinition)
   inputs = KozaInput[KozaInput(i) for i in def.inputs]
   tree = compose_tree_type(inputs)
-  println("Composing builder...")
   builder = compose!(def.builder, tree)
-  println("Composed builder.")
   terminals = KozaTerminal[compose_terminal(inputs, t)() for t in def.terminals]
   non_terminals = KozaNonTerminal[compose_non_terminal(inputs, nt)() for nt in def.non_terminals]
   KozaTreeRepresentation(tree, def.min_depth, def.max_depth, terminals, non_terminals,

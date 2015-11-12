@@ -95,7 +95,8 @@ that is to be composed.
 * `sources::Dict{AbstractString, Source}`, a dictionary containing the sources
 of the breeder that this source belongs to.
 """
-function compose!(def::VariationBreederSourceDefinition,
+function compose!(
+  def::VariationBreederSourceDefinition,
   sp::Species,
   sources::Dict{AbstractString, BreederSource}
 )
