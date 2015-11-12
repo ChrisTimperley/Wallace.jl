@@ -7,9 +7,11 @@ Should aim to reduce the number of methods in this package.
 module common
   importall Base
   export  compose!, rep, prepare, prepare!, get, set, scale!, breed!,
-          compare
+          compare, execute
 
   compare(::Any) = error("Common stub method: compare")
+
+  execute(::Any) = error("Common stub method: execute")
 
   """
   Stub method for scale! functions.

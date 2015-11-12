@@ -42,7 +42,6 @@ function regression()#s::Dict{Any, Any})
   RegressionEvaluator(samples)
 end
 
-"""
 function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessScheme, c::Individual)
   sse = zero(Float)
   diff = zero(Float)
@@ -50,6 +49,5 @@ function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessScheme, c::Indiv
     diff = x[2] - execute(get(c.genome), x[1])
     sse += diff * diff
   end
-  fitness(sc, sse)
+  assign(sc, sse)
 end
-"""

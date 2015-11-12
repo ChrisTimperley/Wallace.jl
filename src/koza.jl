@@ -1,6 +1,6 @@
 module koza
 using utility, individual
-importall core, common, representation, crossover, mutation
+importall core, common, representation, crossover, mutation, variation
 
 """
 The base type of all types which may serve as the parent of a Koza tree node.
