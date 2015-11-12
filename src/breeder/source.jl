@@ -112,7 +112,7 @@ function compose!(
   v.eigen = anonymous_type(breeder)
   v.source = sources[def.source]
   v.stage_getter =
-    eval(Base.parse("inds -> IndividualStage{$(chromosome(representation))}[i.$(def.stage) for i in inds]"))
+    eval(Main, Base.parse("inds -> Wallace.IndividualStage{$(chromosome(representation))}[i.$(def.stage) for i in inds]"))
   v
 end
 

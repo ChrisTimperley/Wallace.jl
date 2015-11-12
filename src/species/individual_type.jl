@@ -57,12 +57,12 @@ function individual_type(
 
   # Build the cloning operation for this type.
   cloner = join(["i.$(stage.label)" for stage in stages], ",")
-  cloner = "clone(i::$(t)) = $(t)($(cloner))"
+  cloner = "Wallace.clone(i::$(t)) = $(t)($(cloner))"
   eval(Main, Base.parse(cloner))
 
   # Build the describe operation for this type.
   describer = join(vcat(["fitness: \$(describe(i.fitness))"], ["$(stage.label):\n\$(describe(i.$(stage.label)))" for stage in stages]), "\n")
-  describer = "describe(i::$(t)) = \"$(describer)\""
+  describer = "Wallace.describe(i::$(t)) = \"$(describer)\""
   eval(Main, Base.parse(describer))
   
   # Return the generated individual type.

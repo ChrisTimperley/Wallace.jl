@@ -1,12 +1,11 @@
 abstract Individual
 
-macro individual_type(name)
-  println("hello")
-  def = "type $(name) <: Individual; end"
-
-  :(
-  eval(:(function x(); println("goodbye"); end))
+type Individual{F}
+  fitness::F
+  stage::
 end
 
-println(@individual_type())
-x()
+type SimpleIndividual <: Individual
+    fitness::F
+    genome::
+end
