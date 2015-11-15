@@ -3,19 +3,24 @@ This module is used to define several core, abstract types, in order to keep
 compilation simple, and to avoid any circular dependencies between modules.
 """
 module core
-export Individual, Operator, OperatorDefinition
+export IndividualCollection, Operator, OperatorDefinition
 
 """
-The base type used by all individuals.
+Used to hold a collection of individuals.
 """
-abstract Individual
+type IndividualCollection{F}
+  """
+  The fitness values for each individual within this collection, indexed by
+  their internal ID.
+  """
+  fitnesses::Vector{F}
 
-type Individual{F}
-  id::Int # need to be able to locate.
-  fitness::F
+  """
+  The developmental stages for each individual within this collection. Indexed
+  by the name of the stage, then by the individual's internal ID.
+  """
+  stages::Dict{AbstractString, Any}
 end
-
-"get(deme, ind, 'genome')" "get('genome')"
 
 """
 The base type used by all search operators.

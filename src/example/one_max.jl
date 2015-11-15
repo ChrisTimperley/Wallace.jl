@@ -17,6 +17,13 @@ function one_max()
         br.crossover = crossover.one_point(0.1)
       end
     end
+
+    # New scheme.
+    # - Automatically deal with non-present genomes?
+    alg.evaluator = evaluator.simple({"threads" => 8}) do scheme, genome
+      assign(scheme, sum(genome))
+    end
+
     alg.evaluator = evaluator.simple("
       assign(scheme, sum(get(i.genome)))
     ")
