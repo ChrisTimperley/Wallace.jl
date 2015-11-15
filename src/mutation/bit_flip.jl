@@ -15,12 +15,12 @@ type BitFlipMutation <: Mutation
   representation::representation.BitVectorRepresentation
 
   BitFlipMutation(stage::AbstractString, rate::Float, rep::representation.BitVectorRepresentation) =
-    new(rate, rep)
+    new(stage, rate, rep)
 end
 
 function compose!(d::BitFlipMutationDefinition, sp::Species)
   d.stage = d.stage == "" ? genotype(sp).label : d.stage
-  BitFlipMutation(d.stage, d.rate, r)
+  BitFlipMutation(d.stage, d.rate, sp.stages[d.stage].representation)
 end
 
 """

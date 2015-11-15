@@ -26,6 +26,7 @@ species.
 """
 function compose!(c::OnePointCrossoverDefinition, sp::Species)
   c.stage = c.stage == "" ? genotype(sp).label : c.stage
+  r = sp.stages[c.stage].representation
   OnePointCrossover{typeof(r)}(c.stage, r, c.rate)
 end
 
