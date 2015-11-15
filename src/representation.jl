@@ -1,5 +1,5 @@
 module representation
-importall core, utility, individual
+importall core, utility, individual, common
 export  Representation, RepresentationDefinition, chromosome, convert!,
         describe, minimum_value, maximum_value
 
