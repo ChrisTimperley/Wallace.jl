@@ -6,7 +6,7 @@ RULE: Number of inputs must be greater or equal to the number of outputs.
 module crossover
 importall common, variation
 using core, utility, representation, individual
-export Crossover, CrossoverDefinition, num_required
+export Crossover, CrossoverDefinition, num_require
 
 """
 Base type used by all crossover operation definitions.
