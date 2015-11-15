@@ -73,10 +73,10 @@ else
   return BreederSource[s.source]
 end
 
-breed!{I <: Individual}(
+breed!(
   b::FastBreeder,
   s::Species,
-  members::Vector{I},
+  members::IndividualCollection,
   capacity::Int,
   num_offspring::Int
 ) =
@@ -85,10 +85,10 @@ breed!{I <: Individual}(
 """
 Produces a requested number of (proto-)offspring from a multiple breeding source.
 """
-function breed!{I <: Individual}(
+function breed!(
   s::MultiBreederSource,
   sp::Species,
-  members::Vector{I},
+  members::IndividualCollection,
   n::Int,
   caller::Union{FastBreeder, BreederSource}
 )

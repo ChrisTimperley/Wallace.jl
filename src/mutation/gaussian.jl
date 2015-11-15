@@ -54,9 +54,7 @@ gaussian_noise{T}(mean::T, std::T) =
 num_inputs(o::GaussianMutation) = 1
 num_outputs(o::GaussianMutation) = 1
 
-function operate!{T}(o::GaussianMutation,
-  inputs::Vector{IndividualStage{Vector{T}}})
-
+function operate!{T}(o::GaussianMutation, inputs::Vector{IndividualStage{Vector{T}}})
   # If we knew the length of our genome in advance, how much faster
   # would this operation be?
   for i in 1:length(get(inputs[1]))

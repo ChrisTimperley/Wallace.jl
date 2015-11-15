@@ -16,6 +16,9 @@ Base type used all by crossover operators.
 """
 abstract Crossover <: Variation
 
+operate!(c::Crossover, srcs::IndividualCollection, n::Int) =
+  operate!(c, srcs.stages[c.stage][1:num_required(c, n)], n)
+
 # Include each of the crossover operators.
 include("crossover/one_point.jl")
 end

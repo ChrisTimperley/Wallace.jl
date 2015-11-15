@@ -1,6 +1,9 @@
 type RandomSelectionDefinition <: SelectionDefinition; end
 type RandomSelection <: Selection; end
 
+"""
+Composes a random selection operator from its definition.
+"""
 compose!(d::RandomSelectionDefinition) = RandomSelection()
 
 """
@@ -9,9 +12,5 @@ replacement.
 """
 random() = RandomSelectionDefinition()
 
-select{I <: Individual}(::RandomSelection,
-  ::Species,
-  candidates::Vector{I},
-  n::Int
-) =
-  I[candidates[rand(1:end)] for i in 1:num]
+select_ids(::RandomSelection, ::Species, ic::IndividualCollection, n::Int) =
+  rand(1:length(ic.fitnesses), n)

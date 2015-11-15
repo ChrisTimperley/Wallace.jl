@@ -30,16 +30,12 @@ bit_flip(rate::Float) = BitFlipMutationDefinition(rate)
 num_inputs(o::BitFlipMutation) = 1
 num_outputs(o::BitFlipMutation) = 1
 
-function operate!(o::BitFlipMutation,
-  inputs::Vector{IndividualStage{Vector{Int}}})
-  for i in 1:length(get(inputs[1]))
+function operate!(o::BitFlipMutation, input::IndividualStage{Vector{Int}})
+  chromo = get(input)
+  for i in 1:length(chromo)
     if rand() <= o.rate
-      if get(inputs[1])[i] == 1
-        get(inputs[1])[i] = 0
-      else
-        get(inputs[1])[i] = 1
-      end
+      chromo[i] = chromo[i] == 1 ? 0 : 1
     end
   end
-  return inputs
+  return input
 end
