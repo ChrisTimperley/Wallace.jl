@@ -8,16 +8,18 @@ type FlatBreeder <: Breeder
 end
 
 type FlatBreederDefinition <: BreederDefinition
-  selection::Selection
-  mutation::Mutation
-  crossover::Crossover
+  selection::SelectionDefinition
+  mutation::MutationDefinition
+  crossover::CrossoverDefinition
 end
 
 """
 Composes a flat breeder from its definition.
 """
-compose!(d::FlatBreederDefinition) =
-  FlatBreeder(d.selection, d.mutation, d.crossover)
+compose!(d::FlatBreederDefinition, sp::Species) =
+  FlatBreeder(compose!(d.selection, sp)
+              compose!(d.mutation, sp),
+              compose!(d.crossover, sp))
 
 """
 Performs the breeding process for each of the demes within the population
