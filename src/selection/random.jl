@@ -12,5 +12,5 @@ replacement.
 """
 random() = RandomSelectionDefinition()
 
-select_ids(::RandomSelection, ::Species, ic::IndividualCollection, n::Int) =
+select_ids{F}(::RandomSelection, ::FitnessScheme, ::Vector{Tuple{Int, F}}, n::Int) =
   rand(1:length(ic.fitnesses), n)

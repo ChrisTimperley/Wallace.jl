@@ -23,6 +23,13 @@ type IndividualCollection{F}
 end
 
 """
+Returns a vector containing the fitness of each individual within a given
+collection along with their internal ID, in the form of a tuple.
+"""
+indexed_fitnesses{F}(ic::IndividualCollection{F}) =
+  collect(enumerate(ic.fitnesses))
+
+"""
 The base type used by all search operators.
 """
 abstract Operator

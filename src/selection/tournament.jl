@@ -26,20 +26,21 @@ tournament(size::Int) = TournamentSelectionDefinition(size)
 Selects a given number of individuals from a set of candidate individuals
 according to a tournament selection method.
 """
-function select{F}(s::TournamentSelection,
-  sp::Species,
+function select_ids{F}(
+  s::TournamentSelection,
+  fs::FitnessScheme,
   candidates::Vector{Tuple{Int, F}},
   n::Int
 )
   # Pre-allocate an array of winners and an array to hold the participants
   # in each tournament.
-  winners = Array(I, n)
-  participants = Array(I, s.size)
+  winners = Array(Int, n)
+  participants = Array(Tuple{Int, F}, s.size)
   for i in 1:n
     for j in 1:s.size
       participants[j] = candidates[rand(1:end)]
     end
-    winners[i] = best(sp.fitness, participants)
+    winners[i] = best(fs, participants)[1]
   end
   return winners
 end

@@ -15,12 +15,20 @@ abstract Selection <: Operator
 
 """
 Selects a given number of individuals from a collection of candidate individuals
-according to a given selection method.
+according to a given selection method, returning the selected individuals as a
+new individual collection.
 """
-select(s::Selection, ::Species, ::IndividualCollection, ::Integer) =
-  error("Unimplemented `select` method for this selection operator: $(typeof(s)).")
+selection(s::Selection, sp::Species, ic::IndividualCollection, n::Integer) =
+  select_ids(s, sp.fitness, indexed_fitnesses(ic), n)
 
-select_ids(s::Selection, ::Species, ::IndividualCollection, ::Integer) =
+"""
+Selects a specified number of individuals from a list of candidates, provided
+as a vector of tuples, specifying the id and fitness of each candidate.
+
+Returns the internal IDs of the selected individuals.
+"""
+select_ids{F}(s::Selection, ::Species, ::Vector{Tuple{Int, F}}, ::Integer) =
+  error("Unimplemented `select_ids' method for this selection operator: $(typeof(s)).") 
 
 """
 Prepares a given selection operator for the breeding process.
