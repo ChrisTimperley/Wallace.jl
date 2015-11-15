@@ -1,7 +1,7 @@
 module species
 using utility, core
-importall representation, fitness, individual, common
-export Species, convert!, genotype, ind_type, SpeciesDefinition
+importall representation, fitness, common
+export Species, convert!, genotype, SpeciesDefinition
 
 """
 The base type used by all species definitions.
@@ -41,9 +41,6 @@ genotype(s::Species) = s.genotype
 rep(species::Species, stage::AbstractString) =
   species.stages[stage].representation
 
-# Returns the unique individual type associated this species.
-ind_type{T}(s::Species{T}) = T
-
 # Converts from one representation to another for a given pair of chromosomes
 # for all individuals in a given list.
 function convert!{I <: Individual}(
@@ -64,7 +61,6 @@ startUp(m::Module) =
   __wallace__ = m
 
 # Include all other components of the species module.
-include("species/individual_type.jl")
 include("species/graph.jl")
 include("species/simple.jl")
 include("species/complex.jl")

@@ -2,8 +2,9 @@
 Simple evaluators implement a single objective function.
 """
 type SimpleEvaluator <: Evaluator
-  stage::AbstractString
   evaluator::Function
+  stage::AbstractString
+  threads::Int
 end
 
 """
@@ -16,6 +17,16 @@ type SimpleEvaluatorDefinition <: EvaluatorDefinition
 
   SimpleEvaluatorDefinition(e::Function) =
     new(e, "", 1)
+end
+
+"""
+Composes a simple evaluator from its definition.
+"""
+function compose!(e::SimpleEvaluatorDefinition, p::Population)
+  if e.stage != ""
+    e.stage = p.demes[1].species.genotype.label
+  end
+  SimpleEvaluator(e.evaluator, e.stage, e.threads)
 end
 
 """
@@ -39,9 +50,9 @@ a provided simple evaluator.
 """
 function evaluate!(e::SimpleEvaluator, s::State, d::Deme)
   for (id, phenome) in enumerate(deme.offspring.stages[e.stage])
-    deme.offspring.fitnesses[id] = e.evaluator(fs, phenome)
+    deme.offspring.fitnesses[id] = e.evaluator(d.species.fitness, phenome)
   end
-  s.evaluations += length(deme.offspring.stages["phenome"])
+  s.evaluations += length(deme.offspring.stages[e.stage])
 end
 
 """
