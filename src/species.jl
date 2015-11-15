@@ -27,7 +27,7 @@ end
 Constructs an empty individual collection for this species.
 """
 function empty_individual_collection(s::Species)
-  F = typeof(s.fitness)
+  F = uses(s.fitness)
   d = Dict{AbstractString, Any}()
   for (label, st) in s.stages
     d[label] = chromosome(st.representation)[]

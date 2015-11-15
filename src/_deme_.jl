@@ -3,7 +3,7 @@ TODO: Description of _deme_ module.
 """
 module _deme_
 importall common
-using core, breeder, species
+using core, breeder, species, fitness
 export Deme, contents, deme, DemeDefinition
 
 type Deme{F}
@@ -66,7 +66,7 @@ function compose!(d::DemeDefinition)
   if d.offspring == 0
     d.offspring = d.capacity
   end
-  Deme{typeof(sp.fitness)}(d.capacity, br, sp, d.offspring)
+  Deme{uses(sp.fitness)}(d.capacity, br, sp, d.offspring)
 end
 
 """

@@ -23,7 +23,7 @@ end
 Composes a simple evaluator from its definition.
 """
 function compose!(e::SimpleEvaluatorDefinition, p::Population)
-  if e.stage != ""
+  if e.stage == ""
     e.stage = p.demes[1].species.genotype.label
   end
   SimpleEvaluator(e.evaluator, e.stage, e.threads)

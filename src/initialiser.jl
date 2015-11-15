@@ -1,5 +1,5 @@
 module initialiser
-using population, _deme_, core
+using population, _deme_, core, fitness
 export Initialiser, initialise!
 
 """
@@ -28,7 +28,9 @@ type DefaultInitialiser <: Initialiser; end
 
 function initialise!(i::DefaultInitialiser, d::Deme)
   rep = d.species.genotype.representation
-  d.members[d.species.genotype.label] = [rand(rep) for i in 1:d.capacity]
+  d.members.fitnesses = d.offspring.fitnesses = Array(uses(d.species.fitness), d.capacity)
+  d.members.stages[d.species.genotype.label] =
+    d.offspring.stages[d.species.genotype.label] = [rand(rep) for i in 1:d.capacity]
 end
 
 end

@@ -32,7 +32,12 @@ Performs any necessary fitness scaling and processing on each of the
 individuals within a given population.
 """
 scale!(p::Population) = for deme in p.demes; scale!(deme); end
-scale!(d::Deme) = scale!(d.species.fitness, contents(d))
+#scale!(d::Deme) = scale!(d.species.fitness, contents(d))
+
+"""
+TODO: IMPLEMENT SCALING.
+"""
+scale!(d::Deme) = true
 
 # Load each of the population types.
 include("population/simple.jl")

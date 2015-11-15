@@ -3,7 +3,8 @@ This module is used to define several core, abstract types, in order to keep
 compilation simple, and to avoid any circular dependencies between modules.
 """
 module core
-export IndividualCollection, Operator, OperatorDefinition
+export  IndividualCollection, Operator, OperatorDefinition, indexed_fitnesses,
+        individuals_from_ids
 
 """
 Used to hold a collection of individuals.

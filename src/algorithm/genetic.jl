@@ -64,7 +64,7 @@ function run!(a::GeneticAlgorithm)
   # Record the best individual from the population.
   #pbest = gbest = best(a.state.population)
 
-  prepare!(a.state.population)
+  #prepare!(a.state.population)
 
   while !any(c -> is_satisfied(c, a.state), values(a.termination))
     breed!(a.state.population)
