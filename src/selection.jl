@@ -1,7 +1,7 @@
 module selection
 importall common, species
 using core
-export Selection, select, SelectionDefinition
+export Selection, select, select_ids, SelectionDefinition
 
 """
 The base type used by all selection operator definitions.
@@ -19,7 +19,7 @@ according to a given selection method, returning the selected individuals as a
 new individual collection.
 """
 selection(s::Selection, sp::Species, ic::IndividualCollection, n::Integer) =
-  select_ids(s, sp.fitness, indexed_fitnesses(ic), n)
+  individuals_from_ids(ic, select_ids(s, sp.fitness, indexed_fitnesses(ic), n))
 
 """
 Selects a specified number of individuals from a list of candidates, provided

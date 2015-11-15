@@ -20,6 +20,11 @@ type IndividualCollection{F}
   by the name of the stage, then by the individual's internal ID.
   """
   stages::Dict{AbstractString, Any}
+
+  """
+  Constructs a new, empty collection of individuals.
+  """
+  IndividualCollection() = new([], [])
 end
 
 """
@@ -28,6 +33,19 @@ collection along with their internal ID, in the form of a tuple.
 """
 indexed_fitnesses{F}(ic::IndividualCollection{F}) =
   collect(enumerate(ic.fitnesses))
+
+"""
+Composes a new collection of individuals by selecting the multi-set of
+individuals in a given collection specified by a provided set of internal IDs.
+"""
+function individuals_from_ids{F}(from::IndividualCollection{F}, ids::Vector{Int})
+  to = IndividualCollection{F}()
+  to.fitnesses = [from.fitnesses[id] for id in ids]
+  for stage in keys(from.stages)
+    to.stages[stage] = [from.stages[stage][id] for id in ids]
+  end
+  to
+end
 
 """
 The base type used by all search operators.

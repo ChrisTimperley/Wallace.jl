@@ -27,8 +27,8 @@ breed!(b::FlatBreeder, s::State) =
   for d in s.population.demes; breed!(b, s, d); end
 
 function breed!(b::FlatBreeder, ::State, d::Deme)
-  n_crossover = num_required_to_produce(b.crossover, d.num_offspring)
+  n_crossover = num_required(b.crossover, d.num_offspring)
   parents = select(b.selection, d.members, n_crossover)
-  proto = crossover(b.crossover, parents, n_crossover)
-  mutate!(b.mutation, proto, d.num_offspring)
+  proto = operate!(b.crossover, parents, n_crossover)
+  operate!(b.mutation, proto, d.num_offspring)
 end
