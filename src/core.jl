@@ -25,6 +25,8 @@ type IndividualCollection{F}
   Constructs a new, empty collection of individuals.
   """
   IndividualCollection() = new([], [])
+
+  IndividualCollection(f::Vector{F}, s::Dict{AbstractString, Any}) = new(f, s)
 end
 
 """

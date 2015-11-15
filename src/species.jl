@@ -1,7 +1,7 @@
 module species
 using utility, core
 importall representation, fitness, common
-export Species, convert!, genotype, SpeciesDefinition, empty_offspring_dict
+export Species, convert!, genotype, SpeciesDefinition, empty_individual_collection
 
 """
 The base type used by all species definitions.
@@ -24,14 +24,15 @@ type Species
 end
 
 """
-Constructs an empty hash of stage containers for this species.
+Constructs an empty individual collection for this species.
 """
-function empty_offspring_dict(s::Species)
+function empty_individual_collection(s::Species)
+  F = typeof(s.fitness)
   d = Dict{AbstractString, Any}()
   for (label, st) in s.stages
     d[label] = chromosome(st.representation)[]
   end
-  return d
+  return IndividualCollection{F}(F[], d)
 end
 
 """

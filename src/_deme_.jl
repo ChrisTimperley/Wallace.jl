@@ -6,16 +6,16 @@ importall common
 using core, breeder, species
 export Deme, contents, deme, DemeDefinition
 
-type Deme
+type Deme{F}
   capacity::Int
   breeder::Breeder
   species::Species
   num_offspring::Int
-  offspring::Dict{AbstractString, Vector{Any}}
-  members::Dict{AbstractString, Vector{Any}}
+  offspring::IndividualCollection{F}
+  members::IndividualCollection{F}
 
   Deme(capacity::Int, breeder::Breeder, species::Species, num_offspring::Int) =
-    new(capacity, breeder, species, num_offspring, empty_offspring_dict(species), empty_offspring_dict(species))
+    new(capacity, breeder, species, num_offspring, empty_individual_collection(species), empty_individual_collection(species))
 end
 
 """
@@ -66,7 +66,7 @@ function compose!(d::DemeDefinition)
   if d.offspring == 0
     d.offspring = d.capacity
   end
-  Deme(d.capacity, br, sp, d.offspring)
+  Deme{typeof(sp.fitness)}(d.capacity, br, sp, d.offspring)
 end
 
 """

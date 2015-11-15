@@ -49,10 +49,10 @@ Evaluates all unevaluated individuals within a provided deme according to
 a provided simple evaluator.
 """
 function evaluate!(e::SimpleEvaluator, s::State, d::Deme)
-  for (id, phenome) in enumerate(deme.offspring.stages[e.stage])
-    deme.offspring.fitnesses[id] = e.evaluator(d.species.fitness, phenome)
+  for (id, phenome) in enumerate(d.offspring.stages[e.stage])
+    d.offspring.fitnesses[id] = e.evaluator(d.species.fitness, phenome)
   end
-  s.evaluations += length(deme.offspring.stages[e.stage])
+  s.evaluations += length(d.offspring.stages[e.stage])
 end
 
 """
