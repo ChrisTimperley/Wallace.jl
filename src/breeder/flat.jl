@@ -11,6 +11,10 @@ type FlatBreederDefinition <: BreederDefinition
   selection::SelectionDefinition
   mutation::MutationDefinition
   crossover::CrossoverDefinition
+
+  FlatBreederDefinition() = new()
+  FlatBreederDefinition(s::SelectionDefinition, m::MutationDefinition, c::CrossoverDefinition) =
+    new(s, m, c)
 end
 
 """
@@ -20,6 +24,15 @@ compose!(d::FlatBreederDefinition, sp::Species) =
   FlatBreeder(compose!(d.selection, sp),
               compose!(d.mutation, sp),
               compose!(d.crossover, sp))
+
+"""
+TODO: Document flat breeders.
+"""
+function flat(f::Function)
+  def = FlatBreederDefinition()
+  f(def)
+  def
+end
 
 """
 Performs the breeding process for each of the demes within the population

@@ -9,7 +9,6 @@ function one_max()
       pop.size = 100
       pop.species = species.simple() do sp
         sp.fitness = fitness.scalar()
-        println("hello")
         sp.representation = representation.bit_vector(100)
       end
       pop.breeder = breeder.flat() do br
