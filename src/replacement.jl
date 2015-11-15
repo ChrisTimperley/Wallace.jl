@@ -32,6 +32,8 @@ module replacement
   replace!(r::GenerationalReplacement, s::State) =
     for d in s.population.demes; replace!(r, d); end
 
-  replace!(r::GenerationalReplacement, d::Deme) =
-    d.members[1:end] = d.offspring[1:d.capacity]
+  function replace!(r::GenerationalReplacement, d::Deme)
+    d.members.fitnesses[1:end] = d.offspring.fitnesses[1:d.capacity]
+    d.members.stages[1:end] = d.offspring.stage[1:d.capacity]
+  end
 end
