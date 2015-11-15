@@ -9,6 +9,7 @@ function one_max()
       pop.size = 100
       pop.species = species.simple() do sp
         sp.fitness = fitness.scalar()
+        println("hello")
         sp.representation = representation.bit_vector(100)
       end
       pop.breeder = breeder.flat() do br
@@ -17,16 +18,9 @@ function one_max()
         br.crossover = crossover.one_point(0.1)
       end
     end
-
-    # New scheme.
-    # - Automatically deal with non-present genomes?
-    alg.evaluator = evaluator.simple({"threads" => 8}) do scheme, genome
+    alg.evaluator = evaluator.simple(Dict("threads" => 8)) do scheme, genome
       assign(scheme, sum(genome))
     end
-
-    alg.evaluator = evaluator.simple("
-      assign(scheme, sum(get(i.genome)))
-    ")
     alg.termination["generations"] = criterion.generations(1000)
   end
   algorithm.compose!(def)
