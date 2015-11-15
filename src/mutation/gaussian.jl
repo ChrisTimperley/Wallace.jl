@@ -24,7 +24,7 @@ function compose!(d::GaussianMutationDefinition, sp::Species)
   GaussianMutation{Float}(d.mean, d.std, d.rate, r)
 end
 
-type GaussianMutation{T} <: Mutation
+type GaussianMutation{T <: Number} <: Mutation
   stage::AbstractString
   mean::T
   std::T
@@ -57,13 +57,13 @@ end
 Produces some Gaussian noise from a given distribution, specified by its mean
 and standard deviation.
 """
-gaussian_noise{T}(mean::T, std::T) =
+gaussian_noise{T <: Number}(mean::T, std::T) =
   mean + std * sqrt(-2 * log(1 - rand())) * sin(2 * pi * rand())
 
 num_inputs(o::GaussianMutation) = 1
 num_outputs(o::GaussianMutation) = 1
 
-function operate!{T}(o::GaussianMutation, input::Vector{T})
+function operate!{T <: Number}(o::GaussianMutation, input::Vector{T})
   # If we knew the length of our genome in advance, how much faster
   # would this operation be?
   for i in 1:length(input)

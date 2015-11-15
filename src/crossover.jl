@@ -5,7 +5,7 @@ RULE: Number of inputs must be greater or equal to the number of outputs.
 """
 module crossover
 importall common, variation
-using core, utility, representation, individual
+using core, utility, representation, individual, species
 export Crossover, CrossoverDefinition, num_require
 
 """
@@ -51,14 +51,10 @@ function operate!{T}(
   # Ensure that all the provided inputs are in a valid state.
   # If not, leave the output buffer unchanged.
   try
-    for idx, chromo in zip(dest, operate!(c, map(get, inputs)))
+    for (idx, chromo) in zip(dest, operate!(c, map(get, inputs)))
       buffer[idx] = chromo
     end
   end
-end
-
-# Include each of the crossover operators.
-include("crossover/one_point.jl")
 end
 
 """
@@ -72,3 +68,9 @@ Calculates the number of input chromosomes required to this operator in order
 to produce a specified number of offspring.
 """
 num_required(c::Crossover, n::Int) = num_calls_required(c, n) * num_inputs(c)
+
+# Include each of the crossover operators.
+include("crossover/one_point.jl")
+
+
+end

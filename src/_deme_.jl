@@ -6,6 +6,8 @@ importall common
 using core, breeder, species
 export Deme, contents, deme, DemeDefinition
 
+println("Importing deme.")
+
 type Deme
   capacity::Int
   breeder::Breeder

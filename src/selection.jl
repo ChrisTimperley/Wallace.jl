@@ -1,6 +1,6 @@
 module selection
 importall common, species
-using core
+using core, fitness
 export Selection, select, select_ids, SelectionDefinition
 
 """
@@ -18,7 +18,7 @@ Selects a given number of individuals from a collection of candidate individuals
 according to a given selection method, returning the selected individuals as a
 new individual collection.
 """
-selection(s::Selection, sp::Species, ic::IndividualCollection, n::Integer) =
+select(s::Selection, sp::Species, ic::IndividualCollection, n::Integer) =
   individuals_from_ids(ic, select_ids(s, sp.fitness, indexed_fitnesses(ic), n))
 
 """

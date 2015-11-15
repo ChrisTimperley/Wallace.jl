@@ -34,24 +34,16 @@ function empty_offspring_dict(s::Species)
   return d
 end
 
-# Returns the canonical genotype of a given species.
+"""
+Returns the canonical genotype of a given species.
+"""
 genotype(s::Species) = s.genotype
 
-# Returns the representation used by a given stage of a provided species.
+"""
+Returns the representation used by a given stage of a provided species.
+"""
 rep(species::Species, stage::AbstractString) =
   species.stages[stage].representation
-
-# Converts from one representation to another for a given pair of chromosomes
-# for all individuals in a given list.
-function convert!{I <: Individual}(
-  s::Species,
-  from::AbstractString,
-  to::AbstractString,
-  inds::Vector{I}
-)
-  convert!(rep(s, from), rep(s, to), from, to, inds)
-end
-
 
 """
 

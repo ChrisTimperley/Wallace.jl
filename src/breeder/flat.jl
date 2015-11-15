@@ -17,7 +17,7 @@ end
 Composes a flat breeder from its definition.
 """
 compose!(d::FlatBreederDefinition, sp::Species) =
-  FlatBreeder(compose!(d.selection, sp)
+  FlatBreeder(compose!(d.selection, sp),
               compose!(d.mutation, sp),
               compose!(d.crossover, sp))
 
@@ -25,10 +25,7 @@ compose!(d::FlatBreederDefinition, sp::Species) =
 Performs the breeding process for each of the demes within the population
 contained by a given state.
 """
-breed!(b::FlatBreeder, s::State) =
-  for d in s.population.demes; breed!(b, s, d); end
-
-function breed!(b::FlatBreeder, ::State, d::Deme)
+function breed!{F}(b::FlatBreeder, members::IndividualCollection{F})
   n_crossover = num_required(b.crossover, d.num_offspring)
   parents = select(b.selection, d.members, n_crossover)
   proto = operate!(b.crossover, parents, n_crossover)
