@@ -21,7 +21,7 @@ end
 Composes a flat breeder from its definition.
 """
 compose!(d::FlatBreederDefinition, sp::Species) =
-  FlatBreeder(compose!(d.selection, sp),
+  FlatBreeder(compose!(d.selection),
               compose!(d.mutation, sp),
               compose!(d.crossover, sp))
 
