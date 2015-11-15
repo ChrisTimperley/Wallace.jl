@@ -1,7 +1,7 @@
 module species
 using utility, core
 importall representation, fitness, common
-export Species, convert!, genotype, SpeciesDefinition
+export Species, convert!, genotype, SpeciesDefinition, empty_offspring_dict
 
 """
 The base type used by all species definitions.
@@ -28,8 +28,8 @@ Constructs an empty hash of stage containers for this species.
 """
 function empty_offspring_dict(s::Species)
   d = Dict{AbstractString, Any}()
-  for st in s.stages
-    d[st.label] = chromosome(st.representation)[]
+  for (label, st) in s.stages
+    d[label] = chromosome(st.representation)[]
   end
   return d
 end
