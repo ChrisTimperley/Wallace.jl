@@ -22,11 +22,13 @@ TODO: Description of tournament selection.
 tournament() = tournament(7)
 tournament(size::Int) = TournamentSelectionDefinition(size)
 
-# Selects a given number of individuals from a set of candidate individuals
-# according to a tournament selection method.
-function select{I <: Individual}(s::TournamentSelection,
+"""
+Selects a given number of individuals from a set of candidate individuals
+according to a tournament selection method.
+"""
+function select{F}(s::TournamentSelection,
   sp::Species,
-  candidates::Vector{I},
+  candidates::Vector{Tuple{Int, F}},
   n::Int
 )
   # Pre-allocate an array of winners and an array to hold the participants

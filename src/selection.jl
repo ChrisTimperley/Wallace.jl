@@ -20,6 +20,8 @@ according to a given selection method.
 select(s::Selection, ::Species, ::IndividualCollection, ::Integer) =
   error("Unimplemented `select` method for this selection operator: $(typeof(s)).")
 
+select_ids(s::Selection, ::Species, ::IndividualCollection, ::Integer) =
+
 """
 Prepares a given selection operator for the breeding process.
 """
