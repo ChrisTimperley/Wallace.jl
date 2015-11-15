@@ -35,11 +35,11 @@ TODO: Short explanation of what a simple evaluator is.
 simple(f::Function) =
   SimpleEvaluatorDefinition(f)
 
-function simple(f::Function, opts::Dict{AbstractString, Any})
+function simple{S <: AbstractString}(f::Function, opts::Dict{S, Any})
   def = SimpleEvaluatorDefinition(f)
   
   if haskey(opts, "stage"); def.stage = opts["stage"]; end
-  if haskey(opts, "threads"); def.stage = opts["threads"]; end
+  if haskey(opts, "threads"); def.threads = opts["threads"]; end
 
   def
 end
