@@ -15,6 +15,9 @@ abstract CrossoverDefinition <: VariationDefinition
 
 """
 Base type used all by crossover operators.
+
+All crossover operators MUST implement a +stage+ property, specifying the name
+of the developmental stage that this operator acts upon.
 """
 abstract Crossover <: Variation
 
