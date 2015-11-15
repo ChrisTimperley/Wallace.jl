@@ -11,7 +11,7 @@ function one_max()
         sp.fitness = fitness.scalar()
         sp.representation = representation.bit_vector(100)
       end
-      pop.breeder = breeder.simple() do br
+      pop.breeder = breeder.flat() do br
         br.selection = selection.tournament(2)
         br.mutation = mutation.bit_flip(1.0)
         br.crossover = crossover.one_point(0.1)
