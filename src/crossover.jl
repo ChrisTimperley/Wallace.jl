@@ -6,7 +6,7 @@ RULE: Number of inputs must be greater or equal to the number of outputs.
 module crossover
 importall common, variation
 using core, utility, representation, individual
-export Crossover, CrossoverDefinition
+export Crossover, CrossoverDefinition, num_required
 
 """
 Base type used by all crossover operation definitions.
@@ -60,3 +60,15 @@ end
 # Include each of the crossover operators.
 include("crossover/one_point.jl")
 end
+
+"""
+Calculates the number of (internal) calls required to this operator to
+produce a desired number of offspring.
+"""
+num_calls_required(c::Crossover, n::Int) = ceil(n / num_outputs(c))
+
+"""
+Calculates the number of input chromosomes required to this operator in order
+to produce a specified number of offspring.
+"""
+num_required(c::Crossover, n::Int) = num_calls_required(c, n) * num_inputs(c)
