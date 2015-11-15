@@ -2,24 +2,30 @@
 Used to provide a definition for a Gaussian mutation operator.
 """
 type GaussianMutationDefinition <: MutationDefinition
+  stage::AbstractString
   rate::Float
   mean::Float
   std::Float
 
-  GaussianMutationDefinition() = new(0.01, 0.0, 1.0) 
-  GaussianMutationDefinition(r::Float) =
-    new(r)
-  GaussianMutationDefinition(r::Float, u::Float, s::Float) =
-    new(r, u, s)
+  GaussianMutationDefinition() = new("", 0.01, 0.0, 1.0) 
+  GaussianMutationDefinition(stage::AbstractString) = new(stage, 0.01, 0.0, 1.0)
+  GaussianMutationDefinition(r::Float) = new("", r, 0.0, 1.0)
+  GaussianMutatianDefinition(r::Float, u::Float, s::Float) =
+    new("", r, u, s)
+  GaussianMutationDefinition(stage::AbstractString, r::Float, u::Float, s::Float) =
+    new(stage, r, u, s)
 end
 
 """
 Composes a Gaussian mutation operator from a provided definition.
 """
-compose!(d::GaussianMutationDefinition, r::Representation) =
+function compose!(d::GaussianMutationDefinition, sp::Species)
+  d.stage = d.stage == "" ? genotype(sp).label : d.stage
   GaussianMutation{Float}(d.mean, d.std, d.rate, r)
+end
 
 type GaussianMutation{T} <: Mutation
+  stage::AbstractString
   mean::T
   std::T
   min_value::T
@@ -27,8 +33,8 @@ type GaussianMutation{T} <: Mutation
   rate::Float
   representation::Representation
 
-  GaussianMutation(mean::T, std::T, rate::Float, rep::Representation) =
-    new(mean, std, representation.minimum_value(rep), representation.maximum_value(rep), rate, rep)
+  GaussianMutation(stage::AbstractString, mean::T, std::T, rate::Float, rep::Representation) =
+    new(stage, mean, std, representation.minimum_value(rep), representation.maximum_value(rep), rate, rep)
 end
 
 """
@@ -36,8 +42,11 @@ TODO: DESCRIPTION OF GAUSSIAN MUTATION.
 """
 gaussian() = GaussianMutationDefinition()
 gaussian(rate::Float) = GaussianMutationDefinition(rate)
+gaussian(stage::AbstractString) = GaussianMutationDefinition(stage)
 gaussian(rate::Float, mean::Float, std::Float) =
   GaussianMutationDefinition(rate, mean, std)
+gaussian(stage::AbstractString, rate::Float, mean::Float, std::Float) =
+  GaussianMutationDefinition(stage, rate, mean, std)
 function gaussian(f::Function)
   def = GaussianMutationDefinition()
   f(def)
