@@ -25,9 +25,9 @@ compose!(d::FlatBreederDefinition, sp::Species) =
 Performs the breeding process for each of the demes within the population
 contained by a given state.
 """
-function breed!{F}(b::FlatBreeder, members::IndividualCollection{F})
-  n_crossover = num_required(b.crossover, d.num_offspring)
-  parents = select(b.selection, d.members, n_crossover)
+function breed!{F}(b::FlatBreeder, sp::Species, members::IndividualCollection{F}, n::Int)
+  n_crossover = num_required(b.crossover, n)
+  parents = select(b.selection, members, n_crossover)
   proto = operate!(b.crossover, parents, n_crossover)
   operate!(b.mutation, proto, d.num_offspring)
 end

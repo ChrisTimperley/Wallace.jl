@@ -6,8 +6,6 @@ importall common
 using core, breeder, species
 export Deme, contents, deme, DemeDefinition
 
-println("Importing deme.")
-
 type Deme
   capacity::Int
   breeder::Breeder
@@ -65,11 +63,10 @@ Composes a deme from a provided specification.
 function compose!(d::DemeDefinition)
   sp = species.compose!(d.species)
   br = breeder.compose!(d.breeder, sp)
-  I = ind_type(sp)
   if d.offspring == 0
     d.offspring = d.capacity
   end
-  Deme{I}(d.capacity, br, sp, d.offspring)
+  Deme(d.capacity, br, sp, d.offspring)
 end
 
 """
@@ -98,21 +95,8 @@ function deme(spec::Function)
 end
 
 """
-Prepares a deme for the evolutionary process, by allocating the
-offspring array. This way we operate on the same array for the rest of
-the process.
-"""
-prepare!{T}(d::Deme{T}) = d.offspring = Array(T, d.num_offspring)
-
-"""
 Produces the offspring for a given deme at each generation.
 """
 breed!(d::Deme) =
-  d.offspring = breed!(d.breeder, d.species, d.members, d.capacity, d.num_offspring)
-
-"""
-Returns a list of all the individuals, both current members and offspring,
-belonging to a given deme.
-"""
-contents{I <: Individual}(d::Deme{I}) = vcat(d.offspring, d.members)
+  d.offspring = breed!(d.breeder, d.species, d.members, d.num_offspring)
 end
