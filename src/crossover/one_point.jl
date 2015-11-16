@@ -47,7 +47,7 @@ end
 num_inputs(o::OnePointCrossover) = 2
 num_outputs(o::OnePointCrossover) = 2
 
-function operate!{T}(o::OnePointCrossover, outputs::Vector{IndividualStage{T}}, x::Vector{T}, y::Vector{T})
+function operate!{T}(o::OnePointCrossover, outputs::Vector{IndividualStage{Vector{T}}}, x::Vector{T}, y::Vector{T})
   # Enforce the crossover rate.
   rand() > o.rate && return
 
