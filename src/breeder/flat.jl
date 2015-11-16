@@ -43,6 +43,6 @@ function breed!{F}(b::FlatBreeder, sp::Species, members::IndividualCollection{F}
   parents = select(b.selection, sp, members, n_crossover)
 
   println(parents)
-  proto = operate!(b.crossover, parents, n_crossover)
-  operate!(b.mutation, proto, d.num_offspring)
+  proto = crossover.operate!(b.crossover, parents, n_crossover)
+  mutation.operate!(b.mutation, proto, d.num_offspring)
 end

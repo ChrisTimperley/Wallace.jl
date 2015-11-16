@@ -50,7 +50,7 @@ a provided simple evaluator.
 """
 function evaluate!(e::SimpleEvaluator, s::State, d::Deme)
   for (id, phenome) in enumerate(d.offspring.stages[e.stage])
-    d.offspring.fitnesses[id] = e.evaluator(d.species.fitness, phenome)
+    d.offspring.fitnesses[id] = e.evaluator(d.species.fitness, get(phenome))
   end
   s.evaluations += length(d.offspring.stages[e.stage])
 end

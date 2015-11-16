@@ -1,5 +1,5 @@
 module initialiser
-using population, _deme_, core, fitness, representation
+using population, _deme_, core, fitness, representation, individual
 export Initialiser, initialise!
 
 """
@@ -28,9 +28,10 @@ type DefaultInitialiser <: Initialiser; end
 
 function initialise!(i::DefaultInitialiser, d::Deme)
   rep = d.species.genotype.representation
+  chromo = chromosome(rep)
   d.members.fitnesses = d.offspring.fitnesses = Array(uses(d.species.fitness), d.capacity)
   d.members.stages[d.species.genotype.label] =
-    d.offspring.stages[d.species.genotype.label] = chromosome(rep)[rand(rep) for i in 1:d.capacity]
+    d.offspring.stages[d.species.genotype.label] = IndividualStage{chromo}[IndividualStage{chromo}(rand(rep)) for i in 1:d.capacity]
 end
 
 end
