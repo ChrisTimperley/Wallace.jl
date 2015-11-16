@@ -90,7 +90,44 @@ below:
 **EXAMPLE CODE**
 
 Species
-==============
+=======
+
+The species of an individual describes the fitness scheme it uses to transform
+the raw objective function values produced by the evaluator into fitness values,
+as well as each the high-level details of its chromosomes, such as their type
+and any restrictions upon them.
+
+Complex Species
+---------------
+
+Unlike most other evolutionary computation frameworks, Wallace implements a
+multiple representation individual model, where each individual may be represented
+in a number of different ways (in fact, to our knowledge, no other framework
+implements a similar model). This feature allows stages of development to be
+codified, where one chromosome is used to produce another, which is then used
+to produce another, and so on, until a phenome is produced.
+
+This ability comes in use when performing grammatical evolution, where an
+individual is subject to a process of development:
+
+1.  Each individual begins life as a variable length bit string.
+2.  From this bit-string, a series of codons, or non-terminal choices, are
+    produced, by transforming each successive block of *n* bits into an
+    integer.
+3.  This series of codons is then used in conjuction with a provided grammar to
+    produce a derivation, modelled as a string.
+4.  Finally, if we are using grammatical evolution to evolve programs, this
+    string is compiled to a program in the target language.
+
+In Wallace, each of these stages can be explicitly 
+
+Simple Species
+--------------
+
+Individual
+==========
+
+Virtual individual model.
 
 Fitness
 =======
