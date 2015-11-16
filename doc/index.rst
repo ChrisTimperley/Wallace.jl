@@ -6,3 +6,4 @@ Wallace.jl - Efficient evolutionary computation in Julia
   :maxdepth: 2
   
   manual/overview.rst
+  manual/basics.rst
