@@ -22,7 +22,7 @@ of the developmental stage that this operator acts upon.
 abstract Crossover <: Variation
 
 operate!(c::Crossover, srcs::IndividualCollection, n::Int) =
-  operate!(c, srcs.stages[c.stage][1:num_required(c, n)], n)
+  operate!(c, srcs.stages[c.stage], n)
 
 function operate!{T}(c::Crossover, srcs::Vector{IndividualStage{T}}, n::Int)
   n_in = num_inputs(c)
@@ -38,24 +38,18 @@ function operate!{T}(c::Crossover, srcs::Vector{IndividualStage{T}}, n::Int)
     n_out_from = n_out_to + 1
     n_out_to = n_out_to + n_out
 
-    operate!(c, srcs, n_out_from:n_out_to, srcs[n_in_from:n_in_to])
+    operate!(c, srcs[n_out_from:n_out_to], srcs[n_in_from:n_in_to])
   end
-  srcs
 end
 
 function operate!{T}(
   c::Crossover,
-  buffer::Vector{IndividualStage{T}},
-  dest::UnitRange{Int},
+  outputs::Vector{IndividualStage{T}},
   inputs::Vector{IndividualStage{T}}
 )
   # Ensure that all the provided inputs are in a valid state.
   # If not, leave the output buffer unchanged.
-  try
-    for (idx, chromo) in zip(dest, operate!(c, map(get, inputs)...))
-      buffer[idx] = chromo
-    end
-  end
+  try; operate!(c, outputs, map(get, inputs)...); end
 end
 
 """
