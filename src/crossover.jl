@@ -42,8 +42,7 @@ function operate!{T}(c::Crossover, srcs::Vector{IndividualStage{T}}, n::Int)
   end
 
   # Remove the excess individuals within the buffer.
-  splice!(srcs, (n + 1):n_in_to)
-  srcs
+  deleteat!(srcs, (n + 1):n_in_to)
 end
 
 function operate!{T}(

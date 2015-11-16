@@ -33,7 +33,15 @@ module replacement
     for d in s.population.demes; replace!(r, d); end
 
   function replace!(r::GenerationalReplacement, d::Deme)
-    d.members.fitnesses[1:end] = d.offspring.fitnesses[1:d.capacity]
-    d.members.stages[1:end] = d.offspring.stage[1:d.capacity]
+    # Truncate the number of offspring.
+    if d.num_offspring > d.capacity
+      deleteat!(d.offspring.fitnesses, d.capacity:d.num_offspring)
+      for stg in values(d.offspring.stages)
+        deleteat!(stg, d.capacity:d.num_offspring) 
+      end
+    end
+
+    # Swap the members collection with the offspring collection.
+    d.members = d.offspring
   end
 end
