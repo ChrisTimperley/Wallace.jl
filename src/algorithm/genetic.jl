@@ -58,7 +58,7 @@ function run!(a::GeneticAlgorithm)
   reset!(a.state)
   prepare!(a.loggers, a.output)
   initialise!(a.initialiser, a.state.population)
-  @time evaluate!(a.evaluator, a.state)
+  evaluate!(a.evaluator, a.state)
   scale!(a.state.population)
 
   # Record the best individual from the population.
@@ -67,10 +67,8 @@ function run!(a::GeneticAlgorithm)
   #prepare!(a.state.population)
 
   while !any(c -> is_satisfied(c, a.state), values(a.termination))
-    println("BREEDING")
-    @time breed!(a.state.population)
-    println("EVALUATION")
-    @time evaluate!(a.evaluator, a.state)
+    breed!(a.state.population)
+    evaluate!(a.evaluator, a.state)
     scale!(a.state.population)
 
     # Record the best individual from the population.
