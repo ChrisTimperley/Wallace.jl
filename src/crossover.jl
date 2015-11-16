@@ -52,7 +52,7 @@ function operate!{T}(
   # Ensure that all the provided inputs are in a valid state.
   # If not, leave the output buffer unchanged.
   try
-    for (idx, chromo) in zip(dest, operate!(c, map(get, inputs)))
+    for (idx, chromo) in zip(dest, operate!(c, map(get, inputs)...))
       buffer[idx] = chromo
     end
   end

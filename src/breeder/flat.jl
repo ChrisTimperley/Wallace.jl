@@ -45,6 +45,6 @@ function breed!{F}(b::FlatBreeder, sp::Species, buffer::IndividualCollection{F},
   println("CROSSOVER:")
   @time crossover.operate!(b.crossover, buffer, n_crossover)
   println("MUTATION:")
-  @time mutation.operate!(b.mutation, buffer, n)
+  @timemutation.operate!(b.mutation, buffer, n)
   buffer
 end

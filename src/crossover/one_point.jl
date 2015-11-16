@@ -47,21 +47,22 @@ end
 num_inputs(o::OnePointCrossover) = 2
 num_outputs(o::OnePointCrossover) = 2
 
-function operate!{T}(o::OnePointCrossover, inputs::Vector{T})
+function operate!{T}(o::OnePointCrossover, x::Vector{T}, y::Vector{T})
   # Enforce the crossover rate.
-  rand() > o.rate && return inputs
+  #rand() > o.rate && return T[x,y]
 
   # Ensure that the inputs are greater than length 1 (should we do this dynamically?).
-  (length(inputs[1]) <= 1 || length(inputs[2]) <= 1) && return inputs
+  #(length(x) <= 1 || length(y) <= 1) && return T[x,y]
 
   # Calculate the crossover point, split A and B into four substrings
   # and combine those substrings to form two children. 
-  x = rand(2:(min(length(inputs[1]), length(inputs[2])) - 1))
+  #c = rand(2:(min(length(x), length(y)) - 1))
 
   # Generate the output chromosomes.
-  t = inputs[1][(x + 1):end]
-  inputs[1] = vcat(inputs[1][1:x], inputs[2][(x + 1):end])
-  inputs[2] = vcat(inputs[2][1:x], t)
+  #t = inputs[1][(c + 1):end]
+  #x = vcat(x[1:c], y[(c + 1):end])
+  #y = vcat(y[1:c], t)
 
-  return inputs
+  #return inputs
+  return T[x, y]
 end
