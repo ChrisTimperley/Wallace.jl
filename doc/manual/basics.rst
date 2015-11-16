@@ -2,7 +2,12 @@
 Basics
 ======
 
-Meta.
+In this section, we cover the basic concepts employed within Wallace, focusing
+on those relating to evolutionary algorithms, and less on any other concepts
+concerned with other meta-heuristics supported within the framework.
+
+For now, this section assumes that the reader has at least a basic knowledge
+of the structure and concepts of evolutionary algorithms.
 
 -------------------------------------------------------------------------------
 
