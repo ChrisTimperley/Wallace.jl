@@ -42,7 +42,38 @@ Wallace, several of which are described below:
 
 Julia REPL (Read-Eval-Print-Loop)
 ---------------------------------
-hello.
+
+The simplest way to started with Wallace is through Julia's built-in
+REPL, which can be accessed by simply typing ``julia`` into the terminal
+(once Julia has been installed). Once the REPL has been loaded, one may
+use the ``using Wallace`` statement to import the Wallace environment
+into the workspace, allowing them to interact with Wallace.
+
+::
+
+    shell> julia
+    ...
+    ...
+
+    julia> using Wallace
+
+Once inside the REPL, you may make use of Julia's help function, invoked by
+typing ``?`` into the prompt, followed by the name of a particular
+representation, operator, algorithm, or other entity within Wallace (or Julia)
+that you wish to learn more about. An example use of the help function is shown
+below:
+
+::
+
+  julia> using Wallace
+  help?> mutation.bit_flip
+    Performs bit-flip mutation on a fixed or variable length chromosome of binary digits, by flipping 1s to 0s and 0s to 1s at each point
+    within the chromosome with a given probability, equal to the mutation rate.
+
+    Parameters:
+
+      • stage::AbstractString, the name of the developmental stage that this  operator should be applied to. Defaults to the genotype if no stage is specified.
+      •  rate::Float, the probability of a bit flip at any given index. Defaults to 0.01 if no rate is provided.
 
 Language
 ========
