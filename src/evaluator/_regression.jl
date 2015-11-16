@@ -63,9 +63,9 @@ regression(stage::AbstractString, samples::Vector{Tuple{Float, Float}}) =
 
 """
 Evaluates all unevaluated individuals within a provided deme according to
-a provided simple evaluator.
+a given regression evaluator.
 """
-function evaluate!(e::SimpleEvaluator, s::State, d::Deme)
+function evaluate!(e::RegressionEvaluator, s::State, d::Deme)
   for (id, phenome) in enumerate(d.offspring.stages[e.stage])
     d.offspring.fitnesses[id] = evaluate!(e, s, d.species.fitness, get(phenome))
   end
@@ -74,16 +74,16 @@ end
 
 """
 Evaluates all unevaluated individuals contained within a given state according
-to a provided simple evaluator.
+to a given regression evaluator.
 """
-evaluate!(e::SimpleEvaluator, s::State) =
+evaluate!(e::RegressionEvaluator, s::State) =
   for deme in s.population.demes; evaluate!(e, s, deme); end
 
-function evaluate!(e::RegressionEvaluator, s::State, sc::FitnessScheme, c::Vector{Float})
+function evaluate!{T}(e::RegressionEvaluator, s::State, sc::FitnessScheme, candidate::T)
   sse = zero(Float)
   diff = zero(Float)
   for (x, y) in e.samples
-    diff = y - execute(get(c.genome), x)
+    diff = y - execute(candidate, x)
     sse += diff * diff
   end
   assign(sc, sse)
