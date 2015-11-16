@@ -50,6 +50,9 @@ Fitness
 Scalar (``fitness.scalar``)
 ---------------------------
 
+Aggregate (``fitness.aggregate``)
+---------------------------------
+
 Lexicographic (``fitness.lexicographic``)
 -----------------------------------------
 
@@ -62,10 +65,19 @@ Goldberg (``fitness.goldberg``)
 MOGA (``fitness.moga``)
 -----------------------
 
+Shared (``fitness.shared``)
+---------------------------
+
 -------------------------------------------------------------------------------
 
 Crossover
 =========
+
+One Point Crossover (``crossover.one_point``)
+---------------------------------------------
+
+Subtree Crossover (``koza.subtree_crossover``)
+----------------------------------------------
 
 -------------------------------------------------------------------------------
 
