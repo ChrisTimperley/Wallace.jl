@@ -14,11 +14,20 @@ of the structure and concepts of evolutionary algorithms.
 Algorithm
 =========
 
-What is an algorithm?
+The domain-specific language within Wallace is entirely tailored around the
+specification and subsequent fine-tuning of algorithms for particular problem
+instances. Users provide a specification of their problem to a particular
+algorithm constructor, chosen according to the search algorithm they wish to
+use to solve the problem, which is then composed into a heavily optimised
+``Algorithm`` instance via the ``compose!`` method, before being ready for
+executed using the ``run!`` method.
 
-For the rest of this section, we shall focus on the basics of evolutionary
-algorithms within Wallace, rather than covering its other meta-heuristic
-algorithms in depth.
+Wallace supports a number of different meta-heuristic algorithms, ranging from
+random walks and hill climbing, to ant colony optimisation and evolutionary
+algorithms. For the remainder of this section however, we shall focus our
+discussion on the implementation of evolutionary algorithms within Wallace.
+More details about the other types of algorithms supported within Wallace
+may be found in the reference section of the documentation.
 
 Population
 ==========
