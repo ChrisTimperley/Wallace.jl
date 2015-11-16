@@ -5,6 +5,7 @@ being solved (using snake case), and returns a composed algorithm definition
 which can be executed using the `run!` method.
 """
 module example
+  using FastAnonymous
   using common, algorithm, logger, criterion, evaluator, replacement, crossover,
         mutation, selection, fitness, population, breeder, initialiser,
         species, representation, koza

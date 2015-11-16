@@ -4,6 +4,7 @@ push!(LOAD_PATH, dirname(@__FILE__))
 TODO: Document Wallace module.
 """
 module Wallace
+  using FastAnonymous
   using StatsBase
   using utility
   using common

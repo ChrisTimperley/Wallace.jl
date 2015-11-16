@@ -1,8 +1,8 @@
 """
 Simple evaluators implement a single objective function.
 """
-type SimpleEvaluator <: Evaluator
-  evaluator::Function
+type SimpleEvaluator{F} <: Evaluator
+  evaluator::F
   stage::AbstractString
   threads::Int
 end
@@ -11,12 +11,11 @@ end
 Provides a definition for a simple evaluator.
 """
 type SimpleEvaluatorDefinition <: EvaluatorDefinition
-  evaluator::Function
   stage::AbstractString
   threads::Int
+  evaluator::Any
 
-  SimpleEvaluatorDefinition(e::Function) =
-    new(e, "", 1)
+  SimpleEvaluatorDefinition() = new("", 1)
 end
 
 """
@@ -32,16 +31,10 @@ end
 """
 TODO: Short explanation of what a simple evaluator is.
 """
-simple(f::Function) =
-  SimpleEvaluatorDefinition(f)
-
-function simple{S <: AbstractString}(f::Function, opts::Dict{S, Any})
-  def = SimpleEvaluatorDefinition(f)
-  
-  if haskey(opts, "stage"); def.stage = opts["stage"]; end
-  if haskey(opts, "threads"); def.threads = opts["threads"]; end
-
-  def
+function simple(def::Function)
+  d = SimpleEvaluatorDefinition()
+  def(d)
+  d
 end
 
 """
