@@ -35,10 +35,9 @@ each deme may elect to use a different species.
 Simple Populations
 ------------------
 
-In most cases, one may wish to use only a single deme and species, in which
-case one may use the ``population.simple`` model to specify the population,
-which effectively ignores the deme (in the eyes of the end-user) model, and
-acts as a simpler population.
+For simple problems, one can use the ``population.simple`` model to quickly specify
+a single deme population, which effectively hides the inner details of the deme
+model from the user.
 
 Complex Populations
 -------------------
