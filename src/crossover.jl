@@ -38,8 +38,12 @@ function operate!{T}(c::Crossover, srcs::Vector{IndividualStage{T}}, n::Int)
     n_out_from = n_out_to + 1
     n_out_to = n_out_to + n_out
 
-    operate!(c, srcs, n_out_from:n_out_to, srcs[n_from:n_to])
+    operate!(c, srcs, n_out_from:n_out_to, srcs[n_in_from:n_in_to])
   end
+
+  # Remove the excess individuals within the buffer.
+  splice!(srcs, (n + 1):n_in_to)
+  srcs
 end
 
 function operate!{T}(
