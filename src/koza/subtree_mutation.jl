@@ -1,4 +1,5 @@
 type SubtreeMutation <: Mutation
+  stage::AbstractString
   representation::KozaTreeRepresentation
   rate::Float
   prob_terminal::Float
@@ -6,14 +7,18 @@ type SubtreeMutation <: Mutation
   max_depth::Int
   max_tree_depth::Int
 
-  SubtreeMutation(rep::KozaTreeRepresentation, rate::Float, pt::Float, mind::Int, maxd::Int) =
-    new(rep, rate, pt, mind - 1, maxd - 1, rep.max_depth)
+  SubtreeMutation(stage::AbstractString, rep::KozaTreeRepresentation, rate::Float, pt::Float, mind::Int, maxd::Int) =
+    new(stage, rep, rate, pt, mind - 1, maxd - 1, rep.max_depth)
 end
 
 """
 Provides a definition for a subtree mutation operator.
 """
 type SubtreeMutationDefinition <: MutationDefinition
+  """
+  The name of the stage that this operator works on.
+  """
+  stage::AbstractString
 
   """
   The mutation rate for this operator determines the probability that a given
@@ -36,7 +41,7 @@ type SubtreeMutationDefinition <: MutationDefinition
   """
   max_depth::Int
 
-  SubtreeMutationDefinition() = new(0.01, 0.5, 1, 5)
+  SubtreeMutationDefinition() = new("", 0.01, 0.5, 1, 5)
 end
 
 """
@@ -51,8 +56,11 @@ end
 """
 Composes a subtree mutation operator from a provided definition.
 """
-compose!(def::SubtreeMutationDefinition, rep::KozaTreeRepresentation) =
-  SubtreeMutation(rep, def.rate, def.p_terminal, def.min_depth, def.max_depth)  
+function compose!(def::SubtreeMutationDefinition, sp::Species)
+  def.stage = def.stage == "" ? genotype(sp).label : def.stage
+  r = sp.stages[def.stage].representation
+  SubtreeMutation(def.stage, r, def.rate, def.p_terminal, def.min_depth, def.max_depth)
+end
 
 num_inputs(o::SubtreeMutation) = 1
 num_outputs(o::SubtreeMutation) = 1
@@ -62,13 +70,12 @@ Performs subtree mutation on a provided Koza tree.
 """
 function operate!{T <: KozaTree}(
   o::SubtreeMutation,
-  inputs::Vector{IndividualStage{T}}
+  tree::T
 )
   # Enforce the mutation rate.
   rand() >= o.rate && return
 
   # Select a random node in the tree.
-  tree = get(inputs[1])
   n1 = sample(tree)
   d = depth(n1)
 
