@@ -92,9 +92,6 @@ package.
 
   shell> julia my_script.jl
 
-Juno
-----
-
 IJulia Graphical Notebook
 -------------------------
 
