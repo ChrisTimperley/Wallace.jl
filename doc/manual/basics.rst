@@ -28,9 +28,9 @@ containing a (nearly) isolated collection of individuals. Within each
 deme, all individuals belong to the same species, but within the population,
 each deme may elect to use a different species.
 
-..  image:: ../_diagrams/population.png
+..  class:: center
 
-**DIAGRAM**
+  ..  image:: ../_diagrams/population.png
 
 Simple Populations
 ------------------
