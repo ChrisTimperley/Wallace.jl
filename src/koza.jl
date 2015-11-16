@@ -1,5 +1,5 @@
 module koza
-using utility, individual
+using utility, individual, species
 importall core, common, representation, crossover, mutation, variation
 
 """
