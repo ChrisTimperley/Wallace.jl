@@ -48,8 +48,37 @@ model from the user.
 Complex Populations
 -------------------
 
+The full power of the deme model can be utilised with the
+``population.complex`` model, which allows the user to add an arbitary number
+of heterogeneous demes to the population. This ability can be exploited to
+spread the search across multiple physical machines, or to allow the search to
+test different problem representation and search parameters at the same time.
+
 Island Model
 ------------
+
+Where the complex population model is employed, one may also choose to make use
+of an island model population.
+
+In island model populations, each deme is conceptualised as a island within
+some imaginary archipelago, where all the individuals in that deme are confined
+to that island.
+
+* After a certain number of generations, known as the *migration interval*,
+  a pre-determined number, or fraction of individuals from each island may migrate
+  from their island to a neighbouring island.
+* The islands that an individual may migrate to from their current island is
+  determined by the *migration topology*, which describes the connections
+  between islands. By default, a fully connected topology is used, where every
+  island can be reached by any other.
+* The individuals selected to leave an island, and those chosen to be removed
+  from an island to make room for them, are both decided according to a
+  pre-determined *migration policy*.
+
+An example of a simple island model population for the one max problem is shown
+below:
+
+**EXAMPLE CODE**
 
 Species
 ==============
