@@ -9,3 +9,10 @@ type SimpleIndividual <: Individual
     fitness::F
     genome::
 end
+
+type Deme
+  stages::Vector{Any}
+end
+
+# population:
+# stages["genome"] = BitVector[]

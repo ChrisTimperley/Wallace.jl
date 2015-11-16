@@ -13,22 +13,26 @@ diversity promotion techniques, multi-objective problems, and fuzzy evaluation
 much easier!
 """
 module evaluator
-  importall common
-  using criterion, state, core, utility, fitness
-  export Evaluator, evaluate!, call
+importall common
+using criterion, state, core, utility, fitness, population, _deme_
+export Evaluator, EvaluatorDefinition, evaluate!, call
 
- 
-  """
-  The base type used by all evaluators.
-  """
-  abstract Evaluator
+"""
+The base type used by all evaluators.
+"""
+abstract Evaluator
 
-  do_nothing(c::Criterion) = "hello"
+"""
+The base type used by all evaluator definitions.
+"""
+abstract EvaluatorDefinition
 
-  # Load each of the evaluators.
-  include("evaluator/_simple.jl")
-  include("evaluator/_tsp.jl")
-  include("evaluator/_regression.jl")
-  include("evaluator/_multiplexer.jl")
-  include("evaluator/_ant.jl")
+do_nothing(c::Criterion) = "hello"
+
+# Load each of the evaluators.
+include("evaluator/_simple.jl")
+#include("evaluator/_tsp.jl")
+#include("evaluator/_regression.jl")
+#include("evaluator/_multiplexer.jl")
+#include("evaluator/_ant.jl")
 end

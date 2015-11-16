@@ -1,7 +1,7 @@
 module species
 using utility, core
-importall representation, fitness, individual, common
-export Species, convert!, genotype, ind_type, SpeciesDefinition
+importall representation, fitness, common
+export Species, convert!, genotype, SpeciesDefinition, empty_individual_collection
 
 """
 The base type used by all species definitions.
@@ -14,7 +14,7 @@ include("species/stage.jl")
 """
 Used to hold information about a given species.
 """
-type Species{T}
+type Species
   stages::Dict{AbstractString, SpeciesStage}
   fitness::FitnessScheme
   genotype::SpeciesStage
@@ -23,27 +23,28 @@ type Species{T}
     new(st, f, root(st))
 end
 
-# Returns the canonical genotype of a given species.
-genotype(s::Species) = s.genotype
-
-# Returns the representation used by a given stage of a provided species.
-rep(species::Species, stage::AbstractString) =
-  species.stages[stage].representation
-
-# Returns the unique individual type associated this species.
-ind_type{T}(s::Species{T}) = T
-
-# Converts from one representation to another for a given pair of chromosomes
-# for all individuals in a given list.
-function convert!{I <: Individual}(
-  s::Species,
-  from::AbstractString,
-  to::AbstractString,
-  inds::Vector{I}
-)
-  convert!(rep(s, from), rep(s, to), from, to, inds)
+"""
+Constructs an empty individual collection for this species.
+"""
+function empty_individual_collection(s::Species)
+  F = uses(s.fitness)
+  d = Dict{AbstractString, Any}()
+  for (label, st) in s.stages
+    d[label] = chromosome(st.representation)[]
+  end
+  return IndividualCollection{F}(F[], d)
 end
 
+"""
+Returns the canonical genotype of a given species.
+"""
+genotype(s::Species) = s.genotype
+
+"""
+Returns the representation used by a given stage of a provided species.
+"""
+rep(species::Species, stage::AbstractString) =
+  species.stages[stage].representation
 
 """
 
@@ -53,7 +54,6 @@ startUp(m::Module) =
   __wallace__ = m
 
 # Include all other components of the species module.
-include("species/individual_type.jl")
 include("species/graph.jl")
 include("species/simple.jl")
 include("species/complex.jl")

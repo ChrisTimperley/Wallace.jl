@@ -10,7 +10,7 @@ type GeneticAlgorithmDefinition
   loggers::Vector{Logger}
   termination::Dict{AbstractString, Criterion}
   population::PopulationDefinition
-  evaluator::Evaluator
+  evaluator::EvaluatorDefinition
 
   GeneticAlgorithmDefinition() =
     new("output", replacement.generational(), [], Dict())
@@ -36,7 +36,7 @@ function compose!(def::GeneticAlgorithmDefinition)
   alg = GeneticAlgorithm()
   pop = population.compose!(def.population)
   alg.state = State(pop)
-  alg.evaluator = def.evaluator
+  alg.evaluator = compose!(def.evaluator,  pop)
   alg.replacement = def.replacement
   alg.termination = def.termination
   alg.initialiser = initialiser.DefaultInitialiser()
@@ -64,7 +64,7 @@ function run!(a::GeneticAlgorithm)
   # Record the best individual from the population.
   #pbest = gbest = best(a.state.population)
 
-  prepare!(a.state.population)
+  #prepare!(a.state.population)
 
   while !any(c -> is_satisfied(c, a.state), values(a.termination))
     breed!(a.state.population)

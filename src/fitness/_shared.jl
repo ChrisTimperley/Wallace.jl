@@ -35,10 +35,10 @@ assign(s::FitnessSharingScheme, args...) =
 sh(s::FitnessSharingScheme, d::Float) =
   d < s.radius ? 1.0 - (d/s.radius) ^ s.alpha : 0.0
 
-scale!{I <: Individual}(s::FitnessSharingScheme, inds::Vector{I}) =
-  for i1 in inds
-    i1.fitness.shared = score(i1.fitness.base) /
-      sum(i2 -> sh(s, distance(s.distance, i1, i2)), inds)
+scale!{F}(s::FitnessSharingScheme, inds::Vector{Tuple{Int, F}}) =
+  for (i1_id, i1_f) in inds
+    i1_f.shared = score(i1_f.base) /
+      sum((i2_id, i2_f) -> sh(s, distance(s.distance, i1, i2)), inds)
   end
 
 compare(s::FitnessSharingScheme, x::SharedFitness, y::SharedFitness) =

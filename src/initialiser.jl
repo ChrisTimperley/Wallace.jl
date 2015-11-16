@@ -1,5 +1,5 @@
 module initialiser
-using population, _deme_, core
+using population, _deme_, core, fitness, representation, individual
 export Initialiser, initialise!
 
 """
@@ -10,29 +10,28 @@ abstract Initialiser
 """
 Initialises all members within a given population.
 """
-initialise!(i::Initialiser, p::Population) = for d in p.demes
-  initialise!(i, d)
+initialise!(init::Initialiser, p::Population) = for d in p.demes
+  initialise!(init, d)
 end
 
 """
 Initialises all members within a given deme.
 """
-initialise!{I <: Individual}(i::Initialiser, d::Deme{I}) = for ind in d.members
-  initialise!(i, ind)
+initialise!(init::Initialiser, d::Deme) = for i in 1:d.capacity
+  initialise!(init, i)
 end
 
 """
 The default initialiser used by all evolutionary algorithms.
 """
-type DefaultInitialiser <: Initialiser
-end
+type DefaultInitialiser <: Initialiser; end
 
-function initialise!{I <: Individual}(i::DefaultInitialiser, d::Deme{I})
+function initialise!(i::DefaultInitialiser, d::Deme)
   rep = d.species.genotype.representation
-  getter = eval(Base.parse("i -> i.$(d.species.genotype.label)")) # TODO: Not a big fan.
-  for ind in d.members
-    getter(ind).value = rand(rep)
-  end
+  chromo = chromosome(rep)
+  d.members.fitnesses = d.offspring.fitnesses = Array(uses(d.species.fitness), d.capacity)
+  d.members.stages[d.species.genotype.label] =
+    d.offspring.stages[d.species.genotype.label] = IndividualStage{chromo}[IndividualStage{chromo}(rand(rep)) for i in 1:d.capacity]
 end
 
 end

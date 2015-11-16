@@ -45,6 +45,9 @@ type SpeciesStageDefinition
     new(lamarckian, parent, label, representation)
 end
 
+"""
+Composes a species stage from its definition.
+"""
 compose!(def::SpeciesStageDefinition) =
   SpeciesStage(def.label, compose!(def.representation), def.parent, def.lamarckian)
 

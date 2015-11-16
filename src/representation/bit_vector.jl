@@ -6,6 +6,22 @@ type BitVectorRepresentation <: Representation
 end
 
 """
+Provides a definition for a bit vector representation.
+"""
+type BitVectorRepresentationDefinition <: RepresentationDefinition
+  length::Int
+
+  BitVectorRepresentationDefinition(length::Int) =
+    new(length)
+end
+
+"""
+Composes a bit vector representation from its provided definition.
+"""
+compose!(r::BitVectorRepresentationDefinition) =
+  BitVectorRepresentation(r.length)
+
+"""
 Bit vector representations operate on a fixed-length vector of binary values,
 implemented as a vector of Int objects (for now).
 
@@ -14,7 +30,7 @@ implemented as a vector of Int objects (for now).
 is supplied.
 """
 bit_vector() = bit_vector(100)
-bit_vector(length::Int) = BitVectorRepresentation(length)
+bit_vector(length::Int) = BitVectorRepresentationDefinition(length)
 
 minimum_value(::BitVectorRepresentation) = 0
 maximum_value(::BitVectorRepresentation) = 1

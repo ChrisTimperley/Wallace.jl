@@ -12,7 +12,7 @@ function belegundu(s::Dict{Any, Any})
    BelegunduFitnessScheme{s["of"]}(s["maximise"])
 end
 
-scale!{I <: Individual}(s::BelegunduFitnessScheme, inds::Vector{I}) =
-  for p1 in inds
-    p1.fitness.rank = any(p2 -> dominates(p2.fitness.scores, p1.fitness.scores, s.maximise), inds) ? 1 : 0
+scale!{F}(s::BelegunduFitnessScheme, inds::Vector{Tuple{Int, F}}) =
+  for (p1_id, p1_fitness) in inds
+    fitness.rank = any((p2_id, p2_fitness) -> dominates(p2_fitness.scores, p1_fitness.scores, s.maximise), inds) ? 1 : 0
   end

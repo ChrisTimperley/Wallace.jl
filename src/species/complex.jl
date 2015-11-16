@@ -14,17 +14,11 @@ end
 Composes a complex species from a provided definition.
 """
 function compose!(c::ComplexSpeciesDefinition)
-  # Compose each of the stages within this species.
   stages = Dict{String, SpeciesStage}()
   for st in c.stages
     stages[st.label] = compose!(st)
   end
-
-  # Construct the individual type for this species.
-  I = individual_type(collect(values(stages)), c.fitness)
-  
-  # Build the species object.
-  Species{I}(stages, c.fitness)
+  Species(stages, c.fitness)
 end
 
 """

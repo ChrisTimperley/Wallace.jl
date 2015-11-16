@@ -1,0 +1,6 @@
+Future additions, when Julia supports them:
+- Staged types
+- Fast (typed) anonymous functions
+
+Bottlenecks:
+- Standard anonymous functions are slow (simple evaluator)

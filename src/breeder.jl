@@ -14,8 +14,5 @@ The base type used by all breeder definitions.
 abstract BreederDefinition
 
 # Include each of the breeders.
-include("breeder/source.jl")
-include("breeder/fast.jl")
-include("breeder/linear.jl")
-include("breeder/simple.jl")
+include("breeder/flat.jl")
 end

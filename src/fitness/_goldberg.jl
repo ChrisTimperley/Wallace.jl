@@ -21,7 +21,7 @@ function goldberg(s::Dict{Any, Any})
    GoldbergFitnessScheme{s["of"]}(s["maximise"])
 end
 
-function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
+function scale!{F}(s::GoldbergFitnessScheme, inds::Vector{Tuple{Int, F}})
   n = length(inds)
   j = k = rank = 1
 
@@ -33,9 +33,9 @@ function scale!{I <: Individual}(s::GoldbergFitnessScheme, inds::Vector{I})
     # If the individual belongs to the pareto front then swap it with the 
     # first unsorted individual.
     for i in j:n
-      p1 = inds[i]
-      if all(p2 -> p1 == p2 || !dominates(p2.fitness.scores, p1.fitness.scores, s.maximise), inds[j:end])
-        p1.fitness.rank = rank
+      (p1_id, p1_f) = inds[i]
+      if all((p2_id, p2_f) -> p1_id == p2_id || !dominates(p2_f.scores, p1_f.scores, s.maximise), inds[j:end])
+        p1_f.rank = rank
         inds[k], inds[i] = inds[i], inds[k]
         k += 1
       end

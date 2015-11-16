@@ -1,5 +1,5 @@
 module representation
-importall individual, core, utility
+importall core, utility, individual, common
 export  Representation, RepresentationDefinition, chromosome, convert!,
         describe, minimum_value, maximum_value
 
@@ -22,25 +22,11 @@ chromosome(r::Representation) =
 """
 Converts all instances of a given stage to another for a list of individuals.
 """
-function convert!{I <: Individual}(
-  r_from::Representation,
-  r_to::Representation,
-  n_from::AbstractString,
-  n_to::AbstractString,
-  inds::Vector{I}
-)
-  getter = eval(parse("i -> i.$(n_from)"))
-  setter = eval(parse("i -> i.$(n_to)"))
-  for i in inds
-    convert!(r_from, r_to, getter(i), setter(i))
-  end
-  return inds
-end
+convert!(::Any) =
+  error("Not yet implemented in updated Individual model.")
 
 """
-Produces a description of a provided individual.
-
-TODO: Why is this ::Any, and not ::Individual?
+Produces a string-based description of a given representation instance.
 """
 describe(i::Any) = "$(i)"
 

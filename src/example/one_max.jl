@@ -8,18 +8,19 @@ function one_max()
     alg.population = population.simple() do pop
       pop.size = 100
       pop.species = species.simple() do sp
-        sp.fitness = fitness.scalar()
+        sp.fitness = fitness.scalar(Int)
         sp.representation = representation.bit_vector(100)
       end
-      pop.breeder = breeder.simple() do br
+      pop.breeder = breeder.flat() do br
         br.selection = selection.tournament(2)
         br.mutation = mutation.bit_flip(1.0)
         br.crossover = crossover.one_point(0.1)
       end
     end
-    alg.evaluator = evaluator.simple("
-      assign(scheme, sum(get(i.genome)))
-    ")
+    alg.evaluator = evaluator.simple(Dict{ASCIIString, Any}("threads" => 8)) do scheme, genome
+      v = sum(genome)
+      assign(scheme, v)
+    end
     alg.termination["generations"] = criterion.generations(1000)
   end
   algorithm.compose!(def)
