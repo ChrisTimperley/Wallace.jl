@@ -119,7 +119,12 @@ individual is subject to a process of development:
 4.  Finally, if we are using grammatical evolution to evolve programs, this
     string is compiled to a program in the target language.
 
-In Wallace, each of these stages can be explicitly 
+In Wallace, each of these stages can be explicitly modelled as its own
+developmental stage, as shown in the example below:
+
+::
+
+  example code!
 
 Simple Species
 --------------
