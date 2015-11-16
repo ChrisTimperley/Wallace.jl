@@ -98,6 +98,20 @@ Juno
 IJulia Graphical Notebook
 -------------------------
 
+Another way to interact with Wallace is through IJulia, a powerful graphical
+web-based notebook front-end for Julia. More details about IJulia, including
+how it should be installed, can be found at: https://github.com/JuliaLang/IJulia.jl.
+
+Once IJulia has been installed, you may start a new notebook, using Wallace,
+by following the commands below:
+
+::
+
+    julia> using IJulia
+    julia> notebook()
+
+    ijulia> using Wallace
+
 -------------------------------------------------------------------------------
 
 Example Problem: Max Ones
