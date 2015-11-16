@@ -72,8 +72,26 @@ below:
 
     Parameters:
 
-      • stage::AbstractString, the name of the developmental stage that this  operator should be applied to. Defaults to the genotype if no stage is specified.
-      •  rate::Float, the probability of a bit flip at any given index. Defaults to 0.01 if no rate is provided.
+      • stage::AbstractString, the name of the developmental stage that this operator should be applied to.
+        Defaults to the genotype if no stage is specified.
+      • rate::Float, the probability of a bit flip at any given index. Defaults to 0.01 if no rate is provided.
+
+Script Execution
+----------------
+
+Alternatively you can treat your Wallace algorithms as you would any other
+Julia code, and write a standard Julia script to execute them. In order to
+access the functionality provided by Wallace, you must import the Wallace
+package.
+
+::
+  shell> julia my_script.jl
+
+Juno
+----
+
+IJulia Graphical Notebook
+-------------------------
 
 Language
 ========
