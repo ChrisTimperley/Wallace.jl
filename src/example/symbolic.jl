@@ -19,7 +19,7 @@ function symbolic()
           ]
         end
       end
-      pop.breeder = breeder.simple() do br
+      pop.breeder = breeder.flat() do br
         br.selection = selection.tournament(2)
         br.mutation = koza.subtree_mutation() do mut
           mut.rate = 0.1
