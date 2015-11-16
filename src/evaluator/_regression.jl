@@ -2,25 +2,31 @@
 An evaluator specialised to dealing with regression problems.
 """
 type RegressionEvaluator <: Evaluator
+  stage::AbstractString
   num_samples::Int
   samples::Vector{Tuple{Float, Float}}
 
-  RegressionEvaluator(samples::Vector{Tuple{Float, Float}}) =
-    new(length(samples), samples)
+  RegressionEvaluator(stage::AbstractString, samples::Vector{Tuple{Float, Float}}) =
+    new(stage, length(samples), samples)
 end
 
 """
 Provides a definition for a regression evaluator.
 """
 type RegressionEvaluatorDefinition <: EvaluatorDefinition
+  stage::AbstractString
   samples::Vector{Tuple{Float, Float}}
 end
 
 """
 Composes a regression evaluator from a provided definition.
 """
-compose!(def::RegressionEvaluatorDefinition) =
-  RegressionEvaluator(def.samples)
+function compose!(def::RegressionEvaluatorDefinition, p::Population)
+  if def.stage == ""
+    def.stage = p.demes[1].species.genotype.label
+  end
+  RegressionEvaluator(def.stage, def.samples)
+end
 
 """
 The regression evaluator measures the fitness of a candidate solution against
@@ -29,7 +35,7 @@ the agreement with a series of provided sample observations from an oracle.
 TODO: FOR NOW THESE OBSERVATIONS ARE FIXED.
 """
 regression() =
-  regression([
+  regression("", [
     (-10.0, 9090.0),
     (-9.0, 5904.0),
     (-8.0, 3640.0),
@@ -51,9 +57,9 @@ regression() =
     (8.0, 4680.0),
     (9.0, 7380.0)
   ])
-
-regression(samples::Array{Tuple{Float, Float}}) =
-  RegressionEvaluatorDefinition(samples)
+regression(samples::Vector{Tuple{Float, Float}}) = regression("", samples)
+regression(stage::AbstractString, samples::Vector{Tuple{Float, Float}}) =
+  RegressionEvaluatorDefinition(stage, samples)
 
 """
 Evaluates all unevaluated individuals within a provided deme according to
