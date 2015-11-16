@@ -18,7 +18,8 @@ function one_max()
       end
     end
     alg.evaluator = evaluator.simple(Dict{ASCIIString, Any}("threads" => 8)) do scheme, genome
-      assign(scheme, sum(genome))
+      v = sum(genome)
+      assign(scheme, v)
     end
     alg.termination["generations"] = criterion.generations(1000)
   end
