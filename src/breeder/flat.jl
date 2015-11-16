@@ -41,6 +41,8 @@ contained by a given state.
 function breed!{F}(b::FlatBreeder, sp::Species, members::IndividualCollection{F}, n::Int)
   n_crossover = num_required(b.crossover, n)
   parents = select(b.selection, sp, members, n_crossover)
+
+  println(parents)
   proto = operate!(b.crossover, parents, n_crossover)
   operate!(b.mutation, proto, d.num_offspring)
 end

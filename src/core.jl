@@ -45,7 +45,7 @@ function individuals_from_ids{F}(from::IndividualCollection{F}, ids::Vector{Int}
   to = IndividualCollection{F}()
   to.fitnesses = [from.fitnesses[id] for id in ids]
   for stage in keys(from.stages)
-    to.stages[stage] = [from.stages[stage][id] for id in ids]
+    to.stages[stage] = eltype(from.stages[stage])[from.stages[stage][id] for id in ids]
   end
   to
 end
