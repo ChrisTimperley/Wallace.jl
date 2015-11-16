@@ -6,6 +6,8 @@ This chapter provides a high-level overview of Wallace.jl, installation
 instructions, information on the different ways to interact with Wallace,
 and an example algorithm for solving the Max Ones problem.
 
+-------------------------------------------------------------------------------
+
 Installation
 ============
 
@@ -33,6 +35,8 @@ of date, you may execute the following command via the REPL:
 
 For information on installing the latest version of Julia, visit the Downloads
 page of the Julia website, at: http://julialang.org/downloads/
+
+-------------------------------------------------------------------------------
 
 Using Wallace
 =============
@@ -93,6 +97,8 @@ Juno
 
 IJulia Graphical Notebook
 -------------------------
+
+-------------------------------------------------------------------------------
 
 Example Problem: Max Ones
 =========================
