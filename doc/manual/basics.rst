@@ -19,8 +19,9 @@ Population
 ==========
 
 Abstractly, the population of the algorithm is used to hold the individuals
-which are presently alive within the current generation, as well as their
-offspring at that generation.
+which are presently alive within the current generation, as well as the
+offspring born within that generation. Each individual within the population is
+used to represent a candidate solution to the problem being solved.
 
 Like many other evolutionary computation frameworks, Wallace models the
 population of an algorithm as a set of demes, or sub-populations, each
