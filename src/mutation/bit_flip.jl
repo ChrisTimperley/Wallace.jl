@@ -29,6 +29,7 @@ digits, by flipping 1s to 0s and 0s to 1s at each point within the chromosome
 with a given probability, equal to the mutation rate.
 
 **Parameters:**
+
 * `stage::AbstractString`, the name of the developmental stage that this
   operator should be applied to. Defaults to the genotype if no stage is
   specified.
