@@ -38,10 +38,10 @@ end
 Performs the breeding process for each of the demes within the population
 contained by a given state.
 """
-function breed!{F}(b::FlatBreeder, sp::Species, members::IndividualCollection{F}, n::Int)
+function breed!{F}(b::FlatBreeder, sp::Species, buffer::IndividualCollection{F}, members::IndividualCollection{F}, n::Int)
   n_crossover = num_required(b.crossover, n)
-  offspring = select(b.selection, sp, members, n_crossover)
-  crossover.operate!(b.crossover, offspring, n_crossover)
-  mutation.operate!(b.mutation, offspring, n)
-  offspring
+  select(b.selection, buffer, sp, members, n_crossover)
+  crossover.operate!(b.crossover, buffer, n_crossover)
+  mutation.operate!(b.mutation, buffer, n)
+  buffer
 end

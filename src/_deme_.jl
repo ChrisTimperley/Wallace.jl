@@ -98,5 +98,5 @@ end
 Produces the offspring for a given deme at each generation.
 """
 breed!(d::Deme) =
-  d.offspring = breed!(d.breeder, d.species, d.members, d.num_offspring)
+  d.offspring = breed!(d.breeder, d.species, d.offspring, d.members, d.num_offspring)
 end

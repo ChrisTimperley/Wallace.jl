@@ -4,7 +4,7 @@ compilation simple, and to avoid any circular dependencies between modules.
 """
 module core
 export  IndividualCollection, Operator, OperatorDefinition, indexed_fitnesses,
-        individuals_from_ids
+        individuals_from_ids, write_to_individual_collection
 
 """
 Used to hold a collection of individuals.
@@ -47,6 +47,23 @@ function individuals_from_ids{F}(from::IndividualCollection{F}, ids::Vector{Int}
   for stage in keys(from.stages)
     to.stages[stage] = eltype(from.stages[stage])[from.stages[stage][id] for id in ids]
   end
+  to
+end
+
+function write_to_individual_collection{F}(to::IndividualCollection{F}, from::IndividualCollection{F}, ids::Vector{Int})
+  # Copy fitness.
+  for (i, id) in enumerate(ids)
+    to.fitnesses[i] = from.fitnesses[id]
+  end
+
+  # Copy chromosomes.
+  for stage in keys(from.stages)
+    for (i, id) in enumerate(ids)
+      to.stages[stage][i] = from.stages[stage][id]
+    end
+  end
+
+  # Return modified buffer.
   to
 end
 

@@ -18,8 +18,8 @@ Selects a given number of individuals from a collection of candidate individuals
 according to a given selection method, returning the selected individuals as a
 new individual collection.
 """
-select(s::Selection, sp::Species, ic::IndividualCollection, n::Integer) =
-  individuals_from_ids(ic, select_ids(s, sp.fitness, indexed_fitnesses(ic), n))
+select(s::Selection, buffer::IndividualCollection, sp::Species, ic::IndividualCollection, n::Integer) =
+  write_to_individual_collection(buffer, ic, select_ids(s, sp.fitness, indexed_fitnesses(ic), n))
 
 """
 Selects a specified number of individuals from a list of candidates, provided
