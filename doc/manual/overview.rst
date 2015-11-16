@@ -37,7 +37,12 @@ page of the Julia website, at: http://julialang.org/downloads/
 Using Wallace
 =============
 
-Methods of interacting with Wallace.
+There are a number of different ways in which you may wish to interact with
+Wallace, several of which are described below:
+
+Julia REPL (Read-Eval-Print-Loop)
+---------------------------------
+hello.
 
 Language
 ========
