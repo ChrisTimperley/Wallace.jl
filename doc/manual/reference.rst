@@ -47,6 +47,21 @@ Koza Tree (``koza.tree``)
 Fitness
 =======
 
+Scalar (``fitness.scalar``)
+---------------------------
+
+Lexicographic (``fitness.lexicographic``)
+-----------------------------------------
+
+Belegundu (``fitness.belegundu``)
+---------------------------------
+
+Goldberg (``fitness.goldberg``)
+-------------------------------
+
+MOGA (``fitness.moga``)
+-----------------------
+
 -------------------------------------------------------------------------------
 
 Crossover
