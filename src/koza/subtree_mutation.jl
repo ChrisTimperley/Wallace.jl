@@ -70,12 +70,13 @@ Performs subtree mutation on a provided Koza tree.
 """
 function operate!{T <: KozaTree}(
   o::SubtreeMutation,
-  tree::T
+  stage::IndividualStage{T}
 )
   # Enforce the mutation rate.
   rand() >= o.rate && return
 
   # Select a random node in the tree.
+  tree = get(stage)
   n1 = sample(tree)
   d = depth(n1)
 
@@ -91,4 +92,6 @@ function operate!{T <: KozaTree}(
     td,
     o.prob_terminal)
   swap!(n1.parent, n1, n2)
+  
+  return
 end

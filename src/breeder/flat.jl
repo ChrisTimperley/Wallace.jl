@@ -41,7 +41,7 @@ contained by a given state.
 function breed!{F}(b::FlatBreeder, sp::Species, buffer::IndividualCollection{F}, members::IndividualCollection{F}, n::Int)
   n_crossover = num_required(b.crossover, n)
   select(b.selection, buffer, sp, members, n_crossover)
-  crossover.operate!(b.crossover, buffer, n_crossover)
-  mutation.operate!(b.mutation, buffer, n)
+  operate!(b.crossover, buffer, n_crossover)
+  operate!(b.mutation, buffer, n)
   return
 end

@@ -31,4 +31,6 @@ Should be implemented by each variation operator.
 """
 num_outputs(v::Variation) =
   error("Unimplemented `num_outputs` function for: $(v).")
+
+operate!(::Any) = error("Common stub method: operate!")
 end
