@@ -49,11 +49,7 @@ function operate!{T}(
 )
   # Ensure that all the provided inputs are in a valid state.
   # If not, leave the output buffer unchanged.
-  try;
-    operate!(c, outputs, T[get(i) for i in inputs]...);
-  catch e
-    println(e)
-  end
+  try; operate!(c, outputs, map(get, inputs)...); end
 end
 
 """

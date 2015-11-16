@@ -63,8 +63,9 @@ function operate!{T}(o::OnePointCrossover, outputs::Vector{IndividualStage{Vecto
   c = rand(2:(min(lx, ly) - 1))
 
   # Generate the output chromosomes.
-  t = splice!(x, (c + 1):ly, y[(c+1):end])
-  splice!(y, (c + 1):lx, t)
+  println("SPLICING")
+  @time t = splice!(x, (c + 1):ly, y[(c+1):end])
+  @time splice!(y, (c + 1):lx, t)
 
   return
 end
