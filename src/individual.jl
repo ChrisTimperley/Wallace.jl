@@ -37,7 +37,7 @@ fitness scheme.
 
 Fails if the if list of individuals is empty.
 """
-function best{F}(s::FitnessScheme, inds::Tuple{Int, F})
+function best{F}(s::FitnessScheme, inds::Vector{Tuple{Int, F}})
   bst = inds[1]
   for i in inds
     if isbetter(s, i, bst)

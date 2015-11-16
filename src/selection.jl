@@ -1,6 +1,6 @@
 module selection
 importall common, species
-using core, fitness
+using core, fitness, individual
 export Selection, select, select_ids, SelectionDefinition
 
 """
