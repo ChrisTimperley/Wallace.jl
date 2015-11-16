@@ -30,6 +30,17 @@ Random Walk
 Representation
 ==============
 
+Int Vector (``representation.int_vector``)
+--------------------------------------
+
+Float Vector
+------------
+
+Bit Vector
+----------
+
+
+
 -------------------------------------------------------------------------------
 
 Fitness
