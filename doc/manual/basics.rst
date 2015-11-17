@@ -218,5 +218,29 @@ extensibility or performance.
 Fitness
 =======
 
+The calculation of fitness values within Wallace also differs slightly from a
+number of other popular EC frameworks. Rather than having the evaluator return
+a fitness value (whether it be a fitness object or a floating point value), the
+evaluator makes use of a provided ``FitnessScheme`` to compute the fitness values
+for individuals from an arbitary number of objective function values via the
+``assign`` function, as shown below:
+
+::
+
+  assign(scheme, score)
+
+This ``assign`` function returns a fitness value, based on the provided objective
+function values, whose type is dependent on the fitness scheme being used (where
+smaller, more efficient types are preferred over redundant objects). Once all
+individuals have had an initial (possibly partial) fitness value assigned, the
+complete set of fitness values (for both the offspring and existing members) is
+passed to the ``scale!`` method, which transforms any partial fitness values into
+full fitness values, relative to the contents of the deme.
+
+Through its fitness schemes, Wallace provides support for a wide variety of
+multiple objective techniques, as well as co-evolution, fitness sharing, niching,
+crowding, and more. For more details on these techniques, please refer to the
+Reference section of the documentation.
+
 Breeding
 ========
