@@ -244,3 +244,17 @@ Reference section of the documentation.
 
 Breeding
 ========
+
+Discussion of breeding architecture.
+
+Simple
+------
+
+Linear
+------
+
+Complex
+-------
+
+Replacement
+===========
