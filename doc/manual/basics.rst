@@ -138,6 +138,9 @@ developmental stage, as shown in the example below:
     ]
   end
 
+Conversion
+~~~~~~~~~~
+
 Conversion between each of the stages is automatically handled by Wallace,
 according to transformation functions provided by the source and destination
 representations. Most conversions operate by handling each chromosome in
