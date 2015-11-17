@@ -245,7 +245,7 @@ Reference section of the documentation.
 Breeding
 ========
 
-Discussion of breeding architecture.
+Breeding within Wallace 
 
 Simple
 ------
