@@ -124,7 +124,19 @@ developmental stage, as shown in the example below:
 
 ::
 
-  example code!
+  species.complex() do sp
+    sp.fitness = fitness.scalar()
+    sp.stages = [
+      species.stage("bit_string", representation.bit_string()),
+      species.stage("codons", "bit_string", True, representation.int_list()),
+      (species.stage("derivation", "codons") do stage
+        stage.representation = representation.grammar_derivation() do g
+          g.grammar = ...
+        end
+      end),
+      species.stage("executable", "derivation", executable.cpp())
+    ]
+  end
 
 Simple Species
 --------------
