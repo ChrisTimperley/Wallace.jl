@@ -164,7 +164,20 @@ individuals is given in the Breeding section below.
 Simple Species
 --------------
 
+As well as its complex species model, Wallace also offers a simpler species
+model, ``species.simple``, which hides the details of the multiple
+representation model from the user, using its provided representation as the
+sole developmental stage of the individual. For most problems, this model will
+suffice.
 
+An example of a simple species is given below:
+
+::
+
+  species.simple() do sp
+    sp.fitness = fitness.scalar()
+    sp.representation = representation.int_vector(100)
+  end
 
 Individual
 ==========
