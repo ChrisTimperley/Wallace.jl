@@ -191,6 +191,10 @@ Individual class to model its individuals, representing fitness and genome
 as properties of the class, Wallace has no Individual class at all!
 **Don't worry though, it still appears to act the same to the end-user.**
 
+..  class:: center
+
+  ..  image:: ../_diagrams/individual_traditional.png
+
 Instead, *virtual individuals* are held within ``IndividualCollection`` objects,
 with separate arrays holding the fitnesses and different developmental stages of
 all individuals within that collection. All arrays are kept in sync, such that
