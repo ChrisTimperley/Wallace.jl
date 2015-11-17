@@ -64,7 +64,7 @@ spread the search across multiple physical machines, or to allow the search to
 test different problem representation and search parameters at the same time.
 
 Island Model
-------------
+~~~~~~~~~~~~
 
 Where the complex population model is employed, one may also choose to make use
 of an island model population.
