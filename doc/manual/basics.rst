@@ -245,16 +245,25 @@ Reference section of the documentation.
 Breeding
 ========
 
-Breeding within Wallace 
+Breeding within Wallace is performed through a sub-type of the aptly named
+``breeder`` component. The exact processes involved depend on which type of
+breeder is employed, however, all involve a process of selection, aided by
+one or more ``selection`` operators, followed by a number of ``crossover``
+and ``mutation`` operators. Variation operators, i.e. crossover and
+mutation, may operate on different developmental stages to one another;
+Wallace takes care of ensuring everything is synchronised in the most
+efficient way possible (with the help of meta-programming and analysis).
 
-Simple
-------
-
-Linear
-------
-
-Complex
--------
+For a detailed list of the different breeding systems within Wallace, please
+refer to the reference section of the documentation.
 
 Replacement
 ===========
+
+Following the process of breeding, evaluation, and possibly migration, each
+deme is subject to a process of replacement, or survivor selection, wherein the
+members of the next generation are decided from the current members of the deme
+and their offspring. By default the replacement scheme is set to use generational
+replacement, ``replacement.generational``, where the entirety of the existing
+deme contents are replaced by the complete set of offspring, as in the simple
+genetic algorithm.
