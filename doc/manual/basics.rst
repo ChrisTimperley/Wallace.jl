@@ -189,12 +189,12 @@ we now turn our attention to the slightly different individual model used in
 Wallace. Whereas almost all other EC frameworks implement some parametric or base
 Individual class to model its individuals, representing fitness and genome
 as properties of the class, Wallace has no Individual class at all!
-*Don't worry though, it still appears to act the same to the end-user.*
+**Don't worry though, it still appears to act the same to the end-user.**
 
-Instead, **virtual individuals** are held within ``IndividualCollection`` objects,
+Instead, *virtual individuals* are held within ``IndividualCollection`` objects,
 with separate arrays holding the fitnesses and different developmental stages of
 all individuals within that collection. All arrays are kept in sync, such that
-the **n**-th entry in the fitness array belongs to the **n**-th entry in each of
+the *n*-th entry in the fitness array belongs to the *n*-th entry in each of
 the developmental stage arrays.
 
 By implementing the individual model in such a way, we see a slightly enhanced
