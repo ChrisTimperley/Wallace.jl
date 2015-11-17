@@ -141,15 +141,20 @@ developmental stage, as shown in the example below:
 Conversion
 ~~~~~~~~~~
 
-Conversion between each of the stages is automatically handled by Wallace,
+Conversion between stages is automatically handled by Wallace,
 according to transformation functions provided by the source and destination
-representations. Most conversions operate by handling each chromosome in
-sequence, however some representations may make use of Wallace's ability
-to perform mass conversion, where all chromosomes are handled within a single
-method call. This functionality can be useful when each conversion involves
-a certain degree of overhead that can otherwise be minimised by bundling it
-with others. This ability is used to compile Java and C programs concurrently,
+representations.
+
+Most conversions operate by handling each chromosome in sequence, however some
+representations may make use of Wallace's ability to perform mass conversion,
+where all chromosomes are handled within a single method call.
+This functionality can be useful when each conversion involves a certain degree
+of overhead that can otherwise be minimised by bundling it with others. This
+ability is used to compile Java and C programs concurrently,
 significantly reducing the not inconsiderable cost of conversion.
+
+Mutation and Crossover
+~~~~~~~~~~~~~~~~~~~~~~
 
 This multiple representation model of individuals also allows mutation and
 crossover to target different 
