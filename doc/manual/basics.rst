@@ -202,7 +202,7 @@ the developmental stage arrays.
 
 ..  class:: center
 
-  ..  image:: ../_diagrams/individual_traditional.png
+  ..  image:: ../_diagrams/individual_new.png
 
 By implementing the individual model in such a way, we see a slightly enhanced
 performance, most likely due to a reduced number of cache misses, as developmental
