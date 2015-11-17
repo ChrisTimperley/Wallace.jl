@@ -157,7 +157,9 @@ Mutation and Crossover
 ~~~~~~~~~~~~~~~~~~~~~~
 
 This multiple representation model of individuals also allows mutation and
-crossover to target different 
+crossover to target different stages of development, rather than being
+restricted to act only the genotype. More details on the breeding of complex
+individuals is given in the Breeding section below.
 
 Simple Species
 --------------
