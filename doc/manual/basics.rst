@@ -87,7 +87,9 @@ to that island.
 An example of a simple island model population for the one max problem is shown
 below:
 
-**EXAMPLE CODE**
+::
+
+  EXAMPLE CODE
 
 Species
 =======
@@ -182,7 +184,25 @@ An example of a simple species is given below:
 Individual
 ==========
 
-Virtual individual model.
+Having discussed Wallace's multiple representation model in the previous section,
+we now turn our attention to the slightly different individual model used in
+Wallace. Whereas almost all other EC frameworks implement some parametric or base
+Individual class to model its individuals, representing fitness and genome
+as properties of the class, Wallace has no Individual class at all!
+*Don't worry though, it still appears to act the same to the end-user.*
+
+Instead, **virtual individuals** are held within ``IndividualCollection`` objects,
+with separate arrays holding the fitnesses and different developmental stages of
+all individuals within that collection. All arrays are kept in sync, such that
+the **n**-th entry in the fitness array belongs to the **n**-th entry in each of
+the developmental stage arrays.
+
+By implementing the individual model in such a way, we see a slightly enhanced
+performance, most likely due to a reduced number of cache misses, as developmental
+stages tend to be accessed at the same time as one another (during mutation and
+crossover). More importantly, this change allows us to implement the multiple
+representation model in a simple, easy-to-use manner, without affecting
+extensibility or performance.
 
 Fitness
 =======
