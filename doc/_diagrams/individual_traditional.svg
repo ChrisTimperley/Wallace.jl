@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="individual_traditional.svg"
-   inkscape:export-filename="/home/chris/git/wallace/doc/_diagrams/population.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="/usr/userfs/c/ct584/git/wallace/doc/_diagrams/individual_traditional.png"
+   inkscape:export-xdpi="42.091911"
+   inkscape:export-ydpi="42.091911">
   <defs
      id="defs4">
     <filter
@@ -227,11 +227,11 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1248"
-     inkscape:window-height="983"
-     inkscape:window-x="65"
+     inkscape:window-width="1680"
+     inkscape:window-height="984"
+     inkscape:window-x="0"
      inkscape:window-y="27"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -259,15 +259,15 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:sans-serif"
-       x="332.34018"
+       x="266.68027"
        y="113.9305"
        id="text5113"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5115"
-         x="332.34018"
+         x="266.68027"
          y="113.9305"
-         style="font-size:22.5px;fill:#664444;fill-opacity:1">Deme</tspan></text>
+         style="font-size:20px;fill:#664444;fill-opacity:1">IndividualCollection</tspan></text>
     <rect
        style="fill:#ffb13b;fill-opacity:1;stroke:#ff9015;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4462-1)"
        id="rect4136-7"
