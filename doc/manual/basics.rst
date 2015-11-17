@@ -29,6 +29,10 @@ discussion on the implementation of evolutionary algorithms within Wallace.
 More details about the other types of algorithms supported within Wallace
 may be found in the reference section of the documentation.
 
+Evolutionary Algorithms
+-----------------------
+Brief recap.
+
 Population
 ==========
 
