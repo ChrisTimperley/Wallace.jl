@@ -275,8 +275,7 @@ operator using the following syntax:
 
   br.crossover = crossover.one_point(0.7)
 
-  Where 0.7 is the crossover rate.
-  
+Where 0.7 is the crossover rate.
 
 Mutation
 ~~~~~~~~
