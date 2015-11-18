@@ -2,7 +2,11 @@
 Tutorials
 =========
 
-Assumptions. Should have read the Basics section.
+In this section of the tutorial, we provide a number of fairly basic tutorials,
+covering the usage of various algorithms, operators, and representations within
+Wallace. All of the tutorials assume that the reader has a basic knowledge of
+evolutionary algorithms, and that they have read the Basics section of this
+documentation.
 
 Simple Genetic Algorithms and Max Ones
 ======================================
