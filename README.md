@@ -31,8 +31,8 @@ on highly complex real-world problems, as well as teaching its concepts.
 
 ## Installation
 
-Wallace is most easily installed using Julia's package manager within the REPL,
-as shown below:
+The latest stable release of Wallace is most easily installed using Julia's package
+manager within the REPL, as shown below.
 
 ```julia
 
@@ -41,6 +41,18 @@ $ julia
 
 julia> Pkg.add("Wallace")
 ```
+
+To install the latest developmental version of Wallace, open up the Julia REPL,
+and call the following:
+
+```
+julia> Pkg.remove("Wallace")
+julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.jl.git")
+```
+
+This will remove any existing Wallace module from your Julia installation,
+before cloning the contents of the Wallace git repository into your local
+Julia modules directory.
 
 > Note: To avoid installation issues, ensure that the rest of your Julia packages are up-to-date via     `Pkg.update()`.
 
