@@ -284,6 +284,15 @@ Where 0.7 is the crossover rate.
 Mutation
 ~~~~~~~~
 
+Given our use of the bit vector representation, we make use of the most
+naturally fitting mutation operator, bit flip mutation, implemented by
+``mutation.bit_flip``. Bit-flip mutation works by iterating across a provided
+chromosome and applying a bit-flip at each gene according to some probability,
+given by the mutation rate.
+
+As with one point crossover, bit flip mutation only accepts a single parameter,
+the mutation rate. As such, we can concisely specify this operator via the
+following:
 
 ::
 
