@@ -2,6 +2,8 @@
 Tutorials
 =========
 
+Assumptions. Should have read the Basics section.
+
 Simple Genetic Algorithms and Max Ones
 ======================================
 
@@ -23,6 +25,7 @@ writing to this (or another) Julia script file, which can be executed from
 the command line by simply calling:
 
 ::
+
   julia tut1.jl
 
 You may find it useful to keep the Julia REPL in another tab, in order to
@@ -36,6 +39,7 @@ you wish to view the documentation.
 first make Wallace available to Julia by calling ``using Wallace``.**
 
 ::
+
   help> mutation.bit_flip
 
   Performs bit-flip mutation on a fixed or variable length chromosome of binary
