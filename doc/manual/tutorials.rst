@@ -144,6 +144,15 @@ will be replaced by species and breeder specifications later on).
     pop.breeder = ...
   end
 
+Specifying the species
+----------------------
+
+Designating a fitness scheme
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Detailing the problem representation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Specifying the breeding operations
 ----------------------------------
 
