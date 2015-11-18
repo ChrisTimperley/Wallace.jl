@@ -259,6 +259,25 @@ Where 2 is the size of the tournament.
 Crossover
 ~~~~~~~~~
 
+As our crossover method, we will use a simple one-point crossover, which accepts
+two parent genomes are supplied to the operator, following which a random point
+common to the two genomes is selected, each genome is split into two parts
+about this point, and finally two new genomes are formed by combining the first
+and second parts of opposite parents. This method of crossover is implemented
+by the ``crossover.one_point`` operator.
+
+As the only parameter for one point crossover is the crossover rate, which
+determines the probability that a given pair of chromosomes will be subject to
+the crossover process, rather than being left alone, we can specify our
+operator using the following syntax:
+
+::
+
+  br.crossover = crossover.one_point(0.7)
+
+  Where 0.7 is the crossover rate.
+  
+
 Mutation
 ~~~~~~~~
 
