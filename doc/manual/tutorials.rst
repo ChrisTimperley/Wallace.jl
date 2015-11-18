@@ -127,6 +127,23 @@ and so on.
 Setting up the population
 -------------------------
 
+To begin with, let's specify the population used by our algorithm. For this
+problem, a simple population, with a single deme and species, specified using
+``population.simple``, will suffice. Using the help function, we can find the
+necessary properties to set up our population.
+
+After specifying the size of our population, the skeleton for our population
+specification should look similar to the one given below (where the ellipsis
+will be replaced by species and breeder specifications later on).
+
+::
+
+  alg.population = population.simple() do pop
+    pop.size = 100
+    pop.species = ...
+    pop.breeder = ...
+  end
+
 Specifying the breeding operations
 ----------------------------------
 
