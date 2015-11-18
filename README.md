@@ -10,20 +10,24 @@ fewer lines of code to write than DEAP. For these reasons, Wallace makes both
 a great framework for performing industrial-strength evolutionary computation
 on highly complex real-world problems, as well as teaching its concepts.
 
-In addition to its speed and domain specific language, Wallace also supports
-the following:
+**Features:**
 
-* Wide range of evolvable representations
-  * Vectors, lists, trees, orderings, etc.
-  * Easy to extend with new representations.
-* Genetic Programming
-  * Weakly typed and strongly typed
-  * Automatically defined functions
-  * Push GP
-  * Cartesian Genetic Programming
-* Grammatical Evolution
-* Multiple-objective optimisation
-* Co-evolution
+* A compact, extensible domain-specific language.
+* Multi-processing and multi-threading.
+* Support for massively distributed computation.
+* Just-in-time compilation of problem-optimised algorithms.
+* Data logging, plotting and visualisation.
+* An interactive shell, with an embedded documentation browser (via Julia).
+* Modular structure makes it easy to extend and share components.
+
+**Algorithms, Representations, and Operations:**
+
+* Vectors, lists, sets, trees, orderings, etc.
+* Grammatical evolution (efficient compilation to arbitrary languages).
+* Genetic programming: Koza, Strictly-Typed GP, Grammar-Guided GP, PushGP, Cartesian GP.
+* Multiple objective optimisation: NSGA, NSGA-II, SPEA, SPEA2, VEGA, and more.
+* Co-operative and competitive co-evolution approaches.
+* Island model support, for same and different species islands.
 
 **Installation:** ```julia> Pkg.add("Wallace")```
 
