@@ -284,6 +284,14 @@ Where 0.7 is the crossover rate.
 Mutation
 ~~~~~~~~
 
+
+::
+
+  br.mutation = mutation.bit_flip(0.05)
+
+Where 0.05 is the per-gene mutation rate, or the probability that the value of
+a given gene will be flipped.
+
 Adding the termination conditions
 ---------------------------------
 
