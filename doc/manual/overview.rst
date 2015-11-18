@@ -8,6 +8,9 @@ and an example algorithm for solving the Max Ones problem.
 
 -------------------------------------------------------------------------------
 
+Philosophy
+==========
+
 Installation
 ============
 
