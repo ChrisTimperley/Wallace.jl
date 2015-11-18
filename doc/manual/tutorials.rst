@@ -150,6 +150,17 @@ Specifying the species
 Designating a fitness scheme
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+::
+
+  sp.fitness = fitness.scalar() do f
+    f.of = Int
+    f.maximise = True
+  end
+
+::
+  
+  sp.fitness = fitness.scalar(Int)
+
 Detailing the problem representation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
