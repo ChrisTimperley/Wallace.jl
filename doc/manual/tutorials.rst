@@ -2,8 +2,8 @@
 Tutorials
 =========
 
-Using a Simple GA to solve Max Ones
-===================================
+Simple Genetic Algorithms and Max Ones
+======================================
 
 In this tutorial, we will be using Wallace to implement a simple Genetic
 Algorithm to solve the benchmark Max Ones optimisation problem, in which the
@@ -22,6 +22,9 @@ Setting up the population
 
 Specifying the breeding operations
 ----------------------------------
+
+Running the algorithm and analysing the results
+-----------------------------------------------
 
 Solving Numerical Optimisation problems using GAs
 =================================================
