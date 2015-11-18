@@ -165,13 +165,7 @@ Designating a fitness scheme
 
 First, let us outline the fitness scheme that will be used. You may notice from
 the documentation for ``species.simple``, that if no fitness scheme is supplied,
-the species will default to using a scalar fitness scheme, ``fitness.scalar``,
-where the fitness function returns floating points that are to be maximised.
-
-For our problem, however, we really want fitness values to be represented by
-integers, rather than performing an unnecessary conversion to a floating point
-number. A scalar fitness shall still suffice though, so we can provide our
-species with the following fitness scheme definition:
+the species will default to using ``fitness.scalar``
 
 ::
 
@@ -179,12 +173,6 @@ species with the following fitness scheme definition:
     f.of = Int
     f.maximise = True
   end
-
-Alternatively, as shown in the documentation, we may also elect to specify our
-``fitness.scalar`` in a number of different ways. We can achieve the same
-effect in fewer lines of code using the code below, but in the process we
-possibly trade-off a smaller amount of readability for those less acquainted
-with Wallace.
 
 ::
   
