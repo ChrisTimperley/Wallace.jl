@@ -10,6 +10,21 @@ fewer lines of code to write than DEAP. For these reasons, Wallace makes both
 a great framework for performing industrial-strength evolutionary computation
 on highly complex real-world problems, as well as teaching its concepts.
 
+In addition to its speed and domain specific language, Wallace also boasts a
+wide range of features:
+
+* Wide range of evolvable representations
+  * Vectors, lists, trees, orderings, etc.
+  * Easy to extend with new representations.
+* Genetic Programming
+  * Weakly typed and strongly typed
+  * Automatically defined functions
+  * Push GP
+  * Cartesian Genetic Programming
+* Grammatical Evolution
+* Multiple-objective optimisation
+* Co-evolution
+
 **Installation:** ```julia> Pkg.add("Wallace")```
 
 > Note: To avoid installation issues, ensure that the rest of your Julia packages are up-to-date via     `Pkg.update()`.
