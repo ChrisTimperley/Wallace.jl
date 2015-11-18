@@ -26,7 +26,7 @@ the command line by simply calling:
 
 ::
 
-  julia tut1.jl
+  $ julia tut1.jl
 
 You may find it useful to keep the Julia REPL in another tab, in order to
 allow you to quickly navigate the Wallace documentation via Julia's help
@@ -91,6 +91,38 @@ and run it via the following code:
 
 Specifying the components of our algorithm
 ------------------------------------------
+
+Now we have our skeleton in place, let's proceed to specify each of the
+components of our algorithm. Before we can do this, however, we need to
+know what the components of our particular algorithm are. In order to
+find out this information, we can make use of the help function within
+the Julia REPL (or Juno) to view the information about our algorithm:
+
+::
+
+  julia> using Wallace
+  help> algorithm.simple_genetic
+
+  DESCRIPTION OF THE SIMPLE GENETIC ALGORITHM
+
+  Properties:
+
+  * evaluator, the evaluator used to compute objective function values for
+    the candidate solutions.
+  * replacement, the replacement scheme used to determine the membership of a
+    deme at each generation, from its existing members and their offspring.
+    Defaults to ``replacement.generational`` if none is specified.
+  * termination, a dictionary of termination conditions for this algorithm,
+    specified as ``criterion`` instances, indexed by their names.
+  * population, a specification of the population used by this algorithm,
+    detailing its size, demes, species, etc.
+  * loggers, a list of loggers that should be attached to this algorithm to log
+    various data. Provided as ``logger`` specifications.
+
+Armed with this information, we can now delve deeper into the domain specific
+language, querying the help function about the types used by each of the
+properties of our algorithm, such as ``population``, ``replacement``, ``logger``,
+and so on.
 
 Setting up the population
 -------------------------
