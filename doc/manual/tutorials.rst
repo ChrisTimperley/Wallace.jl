@@ -337,7 +337,7 @@ Having followed the steps above, you should now have a complete algorithm
 specification that we can use to solve our problem. Your code should look
 something similar to that given below:
 
-::julia
+::
 
   using Wallace
 
