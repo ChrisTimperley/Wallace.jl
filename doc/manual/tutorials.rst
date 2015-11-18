@@ -14,6 +14,14 @@ trickier for “blind” evolutionary algorithms.
 Creating a skeleton for our algorithm specification
 ---------------------------------------------------
 
+::
+  
+  alg = algorithm.simple_genetic() do
+
+  end
+
+**Performance tip:** Wrap inside function; don't use globals.
+
 Specifying the components of our algorithm
 ------------------------------------------
 
