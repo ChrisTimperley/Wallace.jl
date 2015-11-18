@@ -147,6 +147,19 @@ will be replaced by species and breeder specifications later on).
 Specifying the species
 ----------------------
 
+In order to complete our population specification, let us next move onto
+specifying the species to which all of its members belong. Again, for the
+purposes of this problem, where the search only requires one form of
+representation, namely the bit-string, the simple species model,
+``species.simple``, will suffice.
+
+After performing a help query to learn the properties of ``species.simple``,
+we will learn that there are only two properties that need to be provided;
+``fitness``, specifying the fitness scheme used to transform objective function
+values returned by the evaluator into fitness values, and ``representation``,
+used to describe the representation used to model candidate solutions to the
+problem.
+
 Designating a fitness scheme
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
