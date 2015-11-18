@@ -29,7 +29,18 @@ on highly complex real-world problems, as well as teaching its concepts.
 * Co-operative and competitive co-evolution approaches.
 * Island model support, for same and different species islands.
 
-**Installation:** ```julia> Pkg.add("Wallace")```
+## Installation
+
+Wallace is most easily installed using Julia's package manager within the REPL,
+as shown below:
+
+```julia
+
+$ julia
+...
+
+julia> Pkg.add("Wallace")
+```
 
 > Note: To avoid installation issues, ensure that the rest of your Julia packages are up-to-date via     `Pkg.update()`.
 
