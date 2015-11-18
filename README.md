@@ -4,8 +4,8 @@ Wallace is a high-performance, easy-to-use evolutionary computation framework wr
 To simultaneously achieve performance and ease-of-use, Wallace utilises computational reflection to compile problem-specific data structures and algorithms at run-time, using a beautiful and compact domain-specific language.
 
 Through its use of various programming techniques, and the thanks to the speed
-of Julia, Wallace is both the fastest evolutionary computation framework,
-beating ECJ and JCLEC, as well as the most expressive and concise, requiring
+of Julia, Wallace is both **the fastest evolutionary computation framework**,
+beating ECJ and JCLEC, as well as **the most expressive and concise**, requiring
 fewer lines of code to write than DEAP. For these reasons, Wallace makes both
 a great framework for performing industrial-strength evolutionary computation
 on highly complex real-world problems, as well as teaching its concepts.
