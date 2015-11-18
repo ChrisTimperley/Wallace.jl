@@ -10,8 +10,8 @@ fewer lines of code to write than DEAP. For these reasons, Wallace makes both
 a great framework for performing industrial-strength evolutionary computation
 on highly complex real-world problems, as well as teaching its concepts.
 
-In addition to its speed and domain specific language, Wallace also boasts a
-wide range of features:
+In addition to its speed and domain specific language, Wallace also supports
+the following:
 
 * Wide range of evolvable representations
   * Vectors, lists, trees, orderings, etc.
