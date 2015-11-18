@@ -277,9 +277,9 @@ operator using the following syntax:
 
 ::
 
-  br.crossover = crossover.one_point(0.7)
+  br.crossover = crossover.one_point(0.5)
 
-Where 0.7 is the crossover rate.
+Where 0.5 is the crossover rate.
 
 Mutation
 ~~~~~~~~
@@ -301,6 +301,11 @@ following:
 Where 0.05 is the per-gene mutation rate, or the probability that the value of
 a given gene will be flipped.
 
+Adding an evaluator
+-------------------
+
+Almost forgot about this section!
+
 Adding the termination conditions
 ---------------------------------
 
@@ -321,12 +326,49 @@ the ``criterion.generations`` criterion, as shown below:
 
 ::
 
-  alg.termination["generations"] = criterion.generations(100)
+  alg.termination["generations"] = criterion.generations(1000)
 
-Where 100 refers to the generation limit.
+Where 1000 refers to the generation limit.
 
 Running the algorithm and analysing the results
 -----------------------------------------------
+
+Having followed the steps above, you should now have a complete algorithm
+specification that we can use to solve our problem. Your code should look
+something similar to that given below:
+
+::julia
+
+  using Wallace
+
+  def = algorithm.genetic() do alg
+    alg.population = population.simple() do pop
+      pop.size = 100
+
+      pop.species = species.simple() do sp
+        sp.fitness = fitness.scalar(Int)
+        sp.representation = representation.bit_vector(100)
+      end
+
+      pop.breeder = breeder.simple() do br
+        br.selection = selection.tournament(2)
+        br.mutation = mutation.bit_flip(0.05)
+        br.crossover = crossover.one_point(0.5)
+      end
+    end
+
+    alg.evaluator = evaluator.simple() do scheme, genome
+      assign(scheme, sum(genome))
+    end
+
+    alg.termination["generations"] = criterion.generations(1000)
+  end
+
+  executable = compose!(alg)
+  run!(executable)
+
+Adding parallel evaluation and breeding
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Solving Numerical Optimisation problems using GAs
 =================================================
