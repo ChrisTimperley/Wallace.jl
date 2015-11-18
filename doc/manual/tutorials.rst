@@ -5,6 +5,24 @@ Tutorials
 Using a Simple GA to solve Max Ones
 ===================================
 
+In this tutorial, we will be using Wallace to implement a simple Genetic
+Algorithm to solve the benchmark Max Ones optimisation problem, in which the
+object is to maximise the number of ones in a fixed-length binary string.
+This problem is trivial for humans, of course, but proves to be a little
+trickier for “blind” evolutionary algorithms.
+
+Creating a skeleton for our algorithm specification
+---------------------------------------------------
+
+Specifying the components of our algorithm
+------------------------------------------
+
+Setting up the population
+-------------------------
+
+Specifying the breeding operations
+----------------------------------
+
 Solving Numerical Optimisation problems using GAs
 =================================================
 
