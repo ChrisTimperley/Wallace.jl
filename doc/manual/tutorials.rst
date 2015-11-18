@@ -245,6 +245,17 @@ skeleton specification:
 Selection
 ~~~~~~~~~
 
+For the purposes of this tutorial, we will use the simple, but rather effective
+method of tournament selection as our method of choice, implemented by
+``selection.tournament``. After reading the documentation, we can quickly
+specify a tournament selection via the following:
+
+::
+
+  br.selection = selection.tournament(2)
+
+Where 2 is the size of the tournament.
+
 Crossover
 ~~~~~~~~~
 
