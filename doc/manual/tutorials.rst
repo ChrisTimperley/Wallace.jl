@@ -224,6 +224,36 @@ may do so using either of the definitions given below.
 Specifying the breeding operations
 ----------------------------------
 
+Now we have a complete species specification, the only thing remaining in our
+population specification is to provide a description of the breeding process
+it uses.
+
+Again, we will make use of Wallace's simplest breeder, ``breeder.simple``,
+which implements breeding as a process of selection, followed by crossover,
+and finishing with mutation, with each stage performed by a single operator.
+Reading the documentation for ``breeder.simple``, we end up with the following
+skeleton specification:
+
+::
+
+  pop.breeder = breeder.simple() do br
+    br.selection = ...
+    br.crossover = ...
+    br.mutation = ...
+  end
+
+Selection
+~~~~~~~~~
+
+Crossover
+~~~~~~~~~
+
+Mutation
+~~~~~~~~
+
+Adding the termination conditions
+---------------------------------
+
 Running the algorithm and analysing the results
 -----------------------------------------------
 
