@@ -94,8 +94,8 @@ with a given probability, equal to the mutation rate.
 **Parameters:**
 
 * `stage::AbstractString`, the name of the developmental stage that this
-  operator should be applied to. Defaults to the genotype if no stage is
-  specified.
+  operator should be applied to.
+  Defaults to the genotype if no stage is specified.
 * `rate::Float`, the probability of a bit flip at any given index.
   Defaults to 0.01 if no rate is provided.
 

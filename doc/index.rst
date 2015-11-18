@@ -8,3 +8,4 @@ Wallace.jl - Efficient evolutionary computation in Julia
   manual/overview.rst
   manual/basics.rst
   manual/reference.rst
+  manual/tutorials.rst
