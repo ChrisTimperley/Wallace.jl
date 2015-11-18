@@ -75,7 +75,7 @@ def = algorithm.genetic() do alg
 end
 
 # Compose the algorithm from its definition.
-alg = algorithm.compose!(def)
+alg = compose!(def)
 
 # Run the composed algorithm.
 run!(alg)

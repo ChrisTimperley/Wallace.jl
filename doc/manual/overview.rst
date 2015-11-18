@@ -155,7 +155,7 @@ instance, before finally the algorithm instance is run using ``run!``.
   end
 
   # Compose the algorithm from its definition.
-  alg = algorithm.compose!(def)
+  alg = compose!(def)
 
   # Run the composed algorithm.
   run!(alg)
