@@ -39,17 +39,17 @@ you wish to view the documentation.
 
   help> mutation.bit_flip
 
-  Performs bit-flip mutation on a fixed or variable length chromosome of binary
-  digits, by flipping 1s to 0s and 0s to 1s at each point within the chromosome
-  with a given probability, equal to the mutation rate.
+    Performs bit-flip mutation on a fixed or variable length chromosome of binary
+    digits, by flipping 1s to 0s and 0s to 1s at each point within the chromosome
+    with a given probability, equal to the mutation rate.
 
-  **Parameters:**
+    **Parameters:**
 
-  * `stage::AbstractString`, the name of the developmental stage that this
-    operator should be applied to. Defaults to the genotype if no stage is
-    specified.
-  * `rate::Float`, the probability of a bit flip at any given index.
-    Defaults to 0.01 if no rate is provided.
+    * `stage::AbstractString`, the name of the developmental stage that this
+      operator should be applied to. Defaults to the genotype if no stage is
+      specified.
+    * `rate::Float`, the probability of a bit flip at any given index.
+      Defaults to 0.01 if no rate is provided.
 
 **Tip: Don't forget, in order to view the documentation for Wallace, you must
 first make Wallace available to Julia by calling ``using Wallace``.**
@@ -103,21 +103,21 @@ the Julia REPL (or Juno) to view the information about our algorithm:
   julia> using Wallace
   help> algorithm.simple_genetic
 
-  DESCRIPTION OF THE SIMPLE GENETIC ALGORITHM
+    DESCRIPTION OF THE SIMPLE GENETIC ALGORITHM
 
-  Properties:
+    Properties:
 
-  * evaluator, the evaluator used to compute objective function values for
-    the candidate solutions.
-  * replacement, the replacement scheme used to determine the membership of a
-    deme at each generation, from its existing members and their offspring.
-    Defaults to ``replacement.generational`` if none is specified.
-  * termination, a dictionary of termination conditions for this algorithm,
-    specified as ``criterion`` instances, indexed by their names.
-  * population, a specification of the population used by this algorithm,
-    detailing its size, demes, species, etc.
-  * loggers, a list of loggers that should be attached to this algorithm to log
-    various data. Provided as ``logger`` specifications.
+    * evaluator, the evaluator used to compute objective function values for
+      the candidate solutions.
+    * replacement, the replacement scheme used to determine the membership of a
+      deme at each generation, from its existing members and their offspring.
+      Defaults to ``replacement.generational`` if none is specified.
+    * termination, a dictionary of termination conditions for this algorithm,
+      specified as ``criterion`` instances, indexed by their names.
+    * population, a specification of the population used by this algorithm,
+      detailing its size, demes, species, etc.
+    * loggers, a list of loggers that should be attached to this algorithm to log
+      various data. Provided as ``logger`` specifications.
 
 Armed with this information, we can now delve deeper into the domain specific
 language, querying the help function about the types used by each of the
