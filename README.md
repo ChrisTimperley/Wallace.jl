@@ -36,20 +36,49 @@ For technical documentation and an extensive set of tutorials, aimed at a wide r
 Up-to-date documentation and tutorials can be found at:
 [wallacejl.readthedocs.org](http://wallacejl.readthedocs.org)
 
-## Usage
-To load an example problem in Wallace, follow the code below; a list of example problems can be found by calling the `examples()` function.
+## Example
+
+Below is the source code for the Max Ones benchmark problem provided in the
+``examples`` package.
 
 ```julia
 using Wallace
 
-ex = example("one_max")
-results = run!(ex)
-```
-To compose an algorithm specification into executable Julia code tailored to a given problem, follow the example code below:
+# Provide a definition for the algorithm.
+def = algorithm.genetic() do alg
+  alg.population = population.simple() do pop
+    pop.size = 100
 
-```julia
-algo = compose("my_configuration_file.cfg")
-results = run!(algo)
+    # Species describes the fitness scheme and representation used by
+    # individuals belonging to that species.
+    pop.species = species.simple() do sp
+      sp.fitness = fitness.scalar(Int)
+      sp.representation = representation.bit_vector(100)
+    end
+
+    # Multi-threading breeding.
+    pop.breeder = breeder.simple() do br
+      br.threads = 8
+      br.selection = selection.tournament(2)
+      br.mutation = mutation.bit_flip(1.0)
+      br.crossover = crossover.one_point(0.1)
+    end
+  end
+
+  # Evaluation function (split across 8 threads).
+  alg.evaluator = evaluator.simple(["threads" => 8]) do scheme, genome
+    assign(scheme, sum(genome))
+  end
+
+  # Termination conditions.
+  alg.termination["generations"] = criterion.generations(1000)
+end
+
+# Compose the algorithm from its definition.
+alg = algorithm.compose!(def)
+
+# Run the composed algorithm.
+run!(alg)
 ```
 
 ## Citation
