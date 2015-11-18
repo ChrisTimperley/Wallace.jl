@@ -111,8 +111,8 @@ by following the commands below:
 
 -------------------------------------------------------------------------------
 
-Example Problem: Max Ones
-=========================
+Example
+=======
 
 Below is the source code for the Max Ones benchmark problem provided in the
 examples package. First an algorithm definition is specified, using
