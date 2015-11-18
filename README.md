@@ -45,7 +45,7 @@ julia> Pkg.add("Wallace")
 To install the latest developmental version of Wallace, open up the Julia REPL,
 and call the following:
 
-```
+```julia
 julia> Pkg.remove("Wallace")
 julia> Pkg.clone("git://github.com/ChrisTimperley/Wallace.jl.git")
 ```
