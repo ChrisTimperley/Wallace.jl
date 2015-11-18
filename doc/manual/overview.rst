@@ -159,3 +159,21 @@ instance, before finally the algorithm instance is run using ``run!``.
 
   # Run the composed algorithm.
   run!(alg)
+
+Citation
+========
+
+If you plan on using Wallace for your research, we encourage you to cite the
+paper below. Additionally, put in a merge request, and we will add your paper
+to the list of papers using Wallace.
+
+::
+
+  @inproceedings{timperley2015wallace,
+    author = {Timperley, Christopher Steven and Stepney, Susan},
+    title = {Wallace: An efficient generic evolutionary framework},
+    booktitle={ECAL 15},
+    pages={365--372},
+    year={2015},
+    organization={MIT Press}
+  }
