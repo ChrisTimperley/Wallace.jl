@@ -160,6 +160,13 @@ values returned by the evaluator into fitness values, and ``representation``,
 used to describe the representation used to model candidate solutions to the
 problem.
 
+::
+  
+  pop.species = species.simple() do sp
+    sp.fitness = ...
+    sp.representation = ...
+  end
+
 Designating a fitness scheme
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
