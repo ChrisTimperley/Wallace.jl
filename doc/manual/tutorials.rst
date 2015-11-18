@@ -193,6 +193,27 @@ with Wallace.
 Detailing the problem representation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+With a fitness scheme now in place, we need only provide a specification of the
+representation used by candidate solutions within the population. For our
+particular problem we want to use the bit vector representation, implemented
+by ``representation.bit_vector``, where solutions take the form of a
+fixed-length vector of boolean values (representing bits).
+
+Reading the documentation for the ``representation.bit_vector``, we learn that
+this representation has only a single parameter, namely its length, given
+by the ``length`` property.
+
+For this tutorial, let us create a bit vector of length 100, to begin with. We
+may do so using either of the definitions given below.
+
+::
+
+  sp.representation = representation.bit_vector() do rep
+    rep.length = 100
+  end
+
+  sp.representation = representation.bit_vector(100)
+
 Specifying the breeding operations
 ----------------------------------
 
