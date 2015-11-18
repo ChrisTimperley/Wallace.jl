@@ -35,9 +35,6 @@ the REPL will be switched into help mode. When in this mode, you may enter
 the name of a particular component, method, type, or Julia function for which
 you wish to view the documentation.
 
-**Tip: Don't forget, in order to view the documentation for Wallace, you must
-first make Wallace available to Julia by calling ``using Wallace``.**
-
 ::
 
   help> mutation.bit_flip
@@ -54,6 +51,8 @@ first make Wallace available to Julia by calling ``using Wallace``.**
   * `rate::Float`, the probability of a bit flip at any given index.
     Defaults to 0.01 if no rate is provided.
 
+**Tip: Don't forget, in order to view the documentation for Wallace, you must
+first make Wallace available to Julia by calling ``using Wallace``.**
 
 Creating a skeleton for our algorithm specification
 ---------------------------------------------------
