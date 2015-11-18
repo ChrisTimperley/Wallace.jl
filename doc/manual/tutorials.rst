@@ -304,7 +304,39 @@ a given gene will be flipped.
 Adding an evaluator
 -------------------
 
-Almost forgot about this section!
+Next, we will provide our algorithm with an evaluator, responsible for
+computing the objective function values for provided candidate solutions. For
+this problem, the simple evaluator, ``evaluator.simple`` will suffice. Unlike
+other components within Wallace, where the block following the method call is
+used to specify its properties, for the simple evaluator, this block is used
+to implement the objective function.
+
+The supplied objective function should accept two arguments, the fitness
+scheme, and the chromosome for the candidate solution, respectively. Once
+an objective function for the candidate has been computed, a partial fitness
+value for the individual should be computed from that value and returned. In
+order to compute the fitness value, we pass the objective value to the
+``assign`` method, preceded by the fitness scheme.
+
+Since the objective is measured by the number of 1s in a provided bit vector,
+we can quickly compute the objective value using Julia's ``sum`` function.
+
+Putting together all of the above, we should end up with an evaluator that
+looks something like the one below.
+
+::
+
+  alg.evaluator = evaluator.simple() do scheme, genome
+    assign(scheme, sum(genome))
+  end
+
+If you query the documentation for the simple evaluator, you may notice it
+also has two optional keyword parameters. ``threads`` is used to specify the
+number of threads that the evaluation should be split across; leave this
+for now. The ``stage`` parameter is used to specify the name of which of an
+individual's developmental stages should be supplied to the evaluator to
+perform the evaluation; where no value is given, this parameter defaults to
+using the genotype.
 
 Adding the termination conditions
 ---------------------------------
@@ -369,6 +401,8 @@ something similar to that given below:
 
 Adding parallel evaluation and breeding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ADD HERE.
 
 Solving Numerical Optimisation problems using GAs
 =================================================
