@@ -304,6 +304,27 @@ a given gene will be flipped.
 Adding the termination conditions
 ---------------------------------
 
+We now have a near complete algorithm specification. The only task remaining is
+to provide a set of termination conditions, else our algorithm won't terminate
+unless the program is forcibly closed by the user.
+
+In order to add a termination condition to our algorithm, we add an named entry
+into its ``termination`` dictionary. We implement each of our mutually
+inclusive termination conditions using instances of the ``criterion`` type. In
+order to find a list of available criteria, perform a look-up using Julia's
+help function on the ``criterion`` type.
+
+For this problem, we will simply add a generation limit, which will terminate
+the algorithm once a given number of generations have passed (where the
+initialisation phase is not counted as a generation). We can do this using
+the ``criterion.generations`` criterion, as shown below:
+
+::
+
+  alg.termination["generations"] = criterion.generations(100)
+
+Where 100 refers to the generation limit.
+
 Running the algorithm and analysing the results
 -----------------------------------------------
 
