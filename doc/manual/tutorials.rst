@@ -402,16 +402,65 @@ something similar to that given below:
 Give the code a run a few times, using ``run!``, and see what kind of results
 you can attain using the parameters settings we provided above. You might be
 disappointed by the end-result of the algorithm, but don't worry, we've given
-you sub-optimal parameters on purpose. **Can you figure out a better set of
-parameters, which converge on the global optimum faster?** Once you've
-managed that, you might want to try experimenting with other compatible
-selection and crossover methods, or maybe increasing the difficult of the
-problem.
+you sub-optimal parameters on purpose.
+
+**Can you figure out a better set of parameters, which converge on the global
+optimum faster?** Once you've managed that, you might want to try experimenting
+with other compatible selection and crossover methods, or maybe increasing the
+difficult of the problem.
+
+Performing search diagnostics with logging and visualisation
+------------------------------------------------------------
 
 Adding parallel evaluation and breeding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ADD HERE.
+So far we have been running (quite intensively) the algorithm on a single
+thread, but the rest of our available hyper-threads and cores are left doing
+nothing. In order to maximise our CPU usage, and to maximise the performance of
+our algorithm, we can use a multi-threaded configuration of our breeder and
+evaluation to split their respective processes across multiple threads.
+
+Enabling multi-threading within our algorithm is as simply as specifying the
+number of threads that we wish to split the problem across in our evaluator
+and breeder definitions. In both cases, the number of threads is specified by
+the ``threads`` parameter, which is accepted as a keyword by the
+``evaluator.simple`` evaluator.
+
+Try scaling up the difficulty of the problem by increasing the size of the bit
+vector, then compare the performance of the single-threaded and multi-threaded
+configurations of the algorithm using Julia's ``@time`` macro, as shown below.
+
+::
+
+  single = algorithm.genetic() do alg
+    ...
+  end
+
+  multi = algorithm.genetic() do alg
+    ...
+  end
+
+  exec_s = compose!(single)
+  exec_m = compose!(multi)
+
+  run!(exec_s)
+  run!(exec_m)
+
+  @time run!(exec_s)
+  @time run!(exec_m)
+
+Note, that due to the nature of Julia's JIT (just-in-time) compiler, the
+algorithms run faster after they have been run at least once.
+**This difference may be smaller in the future, where each composed algorithm
+is immediately pre-compiled, prior to being used by ``run!``.**
+
+You may also find that performance is slightly improved by running the above
+code within a function, rather than letting the algorithms become global
+variables. A few (excellent) tips on improving the performance of general
+Julia code can be found at:
+
+http://docs.julialang.org/en/latest/manual/performance-tips/
 
 Solving Numerical Optimisation problems using GAs
 =================================================
