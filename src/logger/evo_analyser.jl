@@ -23,6 +23,9 @@ Converts a provided collection of individuals into a list of JSON descriptions.
 
 A list of JSON descriptions, implemented as a vector of UTF-8 strings.
 """
+
+# Idea: Could supply a JSON prefix? (generations, deme number, etc).
+
 function individuals_to_log_entries(
   ic::IndividualCollection,
   fs::FitnessScheme
