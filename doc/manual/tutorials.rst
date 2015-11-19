@@ -458,9 +458,7 @@ is immediately pre-compiled, prior to being used by ``run!``.**
 You may also find that performance is slightly improved by running the above
 code within a function, rather than letting the algorithms become global
 variables. A few (excellent) tips on improving the performance of general
-Julia code can be found at:
-
-http://docs.julialang.org/en/latest/manual/performance-tips/
+Julia code can be found at: http://docs.julialang.org/en/latest/manual/performance-tips/.
 
 Solving Numerical Optimisation problems using GAs
 =================================================
