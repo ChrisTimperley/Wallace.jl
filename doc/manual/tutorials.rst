@@ -410,7 +410,9 @@ with other compatible selection and crossover methods, or maybe increasing the
 difficult of the problem.
 
 Performing search diagnostics with logging and visualisation
-------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Currently integrating EvoAnalyser.py into Wallace.
 
 Adding parallel evaluation and breeding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
