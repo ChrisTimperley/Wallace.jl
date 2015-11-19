@@ -399,6 +399,15 @@ something similar to that given below:
   executable = compose!(alg)
   run!(executable)
 
+Give the code a run a few times, using ``run!``, and see what kind of results
+you can attain using the parameters settings we provided above. You might be
+disappointed by the end-result of the algorithm, but don't worry, we've given
+you sub-optimal parameters on purpose. **Can you figure out a better set of
+parameters, which converge on the global optimum faster?** Once you've
+managed that, you might want to try experimenting with other compatible
+selection and crossover methods, or maybe increasing the difficult of the
+problem.
+
 Adding parallel evaluation and breeding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
