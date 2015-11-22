@@ -8,6 +8,12 @@ Wallace. All of the tutorials assume that the reader has a basic knowledge of
 evolutionary algorithms, and that they have read the Basics section of this
 documentation.
 
+Getting Started
+===============
+
+* Installing IJulia.
+* Installing Pandas and matplotlib.
+
 Simple Genetic Algorithms and Max Ones
 ======================================
 
