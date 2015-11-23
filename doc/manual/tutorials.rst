@@ -747,7 +747,7 @@ Problem
 Could do with a short description of the problem being solved in this tutorial,
 perhaps along with a diagram of the Berlin-52 map, and links to the .tsp file.
 
-.. image: ../_diagrams/tsp.svg
+.. image:: ../_diagrams/tsp.svg
 
 -------------------------------------------------------------------------------
 
