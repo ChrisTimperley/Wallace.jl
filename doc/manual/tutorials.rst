@@ -516,6 +516,25 @@ Fitness Schema    Scalar (float, minimisation)
 Representation    Float vector (length tailored to function)        
 ================  ==================================================
 
+Rather than declaring our algorithm at the top-level in this tutorial, we will
+instead write a function which returns a version of our algorithm, tailored to
+the specifics of one of the benchmarks above. The skeleton of our function
+should look something like the one given below.
+
+::
+
+  function tutorial_two(size::Int, min::Float, max::Float)
+    definition = algorithm.simple_ga() do
+      ...
+    end
+    compose!(definition)
+  end
+
+Where `size::Int` is used to specify the number of dimensions, `min::Float` is
+used to specify the minimum value that a dimension may take (which is assumed to
+be equal for all dimensions), and similarly, `max::Float` specifies the maximum
+value that a dimension may assume.
+
 Fitness Schema
 ~~~~~~~~~~~~~~
 

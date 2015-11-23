@@ -6,9 +6,6 @@ permalink: /tutorials/numerical_optimisation/
 
 ## Basic Setup
 
-For this problem we will be using a near-identical general setup to the one we
-used in the previous tutorial, given below.
-
 Component       | Setting                                           |
 --------------- | ------------------------------------------------- |
 Population      | Simple (single deme)                              |
@@ -17,19 +14,6 @@ Species         | Simple (single representation)                    |
 Fitness Schema  | Scalar (float, minimisation)                      |
 Representation  | Float vector (length tailored to function)        |
 
-### Fitness Schema
-
-As the objective for each of these benchmarks is to find the global minimum
-value for the function within the bounds of the search domain, our fitness
-schema should minimise a floating point value, representing the value of the
-function for a given set of co-ordinates.
-
-<pre class="wallace">
-fitness&lt;fitness/scalar&gt;:
-  of:       Float
-  maximise: false
-</pre>
-
 ### Problem Representation
 
 For each of these benchmark functions we will be optimising vectors of real
@@ -37,30 +21,9 @@ numbers. In order to best represent these vectors we'll be using the
 floating point vector, which will represent each of the real values as a
 fixed-length floating point integer.
 
-Here we can make use of the look-up operator within the Wallace specification
-language, `$()`, to create a specification tailored to our problem by allowing
-the length of the vector to be specified within the top-level `problem_size`
-property of the specification.
-
 <pre class="wallace">
 representation&lt;representation/float_vector&gt;:
   length: $(problem_size)
-</pre>
-
-As the scope of our search will be confined within a given search domain for
-each of the benchmark problems, we can specify the minimum and maximum value that
-any component within the vector may assume using the `min_value` and `max_value`
-properties.
-
-Once again, we can use the look-up operator to allow the minimum and maximum
-values for all vector components to be specified at the top-level of the
-specification, allowing them be changed to suit our particular benchmark more easily.
-
-<pre class="wallace">
-representation&lt;representation/float_vector&gt;:
-  length: $(problem_size)
-  min:    $(problem_min)
-  max:    $(problem_max)
 </pre>
 
 ### Breeding Operations
