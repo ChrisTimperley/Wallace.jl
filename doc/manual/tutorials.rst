@@ -716,7 +716,7 @@ the algorithm construction method to accept a different benchmark function.
 
 -------------------------------------------------------------------------------
 
-Order-Based Genomes and the Travelling Salesman Problem
+Permutations and the Travelling Salesman Problem
 =======================================================
 
 In this tutorial, we shall use Wallace to implement a genetic algorithm to
@@ -748,6 +748,73 @@ Could do with a short description of the problem being solved in this tutorial,
 perhaps along with a diagram of the Berlin-52 map, and links to the .tsp file.
 
 .. image:: ../_diagrams/tsp.svg
+
+Setup
+-----
+
+For this problem, we shall be using a standard genetic algorithm, as in both
+the previous tutorials, with the components listed below:
+
+==================  =================================================
+Component           Setting                                          
+==================  =================================================
+Population          Simple (single deme)                             
+Species             Simple (single representation)
+Representation      Permutation                                      
+Breeder             Linear Breeder                                   
+==================  =================================================
+
+Permutation Representation
+--------------------------
+
+As in the previous tutorial, we will once again be using the `simple` species to
+describe our `simple` population. In this case, we will be using a `permutation`
+representation to represent our potential solutions; each tour is represented
+as an itinerary, where the cities are listed in the order in which they are
+visited, except for the return trip to the starting city, which is left out as
+that part of the journey is implicit.
+
+Instances of the `permutation` representation are specified by providing an
+alphabet of values which they should permute; this alphabet may contain any
+type of item, from strings, to integers, to arbitary objects. One may provide
+a alphabet to the specification either by explicitly stating it within a list,
+by providing a numeric range, or by providing an external alphabet file.
+
+If one were to take the explicit approach to representing the alphabet for the
+given problem, then the specification would look something like that given
+below:
+
+::
+
+  sp.representation = representation.permutation([
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,
+    26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,
+    51,52
+  ])
+
+Clearly this approach is rather tedious and error-prone for our purposes,
+especially if we were to use our algorithm to solve other instances of the TSP.
+
+Alternatively, we could store our alphabet in an external line-delimited file,
+and instead provide the alphabet property with the path to that file.
+
+::
+
+  sp.representation = representation.permutation("my_tsp_cities.txt")
+
+However, exhaustively listing the indices of each of the cities in our problem,
+whether inline or through an external alphabet file, is probably still a bit too
+monotonous for our liking.
+
+Fortunately, we can list the indices for each our cities in far more succinctly
+through the use of numeric ranges, as shown below.
+
+::
+
+  sp.representation = representation.permutation(1:52)
+
+Writing a Custom Evaluator
+--------------------------
 
 -------------------------------------------------------------------------------
 
