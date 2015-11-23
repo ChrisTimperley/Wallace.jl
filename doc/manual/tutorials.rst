@@ -500,21 +500,8 @@ Rastrigin :math:`A = 10`    |rastrigin|    |min_rastrigin|    |dom_rastrigin|
 Rosenbrock                  |rosenbrock|   |min_rosenbrock|   |dom_rosenbrock|
 ==========================  =============  ================   ==================
 
-Setup
------
-
-For this problem we will be using a near-identical general setup to the one we
-used in the previous tutorial, given below.
-
-================  ==================================================
-Component         Setting                                           
-================  ==================================================
-Population        Simple (single deme)                              
-Breeder           Simple (i.e. selection, crossover, mutation)      
-Species           Simple (single representation)                    
-Fitness Schema    Scalar (float, minimisation)                      
-Representation    Float vector (length tailored to function)        
-================  ==================================================
+Skeleton
+--------
 
 Rather than declaring our algorithm at the top-level in this tutorial, we will
 instead write a function which returns a version of our algorithm, tailored to
@@ -534,6 +521,22 @@ Where `size::Int` is used to specify the number of dimensions, `min::Float` is
 used to specify the minimum value that a dimension may take (which is assumed to
 be equal for all dimensions), and similarly, `max::Float` specifies the maximum
 value that a dimension may assume.
+
+Setup
+-----
+
+For this problem we will be using a near-identical general setup to the one we
+used in the previous tutorial, given below.
+
+================  ==================================================
+Component         Setting                                           
+================  ==================================================
+Population        Simple (single deme)                              
+Breeder           Simple (i.e. selection, crossover, mutation)      
+Species           Simple (single representation)                    
+Fitness Schema    Scalar (float, minimisation)                      
+Representation    Float vector (length tailored to function)        
+================  ==================================================
 
 Fitness Schema
 ~~~~~~~~~~~~~~
