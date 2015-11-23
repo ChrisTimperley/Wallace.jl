@@ -507,6 +507,19 @@ Setup
 Fitness Schema
 ~~~~~~~~~~~~~~
 
+As the objective for each of these benchmarks is to find the global minimum
+value for the function within the bounds of the search domain, our fitness
+schema should minimise a floating point value, representing the value of the
+function for a given set of co-ordinates.
+
+::
+  
+  sp.fitness = fitness.scalar() do f
+    f.maximise = False
+  end
+
+  sp.fitness = fitness.scalar(False)
+
 Order-Based Genomes and the Travelling Salesman Problem
 =======================================================
 
