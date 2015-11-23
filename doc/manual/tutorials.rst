@@ -1019,6 +1019,19 @@ something like the one below.
     fitness(sch, length)
   end
 
+Composer
+~~~~~~~~
+
+Running the algorithm
+---------------------
+
+After having followed all the preceding steps, you should have an algorithm
+which looks roughly similar to the one given below.
+
+::
+
+  CODE!
+
 -------------------------------------------------------------------------------
 
 Koza Tree Genetic Programming and Symbolic Regression
