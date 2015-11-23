@@ -468,6 +468,8 @@ code within a function, rather than letting the algorithms become global
 variables. A few (excellent) tips on improving the performance of general
 Julia code can be found at: http://docs.julialang.org/en/latest/manual/performance-tips/.
 
+-------------------------------------------------------------------------------
+
 Floating Point Vectors and Numerical Optimisation
 =================================================
 
@@ -538,8 +540,6 @@ Fitness Schema    Scalar (float, minimisation)
 Representation    Float vector (length tailored to function)        
 ================  ==================================================
 
--------------------------------------------------------------------------------
-
 Fitness Schema
 ~~~~~~~~~~~~~~
 
@@ -580,6 +580,66 @@ would be.
 Breeding Operations
 ~~~~~~~~~~~~~~~~~~~
 
+As our problem is a relatively simple one, we will once again use the
+`breeder.simple` breeder to generate the offspring for the population at each
+generation. Feel free to investigate and experiment with different selection,
+mutation and crossover operators, but for the rest of the tutorial we will be
+using the setup given below.
+
+::
+
+  pop.breeder = breeder.simple() do br
+    br.selection = selection.tournament(4)
+    br.crossover = crossover.two_point(0.7)
+    br.mutation  = mutation.gaussian(0.01, 0.0, 1.0)
+  end
+
+To perform parent selection, we will be using the simple but effective method
+of tournament selection once again, wherein a pre-determined number of parental
+candidates are randomly selected from the population and put into a *tournament*
+to determine the best amongst them, which becomes selected as a parent.
+
+::
+
+  br.selection = selection.tournament(4)
+
+You could also try experimenting with other methods such as
+*roulette wheel selection* and *stochastic universal sampling*.
+
+For our method of crossing over parents to produce proto-offspring, we shall be
+using the `two point crossover` method. This method takes two vectors of equal
+length, and randomly selects two points, or loci, along the genome, before
+exchanging all genes between those two points across the two parents, generating
+two children. For this operator, the `rate` property specifies the probability that
+a crossover will occur during a call; if this event occurs, then the two parents
+are passed to the mutation operator unaltered.
+
+::
+
+  br.crossover = crossover.two_point(0.7)
+
+Once again, there are a multitude of different crossover operators that could
+be effectively applied to our given problem, and we encourage you to experiment
+with as many as possible. To begin with, you could look into using one-point crossover
+again, as used in the previous tutorial, or you could use uniform crossover, which
+creates an offspring from two given parents on a locus-by-locus basis, randomly choosing
+whose gene to include at a given locus, or you could try something different altogether.
+
+Finally, as our mutation operator, we're using *gaussian mutation*, which runs along a
+genome, and with a given probability, perturbs a gene by adding noise generated from a
+predefined normal distribution. Here we can alter the probability that a mutation event
+will occur at a given gene, via the `rate` property, or we can specify the parameters of
+our normal distribution using the `mean` and `std` properties.
+
+::
+
+  br.mutation = mutation.gaussian(0.01, 0.0, 1.0)
+
+Alternatively, we could use *uniform mutation* to sample a new floating point value
+within the search domain at a given locus, or we could implement our own
+*noisy mutation* operator, which could perturb genes using noise sampled from
+alternative probability distributions, such as the Poisson or Gamma distributions.
+
 Evaluator
 ~~~~~~~~~
 
@@ -597,8 +657,12 @@ Starting with the Sphere problem, try running your algorithm on each of the
 benchmarks using a fixed number of evaluations, and attempt to determine an
 optimal set of operators and parameters common to all of them.
 
+-------------------------------------------------------------------------------
+
 Order-Based Genomes and the Travelling Salesman Problem
 =======================================================
+
+-------------------------------------------------------------------------------
 
 Koza Tree Genetic Programming and Symbolic Regression
 =====================================================
