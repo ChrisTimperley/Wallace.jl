@@ -643,6 +643,62 @@ alternative probability distributions, such as the Poisson or Gamma distribution
 Evaluator
 ~~~~~~~~~
 
+Finally, with our problem representation, breeding operations, and schema
+configured, we can provide the evaluator for our problem, responsible for
+calculating the fitness values of potential solutions. As mentioned before, the
+fitness of our individuals will be given by their function value for the
+particular problem we are trying to solve.
+
+To calculate this function value and assign it as the fitness of individuals
+within the population we can make use of the same `evaluator.simple`
+evaluator that we used in the first tutorial.
+
+::
+  
+  alg.evaluator = evaluator/simple()
+
+To recap, this evaluator accepts a trailing block, which describes how the
+objective function value for a given individual should be computed, and an
+optional keyword argument, `threads`, which instructs Wallace how many threads
+to split the evaluation workload across.
+
+At this point our algorithm specification becomes specific to the particular
+benchmark we're attempting to optimise, as the `objective` of our evaluator
+will be different for them all. Below is an example of how the Sphere
+benchmark might be calculated using a Julia function.
+
+::
+
+  alg.evaluator = evaluator.simple(["threads" => 4]) do scheme, genome
+    f = zero(Float)
+    for x in genome
+      f += x*x
+    end
+    fitness(scheme, f)
+  end
+
+As is the case with all Julia functions which accept blocks, it is also
+possible to provide the name of an existing function to the evaluator
+definition instead, as demonstrated below. Depending on your version of
+Julia, this may result in performance gains, as standard functions are
+subject to optimisation by Julia's JIT, whereas anonymous functions
+by default are not.
+
+::
+
+  function sphere(f::ScalarFitnessScheme, g::Vector{Float})
+    f = zero(Float)
+    for x in genome
+      f += x*x
+    end
+    fitness(scheme, f)
+  end
+
+  alg.evaluator = evaluator.simple(sphere, ["threads" => 4])
+
+Following the example above, implement similar functions for each of
+the benchmark functions that are to be optimised.
+
 Running the algorithm
 ---------------------
 
