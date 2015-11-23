@@ -736,6 +736,19 @@ optimisation.
 * Use Wallace to implement genetic algorithms capable of solving
   permutation-based problems, such as the travelling salesman problem.
 
+Getting Started
+---------------
+
+Files that you will need to create!
+
+Problem
+-------
+
+Could do with a short description of the problem being solved in this tutorial,
+perhaps along with a diagram of the Berlin-52 map, and links to the .tsp file.
+
+.. image: ../_diagrams/tsp.svg
+
 -------------------------------------------------------------------------------
 
 Koza Tree Genetic Programming and Symbolic Regression
