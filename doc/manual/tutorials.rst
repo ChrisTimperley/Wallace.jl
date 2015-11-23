@@ -538,6 +538,8 @@ Fitness Schema    Scalar (float, minimisation)
 Representation    Float vector (length tailored to function)        
 ================  ==================================================
 
+-------------------------------------------------------------------------------
+
 Fitness Schema
 ~~~~~~~~~~~~~~
 
