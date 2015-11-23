@@ -686,9 +686,9 @@ by default are not.
 
 ::
 
-  function sphere(f::ScalarFitnessScheme, g::Vector{Float})
+  function sphere(scheme::ScalarFitnessScheme, g::Vector{Float})
     f = zero(Float)
-    for x in genome
+    for x in g
       f += x*x
     end
     fitness(scheme, f)
