@@ -468,7 +468,7 @@ code within a function, rather than letting the algorithms become global
 variables. A few (excellent) tips on improving the performance of general
 Julia code can be found at: http://docs.julialang.org/en/latest/manual/performance-tips/.
 
-Solving Numerical Optimisation problems using GAs
+Floating Point Vectors and Numerical Optimisation
 =================================================
 
 Building on the previous tutorial, in this tutorial we shall be using simple
