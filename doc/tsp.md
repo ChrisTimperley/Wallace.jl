@@ -4,27 +4,6 @@ title: Travelling Salesman Problem
 permalink: /tutorials/tsp/
 ---
 
-## Writing a Custom Evaluator
-
-For our given problem we shall need to write an evaluator capable of
-(quickly) calculating the round-trip distance of a given tour. The quickest way
-to do is this to pre-calculate a distance (or cost) matrix, encoding the cost
-of travelling from one city to another, rather than performing redundant
-calculations at run-time.
-
-However, this introduces the problem of pre-computing
-and storing this matrix at the start of the computation, an ability that the
-simple evaluator is uncapable of. To add this feature into our algorithm we'll
-have to write our own evaluator from scratch.
-
-In the interests of genericity, we'll write a new evaluator tailored specifically
-to the Geometric Travelling Salesman Problem, capable of accepting a `.tsp` file
-containing a list of city co-ordinates.
-
-To add our own evaluator into Wallace, we'll need to write a *type manifest*
-file and register it with Wallace, and in this case, we'll also need to write
-a new Julia type to realise our evaluator.
-
 ### Julia Type
 
 In order to implement our specialised TSP evaluator, we will first extend Wallace

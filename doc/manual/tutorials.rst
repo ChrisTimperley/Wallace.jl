@@ -741,6 +741,8 @@ Getting Started
 
 Files that you will need to create!
 
+my_tsp_evaluator.jl
+
 Problem
 -------
 
@@ -862,6 +864,148 @@ default to the canonical genotype.
 
 Writing a Custom Evaluator
 --------------------------
+
+Type Definition
+~~~~~~~~~~~~~~~
+
+In order to implement our specialised TSP evaluator, we will first extend Wallace
+with a new Julia type for that evaluator. To do this, we'll need to open up the
+skeleton file we constructed earlier, `my_tsp_evaluator.jl`.
+Within this file we will write a standard Julia definition for a type that accepts
+details of a given TSP problem and evaluates provided candidate solutions
+according to them.
+
+To create a new type within Julia, we simply write the keyword `type` followed
+by the name of our type. The definition of our type then immediately follows this
+line, and is terminated by the `end` keyword. However, as we're writing a special
+type of evaluator, we will need to extend the base evaluator type; this is
+done by following the syntax below.
+
+::
+
+  type MyTSPEvaluator <: Evaluator
+
+  end
+
+Next, we shall define the attributes of our TSP evaluator type within the type
+definition block we have just created. This is done by simply providing the name
+of the attribute followed by two colons and the name of its underlying type within
+Julia. An example attribute, responsible for recording the number of cities within
+a given TSP instance is shown below.
+
+::
+
+  type MyTSPEvaluator <: Evaluator
+    cities::Int
+  end
+
+For our particular evaluator, we shall add two further attributes to its
+definition; namely, `threads`, specifying the number of threads that the
+evaluation workload should be split across, and `distance`, modelling the
+distance matrix between nodes.
+
+To model the distance matrix, we shall make use of Julia's multi-dimensional
+arrays, using an efficient two-dimensional array to store the distance between
+nodes. The complete definition for this type is given below:
+
+::
+
+  type MyTSPEvaluator <: Evaluator
+    cities::Int
+    threads::Int
+    distance::Array{Int, 2}
+  end
+
+With our type definition in place, we now need to implement the `evaluate!`
+method of our type, responsible for accepting a chromosome, along with the
+state of the search, and returning a valid fitness object. The `evaluate!`
+method should accept the following arguments:
+
+* `e::MyTSPEvaluator` - The evaluator object itself must be provided as part
+of the call. From this object we will extract the distance matrix to perform
+the tour length calculations.
+* `s::State` - The current state of the evolution. We won't be using this,
+but as it forms a necessary part of the `evaluate!` method signature, we shall
+still include it.
+* `sch::FitnessScheme` - The fitness scheme used by the provided individual.
+We will use this to produce a fitness object from its tour length using the
+`fitness()` method.
+* `tour::Vector{Int}` - The tour under evaluation.
+
+Once we've added these method arguments together, our empty method should
+start to look something like the example below.
+
+::
+
+  function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, tour::Vector{Int})
+
+  end
+
+Ultimately, our method should return a computed fitness object for its provided
+individual. In order to do this, we will call the `fitness` method, together with
+the fitness schema and the individual's tour length as its arguments, as shown
+below.
+
+::
+
+  function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, tour::Vector{Int})
+    # tour length calculation...
+
+    fitness(sch, length)
+  end
+
+Now the last thing that remains is to add the tour length calculation logic
+into the top of our method body. First, let's create a temporary variable to
+store the total length of the individual's tour so far. Let's simply call this
+`length`. Without a little knowledge about the inner workings of Julia, you may
+be tempted to simply perform this operation via `length = 0`. But that would be
+a near-silent mistake, resulting in a slower performance and some strange artefacts.
+
+Why? Because setting the length to `0` will mark the length variable as an
+integer, and any subsequent operations will either proceed to convert the
+integer to a floating point, or they will simply treat inputs as integers.
+
+The simplest way to get round this is to initialise a floating point zero via
+`0.0`, but a safer, better practice, is to initialise the count using the
+`zero` function with the name of the underlying type, as shown below.
+
+::
+
+  function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, tour::Vector{Int})
+    length = zero(Float)
+
+    fitness(sch, length)
+  end
+
+We now need to actually perform the tour length calculation. The fastest and
+simplest way to do this is to simply iterate across the indices of each of the
+cities, from 1 to the number of cities minus one, intentionally missing the
+last index. At each step, we then increment the tour length by the distance
+between the city at the current index and the city at the subsequent index
+using the distance matrix. Finally, we add the distance between the city at
+the final index and the starting index to complete the tour.
+
+We should now have a complete type definition for our evaluator that looks
+something like the one below.
+
+::
+
+  importall Wallace
+
+  type MyTSPEvaluator < SimpleEvaluator
+    cities::Int
+    threads::Int
+    distance::Array{Int, 2}
+  end
+
+  function evaluate!(e::MyTSPEvaluator, s::State, sch::FitnessScheme, tour::Vector{Int})
+    length = zero(Float)
+    for i in 1:e.cities-1
+      length += e.distance[tour[i], tour[i+1]]
+    end
+    length += e.distance[tour[end], tour[1]]
+    fitness(sch, length)
+  end
 
 -------------------------------------------------------------------------------
 
