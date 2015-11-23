@@ -1102,7 +1102,7 @@ Using these arguments, the method should return a well-formed
 ``MyTSPEvaluator`` instance, ready to be integrated into the algorithm under
 composition.
 
-The skeleton for our function should look something like the one shown below.
+The skeleton for our function should look something like that given below.
 
 ::
 
@@ -1111,8 +1111,90 @@ The skeleton for our function should look something like the one shown below.
     
   end
 
-LOAD THE FILE, ETC.
+For our evaluator, the composer will need to take the path to a file containing
+the co-ordinates of a set of cities, and to load and transform the contents of
+that file into a distance matrix.
 
+In order to generate a distance matrix within the composer, we first need to
+load the contents of the cities file and convert it into an array of co-ordinates.
+The easiest way to do this is to first create an empty list to hold the
+co-ordinate lists for each city, and to then scan each line in the TSP file,
+convert it into a list of co-ordinates, and insert it into the array. A way of
+performing the above in Julia is given below.
+
+::
+
+  # Create a list to hold the co-ordinates of each city.
+  cities = Vector{Float}[]
+
+  # Open up a handle on the TSP city file with read permissions.
+  f = open(def.file, "r")
+
+  # Iterate across each line in the file, and provided it isn't empty,
+  # produce a list of co-ordinates from it and append them to the
+  # city co-ordinates list.
+  for l in readlines(f)
+    !isempty(l) && push!(cities, [float(n) for n in split(l, ",")])
+  end
+
+  # Close the file handle.
+  close(f)
+
+Now we have a way of computing the list of co-ordinates for each city,
+let's go about calculating the distance matrix. As we did before, in
+our type definition, we shall use a two-dimensional array to
+implement our distance matrix. A simple way to compute this matrix is
+given below:
+
+::
+
+  n = length(cities)
+  matrix = Array(Float, 2)
+  for i = 1:n
+    for j = 1:n
+      matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
+    end
+  end
+
+We now have everything in place to build an instance of our TSP
+evaluator type, and to complete our composer. We simply need to pass
+the number of cities, the number of threads, and the distance matrix
+to the TSP evaluator constructor (in the order in which they appear
+in the ``MyTSPEvaluator`` type definition).
+
+::
+
+  function compose!(def::MyTSPEvaluatorDefinition, pop::Population)
+
+    # Create a list to hold the co-ordinates of each city.
+    cities = Vector{Float}[]
+
+    # Open up a handle on the TSP city file with read permissions.
+    f = open(def.file, "r")
+
+    # Iterate across each line in the file, and provided it isn't empty,
+    # produce a list of co-ordinates from it and append them to the
+    # city co-ordinates list.
+    for l in readlines(f)
+      !isempty(l) && push!(cities, [float(n) for n in split(l, ",")])
+    end
+
+    # Close the file handle.
+    close(f)
+
+    # Compute the distance matrix.
+    n = length(cities)
+    matrix = Array(Float, 2)
+    for i = 1:n
+      for j = 1:n
+        matrix[i, j] = sqrt(sum((cities[i] - cities[j]) .^ 2))
+      end
+    end
+
+    # Construct and return a MyTSPEvaluator instance.
+    MyTSPEvaluator(n, def.threads, matrix)
+
+  end
 
 Running the algorithm
 ---------------------

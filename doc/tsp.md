@@ -4,49 +4,6 @@ title: Travelling Salesman Problem
 permalink: /tutorials/tsp/
 ---
 
-### Wallace Type Manifest
-
-With our type definition in place, we now need to write a manifest for our
-type, describing its internal structure and composer to Wallace. To do this,
-let's begin by creating a new manifest file, `tsp.manifest.yml`.
-
-At the top of our type manifest file, we should add a `type` property,
-specifying the name of the type that is being registered with Wallace;
-note that this name needn't be the same as the name of the Julia type.
-The name of our evaluator should follow Wallace's type naming conventions.
-Firstly, the name of the package, if any, that the type belongs to
-should appear first, followed by a colon. Then the name of the base type,
-if any, should appear, followed by a forward slash. Finally, the name of
-the type itself should appear at the end. An example type name for our
-problem is given below:
-
-<pre class="yaml">
-type: evaluator/tsp
-</pre>
-
-With the name of our type in place, we now need to provide the manifest
-file with the following information:
-
-* `description` - A short description of the purpose and function of the type.
-* `properties` - An associated array (dictionary/hash) describing the parameters
-    of this type, indexed by the name of each parameter. Each entry should
-    contain a `description`, a `type`, and optionally, a `default` tag,
-    describing, but not specifying, the default value / behaviour of the property.
-* `composer` - Provides the body of a Julia function, responsible for creating
-  and returning an instance of the given type from a set of provided parameters.
-
-To begin with, let's write a short description for our type. Below is an
-example of a simple description. For those less familiar with YAML, the `|` symbol
-following the `description` property marks the beginning of a multi-line string
-on the line below.
-
-<pre class="yaml">
-type: alfred:evaluator/tsp
-
-description: |
-  Evaluates the fitness of a TSP tour for a pre-determined set of cities.
-</pre>
-
 Next, let's put together a list of the properties for our TSP evaluator. For
 our problem we would like our evaluator to accept a file containing the
 co-ordinates of a set of cities for our particular problem, as well as a
