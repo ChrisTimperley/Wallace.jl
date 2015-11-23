@@ -1004,7 +1004,7 @@ something like the one below.
 
   importall Wallace
 
-  type MyTSPEvaluator <: SimpleEvaluator
+  type MyTSPEvaluator <: Evaluator
     cities::Int
     threads::Int
     distance::Array{Int, 2}
@@ -1019,8 +1019,100 @@ something like the one below.
     fitness(sch, length)
   end
 
+Definition
+~~~~~~~~~~
+
+Now that our type definition and ``evaluate!`` method are in place, we now need
+to provide a definition function and a composer for our evaluator. Our
+definition function, which we shall call ``my_tsp_evaluator``, will simply take
+a block, specifying the setup for a TSP evaluator, and return a definition of
+that evaluator, rather than an instance of ``MyTSPEvaluator``.
+
+In order to return such a definition, we must first define one, by adding a
+new sub-type of the ``EvaluatorDefinition`` type, as shown below:
+
+::
+
+  importall Wallace
+
+  type MyTSPEvaluator <: Evaluator
+    ...
+  end
+
+  type MyTSPEvaluatorDefinition <: EvaluatorDefinition
+    
+  end
+
+  ...
+
+The role of this definition type is to hold information about our evaluator
+which will later be transformed into an instance of ``MyTSPEvaluator`` by the
+``compose!`` function.
+
+With our definition type now in place, we can create our definition function,
+as shown below:
+
+::
+
+  """
+  Create a definition function which accepts a block, and returns a
+  MyTSPEvaluatorDefinition function.
+  """
+  function my_tsp_evaluator(blk::Function)
+    def = MyTSPEvaluatorDefinition()
+    blk(def)
+    def
+  end
+
+This will pass an empty ``MyTSPEvaluatorDefinition`` instance to our block,
+from which we can specify the properties of that instance.
+
+To our evaluator definition type, we shall add three such properties:
+
+* ``file::AbstractString``, the name of the TSP file from which the cities
+  should be acquired.
+* ``threads::Int``, the number of threads that the evaluation should be split
+  across. This should be initialised to 1.
+* ``stage::AbstractString``, an optional parameter, specifying the name of the
+  developmental stage that this evaluator should extract the tour from. This
+  should be initialised to an empty string.
+
+We should also add an empty constructor, so that a partial definition can be
+instantiated without specifying each of these properties apriori. Our
+definition type should now look something like:
+
+::
+
+  type MyTSPEvaluatorDefinition <: EvaluatorDefinition
+    file::AbstractString
+    threads::Int
+    stage::AbstractString
+
+    MyTSPEvaluatorDefinition() = new("", 1, "")
+  end
+
 Composer
 ~~~~~~~~
+
+The last remaining task in constructing our evaluator is to implement its
+composer, as a method of the ``compose!`` function. Our ``compose!``
+function should accept a definition, provided in the form of an
+``MyTSPEvaluatorDefinition`` instance, as well as a ``Population`` instance.
+Using these arguments, the method should return a well-formed
+``MyTSPEvaluator`` instance, ready to be integrated into the algorithm under
+composition.
+
+The skeleton for our function should look something like the one shown below.
+
+::
+
+  function compose!(def::MyTSPEvaluatorDefinition, pop::Population)
+    
+    
+  end
+
+LOAD THE FILE, ETC.
+
 
 Running the algorithm
 ---------------------
