@@ -868,8 +868,8 @@ Writing a Custom Evaluator
 Type Definition
 ~~~~~~~~~~~~~~~
 
-In order to implement our specialised TSP evaluator, we will first extend Wallace
-with a new Julia type for that evaluator. To do this, we'll need to open up the
+In order to implement our specialised TSP evaluator, we must first extend Wallace
+with a new Julia type for that evaluator. To do this, wew ill need to open up the
 skeleton file we constructed earlier, `my_tsp_evaluator.jl`.
 Within this file we will write a standard Julia definition for a type that accepts
 details of a given TSP problem and evaluates provided candidate solutions
@@ -886,6 +886,15 @@ done by following the syntax below.
   type MyTSPEvaluator <: Evaluator
 
   end
+
+As our evaluator builds upon the existing functionality of Wallace, we must
+add ``importall Wallace`` to the top of our file, as shown below.
+
+::
+
+  importall Wallace
+
+  type MyTSPEvaluator <: Evaluator
 
 Next, we shall define the attributes of our TSP evaluator type within the type
 definition block we have just created. This is done by simply providing the name
@@ -915,6 +924,9 @@ nodes. The complete definition for this type is given below:
     threads::Int
     distance::Array{Int, 2}
   end
+
+``evaluate!`` method
+~~~~~~~~~~~~~~~~~~~~
 
 With our type definition in place, we now need to implement the `evaluate!`
 method of our type, responsible for accepting a chromosome, along with the
@@ -992,7 +1004,7 @@ something like the one below.
 
   importall Wallace
 
-  type MyTSPEvaluator < SimpleEvaluator
+  type MyTSPEvaluator <: SimpleEvaluator
     cities::Int
     threads::Int
     distance::Array{Int, 2}
