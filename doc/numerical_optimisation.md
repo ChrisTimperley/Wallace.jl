@@ -14,18 +14,6 @@ Species         | Simple (single representation)                    |
 Fitness Schema  | Scalar (float, minimisation)                      |
 Representation  | Float vector (length tailored to function)        |
 
-### Problem Representation
-
-For each of these benchmark functions we will be optimising vectors of real
-numbers. In order to best represent these vectors we'll be using the
-floating point vector, which will represent each of the real values as a
-fixed-length floating point integer.
-
-<pre class="wallace">
-representation&lt;representation/float_vector&gt;:
-  length: $(problem_size)
-</pre>
-
 ### Breeding Operations
 
 As our problem is a relatively simple one, we will once again use the

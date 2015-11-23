@@ -554,6 +554,27 @@ function for a given set of co-ordinates.
 
   sp.fitness = fitness.scalar(False)
 
+Representation
+~~~~~~~~~~~~~~
+
+For each of these benchmark functions we will be optimising vectors of real
+numbers. In order to best represent these vectors we'll be using the
+floating point vector, which will represent each of the real values as a
+fixed-length floating point integer.
+
+Making use of the arguments supplied to our algorithm building function, we can
+build a problem-specific representation using the code below. Notice that the
+DSL is a super-set of Julia, and can thus be used in all the ways it otherwise
+would be.
+
+::
+
+  sp.representation = representation.float_vector() do fv
+    fv.length = size
+    fv.min = min
+    fv.max = max
+  end
+
 Order-Based Genomes and the Travelling Salesman Problem
 =======================================================
 
