@@ -711,12 +711,30 @@ function that looks similar to the one given below.
 
 Starting with the Sphere problem, try running your algorithm on each of the
 benchmarks using a fixed number of evaluations, and attempt to determine an
-optimal set of operators and parameters common to all of them.
+optimal set of operators and parameters common to all of them. Try modifying
+the algorithm construction method to accept a different benchmark function.
 
 -------------------------------------------------------------------------------
 
 Order-Based Genomes and the Travelling Salesman Problem
 =======================================================
+
+In this tutorial, we shall use Wallace to implement a genetic algorithm to
+solve the travelling salesman problem, in which we wish to find the shortest
+possible route through a given set of cities, which visits all cities exactly once
+and return to the city at which the tour was started. The TSP is a prime example
+of an NP-hard, or more specifically, NP-complete, problem that can be
+effectively tackled using techniques such as genetic algorithms and ant colony
+optimisation.
+
+**By the end of this tutorial, you should be able to:**
+
+* Implement memetic algorithms via local search operators, incorporated using
+  the linear breeder.
+* Extend Wallace with a custom evaluator, tailored to the travelling salesman
+  problem.
+* Use Wallace to implement genetic algorithms capable of solving
+  permutation-based problems, such as the travelling salesman problem.
 
 -------------------------------------------------------------------------------
 
