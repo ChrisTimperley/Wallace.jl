@@ -813,6 +813,53 @@ through the use of numeric ranges, as shown below.
 
   sp.representation = representation.permutation(1:52)
 
+Linear Breeder
+--------------
+
+The linear breeder is the second simplest breeder provided by Wallace; it
+relaxes the constraints imposed on the type and number of genetic operators
+imposed by the simple breeder, allowing the user to provide an arbitrary linear
+chain of operators instead. Offspring are produced by being subjecting batches of
+proto-offspring to each of these operators in sequence, until the desired number
+the required number have been produced as directed.
+
+To specify a linear breeder, one needs only to provide its definition with an
+ordered list of operators, and if necessary, the associated stage of individual
+development upon which they operate, as demonstrated below:
+
+::
+
+  # Using this style,
+  pop.breeder = breeder.linear([
+    selection.tournament("genome", 4),
+    crossover.pmx("genome")
+    mutation.two_opt("genome")
+  ])
+
+  # ... or this style.
+  pop.breeder = breeder.linear() do br
+    br.ops << selection.tournament() do sel
+      sel.size = 4
+      sel.stage = "genome"
+    end
+    br.ops << crossover.pmx("genome")
+    br.ops << mutation.two_opt("genome")
+  end
+
+However, since we're using a simple species, which has only a single stage of
+development, there is no need for us to provide the `stage` property for each
+operator specification. In the event we omitted the `stage` property and our
+species had more than a single stage of development, then the stage would
+default to the canonical genotype.
+
+::
+
+  pop.breeder = breeder.linear([
+    selection.tournament(4),
+    crossover.pmx()
+    mutation.two_opt()
+  ])
+
 Writing a Custom Evaluator
 --------------------------
 
