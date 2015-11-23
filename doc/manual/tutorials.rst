@@ -575,6 +575,26 @@ would be.
     fv.max = max
   end
 
+Breeding Operations
+~~~~~~~~~~~~~~~~~~~
+
+Evaluator
+~~~~~~~~~
+
+Running the algorithm
+---------------------
+
+After following the steps above, you should end up with an algorithm building
+function that looks similar to the one given below.
+
+::
+
+  CODE GOES HERE!
+
+Starting with the Sphere problem, try running your algorithm on each of the
+benchmarks using a fixed number of evaluations, and attempt to determine an
+optimal set of operators and parameters common to all of them.
+
 Order-Based Genomes and the Travelling Salesman Problem
 =======================================================
 

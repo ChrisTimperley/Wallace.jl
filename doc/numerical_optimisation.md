@@ -4,16 +4,6 @@ title: Numerical Optimisation
 permalink: /tutorials/numerical_optimisation/
 ---
 
-## Basic Setup
-
-Component       | Setting                                           |
---------------- | ------------------------------------------------- |
-Population      | Simple (single deme)                              |
-Breeder         | Simple (i.e. selection, crossover, mutation)      |
-Species         | Simple (single representation)                    |
-Fitness Schema  | Scalar (float, minimisation)                      |
-Representation  | Float vector (length tailored to function)        |
-
 ### Breeding Operations
 
 As our problem is a relatively simple one, we will once again use the
@@ -117,52 +107,3 @@ As in the first tutorial, we construct and return a fitness object for our
 individual using the `fitness()` function in combination with our schema,
 provided to the objective function by the `scheme` parameter. **(This is
 possibly subject to change).**
-
--------------------------------------------------------------------------------
-
-## Running the Algorithm
-
-After following the steps above, you should end up with an algorithm that looks
-similar to the one given below, except tailored to the numerical function you
-wish to optimise.
-
-<pre class="wallace">
-type: algorithm/evolutionary_algorithm
-
-# Sphere function (n = 10)
-problem_size: 10
-problem_min:  0.0
-problem_max:  1.0
-
-evaluator&lt;evaluator/simple&gt;:
-  objective: |
-    f = 0.0
-    for x in get(i.genome)
-      f += x*x
-    end
-    fitness(scheme, f)
-
-termination:
-  evaluations&lt;criterion/evaluations&gt;: { limit: 10000 }
-
-_my_species&lt;species/simple&gt;:
-  fitness&lt;fitness/scalar&gt;: { of: Float, maximise: false }
-  representation&lt;representation/float_vector&gt;:
-    length: $(problem_size)
-    min:    $(problem_min)
-    max:    $(problem_max)
-
-_my_breeder&lt;breeder/simple&gt;:
-  selection&lt;selection/tournament&gt;: { size: 4 }
-  crossover&lt;crossover/two_point&gt;: { rate: 0.7 }
-  mutation&lt;mutation/gaussian&gt;: { rate: 0.01, mean: 0.0, std: 1.0 }
-
-population&lt;population/simple&gt;:
-  size:     30
-  breeder:  $(_my_breeder)
-  species:  $(_my_species)
-</pre>
-
-Starting with the Sphere problem, try running your algorithm on each of the
-benchmarks using a fixed number of evaluations, and attempt to determine an
-optimal set of operators and parameters common to all of them.
