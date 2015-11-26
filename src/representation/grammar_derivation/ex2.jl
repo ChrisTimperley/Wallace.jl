@@ -191,16 +191,6 @@ derive(g::Grammar, nxt::Task) =
   derive(g, g.rules["root"], nxt)
 
 """
-Derives a Julia expression (in the form of an Expr) using a provided sequence
-of codons, a maximum number of wrappings, and a given grammar.
-"""
-function derive(g::Grammar, r::Rule, nxt::Task)
-  i1 = derive(g, g.rules[:num], nxt)
-  i2 = derive(g, g.rules[:num], nxt)
-  Expr(:call, :add, i1, i2)
-end
-
-"""
 Converts a given Expr into a string containing Julia code capable of
 reproducing that Expr.
 """
