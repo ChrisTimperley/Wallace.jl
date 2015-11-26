@@ -34,4 +34,5 @@ describe(i::Any) = "$(i)"
 include("representation/float_vector.jl")
 include("representation/int_vector.jl")
 include("representation/bit_vector.jl")
+include("representation/grammar_derivation.jl")
 end

@@ -1,5 +1,0 @@
-id: representation/grammar_derivation
-composer: |
-  s["max_wraps"] = Base.get(s, "max_wraps", 0)
-  s["grammar"] = compose("grammar", s["grammar"])
-  GrammarDerivationRepresentation(s["max_wraps"], s["grammar"])
