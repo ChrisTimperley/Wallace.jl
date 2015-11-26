@@ -8,6 +8,9 @@ For now we'll go with the former, since you can express a more complex optional
 section as a separate rule.
 """
 
+"""
+Defines the RegEx pattern used to embed grammar rules within one another.
+"""
 const rule_regex = r"<[\w_]+(,\s*[\?|\+|\*])?>"
 
 #grammar(max_wraps = 2) do g
@@ -35,13 +38,8 @@ end
 Parses a single option for a grammar rule and returns a Rule object encoding
 that rule.
 """
-function rule(r::AbstractString)
-  if search(r, rule_regex) != 0:-1
-    NonTerminalRule(r)
-  else
-    TerminalRule(parse(r))
-  end
-end
+rule(g::Grammar, r::AbstractString) =
+  search(r, rule_regex) != 0:-1 ? NonTerminalRule(r) : TerminalRule(parse(r))
 
 """
 Creates a modified version of a given grammar rule, according to some provided
@@ -60,17 +58,28 @@ function rule(r::Rule, modifier::AbstractString)
   end
 end
 
-function rule(g::Grammar, name::AbstractString, options...)
+"""
+Creates a single grammar rule from a provided rule definition string.
+"""
+rule(g::Grammar, name::AbstractString, def::String) =
+  g.rules[name] = rule(g, def)
 
-end
+"""
+Creates a named OR rule for a given grammar, using a list of possible options,
+each given by a rule definition string.
+"""
+rule(g::Grammar, name::AbstractString, defs...) =
+  g.rules[name] = OptionRule(Rule[rule(g, def) for def in defs])
 
 """
 An OR rule allows a given grammar rule to be interpreted in a number of
 different ways.
 """
 immutable OrRule <: Rule
-  num_rules::Int
-  rules::Vector{Rule}
+  num_options::Int
+  options::Vector{Rule}
+
+  OrRule(options::Vector{Rule}) = new(length(options), options)
 end
 
 """
@@ -119,7 +128,7 @@ Selects an interpretation of a given OR rule according to an index provided by
 a given codon sequence.
 """
 derive(g::Grammar, r::OrRule, nxt::Task) =
-  derive(g, g.rules[(consume(nxt) % num_rules) + 1], nxt)
+  derive(g, g.options[(consume(nxt) % num_options) + 1], nxt)
 
 derive(g::Grammar, r::TerminalRule, nxt::Task) =
   r.value
