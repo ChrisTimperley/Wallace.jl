@@ -1,13 +1,25 @@
+"""
+Two ways of implementing options:
+
+<something, ?> OR ?[<something> and <something else>]
+
+The latter is more powerful, but a bit trickier to parse.
+For now we'll go with the former, since you can express a more complex optional
+section as a separate rule.
+"""
+
+const rule_regex = r"<[\w_]+(,\s*[\?|\+|\*])?>"
+
 example = "add(<num>, <num>)"
 
-grammar(max_wraps = 2) do g
-  # Should retreive <val> from grammar, rather than fetching rule each time
-  # it's called.
-  rule(g, "exp", "(<exp>)", "<val>", "<op>")
-  rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
-  rule(g, "val", "x", "y", "<num>")
-  rule(g, "num", "<digit, +>") # this one is the trickiest to deal with.
-end
+#grammar(max_wraps = 2) do g
+#  # Should retreive <val> from grammar, rather than fetching rule each time
+#  # it's called.
+#  rule(g, "exp", "(<exp>)", "<val>", "<op>")
+#  rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
+#  rule(g, "val", "x", "y", "<num>")
+#  rule(g, "num", "<digit, +>") # this one is the trickiest to deal with.
+#end
 
 """
 The base type for all grammar rules.
@@ -16,6 +28,24 @@ abstract Rule
 
 type Grammar
   rules::Dict{AbstractString, Rule}
+
+  Grammar() = new(Dict{AbstractString, Rule}())
+end
+
+"""
+Parses a single option for a grammar rule and returns a Rule object encoding
+that rule.
+"""
+function rule(g::Grammar, name::AbstractString, r::AbstractString)
+  if search(r, rule_regex) != 0:-1
+    NonTerminalRule(r)
+  else
+    TerminalRule(parse(r))
+  end
+end
+
+function rule(g::Grammar, name::AbstractString, options...)
+
 end
 
 """
