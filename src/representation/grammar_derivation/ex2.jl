@@ -13,15 +13,6 @@ Defines the RegEx pattern used to embed grammar rules within one another.
 """
 const rule_regex = r"<[\w_]+(,\s*[\?|\+|\*])?>"
 
-#grammar(max_wraps = 2) do g
-#  # Should retreive <val> from grammar, rather than fetching rule each time
-#  # it's called.
-#  rule(g, "exp", "(<exp>)", "<val>", "<op>")
-#  rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
-#  rule(g, "val", "x", "y", "<num>")
-#  rule(g, "num", "<digit, +>") # this one is the trickiest to deal with.
-#end
-
 """
 The base type for all grammar rules.
 """
@@ -69,7 +60,7 @@ Creates a named OR rule for a given grammar, using a list of possible options,
 each given by a rule definition string.
 """
 rule(g::Grammar, name::AbstractString, defs...) =
-  (println("Building: $(name)"); g.rules[name] = OptionRule(Rule[rule(g, def) for def in defs]))
+  g.rules[name] = OrRule(Rule[rule(g, def) for def in defs])
 
 """
 An OR rule allows a given grammar rule to be interpreted in a number of
@@ -161,6 +152,10 @@ immutable NonTerminalRule <: Rule
   end
 end
 
+"""
+A terminal rule simply returns some predetermined constant symbol, expression,
+string or integer.
+"""
 immutable TerminalRule <: Rule
   value
 
@@ -214,6 +209,8 @@ g.rules["num"] = TerminalRule("blah")
 # Deferred construction should probably come next.
 rule(g, "num", "blah!") # this one is the trickiest to deal with.
 rule(g, "val", "x", "y", "<num>")
-rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
-rule(g, "exp", "(<exp>)", "<val>", "<op>")
-rule(g, "root", "<exp>")
+
+# Even worse... these are circular!
+#rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
+#'rule(g, "exp", "(<exp>)", "<val>", "<op>")
+#rule(g, "root", "<exp>")
