@@ -1,4 +1,5 @@
 abstract GrammarToken
+
 type GrammarLiteral <: GrammarToken
   value::AbstractString
 end
@@ -66,5 +67,3 @@ function parse_rule_entry(entry::AbstractString)
   end
   return tokens
 end
-
-register(joinpath(dirname(@__FILE__), "grammar.manifest.yml"))
