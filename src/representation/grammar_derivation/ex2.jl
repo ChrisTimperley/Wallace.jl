@@ -63,6 +63,13 @@ rule(g::Grammar, name::AbstractString, defs...) =
   g.rules[name] = OrRule(Rule[rule(g, def) for def in defs])
 
 """
+A rule reference is used to indirectly point to another rule, via its name.
+"""
+immutable RuleReference <: Rule
+  name::AbstractString
+end
+
+"""
 An OR rule allows a given grammar rule to be interpreted in a number of
 different ways.
 """
@@ -131,7 +138,9 @@ immutable NonTerminalRule <: Rule
     for (i, tag) in enumerate(tags)
       parts = split(tag[2 : (length(tag) - 1)], r",\s+")
       tag_rule_name, modifier = parts[1], Base.get(parts, 2, "")
-      tag_rule = g.rules[tag_rule_name]
+
+      # Create a reference to the rule for the symbol.
+      tag_rule = RuleReference(tag_rule_name)
 
       # Apply any modifiers to the rule for this symbol.
       tag_rule = modifier == "" ? tag_rule : rule(tag_rule, modifier)
@@ -169,6 +178,9 @@ a given codon sequence.
 derive(g::Grammar, r::OrRule, nxt::Task) =
   derive(g, g.options[(consume(nxt) % num_options) + 1], nxt)
 
+derive(g::Grammar, r::RuleReference, nxt::Task) =
+  derive(g, g.rules[r.name], nxt)
+
 derive(g::Grammar, r::TerminalRule, nxt::Task) =
   r.value
 
@@ -200,17 +212,9 @@ expr_to_def_s(a::Any) = string(a)
 """
 TESTING!
 """
-example = "add(<num>, <num>)"
-
 g = Grammar()
-g.rules["num"] = TerminalRule("blah")
-
-# Now we can construct grammars, so long as we do so in the right order.
-# Deferred construction should probably come next.
+rule(g, "root", "<exp>")
 rule(g, "num", "blah!") # this one is the trickiest to deal with.
 rule(g, "val", "x", "y", "<num>")
-
-# Even worse... these are circular!
-#rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
-#'rule(g, "exp", "(<exp>)", "<val>", "<op>")
-#rule(g, "root", "<exp>")
+rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
+rule(g, "exp", "(<exp>)", "<val>", "<op>")
