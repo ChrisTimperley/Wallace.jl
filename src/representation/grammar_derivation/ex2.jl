@@ -26,6 +26,7 @@ abstract Rule
 
 type Grammar
   rules::Dict{AbstractString, Rule}
+  # caching the root rule might reduce the number of look-ups.
 
   Grammar() = new(Dict{AbstractString, Rule}())
 end
@@ -40,6 +41,15 @@ function rule(r::AbstractString)
   else
     TerminalRule(parse(r))
   end
+end
+
+"""
+Creates a modified version of a given grammar rule, according to some provided
+modifier string. This function is used to implement EBNF constructs, such as
+ONE-OR-MORE, ZERO-OR-MORE and OPTIONAL.
+"""
+function rule(r::Rule, modifier::AbstractString)
+
 end
 
 function rule(g::Grammar, name::AbstractString, options...)
@@ -86,6 +96,8 @@ quite as efficient as it could be.
 immutable NonTerminalRule <: Rule
   non_terminals::Vector{Rule}
   builder::Function # (Grammar, NonTerminalRule, Task) -> Expr
+
+  NonTerminalRule(nts::Vector{Rule}, builder::Function) = new(nts, builder)
 end
 
 immutable TerminalRule <: Rule
@@ -108,7 +120,7 @@ derive(g::Grammar, r::NonTerminalRule, nxt::Task) =
   r.builder(g, nxt)
 
 derive(g::Grammar, nxt::Task) =
-  derive(g, g.rules[:root], codons)
+  derive(g, g.rules["root"], nxt)
 
 """
 Derives a Julia expression (in the form of an Expr) using a provided sequence
@@ -137,23 +149,22 @@ function parse_non_terminal_rule(g::Grammar, r::AbstractString)
 
   # Now parse the rule definition to a Julia expression and then back into
   # Julia code (in the form a string).
-  r = expr_to_def_s(parse(r))
+  r = expr_to_def_s(Base.parse(r))
 
   # Replace each placeholder with a call to the appropriate function, and
   # build the list of rules used by the symbols within this non-terminal.
   for (i, tag) in enumerate(tags)
     parts = split(tag[2 : (length(tag) - 1)], r",\s+")
-    tag_rule, modifier = parts[1], Base.get(parts, 2, "")
+    tag_rule_name, modifier = parts[1], Base.get(parts, 2, "")
+    tag_rule = g.rules[tag_rule]
 
-    # Check if a special rule has been applied to this symbol.
-    if modifier != ""
-      println("Building modified rule: $(modifier)")
+    # Apply any modifiers to the rule for this symbol.
+    tag_rule = modifier == "" ? tag_rule : rule(tag_rule, modifier)
 
-    # If not, fetch the standard rule from the grammar.
-    else
-      push!(nts, g.rules[tag_rule])
-    end
+    push!(nts, tag_rule)
 
+    # Replace the placeholder for this symbol within the Expr object with a
+    # call to derive, along with the appropriate rule.
     r = replace(r, ":__WALLACE_GRAMMAR_TAG_$(i)__", "derive(g, r.non_terminals[$(i)], nxt)")
   end
 
