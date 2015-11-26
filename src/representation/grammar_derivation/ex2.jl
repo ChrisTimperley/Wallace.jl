@@ -8,13 +8,21 @@
 example = "add(<num>, <num>)"
 
 grammar(max_wraps = 2) do g
-  rule(g, "exp", ["(<exp>)"])
-  rule(g, "mul", "<exp> * <exp>")
-  rule(g, "sub", "sub(<num>, <num>)")
-  rule(g, "add", "add(<num>, <num>)")
-  rule(g, "digit", 0:9)
-  rule(g, "nz_digit", 0:9)
+  # Should retreive <val> from grammar, rather than fetching rule each time
+  # it's called.
+  """
+  exp = (<exp>) | <val> | <op>
+  op  = <exp> * <exp> | <exp> - <exp> | <exp> + <exp>
+  val = x | y | <num>
+  num = <digit, +>.<digit, +>
+  digit = 0:9
+  """
+  rule(g, "exp",  ["(<exp>)", "<val>", "<op>"])
+  rule(g, "op",   ["<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>"])
+  rule(g, "val", ["x", "y", "<num>"])
   rule(g, "num", "<digit>")
+  rule(g, "nz_digit", 0:9)
+  rule(g, "digit", ["<digit>"^2])
 end
 
 """
