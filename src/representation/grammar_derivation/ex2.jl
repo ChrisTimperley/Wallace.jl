@@ -1,23 +1,8 @@
-# Each grammar rule is an anonymous function which takes a codon iterator
-# and returns an expression.
-# add(@num, @num) -> (codon_iterator) -> Expr
-
-# Now we have n1 and n2: add(n1, n2).
-# But how do we form the Expr?
-
 example = "add(<num>, <num>)"
 
 grammar(max_wraps = 2) do g
   # Should retreive <val> from grammar, rather than fetching rule each time
   # it's called.
-  """
-  exp = (<exp>) | <val> | <op>
-  op  = <exp> * <exp> | <exp> - <exp> | <exp> + <exp>
-  val = x | y | <num>
-  num = <digit, +>.<digit, +>
-  digit = 0:9
-  """
-
   rule(g, "exp", "(<exp>)", "<val>", "<op>")
   rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
   rule(g, "val", "x", "y", "<num>")
@@ -40,6 +25,30 @@ different ways.
 immutable OrRule <: Rule
   num_rules::Int
   rules::Vector{Rule}
+end
+
+"""
+The ONE-OR-MORE rule (<x, +>) allows a grammar rule to be applied more than
+once and at least once.
+"""
+immutable OneOrMoreRule <: Rule
+  rule::Rule
+end
+
+"""
+The ZERO-OR-MORE rule (<x, *>) allows a grammar rule to be applied
+an arbitrary number of times, or not applied at all.
+"""
+immutable ZeroOrMoreRule <: Rule
+  rule::Rule
+end
+
+"""
+The OPTIONAL rule (<x, ?>) allows a grammar rule to be optionally applied at
+most once.
+"""
+immutable OptionalRule <: Rule
+  rule::Rule
 end
 
 """
