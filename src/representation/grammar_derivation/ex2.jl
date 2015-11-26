@@ -39,7 +39,7 @@ Parses a single option for a grammar rule and returns a Rule object encoding
 that rule.
 """
 rule(g::Grammar, r::AbstractString) =
-  search(r, rule_regex) != 0:-1 ? NonTerminalRule(r) : TerminalRule(parse(r))
+  search(r, rule_regex) != 0:-1 ? NonTerminalRule(g, r) : TerminalRule(parse(r))
 
 """
 Creates a modified version of a given grammar rule, according to some provided
@@ -61,7 +61,7 @@ end
 """
 Creates a single grammar rule from a provided rule definition string.
 """
-rule(g::Grammar, name::AbstractString, def::String) =
+rule(g::Grammar, name::AbstractString, def::AbstractString) =
   g.rules[name] = rule(g, def)
 
 """
@@ -69,7 +69,7 @@ Creates a named OR rule for a given grammar, using a list of possible options,
 each given by a rule definition string.
 """
 rule(g::Grammar, name::AbstractString, defs...) =
-  g.rules[name] = OptionRule(Rule[rule(g, def) for def in defs])
+  (println("Building: $(name)"); g.rules[name] = OptionRule(Rule[rule(g, def) for def in defs]))
 
 """
 An OR rule allows a given grammar rule to be interpreted in a number of
@@ -114,7 +114,51 @@ immutable NonTerminalRule <: Rule
   non_terminals::Vector{Rule}
   builder::Function # (Grammar, NonTerminalRule, Task) -> Expr
 
-  NonTerminalRule(nts::Vector{Rule}, builder::Function) = new(nts, builder)
+  NonTerminalRule(nts::Vector{Rule}, builder::Function) =
+    new(nts, builder)
+
+  function NonTerminalRule(g::Grammar, r::AbstractString)
+    # Create an array to hold the non-terminal symbols within the given rule,
+    # and another to hold their associated (possibly modified) rules.
+    tags = AbstractString[]
+    nts = Rule[]
+
+    # Replace each grammar symbol in the given string with an associated
+    # placeholder tag.
+    function replacer(tag::AbstractString)
+      push!(tags, string(tag))
+      "__WALLACE_GRAMMAR_TAG_$(length(tags))__"
+    end
+    r = replace(r, rule_regex, replacer)
+
+    # Now parse the rule definition to a Julia expression and then back into
+    # Julia code (in the form a string).
+    r = expr_to_def_s(Base.parse(r))
+
+    # Replace each placeholder with a call to the appropriate function, and
+    # build the list of rules used by the symbols within this non-terminal.
+    for (i, tag) in enumerate(tags)
+      parts = split(tag[2 : (length(tag) - 1)], r",\s+")
+      tag_rule_name, modifier = parts[1], Base.get(parts, 2, "")
+      tag_rule = g.rules[tag_rule_name]
+
+      # Apply any modifiers to the rule for this symbol.
+      tag_rule = modifier == "" ? tag_rule : rule(tag_rule, modifier)
+
+      push!(nts, tag_rule)
+
+      # Replace the placeholder for this symbol within the Expr object with a
+      # call to derive, along with the appropriate rule.
+      r = replace(r, ":__WALLACE_GRAMMAR_TAG_$(i)__", "derive(g, r.non_terminals[$(i)], nxt)")
+    end
+
+    # Construct the lambda function for this non-terminal.
+    r = "(g::Grammar, r::NonTerminalRule, nxt::Task) -> $(r)"
+    builder = eval(Base.parse(r))
+
+    # Build the rule object.
+    new(nts, builder)
+  end
 end
 
 immutable TerminalRule <: Rule
@@ -149,48 +193,6 @@ function derive(g::Grammar, r::Rule, nxt::Task)
   Expr(:call, :add, i1, i2)
 end
 
-function parse_non_terminal_rule(g::Grammar, r::AbstractString)
-
-  # Create an array to hold the non-terminal symbols within the given rule,
-  # and another to hold their associated (possibly modified) rules.
-  tags = AbstractString[]
-  nts = Rule[]
-
-  # Replace each grammar symbol in the given string with an associated
-  # placeholder tag.
-  function replacer(tag::AbstractString)
-    push!(tags, string(tag))
-    "__WALLACE_GRAMMAR_TAG_$(length(tags))__"
-  end
-  r = replace(r, rule_regex, replacer)
-
-  # Now parse the rule definition to a Julia expression and then back into
-  # Julia code (in the form a string).
-  r = expr_to_def_s(Base.parse(r))
-
-  # Replace each placeholder with a call to the appropriate function, and
-  # build the list of rules used by the symbols within this non-terminal.
-  for (i, tag) in enumerate(tags)
-    parts = split(tag[2 : (length(tag) - 1)], r",\s+")
-    tag_rule_name, modifier = parts[1], Base.get(parts, 2, "")
-    tag_rule = g.rules[tag_rule]
-
-    # Apply any modifiers to the rule for this symbol.
-    tag_rule = modifier == "" ? tag_rule : rule(tag_rule, modifier)
-
-    push!(nts, tag_rule)
-
-    # Replace the placeholder for this symbol within the Expr object with a
-    # call to derive, along with the appropriate rule.
-    r = replace(r, ":__WALLACE_GRAMMAR_TAG_$(i)__", "derive(g, r.non_terminals[$(i)], nxt)")
-  end
-
-  # Construct the lambda function for this non-terminal.
-  r = "(g::Grammar, r::NonTerminalRule, nxt::Task)::Expr -> $(r)"
-  builder = eval(r)
-
-end
-
 """
 Converts a given Expr into a string containing Julia code capable of
 reproducing that Expr.
@@ -208,4 +210,10 @@ example = "add(<num>, <num>)"
 g = Grammar()
 g.rules["num"] = TerminalRule("blah")
 
-parse_non_terminal_rule(g, example)
+# Now we can construct grammars, so long as we do so in the right order.
+# Deferred construction should probably come next.
+rule(g, "num", "blah!") # this one is the trickiest to deal with.
+rule(g, "val", "x", "y", "<num>")
+rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
+rule(g, "exp", "(<exp>)", "<val>", "<op>")
+rule(g, "root", "<exp>")
