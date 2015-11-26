@@ -10,8 +10,6 @@ section as a separate rule.
 
 const rule_regex = r"<[\w_]+(,\s*[\?|\+|\*])?>"
 
-example = "add(<num>, <num>)"
-
 #grammar(max_wraps = 2) do g
 #  # Should retreive <val> from grammar, rather than fetching rule each time
 #  # it's called.
@@ -36,7 +34,7 @@ end
 Parses a single option for a grammar rule and returns a Rule object encoding
 that rule.
 """
-function rule(g::Grammar, name::AbstractString, r::AbstractString)
+function rule(r::AbstractString)
   if search(r, rule_regex) != 0:-1
     NonTerminalRule(r)
   else
@@ -99,16 +97,16 @@ end
 Selects an interpretation of a given OR rule according to an index provided by
 a given codon sequence.
 """
-derive(g::JLBNF, r::OrRule, nxt::Task) =
+derive(g::Grammar, r::OrRule, nxt::Task) =
   derive(g, g.rules[(consume(nxt) % num_rules) + 1], nxt)
 
-derive(g::JLBNF, r::TerminalRule, nxt::Task) =
+derive(g::Grammar, r::TerminalRule, nxt::Task) =
   r.value
 
-derive(g::JLBNF, r::NonTerminalRule, nxt::Task) =
+derive(g::Grammar, r::NonTerminalRule, nxt::Task) =
   r.builder(g, nxt)
 
-derive(g::JLBNF, nxt::Task) =
+derive(g::Grammar, nxt::Task) =
   derive(g, g.rules[:root], codons)
 
 """
@@ -121,28 +119,33 @@ function derive(g::Grammar, r::Rule, nxt::Task)
   Expr(:call, :add, i1, i2)
 end
 
-function 
+function parse_non_terminal_rule(r::AbstractString)
+
+end
 
 # Find and replace @num with placeholder symbol.
-function inject_placeholder(s::AbstractString)
-  p = 0
-  insertions = AbstractString[]
+function inject_placeholder(r::AbstractString)
+  # Create an arrray to hold the non-terminal symbols within the given rule.
+  tags = AbstractString[]
 
   # Replace each grammar symbol in the given string with an associated
   # placeholder tag.
   function replacer(tag::AbstractString)
-    p += 1
-    push!(insertions, string(tag))
-    "__WALLACE_GRAMMAR_TAG_$(p)__"
+    push!(tags, string(tag))
+    "__WALLACE_GRAMMAR_TAG_$(length(tags))__"
   end
-  s = replace(s, r"<(\w+)>", replacer)
+  r = replace(r, r"<(\w+)>", replacer)
 
   # Now parse the rule definition to a Julia expression and then back into
   # Julia code (in the form a string).
-  code = expr_to_def_s(parse(s))
+  r = expr_to_def_s(parse(r))
 
   # Replace each placeholder with a call to the appropriate function.
+  for (i, tag) in enumerate(tags)
+    r = replace(r, ":__WALLACE_GRAMMAR_TAG_$(i)__", "derive(g, NT[$(i)], nxt)")
+  end
 
+  println(r)
 end
 
 # Converts a given Expr into Julia code capable of reproducing that Expr.
@@ -151,4 +154,10 @@ expr_to_def_s(ex::Expr) =
 expr_to_def_s(sym::Symbol) = ":$(sym)"
 expr_to_def_s(a::Any) = string(a)
 
+
+
+"""
+TESTING!
+"""
+example = "add(<num>, <num>)"
 inject_placeholder(example)
