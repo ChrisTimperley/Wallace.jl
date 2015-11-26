@@ -49,7 +49,15 @@ modifier string. This function is used to implement EBNF constructs, such as
 ONE-OR-MORE, ZERO-OR-MORE and OPTIONAL.
 """
 function rule(r::Rule, modifier::AbstractString)
-
+  if      modifier == "+"
+    OneOrMoreRule(r)
+  elseif  modifier == "*"
+    ZeroOrMoreRule(r)
+  elseif  modifier == "?"
+    OptionalRule(r)
+  else
+    error("Unrecognised rule modifier: $(modifier).")
+  end
 end
 
 function rule(g::Grammar, name::AbstractString, options...)
