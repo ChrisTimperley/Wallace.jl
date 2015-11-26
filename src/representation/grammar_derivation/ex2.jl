@@ -17,12 +17,11 @@ grammar(max_wraps = 2) do g
   num = <digit, +>.<digit, +>
   digit = 0:9
   """
-  rule(g, "exp",  ["(<exp>)", "<val>", "<op>"])
-  rule(g, "op",   ["<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>"])
-  rule(g, "val", ["x", "y", "<num>"])
-  rule(g, "num", "<digit>")
-  rule(g, "nz_digit", 0:9)
-  rule(g, "digit", ["<digit>"^2])
+
+  rule(g, "exp", "(<exp>)", "<val>", "<op>")
+  rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
+  rule(g, "val", "x", "y", "<num>")
+  rule(g, "num", "<digit, +>") # this one is the trickiest to deal with.
 end
 
 """
