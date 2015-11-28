@@ -204,6 +204,7 @@ TESTING!
 """
 g = Grammar()
 rule(g, "root", "<exp>")
+# rule(g, "digit", 1:9) <-- Need to add support for Range next.
 rule(g, "num", "blah!") # this one is the trickiest to deal with.
 rule(g, "val", "x", "y", "<num>")
 rule(g, "op", "<exp> * <exp>", "<exp> - <exp>", "<exp> + <exp>")
