@@ -723,9 +723,9 @@ In this tutorial, we shall use Wallace to implement a genetic algorithm to
 solve the travelling salesman problem, in which we wish to find the shortest
 possible route through a given set of cities, which visits all cities exactly once
 and return to the city at which the tour was started. The TSP is a prime example
-of an NP-hard, or more specifically, NP-complete, problem that can be
-effectively tackled using techniques such as genetic algorithms and ant colony
-optimisation.
+of an NP-hard problem, or more specifically, an NP-complete problem, that can be
+effectively tackled using stochastic search techniques such as genetic algorithms or
+ant colony optimisation.
 
 **By the end of this tutorial, you should be able to:**
 
@@ -739,9 +739,13 @@ optimisation.
 Getting Started
 ---------------
 
-Files that you will need to create!
+Before embarking on this tutorial, you should create the two Julia files described
+below, each within the same directory.
 
-my_tsp_evaluator.jl
+* ``tsp.jl``, which will be used to specify and run our algorithm for solving the
+  travelling salesman problem, and...
+* ``my_tsp_evaluator.jl``. which will be to define a new evaluator, tailored to
+  evaluating potential solutions to the travelling salesman problem.
 
 Problem
 -------
