@@ -32,11 +32,9 @@ function compose!(d::KozaGrowBuilderDefinition, t::Type)
   KozaGrowBuilder{t}(d.min_depth, d.max_depth, d.prob_terminal)
 end
 
-"""
 grow() = KozaGrowBuilderDefinition()
 grow(mn::Int, mx::Int) = KozaGrowBuilderDefinition(mn, mx)
 function grow(min::Int, max::Int, p::Float)
-  println("GROW DADDSADAS")
   KozaGrowBuilderDefinition(min, max, p)
 end
 function grow(f::Function)
@@ -44,7 +42,6 @@ function grow(f::Function)
   f(def)
   def
 end
-"""
 
 """
 Constructs a Koza Tree belonging to a given representation using the GROW
