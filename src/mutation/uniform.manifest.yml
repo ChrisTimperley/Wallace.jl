@@ -1,5 +1,0 @@
-id: mutation/uniform
-composer: |
-  rep = s["stage"].representation
-  UniformMutation{typeof(rep), codon_type(rep)}(
-    rep, Base.get(s, "rate", 0.01))
