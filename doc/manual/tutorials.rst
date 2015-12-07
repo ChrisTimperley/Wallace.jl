@@ -787,7 +787,7 @@ a alphabet to the specification either by explicitly stating it within a list,
 by providing a numeric range, or by providing an external alphabet file.
 
 If one were to take the explicit approach to representing the alphabet for the
-given problem, then the specification would look something like that given
+given problem, then the specification would look something like the one given
 below:
 
 ::
@@ -812,8 +812,8 @@ However, exhaustively listing the indices of each of the cities in our problem,
 whether inline or through an external alphabet file, is probably still a bit too
 monotonous for our liking.
 
-Fortunately, we can list the indices for each our cities in far more succinctly
-through the use of numeric ranges, as shown below.
+Fortunately, we can list the indices for each our cities more succinctly through
+the use of numeric ranges within Julia, as demonstrated below.
 
 ::
 
@@ -869,11 +869,15 @@ default to the canonical genotype.
 Writing a Custom Evaluator
 --------------------------
 
+In this part of the tutorial, we shall implement a specialised evaluator capable
+of efficiently determining the quality of potential solutions for the travelling
+salesman problem.
+
 Type Definition
 ~~~~~~~~~~~~~~~
 
 In order to implement our specialised TSP evaluator, we must first extend Wallace
-with a new Julia type for that evaluator. To do this, wew ill need to open up the
+with a new Julia type for that evaluator. To do this, we will need to open up the
 skeleton file we constructed earlier, `my_tsp_evaluator.jl`.
 Within this file we will write a standard Julia definition for a type that accepts
 details of a given TSP problem and evaluates provided candidate solutions
@@ -1099,7 +1103,7 @@ Composer
 ~~~~~~~~
 
 The last remaining task in constructing our evaluator is to implement its
-composer, as a method of the ``compose!`` function. Our ``compose!``
+composer, or builder, as a method of the ``compose!`` function. Our ``compose!``
 function should accept a definition, provided in the form of an
 ``MyTSPEvaluatorDefinition`` instance, as well as a ``Population`` instance.
 Using these arguments, the method should return a well-formed
@@ -1202,6 +1206,11 @@ in the ``MyTSPEvaluator`` type definition).
 
 Running the algorithm
 ---------------------
+
+With our evaluator definition now complete, we can use it within our algorithm
+specification by loading the definition file within our specification file, via
+``using my_tsp_evaluator``. We can then use the ``evaluator`` property of our
+algorithm to specify its TSP evaluator.
 
 After having followed all the preceding steps, you should have an algorithm
 which looks roughly similar to the one given below.

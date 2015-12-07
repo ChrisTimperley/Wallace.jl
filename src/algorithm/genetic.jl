@@ -8,19 +8,19 @@ type GeneticAlgorithmDefinition
   output::AbstractString
   replacement::Replacement
   loggers::Vector{Logger}
-  termination::Dict{AbstractString, Criterion}
+  termination::Vector{Criterion}
   population::PopulationDefinition
   evaluator::EvaluatorDefinition
 
   GeneticAlgorithmDefinition() =
-    new("output", replacement.generational(), [], Dict())
+    new("output", replacement.generational(), [], [])
 end
 
 type GeneticAlgorithm <: Algorithm
   state::State
   evaluator::Evaluator
   replacement::Replacement
-  termination::Dict{AbstractString, Criterion}
+  termination::Vector{Criterion}
   loggers::Vector{Logger}
   initialiser::Initialiser
   output::AbstractString
@@ -66,7 +66,7 @@ function run!(a::GeneticAlgorithm)
 
   #prepare!(a.state.population)
 
-  while !any(c -> is_satisfied(c, a.state), values(a.termination))
+  while !any(c -> is_satisfied(c, a.state), a.termination)
     breed!(a.state.population)
     evaluate!(a.evaluator, a.state)
     scale!(a.state.population)

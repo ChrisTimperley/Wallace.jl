@@ -28,7 +28,7 @@ function rastrigin()
       end
       assign(scheme, f)
     ")
-    alg.termination["generations"] = criterion.generations(1000)
+    alg.termination << criterion.generations(1000)
   end
   algorithm.compose!(def)
 end
