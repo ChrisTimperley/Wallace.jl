@@ -50,5 +50,5 @@ num_outputs(m::Mutation) = 1
 # Load all mutation operations.
 include("mutation/bit_flip.jl")
 include("mutation/gaussian.jl")
-include("mutation/twors.jl")
+include("mutation/single_swap.jl")
 end
