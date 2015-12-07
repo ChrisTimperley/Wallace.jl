@@ -48,6 +48,7 @@ All mutation operators produce a single individual.
 num_outputs(m::Mutation) = 1
 
 # Load all mutation operations.
+include("mutation/null.jl")
 include("mutation/bit_flip.jl")
 include("mutation/gaussian.jl")
 include("mutation/single_swap.jl")
