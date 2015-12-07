@@ -35,29 +35,8 @@ TODO: Short explanation of what a simple evaluator is.
 simple(f::Function) =
   SimpleEvaluatorDefinition(f)
 
-function simple{S <: AbstractString}(f::Function, opts::Dict{S, Any})
-  def = SimpleEvaluatorDefinition(f)
-  
-  if haskey(opts, "stage"); def.stage = opts["stage"]; end
-  if haskey(opts, "threads"); def.threads = opts["threads"]; end
-
-  def
-end
-
 """
-Evaluates all unevaluated individuals within a provided deme according to
-a provided simple evaluator.
+Evaluates a provided phenome according to a simple evaluation method.
 """
-function evaluate!(e::SimpleEvaluator, s::State, d::Deme)
-  for (id, phenome) in enumerate(d.offspring.stages[e.stage])
-    d.offspring.fitnesses[id] = e.evaluator(d.species.fitness, get(phenome))
-  end
-  s.evaluations += length(d.offspring.stages[e.stage])
-end
-
-"""
-Evaluates all unevaluated individuals contained within a given state according
-to a provided simple evaluator.
-"""
-evaluate!(e::SimpleEvaluator, s::State) =
-  for deme in s.population.demes; evaluate!(e, s, deme); end
+evaluate{T}(ev::SimpleEvaluator, sch::FitnessScheme, phenome::T) =
+  ev.evaluator(sch, phenome)

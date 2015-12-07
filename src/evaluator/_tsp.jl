@@ -71,8 +71,10 @@ tsp(file::AbstractString; stage::AbstractString = "", threads = 1) =
   TSPEvaluatorDefinition(stage, file, max(1, threads))
 
 """
-function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
-  tour = get(c.genome)
+Computes the length of a provided tour and transforms it into a fitness value
+according to a provided fitness scheme.
+"""
+function evaluate!(e::TSPEvaluator, sch::FitnessScheme, tour::Vector{Int})
   length = zero(Float)
   for i in 1:(e.cities - 1)
     length += e.distance[tour[i], tour[i+1]]
@@ -80,4 +82,3 @@ function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)
   length += e.distance[tour[end], tour[1]]
   fitness(sch, length)
 end
-"""
