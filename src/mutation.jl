@@ -53,4 +53,5 @@ include("mutation/null.jl")
 include("mutation/bit_flip.jl")
 include("mutation/gaussian.jl")
 include("mutation/single_swap.jl")
+include("mutation/reverse.jl")
 end
