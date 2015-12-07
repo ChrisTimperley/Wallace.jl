@@ -7,7 +7,7 @@ type TSPEvaluator <: Evaluator
   threads::Int
   distance::Array{Float, 2}
 
-  TSPEvaluator(st::AbstractString, n::Int, d::Array{Float, 2}, t::Int) =
+  TSPEvaluator(st::AbstractString, n::Int, t::Int, d::Array{Float, 2}) =
     new(st, n, t, d)
 end
 
@@ -20,6 +20,8 @@ type TSPEvaluatorDefinition <: EvaluatorDefinition
   threads::Int
 
   TSPEvaluatorDefinition() = new("", "", 1)
+  TSPEvaluatorDefinition(s::AbstractString, f::AbstractString, t::Int) =
+    new(s, f, t)
 end
 
 """
@@ -50,7 +52,7 @@ function compose!(ev::TSPEvaluatorDefinition, p::Population)
   end
 
   # Build and return the evaluator.
-  return TSPEvaluator(num, matrix, ev.threads)
+  return TSPEvaluator(ev.stage, num, ev.threads, matrix)
 end
 
 """
