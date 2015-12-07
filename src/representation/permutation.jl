@@ -25,11 +25,11 @@ compose!{T}(def::PermutationRepresentationDefinition{T}) =
   PermutationRepresentation{T}(def.alphabet, length(def.alphabet))
 
 """
-Builds a permutation representation using an alphabet defined by a given range
-of values.
+Builds a permutation representation using an alphabet defined by a given
+unit range of values.
 """
-permutation{T}(range::Range{T}) =
-  permutation{T}(collect(range))
+permutation(range::UnitRange) =
+  permutation(collect(range))
 
 """
 Builds a permutation representation using an alphabet supplied as a vector
