@@ -1,34 +1,38 @@
 """
 An evaluator specialised to the travelling salesman problem.
 """
-type TSPEvaluator <: SimpleEvaluator
+type TSPEvaluator <: Evaluator
+  stage::AbstractString
   cities::Int
   threads::Int
   distance::Array{Float, 2}
 
-  TSPEvaluator(d::Array{Float, 2}, t::Int) =
-    new(size(d, 1), t, d)
+  TSPEvaluator(st::AbstractString, n::Int, d::Array{Float, 2}, t::Int) =
+    new(st, n, t, d)
 end
 
 """
-Evaluates the fitness of a TSP tour for a pre-determined geometric problem.
-
-**Properties**:
-
-* `threads::Int`, the number of threads that the evaluation process should be
-  split across.
-* `file::String`, the path to the file containing the co-ordinates of each of
-  the cities for the geometric TSP instance being solved, relative to the
-  current working directory.
+Contains a definition of a TSP evaluator.
 """
-function tsp(s::Dict{Any, Any})
+type TSPEvaluatorDefinition <: EvaluatorDefinition
+  stage::AbstractString
+  file::AbstractString
+  threads::Int
 
-  # Determine number of threads to use.
-  s["threads"] = int(Base.get(s, "threads", 1))
-  s["threads"] = max(1, s["threads"])
+  TSPEvaluatorDefinition() = new("", "", 1)
+end
+
+"""
+Composes a TSP evaluator from its definition.
+"""
+function compose!(ev::TSPEvaluatorDefinition, p::Population)
+  # Find the name of the stage that is used for evaluation if none is provided.
+  if ev.stage == ""
+    ev.stage = p.demes[1].species.genotype.label
+  end
 
   # Load the contents of the file and convert into a list of co-ordinates.
-  coords = open(s["file"], "r") do f
+  coords = open(ev.file, "r") do f
     c = Vector{Float}[]
     for ln in eachline(f)
       !isempty(ln) && push!(c, Float[float(x) for x in split(ln)]) 
@@ -46,8 +50,25 @@ function tsp(s::Dict{Any, Any})
   end
 
   # Build and return the evaluator.
-  return TSPEvaluator(matrix, s["threads"])
+  return TSPEvaluator(num, matrix, ev.threads)
 end
+
+"""
+Evaluates the fitness of a TSP tour for a pre-determined geometric problem.
+
+**Positional Arguments**:
+
+* `file::AbstractString`, the path to the file containing the co-ordinates of
+  each of the cities for the geometric TSP instance being solved, relative to
+  the current working directory.
+
+**Keyword Arguments**:
+
+* `threads::Int`, the number of threads that the evaluation process should be
+  split across. Defaults to `1`.
+"""
+tsp(file::AbstractString; stage::AbstractString = "", threads = 1) =
+  TSPEvaluatorDefinition(stage, file, max(1, threads))
 
 """
 function evaluate!(e::TSPEvaluator, s::State, sch::FitnessScheme, c::Individual)

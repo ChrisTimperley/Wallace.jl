@@ -31,7 +31,7 @@ do_nothing(c::Criterion) = "hello"
 
 # Load each of the evaluators.
 include("evaluator/_simple.jl")
-#include("evaluator/_tsp.jl")
+include("evaluator/_tsp.jl")
 include("evaluator/_regression.jl")
 #include("evaluator/_multiplexer.jl")
 #include("evaluator/_ant.jl")
