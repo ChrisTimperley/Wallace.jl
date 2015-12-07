@@ -36,7 +36,11 @@ minimum_value(::BitVectorRepresentation) = 0
 maximum_value(::BitVectorRepresentation) = 1
 codon_type(::BitVectorRepresentation) = Int
 chromosome(::BitVectorRepresentation) = Vector{Int}
-Base.rand(r::BitVectorRepresentation) = Base.rand(0:1, r.length)
+
+"""
+Generates a bit vector at random using its representation.
+"""
+generate(r::BitVectorRepresentation) = Base.rand(0:1, r.length)
 
 # Converts a given bit vector chromosome into an int vector chromosome, destructively.
 function convert!(r_from::BitVectorRepresentation,

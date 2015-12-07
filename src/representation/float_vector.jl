@@ -34,4 +34,8 @@ maximum_value(r::FloatVectorRepresentation) = r.max
 codon_type(::FloatVectorRepresentation) = Float
 chromosome(r::FloatVectorRepresentation) = Vector{Float}
 describe(i::Vector{Float}) = "($(join(i, ", ")))"
-Base.rand(r::FloatVectorRepresentation) = rand(r.range, r.length)
+
+"""
+Generates a float vector at random using its representation.
+"""
+generate(r::FloatVectorRepresentation) = Base.rand(r.range, r.length)

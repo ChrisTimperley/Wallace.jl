@@ -35,4 +35,8 @@ maximum_value(r::IntVectorRepresentation) = r.max
 codon_type(::IntVectorRepresentation) = Int
 chromosome(::IntVectorRepresentation) = Vector{Int}
 describe(i::Vector{Int}) = "($(join(i, ",")))"
-Base.rand(r::IntVectorRepresentation) = rand(r.range, r.length)
+
+"""
+Generates an int vector at random using its representation.
+"""
+generate(r::IntVectorRepresentation) = Base.rand(r.range, r.length)

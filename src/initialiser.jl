@@ -26,12 +26,17 @@ The default initialiser used by all evolutionary algorithms.
 """
 type DefaultInitialiser <: Initialiser; end
 
+"""
+Initialises a given deme by generating its contents at pseudo-random according
+to its default generator method.
+"""
 function initialise!(i::DefaultInitialiser, d::Deme)
   rep = d.species.genotype.representation
   chromo = chromosome(rep)
   d.members.fitnesses = d.offspring.fitnesses = Array(uses(d.species.fitness), d.capacity)
   d.members.stages[d.species.genotype.label] =
-    d.offspring.stages[d.species.genotype.label] = IndividualStage{chromo}[IndividualStage{chromo}(rand(rep)) for i in 1:d.capacity]
+    d.offspring.stages[d.species.genotype.label] =
+    IndividualStage{chromo}[IndividualStage{chromo}(generate(rep)) for i in 1:d.capacity]
 end
 
 end

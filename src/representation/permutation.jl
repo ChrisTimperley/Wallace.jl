@@ -60,5 +60,5 @@ codon_type{T}(rep::PermutationRepresentation{T}) = T
 """
 Produces a random permutation using a provided permutation representation.
 """
-rand(r::PermutationRepresentation) =
+generate{T}(r::PermutationRepresentation{T}) =
   shuffle(r.alphabet)
