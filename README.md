@@ -93,7 +93,7 @@ def = algorithm.genetic() do alg
   end
 
   # Evaluation function (split across 8 threads).
-  alg.evaluator = evaluator.simple(["threads" => 8]) do scheme, genome
+  alg.evaluator = evaluator.simple(; threads = 8) do scheme, genome
     assign(scheme, sum(genome))
   end
 
