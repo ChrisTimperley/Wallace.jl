@@ -20,6 +20,7 @@ function tsp()
     end
     alg.evaluator = evaluator.tsp(file_name; threads = 8)
     alg.termination = [criterion.generations(1000)]
+    alg.loggers = [logger.fitness()]
   end
 
   # Build and return the algorithm; somewhat redundant.

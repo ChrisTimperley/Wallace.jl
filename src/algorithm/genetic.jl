@@ -7,7 +7,7 @@ Builder for algorithm.genetic.
 type GeneticAlgorithmDefinition
   output::AbstractString
   replacement::Replacement
-  loggers::Vector{Logger}
+  loggers::Vector{LoggerDefinition}
   termination::Vector{Criterion}
   population::PopulationDefinition
   evaluator::EvaluatorDefinition
@@ -41,7 +41,7 @@ function compose!(def::GeneticAlgorithmDefinition)
   alg.termination = def.termination
   alg.initialiser = initialiser.DefaultInitialiser()
   alg.output = abspath(def.output)
-  alg.loggers = []
+  alg.loggers = Logger[compose!(l) for l in def.loggers]
   alg
 end
 
@@ -75,6 +75,8 @@ function run!(a::GeneticAlgorithm)
     # --- What does this mean for co-evolution?
     #pbest = best(a.state.population)
     #gbest = best([pbest, gbest])
+
+    # Debugging, for now.
 
     replace!(a.replacement, a.state)
     scale!(a.state.population)
