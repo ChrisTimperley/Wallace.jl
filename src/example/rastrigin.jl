@@ -21,13 +21,12 @@ function rastrigin()
         br.crossover = crossover.one_point(1.0)
       end
     end
-    alg.evaluator = evaluator.simple("
-      f = 1000.0
-      for x in get(i.genome)
+    alg.evaluator = evaluator.simple(; threads = 8) do fs, phenome
+      f = reduce(phenome, 1000.0) do f, x
         f += x*x - 10.0 * cos(2.0 * pi * x)
       end
-      assign(scheme, f)
-    ")
+      assign(fs, f)
+    end
     alg.termination = [criterion.generations(1000)]
   end
   algorithm.compose!(def)

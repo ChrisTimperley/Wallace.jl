@@ -17,7 +17,7 @@ function one_max()
         br.crossover = crossover.one_point(0.1)
       end
     end
-    alg.evaluator = evaluator.simple(Dict{ASCIIString, Any}("threads" => 8)) do scheme, genome
+    alg.evaluator = evaluator.simple(; threads = 8) do scheme, genome
       v = sum(genome)
       assign(scheme, v)
     end

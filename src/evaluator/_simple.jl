@@ -14,9 +14,6 @@ type SimpleEvaluatorDefinition <: EvaluatorDefinition
   evaluator::Function
   stage::AbstractString
   threads::Int
-
-  SimpleEvaluatorDefinition(e::Function) =
-    new(e, "", 1)
 end
 
 """
@@ -32,8 +29,8 @@ end
 """
 TODO: Short explanation of what a simple evaluator is.
 """
-simple(f::Function) =
-  SimpleEvaluatorDefinition(f)
+simple(f::Function; stage = "", threads = 1) =
+  SimpleEvaluatorDefinition(f, stage, max(1, threads))
 
 """
 Evaluates a provided phenome according to a simple evaluation method.
