@@ -51,7 +51,7 @@ Returns the number of outputs produced by this operation.
 """
 num_outputs(o::UniformMutation) = 1
 
-function operate!{T}(o::UniformMutation, input::Vector{T})
+function mutate!{T}(o::UniformMutation, input::Vector{T})
   # If we knew the length of our genome in advance, how much faster
   # would this operation be?
   for i in 1:length(input)

@@ -42,10 +42,7 @@ bit_flip(stage::AbstractString) = BitFlipMutationDefinition(stage)
 bit_flip(stage::AbstractString, rate::Float) =
   BitFlipMutationDefinition(stage, rate)
 
-num_inputs(o::BitFlipMutation) = 1
-num_outputs(o::BitFlipMutation) = 1
-
-function operate!(o::BitFlipMutation, input::Vector{Int})
+function mutate!(o::BitFlipMutation, input::Vector{Int})
   for i in 1:length(input)
     if rand() <= o.rate
       input[i] = input[i] == 1 ? 0 : 1

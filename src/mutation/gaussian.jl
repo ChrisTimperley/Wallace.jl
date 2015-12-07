@@ -60,10 +60,7 @@ and standard deviation.
 gaussian_noise{T <: Number}(mean::T, std::T) =
   mean + std * sqrt(-2 * log(1 - rand())) * sin(2 * pi * rand())
 
-num_inputs(o::GaussianMutation) = 1
-num_outputs(o::GaussianMutation) = 1
-
-function operate!{T <: Number}(o::GaussianMutation, input::Vector{T})
+function mutate!{T <: Number}(o::GaussianMutation, input::Vector{T})
   # If we knew the length of our genome in advance, how much faster
   # would this operation be?
   for i in 1:length(input)
