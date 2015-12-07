@@ -2,6 +2,7 @@
 TODO: Document mutation module.
 """
 module mutation
+import StatsBase.sample
 importall common, variation
 using core, utility, representation, individual, species
 export Mutation, MutationDefinition, mutate!

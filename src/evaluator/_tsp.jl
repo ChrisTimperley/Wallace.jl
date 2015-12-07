@@ -82,5 +82,5 @@ function evaluate!(e::TSPEvaluator, sch::FitnessScheme, tour::Vector{Int})
     length += e.distance[tour[i], tour[i+1]]
   end
   length += e.distance[tour[end], tour[1]]
-  fitness(sch, length)
+  assign(sch, length)
 end

@@ -53,7 +53,7 @@ function mutate!{T}(o::SingleSwapMutation, input::Vector{T})
   rand() < o.rate && return input
 
   # Perform the swap between two randomly selected genes.
-  i, j = sample(1:len(input), 2, replace=false)
+  i, j = sample(1:length(input), 2, replace=false)
   input[i], input[j] = input[j], input[i]
 
   return input
