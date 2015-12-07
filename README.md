@@ -98,7 +98,7 @@ def = algorithm.genetic() do alg
   end
 
   # Termination conditions.
-  alg.termination << criterion.generations(1000)
+  alg.termination = [criterion.generations(1000)]
 end
 
 # Compose the algorithm from its definition.

@@ -21,7 +21,7 @@ function one_max()
       v = sum(genome)
       assign(scheme, v)
     end
-    alg.termination << criterion.generations(1000)
+    alg.termination = [criterion.generations(1000)]
   end
   algorithm.compose!(def)
 end

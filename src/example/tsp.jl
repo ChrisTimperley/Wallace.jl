@@ -19,7 +19,7 @@ function tsp()
       end
     end
     alg.evaluator = evaluator.tsp(file_name; threads = 8)
-    alg.termination << criterion.generations(1000)
+    alg.termination = [criterion.generations(1000)]
   end
 
   # Build and return the algorithm; somewhat redundant.
