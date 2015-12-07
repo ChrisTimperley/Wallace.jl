@@ -53,6 +53,16 @@ function operate!{T}(
 end
 
 """
+By default, crossover operators accept two chromosomes as input.
+"""
+num_inputs(::Crossover) = 2
+
+"""
+By default, crossover operators produce two chromosomes as output.
+"""
+num_outputs(::Crossover) = 2
+
+"""
 Calculates the number of (internal) calls required to this operator to
 produce a desired number of offspring.
 """
@@ -65,5 +75,6 @@ to produce a specified number of offspring.
 num_required(c::Crossover, n::Int) = num_calls_required(c, n) * num_inputs(c)
 
 # Include each of the crossover operators.
+include("crossover/null.jl")
 include("crossover/one_point.jl")
 end
