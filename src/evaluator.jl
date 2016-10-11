@@ -27,13 +27,15 @@ The base type used by all evaluator definitions.
 """
 abstract EvaluatorDefinition
 
-"""
-Evaluates a given phenome using a provided fitness scheme, according to a
-specified evaluation method. This function should be implemented by each
-evaluator.
-"""
-evaluate!(ev::Evaluator, ::FitnessScheme, ::Any) =
-  error("Unimplemented evaluate!(::Evaluator, ::FitnessScheme, phenome) for evaluator: $(typeof(ev)).")
+# As of Julia 0.5, this method is given priority over its specialised
+# forms. I expect this pattern to have affected a few things.
+#"""
+#Evaluates a given phenome using a provided fitness scheme, according to a
+#specified evaluation method. This function should be implemented by each
+#evaluator.
+#"""
+#evaluate!(ev::Evaluator, ::FitnessScheme, ::Any) =
+#  error("Unimplemented evaluate!(::Evaluator, ::FitnessScheme, phenome) for evaluator: $(typeof(ev)).")
 
 """
 Evaluates all unevaluated individuals within a provided deme according to
