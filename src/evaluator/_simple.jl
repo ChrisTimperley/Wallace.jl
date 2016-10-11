@@ -1,5 +1,7 @@
 """
-Simple evaluators implement a single objective function.
+Simple evaluators implement a single objective function, and use the genotype
+of a species when performing the evaluation (as opposed to using some later
+stage of development).
 """
 type SimpleEvaluator <: Evaluator
   evaluator::Function
@@ -27,7 +29,10 @@ function compose!(e::SimpleEvaluatorDefinition, p::Population)
 end
 
 """
-TODO: Short explanation of what a simple evaluator is.
+Simple evaluators implement a single objective function, and use the genotype
+of a species when performing the evaluation (as opposed to using some later
+stage of development).
+
 """
 simple(f::Function; stage = "", threads = 1) =
   SimpleEvaluatorDefinition(f, stage, max(1, threads))
@@ -36,4 +41,5 @@ simple(f::Function; stage = "", threads = 1) =
 Evaluates a provided phenome according to a simple evaluation method.
 """
 evaluate{T}(ev::SimpleEvaluator, sch::FitnessScheme, phenome::T) =
+  println("Called simple evaluator")
   ev.evaluator(sch, phenome)
