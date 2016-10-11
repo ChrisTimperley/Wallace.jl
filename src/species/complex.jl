@@ -14,7 +14,7 @@ end
 Composes a complex species from a provided definition.
 """
 function compose!(c::ComplexSpeciesDefinition)
-  stages = Dict{String, SpeciesStage}()
+  stages = Dict{AbstractString, SpeciesStage}()
   for st in c.stages
     stages[st.label] = compose!(st)
   end
