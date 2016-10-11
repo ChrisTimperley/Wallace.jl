@@ -40,6 +40,7 @@ simple(f::Function; stage = "", threads = 1) =
 """
 Evaluates a provided phenome according to a simple evaluation method.
 """
-evaluate{T}(ev::SimpleEvaluator, sch::FitnessScheme, phenome::T) =
+function evaluate{T}(ev::SimpleEvaluator, sch::FitnessScheme, phenome::T)
   println("Called simple evaluator")
   ev.evaluator(sch, phenome)
+end
