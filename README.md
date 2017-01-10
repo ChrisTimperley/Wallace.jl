@@ -1,3 +1,5 @@
+**Warning:** Wallace is currently in an non-functional state, following changes from Julia 0.3 onwards. For now, users are encouraged to seek other solutions.
+
 # Wallace
 
 Wallace is a high-performance, easy-to-use evolutionary computation framework written in [Julia](http://julialang.org/), built for researchers, students, and software engineers alike.
